@@ -1,0 +1,1357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClientOpportunitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BusinessRoles">
+          <Key>
+            <PropertyRef Name="BusinessRoleId" />
+          </Key>
+          <Property Name="BusinessRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessRoleName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientName" Type="varchar" MaxLength="200" />
+          <Property Name="ClientSubbusiness" Type="varchar" MaxLength="200" />
+          <Property Name="LastModifiedUserId" Type="int" />
+          <Property Name="LastModified" Type="date" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DefaultViewRoles">
+          <Key>
+            <PropertyRef Name="ViewRoleId" />
+          </Key>
+          <Property Name="ViewRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ViewName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="ConsultantGradeId" />
+          </Key>
+          <Property Name="ConsultantGradeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConsultantGradeName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Opportunities">
+          <Key>
+            <PropertyRef Name="OpportunityId" />
+          </Key>
+          <Property Name="OpportunityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="AccountExecutiveUserId" Type="int" />
+          <Property Name="UnitId" Type="int" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="OpportunityStatusId" Type="int" />
+          <Property Name="SoldStatusId" Type="int" />
+          <Property Name="OpportunityName" Type="varchar" MaxLength="200" />
+          <Property Name="OpportunityOwnerUserId" Type="int" />
+          <Property Name="OpportunityNotes" Type="varchar(max)" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="200" />
+          <Property Name="LastModifiedUserId" Type="int" />
+          <Property Name="LastModified" Type="date" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OpportunityStatuses">
+          <Key>
+            <PropertyRef Name="OpportunityStatusId" />
+          </Key>
+          <Property Name="OpportunityStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpportunityStatusName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermissionRoles">
+          <Key>
+            <PropertyRef Name="PermissionRoleId" />
+          </Key>
+          <Property Name="PermissionRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionRoleName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OpportunityId" Type="int" />
+          <Property Name="UnitPracticeId" Type="int" />
+          <Property Name="MaxConsultantGradeId" Type="int" />
+          <Property Name="MinConsultantGradeId" Type="int" />
+          <Property Name="PositionName" Type="varchar" MaxLength="200" />
+          <Property Name="NumberOfPositions" Type="int" />
+          <Property Name="Skillset" Type="varchar(max)" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="ExpectedStartDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="HireCandidate" Type="varchar(max)" />
+          <Property Name="ProposedCandidate" Type="varchar(max)" />
+          <Property Name="AcceptedCandidate" Type="varchar(max)" />
+          <Property Name="RejectedCandidate" Type="varchar(max)" />
+          <Property Name="PositionNote" Type="varchar(max)" />
+          <Property Name="LastModifiedUserId" Type="int" />
+          <Property Name="LastModified" Type="date" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Practices">
+          <Key>
+            <PropertyRef Name="PracticeId" />
+          </Key>
+          <Property Name="PracticeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracticeName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SoldStatuses">
+          <Key>
+            <PropertyRef Name="SoldStatusId" />
+          </Key>
+          <Property Name="SoldStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoldStatusName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitPractices">
+          <Key>
+            <PropertyRef Name="UnitPracticeId" />
+          </Key>
+          <Property Name="UnitPracticeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracticeId" Type="int" />
+          <Property Name="UnitId" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Units">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" />
+          <Property Name="UnitName" Type="varchar" MaxLength="200" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Test_ClientOpportunities.dbo.UserBusinessRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserBusinessRoles">
+          <Key>
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="UserId" Type="int" />
+          <Property Name="BusinessRoleId" Type="int" />
+          <Property Name="LastModifiedUserId" Type="int" />
+          <Property Name="LastModified" Type="date" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ViewRoleId" Type="int" />
+          <Property Name="PermissionRoleId" Type="int" />
+          <Property Name="FullName" Type="varchar" MaxLength="200" />
+          <Property Name="LastModifiedUserId" Type="int" />
+          <Property Name="LastModified" Type="date" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Clients_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_OpportunityStatuses">
+          <End Role="OpportunityStatuses" Type="Self.OpportunityStatuses" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpportunityStatuses">
+              <PropertyRef Name="OpportunityStatusId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="OpportunityStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_SoldStatuses">
+          <End Role="SoldStatuses" Type="Self.SoldStatuses" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SoldStatuses">
+              <PropertyRef Name="SoldStatusId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="SoldStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_UnitId">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_AE">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="AccountExecutiveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_LastModifiedBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_OppOwner">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="OpportunityOwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Grades_Max">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ConsultantGradeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="MaxConsultantGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Grades_Min">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ConsultantGradeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="MinConsultantGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Opportunities">
+          <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opportunities">
+              <PropertyRef Name="OpportunityId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="OpportunityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_UnitPractices">
+          <End Role="UnitPractices" Type="Self.UnitPractices" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitPractices">
+              <PropertyRef Name="UnitPracticeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="UnitPracticeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Units_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Units" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitsPractices_Practices">
+          <End Role="Practices" Type="Self.Practices" Multiplicity="0..1" />
+          <End Role="UnitPractices" Type="Self.UnitPractices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practices">
+              <PropertyRef Name="PracticeId" />
+            </Principal>
+            <Dependent Role="UnitPractices">
+              <PropertyRef Name="PracticeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitsPractices_Units">
+          <End Role="Units" Type="Self.Units" Multiplicity="0..1" />
+          <End Role="UnitPractices" Type="Self.UnitPractices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitPractices">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserBusinessRoles__Users_UserLastModified">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserBusinessRoles_BusinessRoles">
+          <End Role="BusinessRoles" Type="Self.BusinessRoles" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessRoles">
+              <PropertyRef Name="BusinessRoleId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="BusinessRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserBusinessRoles_Users_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_DefaultViewRoles">
+          <End Role="DefaultViewRoles" Type="Self.DefaultViewRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultViewRoles">
+              <PropertyRef Name="ViewRoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ViewRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_PermissionRoles">
+          <End Role="PermissionRoles" Type="Self.PermissionRoles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionRoles">
+              <PropertyRef Name="PermissionRoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PermissionRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClientOpportunitiesModelStoreContainer">
+          <EntitySet Name="BusinessRoles" EntityType="Self.BusinessRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DefaultViewRoles" EntityType="Self.DefaultViewRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Opportunities" EntityType="Self.Opportunities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpportunityStatuses" EntityType="Self.OpportunityStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermissionRoles" EntityType="Self.PermissionRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoldStatuses" EntityType="Self.SoldStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitPractices" EntityType="Self.UnitPractices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Units" EntityType="Self.Units" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBusinessRoles" EntityType="Self.UserBusinessRoles" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserBusinessRoles].[UserId] AS [UserId], 
+    [UserBusinessRoles].[BusinessRoleId] AS [BusinessRoleId], 
+    [UserBusinessRoles].[LastModifiedUserId] AS [LastModifiedUserId], 
+    [UserBusinessRoles].[LastModified] AS [LastModified], 
+    [UserBusinessRoles].[Active] AS [Active]
+    FROM [dbo].[UserBusinessRoles] AS [UserBusinessRoles]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="fk_Clients_Users" Association="Self.fk_Clients_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Clients" Association="Self.fk_Opportunities_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_OpportunityStatuses" Association="Self.fk_Opportunities_OpportunityStatuses">
+            <End Role="OpportunityStatuses" EntitySet="OpportunityStatuses" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Regions" Association="Self.fk_Opportunities_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_SoldStatuses" Association="Self.fk_Opportunities_SoldStatuses">
+            <End Role="SoldStatuses" EntitySet="SoldStatuses" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_UnitId" Association="Self.fk_Opportunities_UnitId">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_AE" Association="Self.fk_Opportunities_Users_AE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_LastModifiedBy" Association="Self.fk_Opportunities_Users_LastModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_OppOwner" Association="Self.fk_Opportunities_Users_OppOwner">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Grades_Max" Association="Self.fk_Positions_Grades_Max">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Grades_Min" Association="Self.fk_Positions_Grades_Min">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Opportunities" Association="Self.fk_Positions_Opportunities">
+            <End Role="Opportunities" EntitySet="Opportunities" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_UnitPractices" Association="Self.fk_Positions_UnitPractices">
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Users" Association="Self.fk_Positions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Units_Regions" Association="Self.fk_Units_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitsPractices_Practices" Association="Self.fk_UnitsPractices_Practices">
+            <End Role="Practices" EntitySet="Practices" />
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitsPractices_Units" Association="Self.fk_UnitsPractices_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserBusinessRoles__Users_UserLastModified" Association="Self.fk_UserBusinessRoles__Users_UserLastModified">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserBusinessRoles_BusinessRoles" Association="Self.fk_UserBusinessRoles_BusinessRoles">
+            <End Role="BusinessRoles" EntitySet="BusinessRoles" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserBusinessRoles_Users_User" Association="Self.fk_UserBusinessRoles_Users_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_DefaultViewRoles" Association="Self.fk_Users_DefaultViewRoles">
+            <End Role="DefaultViewRoles" EntitySet="DefaultViewRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_PermissionRoles" Association="Self.fk_Users_PermissionRoles">
+            <End Role="PermissionRoles" EntitySet="PermissionRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_Users" Association="Self.fk_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClientOpportunitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BusinessRole">
+          <Key>
+            <PropertyRef Name="BusinessRoleId" />
+          </Key>
+          <Property Name="BusinessRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessRoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserBusinessRoles" Relationship="Self.fk_UserBusinessRoles_BusinessRoles" FromRole="BusinessRoles" ToRole="UserBusinessRoles" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ClientId" />
+          </Key>
+          <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ClientSubbusiness" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Clients_Users" FromRole="Clients" ToRole="Users" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Clients" FromRole="Clients" ToRole="Opportunities" />
+        </EntityType>
+        <EntityType Name="DefaultViewRole">
+          <Key>
+            <PropertyRef Name="ViewRoleId" />
+          </Key>
+          <Property Name="ViewRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ViewName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.fk_Users_DefaultViewRoles" FromRole="DefaultViewRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="ConsultantGradeId" />
+          </Key>
+          <Property Name="ConsultantGradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConsultantGradeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Grades_Max" FromRole="Grades" ToRole="Positions" />
+          <NavigationProperty Name="Positions1" Relationship="Self.fk_Positions_Grades_Min" FromRole="Grades" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Opportunity">
+          <Key>
+            <PropertyRef Name="OpportunityId" />
+          </Key>
+          <Property Name="OpportunityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="AccountExecutiveUserId" Type="Int32" />
+          <Property Name="UnitId" Type="Int32" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="OpportunityStatusId" Type="Int32" />
+          <Property Name="SoldStatusId" Type="Int32" />
+          <Property Name="OpportunityName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="OpportunityOwnerUserId" Type="Int32" />
+          <Property Name="OpportunityNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.fk_Opportunities_Clients" FromRole="Opportunities" ToRole="Clients" />
+          <NavigationProperty Name="OpportunityStatus" Relationship="Self.fk_Opportunities_OpportunityStatuses" FromRole="Opportunities" ToRole="OpportunityStatuses" />
+          <NavigationProperty Name="Region" Relationship="Self.fk_Opportunities_Regions" FromRole="Opportunities" ToRole="Regions" />
+          <NavigationProperty Name="SoldStatus" Relationship="Self.fk_Opportunities_SoldStatuses" FromRole="Opportunities" ToRole="SoldStatuses" />
+          <NavigationProperty Name="Unit" Relationship="Self.fk_Opportunities_UnitId" FromRole="Opportunities" ToRole="Units" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Opportunities_Users_AE" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_Opportunities_Users_LastModifiedBy" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.fk_Opportunities_Users_OppOwner" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Opportunities" FromRole="Opportunities" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="OpportunityStatus">
+          <Key>
+            <PropertyRef Name="OpportunityStatusId" />
+          </Key>
+          <Property Name="OpportunityStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpportunityStatusName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_OpportunityStatuses" FromRole="OpportunityStatuses" ToRole="Opportunities" />
+        </EntityType>
+        <EntityType Name="PermissionRole">
+          <Key>
+            <PropertyRef Name="PermissionRoleId" />
+          </Key>
+          <Property Name="PermissionRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionRoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.fk_Users_PermissionRoles" FromRole="PermissionRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpportunityId" Type="Int32" />
+          <Property Name="UnitPracticeId" Type="Int32" />
+          <Property Name="MaxConsultantGradeId" Type="Int32" />
+          <Property Name="MinConsultantGradeId" Type="Int32" />
+          <Property Name="PositionName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfPositions" Type="Int32" />
+          <Property Name="Skillset" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="ExpectedStartDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="HireCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProposedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AcceptedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RejectedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PositionNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Grade" Relationship="Self.fk_Positions_Grades_Max" FromRole="Positions" ToRole="Grades" />
+          <NavigationProperty Name="Grade1" Relationship="Self.fk_Positions_Grades_Min" FromRole="Positions" ToRole="Grades" />
+          <NavigationProperty Name="Opportunity" Relationship="Self.fk_Positions_Opportunities" FromRole="Positions" ToRole="Opportunities" />
+          <NavigationProperty Name="UnitPractice" Relationship="Self.fk_Positions_UnitPractices" FromRole="Positions" ToRole="UnitPractices" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Positions_Users" FromRole="Positions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Practice">
+          <Key>
+            <PropertyRef Name="PracticeId" />
+          </Key>
+          <Property Name="PracticeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracticeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UnitPractices" Relationship="Self.fk_UnitsPractices_Practices" FromRole="Practices" ToRole="UnitPractices" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Regions" FromRole="Regions" ToRole="Opportunities" />
+          <NavigationProperty Name="Units" Relationship="Self.fk_Units_Regions" FromRole="Regions" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="SoldStatus">
+          <Key>
+            <PropertyRef Name="SoldStatusId" />
+          </Key>
+          <Property Name="SoldStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoldStatusName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_SoldStatuses" FromRole="SoldStatuses" ToRole="Opportunities" />
+        </EntityType>
+        <EntityType Name="UnitPractice">
+          <Key>
+            <PropertyRef Name="UnitPracticeId" />
+          </Key>
+          <Property Name="UnitPracticeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracticeId" Type="Int32" />
+          <Property Name="UnitId" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_UnitPractices" FromRole="UnitPractices" ToRole="Positions" />
+          <NavigationProperty Name="Practice" Relationship="Self.fk_UnitsPractices_Practices" FromRole="UnitPractices" ToRole="Practices" />
+          <NavigationProperty Name="Unit" Relationship="Self.fk_UnitsPractices_Units" FromRole="UnitPractices" ToRole="Units" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="UnitId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" />
+          <Property Name="UnitName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_UnitId" FromRole="Units" ToRole="Opportunities" />
+          <NavigationProperty Name="Region" Relationship="Self.fk_Units_Regions" FromRole="Units" ToRole="Regions" />
+          <NavigationProperty Name="UnitPractices" Relationship="Self.fk_UnitsPractices_Units" FromRole="Units" ToRole="UnitPractices" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ViewRoleId" Type="Int32" />
+          <Property Name="PermissionRoleId" Type="Int32" />
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_Clients_Users" FromRole="Users" ToRole="Clients" />
+          <NavigationProperty Name="DefaultViewRole" Relationship="Self.fk_Users_DefaultViewRoles" FromRole="Users" ToRole="DefaultViewRoles" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Users_AE" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="Opportunities1" Relationship="Self.fk_Opportunities_Users_LastModifiedBy" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="Opportunities2" Relationship="Self.fk_Opportunities_Users_OppOwner" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="PermissionRole" Relationship="Self.fk_Users_PermissionRoles" FromRole="Users" ToRole="PermissionRoles" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Users" FromRole="Users" ToRole="Positions" />
+          <NavigationProperty Name="UserBusinessRoles" Relationship="Self.fk_UserBusinessRoles__Users_UserLastModified" FromRole="Users" ToRole="UserBusinessRoles" />
+          <NavigationProperty Name="UserBusinessRoles1" Relationship="Self.fk_UserBusinessRoles_Users_User" FromRole="Users" ToRole="UserBusinessRoles" />
+          <NavigationProperty Name="Users1" Relationship="Self.fk_Users_Users" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_Users_Users" FromRole="Users1" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserBusinessRole">
+          <Key>
+            <PropertyRef Name="Active" />
+          </Key>
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="BusinessRoleId" Type="Int32" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BusinessRole" Relationship="Self.fk_UserBusinessRoles_BusinessRoles" FromRole="UserBusinessRoles" ToRole="BusinessRoles" />
+          <NavigationProperty Name="User" Relationship="Self.fk_UserBusinessRoles__Users_UserLastModified" FromRole="UserBusinessRoles" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_UserBusinessRoles_Users_User" FromRole="UserBusinessRoles" ToRole="Users" />
+        </EntityType>
+        <Association Name="fk_UserBusinessRoles_BusinessRoles">
+          <End Role="BusinessRoles" Type="Self.BusinessRole" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessRoles">
+              <PropertyRef Name="BusinessRoleId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="BusinessRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Clients_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Clients">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_DefaultViewRoles">
+          <End Role="DefaultViewRoles" Type="Self.DefaultViewRole" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DefaultViewRoles">
+              <PropertyRef Name="ViewRoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ViewRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Grades_Max">
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ConsultantGradeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="MaxConsultantGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Grades_Min">
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="ConsultantGradeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="MinConsultantGradeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_OpportunityStatuses">
+          <End Role="OpportunityStatuses" Type="Self.OpportunityStatus" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OpportunityStatuses">
+              <PropertyRef Name="OpportunityStatusId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="OpportunityStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Regions">
+          <End Role="Regions" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_SoldStatuses">
+          <End Role="SoldStatuses" Type="Self.SoldStatus" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SoldStatuses">
+              <PropertyRef Name="SoldStatusId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="SoldStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_UnitId">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_AE">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="AccountExecutiveUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_LastModifiedBy">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Opportunities_Users_OppOwner">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Opportunities">
+              <PropertyRef Name="OpportunityOwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Opportunities">
+          <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opportunities">
+              <PropertyRef Name="OpportunityId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="OpportunityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_PermissionRoles">
+          <End Role="PermissionRoles" Type="Self.PermissionRole" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionRoles">
+              <PropertyRef Name="PermissionRoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PermissionRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_UnitPractices">
+          <End Role="UnitPractices" Type="Self.UnitPractice" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitPractices">
+              <PropertyRef Name="UnitPracticeId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="UnitPracticeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Positions_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitsPractices_Practices">
+          <End Role="Practices" Type="Self.Practice" Multiplicity="0..1" />
+          <End Role="UnitPractices" Type="Self.UnitPractice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Practices">
+              <PropertyRef Name="PracticeId" />
+            </Principal>
+            <Dependent Role="UnitPractices">
+              <PropertyRef Name="PracticeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Units_Regions">
+          <End Role="Regions" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Units" Type="Self.Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Units">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UnitsPractices_Units">
+          <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+          <End Role="UnitPractices" Type="Self.UnitPractice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Units">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="UnitPractices">
+              <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserBusinessRoles__Users_UserLastModified">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserBusinessRoles_Users_User">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserBusinessRoles" Type="Self.UserBusinessRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserBusinessRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Users_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users1" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="LastModifiedUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClientOpportunitiesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BusinessRoles" EntityType="Self.BusinessRole" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="DefaultViewRoles" EntityType="Self.DefaultViewRole" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="Opportunities" EntityType="Self.Opportunity" />
+          <EntitySet Name="OpportunityStatuses" EntityType="Self.OpportunityStatus" />
+          <EntitySet Name="PermissionRoles" EntityType="Self.PermissionRole" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Practices" EntityType="Self.Practice" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="SoldStatuses" EntityType="Self.SoldStatus" />
+          <EntitySet Name="UnitPractices" EntityType="Self.UnitPractice" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserBusinessRoles" EntityType="Self.UserBusinessRole" />
+          <AssociationSet Name="fk_UserBusinessRoles_BusinessRoles" Association="Self.fk_UserBusinessRoles_BusinessRoles">
+            <End Role="BusinessRoles" EntitySet="BusinessRoles" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Clients_Users" Association="Self.fk_Clients_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Clients" Association="Self.fk_Opportunities_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_DefaultViewRoles" Association="Self.fk_Users_DefaultViewRoles">
+            <End Role="DefaultViewRoles" EntitySet="DefaultViewRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Grades_Max" Association="Self.fk_Positions_Grades_Max">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Grades_Min" Association="Self.fk_Positions_Grades_Min">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_OpportunityStatuses" Association="Self.fk_Opportunities_OpportunityStatuses">
+            <End Role="OpportunityStatuses" EntitySet="OpportunityStatuses" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Regions" Association="Self.fk_Opportunities_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_SoldStatuses" Association="Self.fk_Opportunities_SoldStatuses">
+            <End Role="SoldStatuses" EntitySet="SoldStatuses" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_UnitId" Association="Self.fk_Opportunities_UnitId">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_AE" Association="Self.fk_Opportunities_Users_AE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_LastModifiedBy" Association="Self.fk_Opportunities_Users_LastModifiedBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Opportunities_Users_OppOwner" Association="Self.fk_Opportunities_Users_OppOwner">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Opportunities" EntitySet="Opportunities" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Opportunities" Association="Self.fk_Positions_Opportunities">
+            <End Role="Opportunities" EntitySet="Opportunities" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_PermissionRoles" Association="Self.fk_Users_PermissionRoles">
+            <End Role="PermissionRoles" EntitySet="PermissionRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_UnitPractices" Association="Self.fk_Positions_UnitPractices">
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Positions_Users" Association="Self.fk_Positions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitsPractices_Practices" Association="Self.fk_UnitsPractices_Practices">
+            <End Role="Practices" EntitySet="Practices" />
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Units_Regions" Association="Self.fk_Units_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Units" EntitySet="Units" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UnitsPractices_Units" Association="Self.fk_UnitsPractices_Units">
+            <End Role="Units" EntitySet="Units" />
+            <End Role="UnitPractices" EntitySet="UnitPractices" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserBusinessRoles__Users_UserLastModified" Association="Self.fk_UserBusinessRoles__Users_UserLastModified">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserBusinessRoles_Users_User" Association="Self.fk_UserBusinessRoles_Users_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserBusinessRoles" EntitySet="UserBusinessRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Users_Users" Association="Self.fk_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClientOpportunitiesModelStoreContainer" CdmEntityContainer="ClientOpportunitiesEntities">
+          <EntitySetMapping Name="BusinessRoles">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.BusinessRole">
+              <MappingFragment StoreEntitySet="BusinessRoles">
+                <ScalarProperty Name="BusinessRoleId" ColumnName="BusinessRoleId" />
+                <ScalarProperty Name="BusinessRoleName" ColumnName="BusinessRoleName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientSubbusiness" ColumnName="ClientSubbusiness" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DefaultViewRoles">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.DefaultViewRole">
+              <MappingFragment StoreEntitySet="DefaultViewRoles">
+                <ScalarProperty Name="ViewRoleId" ColumnName="ViewRoleId" />
+                <ScalarProperty Name="ViewName" ColumnName="ViewName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="ConsultantGradeId" ColumnName="ConsultantGradeId" />
+                <ScalarProperty Name="ConsultantGradeName" ColumnName="ConsultantGradeName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Opportunities">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Opportunity">
+              <MappingFragment StoreEntitySet="Opportunities">
+                <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AccountExecutiveUserId" ColumnName="AccountExecutiveUserId" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="OpportunityStatusId" ColumnName="OpportunityStatusId" />
+                <ScalarProperty Name="SoldStatusId" ColumnName="SoldStatusId" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="OpportunityOwnerUserId" ColumnName="OpportunityOwnerUserId" />
+                <ScalarProperty Name="OpportunityNotes" ColumnName="OpportunityNotes" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpportunityStatuses">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.OpportunityStatus">
+              <MappingFragment StoreEntitySet="OpportunityStatuses">
+                <ScalarProperty Name="OpportunityStatusId" ColumnName="OpportunityStatusId" />
+                <ScalarProperty Name="OpportunityStatusName" ColumnName="OpportunityStatusName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermissionRoles">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.PermissionRole">
+              <MappingFragment StoreEntitySet="PermissionRoles">
+                <ScalarProperty Name="PermissionRoleId" ColumnName="PermissionRoleId" />
+                <ScalarProperty Name="PermissionRoleName" ColumnName="PermissionRoleName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
+                <ScalarProperty Name="UnitPracticeId" ColumnName="UnitPracticeId" />
+                <ScalarProperty Name="MaxConsultantGradeId" ColumnName="MaxConsultantGradeId" />
+                <ScalarProperty Name="MinConsultantGradeId" ColumnName="MinConsultantGradeId" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="NumberOfPositions" ColumnName="NumberOfPositions" />
+                <ScalarProperty Name="Skillset" ColumnName="Skillset" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ExpectedStartDate" ColumnName="ExpectedStartDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="HireCandidate" ColumnName="HireCandidate" />
+                <ScalarProperty Name="ProposedCandidate" ColumnName="ProposedCandidate" />
+                <ScalarProperty Name="AcceptedCandidate" ColumnName="AcceptedCandidate" />
+                <ScalarProperty Name="RejectedCandidate" ColumnName="RejectedCandidate" />
+                <ScalarProperty Name="PositionNote" ColumnName="PositionNote" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Practices">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Practice">
+              <MappingFragment StoreEntitySet="Practices">
+                <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
+                <ScalarProperty Name="PracticeName" ColumnName="PracticeName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoldStatuses">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.SoldStatus">
+              <MappingFragment StoreEntitySet="SoldStatuses">
+                <ScalarProperty Name="SoldStatusId" ColumnName="SoldStatusId" />
+                <ScalarProperty Name="SoldStatusName" ColumnName="SoldStatusName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitPractices">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.UnitPractice">
+              <MappingFragment StoreEntitySet="UnitPractices">
+                <ScalarProperty Name="UnitPracticeId" ColumnName="UnitPracticeId" />
+                <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Unit">
+              <MappingFragment StoreEntitySet="Units">
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ViewRoleId" ColumnName="ViewRoleId" />
+                <ScalarProperty Name="PermissionRoleId" ColumnName="PermissionRoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBusinessRoles">
+            <EntityTypeMapping TypeName="ClientOpportunitiesModel.UserBusinessRole">
+              <MappingFragment StoreEntitySet="UserBusinessRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="BusinessRoleId" ColumnName="BusinessRoleId" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

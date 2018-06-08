@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e4b9e603460c4bd2a59142f28188d408" Name="Diagram1">
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.BusinessRole" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Client" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.DefaultViewRole" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Grade" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Opportunity" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.OpportunityStatus" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.PermissionRole" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Position" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Practice" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Region" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.SoldStatus" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.UnitPractice" Width="1.5" PointX="7.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Unit" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.User" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.UserBusinessRole" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_UserBusinessRoles_BusinessRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Clients_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Users_DefaultViewRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Positions_Grades_Max" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Positions_Grades_Min" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_OpportunityStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_Regions" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_SoldStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_UnitId" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_Users_AE" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_Users_LastModifiedBy" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Opportunities_Users_OppOwner" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Positions_Opportunities" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Users_PermissionRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Positions_UnitPractices" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Positions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_UnitsPractices_Practices" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Units_Regions" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_UnitsPractices_Units" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_UserBusinessRoles__Users_UserLastModified" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_UserBusinessRoles_Users_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ClientOpportunitiesModel.fk_Users_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

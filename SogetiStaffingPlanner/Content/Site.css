@@ -1,24 +1,86 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+body{
+    background-color: #E0E0E0;
+    font-family: roboto;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+table, table th, table td{
+    border: 1px solid #BDBDBD;
+    text-align: left;
+    padding: 10px;
+}
+table tr:hover{background-color: #E0E0E0;}
+tr:nth-child(even) {background-color: #EEEEEE;}
+
+.navBar{
+    background-color: #ef4527;
+    height: 70px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+-webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.navLogo{
+    float: left;
+    position: relative;
+    top: 15px;
+    left: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.navTitle{
+    float: left;
+    position: relative;
+    top: 25px;
+    left: 25px;
+    font-size: 20px;
+    font-weight: 500;
 }
+
+.navItems{
+    position: relative;
+    bottom: 15px;
+    float: right;
+}
+
+.navItems li{
+    display: inline-block;
+    padding: 25px;
+}
+
+.main{
+    background-color: white;
+    width: 95%;
+    margin: 0 auto;
+    position: relative;
+    top: 95px;
+    padding: 30px;
+    -webkit-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
+}
+
+.clientView{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    overflow-x: scroll;
+}
+
+.pageCount{
+    float: right;
+    position: relative;
+    right: 37px;
+}
+
+.pageList li{
+    display: inline-block;
+    font-size: 20px;
+    padding: 12px;
+    border: 1px solid #BDBDBD;
+    margin-left: -5px;
+}
+
+.pageList li:hover{background-color: #E0E0E0;}

@@ -8,13 +8,59 @@
     <link rel="icon" href="../../../../favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script type="text/javascript" src="../../Scripts/vue.min.js"></script>
-    <script type="text/javascript" src="../../Scripts/App/Table/app.js"
     <title>Sogeti Staffing Planner</title>
 </head>
 
 <body>
-    <div id="#app" class='main'>
-        
+    <div id="appContainer">
+        <div id="app" class='main'>
+            <h1>Practice Manager View</h1>
+            <table class='clientView'>
+                <tr>
+                    <th>ACCOUNT NAME</th>
+                    <th>SUB-BUSINESS</th>
+                    <th>PROJECT NAME</th>
+                    <th>SPONSOR</th>
+                    <th>PROJECT VALUE</th>
+                    <th>REQUIRED SKILLS</th>
+                    <th>PROJECT TYPE</th>
+                    <th>STATUS</th>
+                    <th>RATE CARD / HR</th>
+                    <th>PROJECT PRACTICE</th>
+                    <th>MAX TARGET GRADE</th>
+                    <th>TARGETED CONSULTANTS</th>
+                    <th>LOCATION</th>
+                    <th>ACTUAL START DATE</th>
+                    <th>DURATION</th>
+                    <th>PRIORITY</th>
+                    <th># OF ROLES</th>
+                    <th>AE</th>
+                    <th>LAST EDITED ON</th>
+                </tr>
+                <tr v-for="post in posts">
+                    <td> {{ post.AccountName }} </td>
+                    <td> {{ post.SubBusiness }} </td>
+                    <td> {{ post.ProjectName }}</td>
+                    <td> {{ post.Sponsor }}</td>
+                    <td> {{ post.ProjectValue }}</td>
+                    <td> {{ post.RequiredSkills }}</td>
+                    <td> {{ post.ProjectType }}</td>
+                    <td> {{ post.Status }}</td>
+                    <td> {{ post.RateCard_HR }}</td>
+                    <td> {{ post.ProjectPractice }}</td>
+                    <td> {{ post.MaxTargetGrade }}</td>
+                    <td> {{ post.TargetConsultants }}</td>
+                    <td> {{ post.Location }}</td>
+                    <td> {{ post.ActualStartDate }}</td>
+                    <td> {{ post.Duration }}</td>
+                    <td> {{ post.Priority }}</td>
+                    <td> {{ post.NumberOfGoals }}</td>
+                    <td> {{ post.AE }}</td>
+                    <td> {{ post.LastEdited }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
+    <script type="text/javascript" src="../../Scripts/App/Table/app.js"></script>
 </body>
 </html>

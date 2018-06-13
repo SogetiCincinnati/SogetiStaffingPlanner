@@ -64,6 +64,11 @@ table, table th, table td{
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}
 
+.navItems li:hover{
+    background-color: #FF5722;
+    cursor: pointer;
+}
+
 th {
     font-size: 6px;
 }
@@ -84,9 +89,10 @@ td {
 
 .clientView{
     width: 100%;
+    display: inline-block;
     border-collapse: collapse;
     font-size: 13px;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .pageCount{

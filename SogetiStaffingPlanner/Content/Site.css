@@ -2,6 +2,59 @@ body{
     background-color: #E0E0E0;
     font-family: roboto;
 }
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Nav Container */
+
+#navContainer {
+    display: flex;
+    align-items: center;
+}
+
+#logoContainer {
+    align-items: center;
+    display: flex;
+    padding-left: 30px;
+}
+
+.navBar {
+    display: flex;
+    background-color: #ef4527;
+    height: 70px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+}
+
+.navLogo {
+    top: 15px;
+    left: 15px;
+}
+
+.navTitle {
+    top: 25px;
+    left: 25px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.navItems li {
+    display: inline-block;
+    padding: 10px;
+    font-size: 12px;
+}
+
+//Table Styles
+
+
+
+
 
 table, table th, table td{
     border: 1px solid #BDBDBD;
@@ -11,44 +64,7 @@ table, table th, table td{
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}
 
-.navBar{
-    background-color: #ef4527;
-    height: 70px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
--webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
-}
 
-.navLogo{
-    float: left;
-    position: relative;
-    top: 15px;
-    left: 15px;
-}
-
-.navTitle{
-    float: left;
-    position: relative;
-    top: 25px;
-    left: 25px;
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.navItems{
-    position: relative;
-    bottom: 15px;
-    float: right;
-}
-
-.navItems li{
-    display: inline-block;
-    padding: 25px;
-}
 
 .main{
     background-color: white;

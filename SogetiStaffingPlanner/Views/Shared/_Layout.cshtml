@@ -6,25 +6,23 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="../../Scripts/vue.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
+    <div class='navBar'>
+        <div id="logoContainer">
+            <img class='navLogo' src="../../Images/logo.png" width='200px'>
+        </div>
+        <div id="navContainer">
+            <!--<span class='navTitle'>Staffing Planner</span>-->
+            <ul class='navItems'>
+                <li>HOME</li>
+                <li>ACCOUNTS</li>
+                <li>PROJECTS</li>
+                <li>OPPORTUNITIES</li>
+                <li>REPORTS</li>
+                <li>CONTACT</li>
+            </ul>
         </div>
     </div>
     <div class="container body-content">

@@ -28,9 +28,13 @@ namespace SogetiStaffingPlanner.Controllers
 
 			return View();
 		}
-
+        /*
+         * Function that calculates the priority of an oppurtunity
+         * Currently only using OpportunityStatus and the number of people to calculate it
+        */
         private String CalculatePriority(MainView_Result result)
         {
+            /*
             if (result.SoldStatusName != null && result.OpportunityStatusName != null)
             {
                 if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
@@ -38,6 +42,7 @@ namespace SogetiStaffingPlanner.Controllers
                     return "High";
                 }
             }
+            */
             if (result.OpportunityStatusName != null)
             {
                 if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions!=null)

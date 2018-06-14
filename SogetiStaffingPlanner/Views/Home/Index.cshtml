@@ -1,49 +1,72 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script>
-        var GetData = function ()
-        {
-            console.log("called");
-            $.ajax({
-                async: false,
-                cache: false,
-                type: "GET",
-                url: "@(Url.Action("GetMainData", "Home"))",
-                success: function (data) {
-                    console.log(data);
-                }
-            });
-    };
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../Content/Site.css" >
+    <script type="text/javascript" 
+    src="../../Scripts/vue.min.js"></script>
+    <title>Sogeti Staffing Planner</title>
 </head>
-<div class="jumbotron">
-    <button id="ActivateText" onclick="GetData()">button</button>
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<body>
+    <div id="appContainer">
+        <div id="app" class='main'>
+            <h1>Practice Manager View</h1>
+            <table class='clientView'>
+                <tr>
+                    <th>NUMBER OF POSITIONS</th>
+                    <th>UNIT</th>
+                    <th>OPPORTUNITY NAME</th>
+                    <th>POSITION NAME</th>
+                    <th>PRIORITY</th>
+                    <th>SOLD</th>
+                    <th>STATUS</th>
+                    <th>CLIENT</th>
+                    <th>AE</th>
+                    <th>ACT LEAD</th>
+                    <th>SKILL SET</th>
+                    <th>MIN CONSULTANT GRADE</th>
+                    <th>MAX CONSULTANT GRADE</th>
+                    <th>RATE</th>
+                    <th>DATE</th>
+                    <th>DURATION</th>
+                    <th>HIRE CANDIDATES</th>
+                    <th>PROPOSED</th>
+                    <th>REJECTED</th>
+                    <th>ACCEPTED</th>
+                    <th>NOTES</th>
+                </tr>
+                <tr v-for="post in posts">
+                    <td> {{ post.NumberOfPositions }} </td>
+                    <td> {{ post.UnitName }} </td>
+                    <td> {{ post.OpportunityName }}</td>
+                    <td> {{ post.PositionName }}</td>
+                    <td> {{ post.Priority }}</td>
+                    <td> {{ post.SoldStatusName }}</td>
+                    <td> {{ post.OpportunityStatus }}</td>
+                    <td> {{ post.ClientSubBusiness }}</td>
+                    <td> {{ post.AEName }}</td>
+                    <td> {{ post.ACTName }}</td>
+                    <td> {{ post.Skillset }}</td>
+                    <td> {{ post.MinConsultantGrade }}</td>
+                    <td> {{ post.MaxConsultantGrade }}</td>
+                    <td> {{ post.Rate }}</td>
+                    <td> {{ post.ExpectedStartDate }}</td>
+                    <td> {{ post.Duration }}</td>
+                    <td> {{ post.HireCandidate }}</td>
+                    <td> {{ post.ProposedCandidate }}</td>
+                    <td> {{ post.RejectedCandidate }}</td>
+                    <td> {{ post.AcceptedCandidate }}</td>
+                    <td> {{ post.PositionNote }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <script type="text/javascript" src="../../Scripts/App/Table/app.js"></script>
+</body>
+</html>

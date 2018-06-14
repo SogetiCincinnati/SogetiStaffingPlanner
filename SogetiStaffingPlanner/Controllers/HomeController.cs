@@ -103,7 +103,9 @@ namespace SogetiStaffingPlanner.Controllers
                         UnitName = mvR.UnitName,
                         Priority = CalculatePriority(mvR),
                         ExpectedStartDateString = Convert.ToString(mvR.ExpectedStartDate.Value.Month) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Day) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Year),
-                        LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year)
+                        LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year),
+                        SoldStatusName=mvR.SoldStatusName,
+                        PositionName=mvR.PositionName
                     });
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);

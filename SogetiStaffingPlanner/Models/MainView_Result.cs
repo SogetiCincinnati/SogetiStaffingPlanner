@@ -40,6 +40,7 @@ namespace SogetiStaffingPlanner.Models
         public string PracticeName { get; set; }
         public string AEName { get; set; }
         public string ACTName { get; set; }
+        public string PositionName { get; set; }
         public string MinConsultantGrade { get; set; }
         public string MaxConsultantGrade { get; set; }
         public string Priority { get; set; }

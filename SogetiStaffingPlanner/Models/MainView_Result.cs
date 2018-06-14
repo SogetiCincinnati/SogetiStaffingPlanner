@@ -15,18 +15,33 @@ namespace SogetiStaffingPlanner.Models
     {
         public string OpportunityName { get; set; }
         public string ClientContact { get; set; }
+        public string OpportunityStatusName { get; set; }
+        public bool OpActive { get; set; }
         public string Skillset { get; set; }
-        public string AE { get; set; }
+        public Nullable<int> AE { get; set; }
+        public Nullable<int> ACT { get; set; }
+        public string UnitName { get; set; }
         public Nullable<int> Rate { get; set; }
         public Nullable<System.DateTime> LastModified { get; set; }
         public string ProposedCandidate { get; set; }
         public Nullable<System.DateTime> ExpectedStartDate { get; set; }
         public Nullable<int> NumberOfPositions { get; set; }
-        public string ConsultantGradeName { get; set; }
+        public Nullable<int> Duration { get; set; }
+        public string HireCandidate { get; set; }
+        public string AcceptedCandidate { get; set; }
+        public string RejectedCandidate { get; set; }
+        public string PositionNote { get; set; }
+        public Nullable<int> MaxConsultantGradeId { get; set; }
+        public Nullable<int> MinConsultantGradeId { get; set; }
         public string ClientName { get; set; }
         public string ClientSubbusiness { get; set; }
-        public bool Active { get; set; }
+        public Nullable<bool> SActive { get; set; }
+        public string SoldStatusName { get; set; }
         public string PracticeName { get; set; }
-        public int DataId { get; set; }
+        public string AEName { get; set; }
+        public string ACTName { get; set; }
+        public string MinConsultantGrade { get; set; }
+        public string MaxConsultantGrade { get; set; }
+        public string Priority { get; set; }
     }
 }

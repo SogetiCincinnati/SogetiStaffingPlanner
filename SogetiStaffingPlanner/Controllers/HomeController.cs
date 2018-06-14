@@ -28,39 +28,84 @@ namespace SogetiStaffingPlanner.Controllers
 
 			return View();
 		}
+
+        private String CalculatePriority(MainView_Result result)
+        {
+            if (result.SoldStatusName != null && result.OpportunityStatusName != null)
+            {
+                if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
+                {
+                    return "High";
+                }
+            }
+            if (result.OpportunityStatusName != null)
+            {
+                if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions!=null)
+                {
+                    if (result.NumberOfPositions == 1)
+                    {
+                        return ("Medium");
+                    }
+                    if (result.NumberOfPositions >= 2)
+                    {
+                        return "High";
+                    }
+                }
+            }
+            return "Low";
+        }
         /*
          * Method for getting the data for the main view
          */
         [HttpGet]
         public JsonResult GetMainData()
         {
-            //create the object to connect to the database
-            Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
-            //get the results
-            ObjectResult<MainView_Result> results =item.MainView();
-            var returner = new List<MainView_Result> { };
-            //map it to a json object
-            foreach (MainView_Result mvR in results)
+            try
             {
-                returner.Add(new MainView_Result
+                //create the object to connect to the database
+                Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
+                //get the results
+                ObjectResult<MainView_Result> results = item.MainView();
+                var returner = new List<MainView_Result> { };
+                //map it to a json object
+                foreach (MainView_Result mvR in results)
                 {
-                    OpportunityName = mvR.OpportunityName,
-                    AE = mvR.AE,
-                    Active = mvR.Active,
-                    ClientContact = mvR.ClientContact,
-                    ClientName = mvR.ClientName,
-                    ClientSubbusiness = mvR.ClientSubbusiness,
-                    ConsultantGradeName = mvR.ConsultantGradeName,
-                    ExpectedStartDate = mvR.ExpectedStartDate,
-                    LastModified = mvR.LastModified,
-                    NumberOfPositions = mvR.NumberOfPositions,
-                    PracticeName = mvR.PracticeName,
-                    ProposedCandidate = mvR.ProposedCandidate,
-                    Rate = mvR.Rate,
-                    Skillset = mvR.Skillset
-                });
+                    returner.Add(new MainView_Result
+                    {
+                        OpportunityName = mvR.OpportunityName,
+                        AEName = mvR.AEName,
+                        OpActive = mvR.OpActive,
+                        ClientContact = mvR.ClientContact,
+                        ClientName = mvR.ClientName,
+                        ClientSubbusiness = mvR.ClientSubbusiness,
+                        MaxConsultantGrade = mvR.MaxConsultantGrade,
+                        ExpectedStartDate = mvR.ExpectedStartDate,
+                        LastModified = mvR.LastModified,
+                        NumberOfPositions = mvR.NumberOfPositions,
+                        PracticeName = mvR.PracticeName,
+                        ProposedCandidate = mvR.ProposedCandidate,
+                        Rate = mvR.Rate,
+                        Skillset = mvR.Skillset,
+                        AcceptedCandidate = mvR.AcceptedCandidate,
+                        ACTName = mvR.ACTName,
+                        Duration = mvR.Duration,
+                        HireCandidate = mvR.HireCandidate,
+                        MinConsultantGrade = mvR.MinConsultantGrade,
+                        OpportunityStatusName = mvR.OpportunityStatusName,
+                        PositionNote = mvR.PositionNote,
+                        RejectedCandidate = mvR.RejectedCandidate,
+                        SActive = mvR.SActive,
+                        UnitName = mvR.UnitName,
+                        Priority = CalculatePriority(mvR)
+                    });
+                }
+                return Json(returner, JsonRequestBehavior.AllowGet);
             }
-            return Json(returner, JsonRequestBehavior.AllowGet);
+            catch(Exception e)
+            {
+                Console.WriteLine("An error occured {0}", e);
+                return null;
+            }
         }
 	}
 }

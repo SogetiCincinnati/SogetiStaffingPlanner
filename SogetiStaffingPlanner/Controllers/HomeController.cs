@@ -101,7 +101,9 @@ namespace SogetiStaffingPlanner.Controllers
                         RejectedCandidate = mvR.RejectedCandidate,
                         SActive = mvR.SActive,
                         UnitName = mvR.UnitName,
-                        Priority = CalculatePriority(mvR)
+                        Priority = CalculatePriority(mvR),
+                        ExpectedStartDateString = Convert.ToString(mvR.ExpectedStartDate.Value.Month) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Day) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Year),
+                        LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year)
                     });
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);

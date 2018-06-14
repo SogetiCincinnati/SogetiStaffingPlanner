@@ -6,9 +6,14 @@ new Vue({
         testArr: [{ "name": "mark" }]
     },
     created: function () {
-        axios.get('/Scripts/App/Seed/seed.json').then((res) => {
-            this.posts = res.data.opprotunities;
-            console.log(this.posts);
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "/Home/GetMainData",
+            success: (data) => {
+                this.posts = data;
+            }
         })
     }
 })

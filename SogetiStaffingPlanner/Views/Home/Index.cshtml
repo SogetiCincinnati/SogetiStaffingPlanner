@@ -7,7 +7,9 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <script type="text/javascript" src="../../Scripts/vue.min.js"></script>
+    <link rel="stylesheet" href="../../Content/Site.css" >
+    <script type="text/javascript" 
+    src="../../Scripts/vue.min.js"></script>
     <title>Sogeti Staffing Planner</title>
 </head>
 
@@ -17,46 +19,50 @@
             <h1>Practice Manager View</h1>
             <table class='clientView'>
                 <tr>
-                    <th>ACCOUNT NAME</th>
-                    <th>SUB-BUSINESS</th>
-                    <th>PROJECT NAME</th>
-                    <th>SPONSOR</th>
-                    <th>PROJECT VALUE</th>
-                    <th>REQUIRED SKILLS</th>
-                    <th>PROJECT TYPE</th>
-                    <th>STATUS</th>
-                    <th>RATE CARD / HR</th>
-                    <th>PROJECT PRACTICE</th>
-                    <th>MAX TARGET GRADE</th>
-                    <th>TARGETED CONSULTANTS</th>
-                    <th>LOCATION</th>
-                    <th>ACTUAL START DATE</th>
-                    <th>DURATION</th>
+                    <th>NUMBER OF POSITIONS</th>
+                    <th>UNIT</th>
+                    <th>OPPORTUNITY NAME</th>
+                    <th>POSITION NAME</th>
                     <th>PRIORITY</th>
-                    <th># OF ROLES</th>
+                    <th>SOLD</th>
+                    <th>STATUS</th>
+                    <th>CLIENT</th>
                     <th>AE</th>
-                    <th>LAST EDITED ON</th>
+                    <th>ACT LEAD</th>
+                    <th>SKILL SET</th>
+                    <th>MIN CONSULTANT GRADE</th>
+                    <th>MAX CONSULTANT GRADE</th>
+                    <th>RATE</th>
+                    <th>DATE</th>
+                    <th>DURATION</th>
+                    <th>HIRE CANDIDATES</th>
+                    <th>PROPOSED</th>
+                    <th>REJECTED</th>
+                    <th>ACCEPTED</th>
+                    <th>NOTES</th>
                 </tr>
                 <tr v-for="post in posts">
-                    <td> {{ post.AccountName }} </td>
-                    <td> {{ post.SubBusiness }} </td>
-                    <td> {{ post.ProjectName }}</td>
-                    <td> {{ post.Sponsor }}</td>
-                    <td> {{ post.ProjectValue }}</td>
-                    <td> {{ post.RequiredSkills }}</td>
-                    <td> {{ post.ProjectType }}</td>
-                    <td> {{ post.Status }}</td>
-                    <td> {{ post.RateCard_HR }}</td>
-                    <td> {{ post.ProjectPractice }}</td>
-                    <td> {{ post.MaxTargetGrade }}</td>
-                    <td> {{ post.TargetConsultants }}</td>
-                    <td> {{ post.Location }}</td>
-                    <td> {{ post.ActualStartDate }}</td>
-                    <td> {{ post.Duration }}</td>
+                    <td> {{ post.NumberOfPositions }} </td>
+                    <td> {{ post.UnitName }} </td>
+                    <td> {{ post.OpportunityName }}</td>
+                    <td> {{ post.PositionName }}</td>
                     <td> {{ post.Priority }}</td>
-                    <td> {{ post.NumberOfGoals }}</td>
-                    <td> {{ post.AE }}</td>
-                    <td> {{ post.LastEdited }}</td>
+                    <td> {{ post.SoldStatusName }}</td>
+                    <td> {{ post.OpportunityStatus }}</td>
+                    <td> {{ post.ClientSubBusiness }}</td>
+                    <td> {{ post.AEName }}</td>
+                    <td> {{ post.ACTName }}</td>
+                    <td> {{ post.Skillset }}</td>
+                    <td> {{ post.MinConsultantGrade }}</td>
+                    <td> {{ post.MaxConsultantGrade }}</td>
+                    <td> {{ post.Rate }}</td>
+                    <td> {{ post.ExpectedStartDate }}</td>
+                    <td> {{ post.Duration }}</td>
+                    <td> {{ post.HireCandidate }}</td>
+                    <td> {{ post.ProposedCandidate }}</td>
+                    <td> {{ post.RejectedCandidate }}</td>
+                    <td> {{ post.AcceptedCandidate }}</td>
+                    <td> {{ post.PositionNote }}</td>
                 </tr>
             </table>
         </div>

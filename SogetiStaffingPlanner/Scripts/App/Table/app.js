@@ -1,3 +1,5 @@
+
+
 new Vue({
     el: '#app',
     data: {
@@ -12,6 +14,7 @@ new Vue({
             type: "GET",
             url: "/Home/GetMainData",
             success: (data) => {
+                console.log(data);
                 this.posts = data;
             }
         })

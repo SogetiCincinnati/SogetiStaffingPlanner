@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SogetiStaffingPlanner</RootNamespace>
     <AssemblyName>SogetiStaffingPlanner</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,11 +63,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -187,6 +184,24 @@
     <Compile Include="Models\Grade.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MainViewData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainViewData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainViewData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainViewData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainViewData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainViewData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainView_Result.cs">
+      <DependentUpon>MainViewData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
@@ -242,6 +257,16 @@
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\MainViewData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MainViewData.edmx</DependentUpon>
+      <LastGenOutput>MainViewData.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MainViewData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MainViewData.edmx</DependentUpon>
+      <LastGenOutput>MainViewData.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -254,6 +279,13 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\MainViewData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MainViewData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\MainViewData.edmx.diagram">
+      <DependentUpon>MainViewData.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -265,8 +297,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\vue.min.js" />
     <Content Include="Web.config" />
+=======
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+>>>>>>> AlexBranch
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

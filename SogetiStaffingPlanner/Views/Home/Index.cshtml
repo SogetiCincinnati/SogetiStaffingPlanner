@@ -1,8 +1,26 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script>
+        var GetData = function ()
+        {
+            console.log("called");
+            $.ajax({
+                async: false,
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("GetMainData", "Home"))",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+    };
+    </script>
+</head>
 <div class="jumbotron">
+    <button id="ActivateText" onclick="GetData()">button</button>
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>

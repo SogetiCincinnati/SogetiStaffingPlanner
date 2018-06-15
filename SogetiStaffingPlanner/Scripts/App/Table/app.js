@@ -16,6 +16,8 @@ new Vue({
             cache: false,
             type: "GET",
             url: "Home/GetMainData",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
             success: function(data) {
                 this.posts = data;
             }.bind(this)

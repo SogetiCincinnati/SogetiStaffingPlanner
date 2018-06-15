@@ -15,7 +15,7 @@ new Vue({
             async: false,
             cache: false,
             type: "GET",
-            url: "/Home/GetMainData",
+            url: "Home/GetMainData",
             success: function(data) {
                 this.posts = data;
             }.bind(this)

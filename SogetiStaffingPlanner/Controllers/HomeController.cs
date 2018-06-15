@@ -66,11 +66,13 @@ namespace SogetiStaffingPlanner.Controllers
         public JsonResult GetMainData()
         {
             ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
-                //create the object to connect to the database
-                //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
-                //get the results
-                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView").ToList<MainViewData>();
-            var returner = new List<MainViewData> { };
+            //create the object to connect to the database
+            //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
+            //get the results
+            try
+            {
+                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView2").ToList<MainViewData>();
+                var returner = new List<MainViewData> { };
                 //map it to a json object
                 foreach (MainViewData mvR in results)
                 {
@@ -103,18 +105,19 @@ namespace SogetiStaffingPlanner.Controllers
                         Priority = CalculatePriority(mvR),
                         ExpectedStartDateString = Convert.ToString(mvR.ExpectedStartDate.Value.Month) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Day) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Year),
                         LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year),
-                        SoldStatusName=mvR.SoldStatusName,
-                        PositionName=mvR.PositionName
+                        SoldStatusName = mvR.SoldStatusName,
+                        PositionName = mvR.PositionName
                     });
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);
-            /*
+            }
+            
             catch(Exception e)
             {
                 Console.WriteLine("An error occured {0}", e);
                 return null;
             }
-            */
+            
         }
 	}
 }

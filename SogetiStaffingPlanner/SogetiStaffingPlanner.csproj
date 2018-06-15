@@ -255,6 +255,7 @@
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\App\Seed\seed.json" />
+    <Content Include="Scripts\App\Seed\seed100.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

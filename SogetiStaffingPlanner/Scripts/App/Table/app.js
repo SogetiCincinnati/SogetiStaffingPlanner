@@ -1,8 +1,11 @@
-
+Vue.component('modal', {
+    template: '#modal-template'
+});
 
 new Vue({
     el: '#app',
     data: {
+        showModal: false,
         posts: [],
         message: 'Planning view',
         testArr: [{ "name": "mark" }]
@@ -13,10 +16,9 @@ new Vue({
             cache: false,
             type: "GET",
             url: "/Home/GetMainData",
-            success: (data) => {
-                console.log(data);
+            success: function(data) {
                 this.posts = data;
-            }
+            }.bind(this)
         })
     }
 })

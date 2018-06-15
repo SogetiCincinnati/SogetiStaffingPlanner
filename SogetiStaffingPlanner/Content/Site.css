@@ -74,10 +74,14 @@ th {
 }
 td {
     font-size: 10px;
+    overflow-y: auto;
+    text-overflow:clip;
+    white-space: nowrap;
+    width: 80px;
 }
 .main{
     background-color: white;
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     position: relative;
     top: 30px;

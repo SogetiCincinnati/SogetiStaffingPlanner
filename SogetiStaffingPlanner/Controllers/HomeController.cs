@@ -65,6 +65,8 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpGet]
         public JsonResult GetMainData()
         {
+            return Json(new { foo = "bar" }, JsonRequestBehavior.AllowGet);
+            /*
             ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
             //create the object to connect to the database
             //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
@@ -117,7 +119,7 @@ namespace SogetiStaffingPlanner.Controllers
                 Console.WriteLine("An error occured {0}", e);
                 return null;
             }
-            
+            */
         }
 	}
 }

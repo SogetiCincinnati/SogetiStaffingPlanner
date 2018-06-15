@@ -32,7 +32,7 @@ namespace SogetiStaffingPlanner.Controllers
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-        private String CalculatePriority(MainView_Result result)
+        private String CalculatePriority(MainViewData result)
         {
             /*
             if (result.SoldStatusName != null && result.OpportunityStatusName != null)
@@ -65,17 +65,16 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpGet]
         public JsonResult GetMainData()
         {
-            try
-            {
+            ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
                 //create the object to connect to the database
-                Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
+                //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
                 //get the results
-                ObjectResult<MainView_Result> results = item.MainView();
-                var returner = new List<MainView_Result> { };
+                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView").ToList<MainViewData>();
+            var returner = new List<MainViewData> { };
                 //map it to a json object
-                foreach (MainView_Result mvR in results)
+                foreach (MainViewData mvR in results)
                 {
-                    returner.Add(new MainView_Result
+                    returner.Add(new MainViewData
                     {
                         OpportunityName = mvR.OpportunityName,
                         AEName = mvR.AEName,
@@ -109,12 +108,13 @@ namespace SogetiStaffingPlanner.Controllers
                     });
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);
-            }
+            /*
             catch(Exception e)
             {
                 Console.WriteLine("An error occured {0}", e);
                 return null;
             }
+            */
         }
 	}
 }

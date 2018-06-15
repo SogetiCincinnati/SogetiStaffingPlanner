@@ -229,6 +229,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.png" />
     <Content Include="Models\ClientOpportunities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
@@ -239,6 +240,8 @@
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\App\Table\app.js" />
+    <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -251,6 +254,7 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\App\Seed\seed.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

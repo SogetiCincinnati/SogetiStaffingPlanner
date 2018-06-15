@@ -12,7 +12,8 @@ namespace SogetiStaffingPlanner.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Core.Objects;
+
     public partial class ClientOpportunitiesEntities : DbContext
     {
         public ClientOpportunitiesEntities()
@@ -24,7 +25,10 @@ namespace SogetiStaffingPlanner.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        public virtual ObjectResult<MainViewData> MainView()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MainViewData>("MainView");
+        }
         public virtual DbSet<BusinessRole> BusinessRoles { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<DefaultViewRole> DefaultViewRoles { get; set; }

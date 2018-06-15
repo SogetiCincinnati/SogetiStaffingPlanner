@@ -17,7 +17,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 		public ActionResult About()
 		{
-			ViewBag.Message = "Your application description.";
+			ViewBag.Message = "Your application.";
 
 			return View();
 		}

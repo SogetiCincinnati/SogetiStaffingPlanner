@@ -11,7 +11,7 @@ namespace SogetiStaffingPlanner.Views
     {
         public string Index()
         {
-            return "Alex";
+            return "AL";
         }
         /*
  * Function that calculates the priority of an oppurtunity

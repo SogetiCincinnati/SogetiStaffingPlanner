@@ -15,12 +15,10 @@ namespace SogetiStaffingPlanner.Controllers
 			return View();
 		}
 
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application.";
-
-			return View();
-		}
+        public ActionResult SetOpportunity(int OpportunityID, int ClientID, string OpportunityName, string OpportunityNotes, string ClientContact)
+        {
+            return Content(OpportunityName);
+        }
 
 		public ActionResult Contact()
 		{

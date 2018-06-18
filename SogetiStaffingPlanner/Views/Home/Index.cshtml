@@ -1,8 +1,9 @@
 ﻿<!---->
     <div id="appContainer">
-        <div id="app" class='main'>
+       
             <h1>Practice Manager View</h1>
-            <table class='clientView'>
+            
+            @*<table class='clientView'>
                 <tr>
                     <th>NUMBER OF POSITIONS</th>
                     <th>UNIT</th>
@@ -49,8 +50,26 @@
                     <td> {{ post.AcceptedCandidate }}</td>
                     <td> {{ post.PositionNote }}</td>
                 </tr>
-            </table>
+            </table>*@
         </div>
-    </div>
+    
+    <form action="SetthisOpportunity" method="post">
+        <label>Opportunity Id</label>
+        <input type="text" name="OpportunityID" placeholder="Id here" />
+        <br />
+        <label>Client Id</label>
+        <input type="text" name="ClientID" placeholder="Id here" />
+        <br />
+        <label>Opportunity name</label>
+        <input type="text" name="OpportunityName" placeholder="id here" />
+        <br />
+        <label>Opportunity notes</label>
+        <input type="text" name="OpportunityNotes" placeholder="Id here" />
+        <br />
+        <label>Client Contact</label>
+        <input type="text" name="ClientContact" placeholder="Id here" />
+        <br /><br />
+        <input type="submit" value="Add opportunity" />
+    </form>
     <script type="text/javascript" src="../../Scripts/App/Table/app.js"></script>
 

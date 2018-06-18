@@ -54,6 +54,10 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpPost]
         public ActionResult SetthisOpportunity(int OpportunityID, int ClientID, string OpportunityName, string OpportunityNotes, string ClientContact)
         {
+            //connect to database with an object
+            ClientOpportunitiesEntities dbopp = new ClientOpportunitiesEntities();
+
+            //set data into new opportunity
             Opportunity sOpp = new Opportunity();
             sOpp.OpportunityId = OpportunityID;
             sOpp.ClientId = ClientID;
@@ -61,7 +65,24 @@ namespace SogetiStaffingPlanner.Controllers
             sOpp.OpportunityNotes = OpportunityNotes;
             sOpp.ClientContact = ClientContact;
 
-            return View(sOpp);
+            //save new opportunity to db
+            dbopp.Opportunities.Add(sOpp);
+            dbopp.SaveChanges();
+
+            return Json("Add Successful", JsonRequestBehavior.AllowGet);
+
+            //Success and error messages to front end
+            //if()
+            //{
+            //    //  Send "false"
+            //    return Json(new { success = false, responseText = "Cannot create new Opportunity" }, JsonRequestBehavior.AllowGet);
+            //}
+            //else
+            //{
+            //    //  Send "success"
+            //    return Json(new { success = true, responseText = "Added Opportunity succesfully" }, JsonRequestBehavior.AllowGet);
+            //}
         }
+
     }
 }

@@ -22,13 +22,15 @@ namespace SogetiStaffingPlanner.Controllers
 		* Adds a client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
 		*/
 		[HttpPost]
-		public ActionResult AddClient(int clientId, string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
+		public ActionResult AddClient(string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
 		{
-			try
+            System.Diagnostics.Debug.WriteLine("AddClient function");
+
+            try
 			{
 				Client client = new Client()
 				{
-					ClientId = clientId,
+					
 					ClientName = clientName,
 					ClientSubbusiness = clientSubbusiness,
 					LastModifiedUserId = lastModifiedUserId,

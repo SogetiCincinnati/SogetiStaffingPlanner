@@ -242,6 +242,7 @@
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\App\Client\client.js" />
     <Content Include="Scripts\App\Table\app.js" />
     <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\bootstrap.js" />

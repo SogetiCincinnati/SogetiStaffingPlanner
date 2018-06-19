@@ -1,56 +1,55 @@
 ﻿<!---->
-    <div id="appContainer">
-       
-            <h1>Practice Manager View</h1>
-		
-            <table class='clientView'>
-                <tr>
-                    <th>NUMBER OF POSITIONS</th>
-                    <th>UNIT</th>
-                    <th>OPPORTUNITY NAME</th>
-                    <th>POSITION NAME</th>
-                    <th>PRIORITY</th>
-                    <th>SOLD</th>
-                    <th>STATUS</th>
-                    <th>CLIENT</th>
-                    <th>AE</th>
-                    <th>ACT LEAD</th>
-                    <th>SKILL SET</th>
-                    <th>MIN CONSULTANT GRADE</th>
-                    <th>MAX CONSULTANT GRADE</th>
-                    <th>RATE</th>
-                    <th>DATE</th>
-                    <th>DURATION</th>
-                    <th>HIRE CANDIDATES</th>
-                    <th>PROPOSED</th>
-                    <th>REJECTED</th>
-                    <th>ACCEPTED</th>
-                    <th>NOTES</th>
-                </tr>
-                <tr v-for="post in posts">
-                    <td> {{ post.NumberOfPositions }} </td>
-                    <td> {{ post.UnitName }} </td>
-                    <td> {{ post.OpportunityName }}</td>
-                    <td> {{ post.PositionName }}</td>
-                    <td> {{ post.Priority }}</td>
-                    <td> {{ post.SoldStatusName }}</td>
-                    <td> {{ post.OpportunityStatusName }}</td>
-                    <td> {{ post.ClientSubbusiness }}</td>
-                    <td> {{ post.AEName }}</td>
-                    <td> {{ post.ACTName }}</td>
-                    <td> {{ post.Skillset }}</td>
-                    <td> {{ post.MinConsultantGrade }}</td>
-                    <td> {{ post.MaxConsultantGrade }}</td>
-                    <td> {{ post.Rate }}</td>
-                    <td> {{ post.ExpectedStartDateString }}</td>
-                    <td> {{ post.Duration }}</td>
-                    <td> {{ post.HireCandidate }}</td>
-                    <td> {{ post.ProposedCandidate }}</td>
-                    <td> {{ post.RejectedCandidate }}</td>
-                    <td> {{ post.AcceptedCandidate }}</td>
-                    <td> {{ post.PositionNote }}</td>
-                </tr>
-            </table>
-        </div>
-
-
+<div id="appContainer">
+	<div id="app" class='main'>
+		<h1>Practice Manager View</h1>
+		<table class='clientView'>
+			<tr>
+				<th>NUMBER OF POSITIONS</th>
+				<th>UNIT</th>
+				<th>OPPORTUNITY NAME</th>
+				<th>POSITION NAME</th>
+				<th>PRIORITY</th>
+				<th>SOLD</th>
+				<th>STATUS</th>
+				<th>CLIENT</th>
+				<th>AE</th>
+				<th>ACT LEAD</th>
+				<th>SKILL SET</th>
+				<th>MIN CONSULTANT GRADE</th>
+				<th>MAX CONSULTANT GRADE</th>
+				<th>RATE</th>
+				<th>DATE</th>
+				<th>DURATION</th>
+				<th>HIRE CANDIDATES</th>
+				<th>PROPOSED</th>
+				<th>REJECTED</th>
+				<th>ACCEPTED</th>
+				<th>NOTES</th>
+			</tr>
+			<tr v-for="post in posts">
+				<td> {{ post.NumberOfPositions }} </td>
+				<td> {{ post.UnitName }} </td>
+				<td> {{ post.OpportunityName }}</td>
+				<td> {{ post.PositionName }}</td>
+				<td> {{ post.Priority }}</td>
+				<td> {{ post.SoldStatusName }}</td>
+				<td> {{ post.OpportunityStatusName }}</td>
+				<td> {{ post.ClientSubbusiness }}</td>
+				<td> {{ post.AEName }}</td>
+				<td> {{ post.ACTName }}</td>
+				<td> {{ post.Skillset }}</td>
+				<td> {{ post.MinConsultantGrade }}</td>
+				<td> {{ post.MaxConsultantGrade }}</td>
+				<td> {{ post.Rate }}</td>
+				<td> {{ post.ExpectedStartDateString }}</td>
+				<td> {{ post.Duration }}</td>
+				<td> {{ post.HireCandidate }}</td>
+				<td> {{ post.ProposedCandidate }}</td>
+				<td> {{ post.RejectedCandidate }}</td>
+				<td> {{ post.AcceptedCandidate }}</td>
+				<td> {{ post.PositionNote }}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+<script type="text/javascript" src="../../Scripts/App/Table/app.js"></script>

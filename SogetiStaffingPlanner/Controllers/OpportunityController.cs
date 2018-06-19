@@ -17,13 +17,18 @@ namespace SogetiStaffingPlanner.Controllers
     {
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
+		//Default Method to return the view of the Index
 		public ViewResult Index()
 		{
 			return View();
 		}
 
+		/*
+		 * POST: Opportunity/AddOpportunity
+		 * Adds a new opportunity to the entity framework when called using HttpPost
+		 */
 		[HttpPost]
-		public ActionResult AddOpportunity(int opportunityID, int clientID, int? accountExecutiveUserId, int unitId, int regionId, int opportunityStatusId, int soldStatusId,  string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime? lastModified, bool? active)
+		public ActionResult AddOpportunity(int opportunityID, int clientID, int? accountExecutiveUserId, int unitId, int regionId, int opportunityStatusId, int soldStatusId,  string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int? lastModifiedUserId, DateTime? lastModified, bool? active)
 		{
 			try
 			{

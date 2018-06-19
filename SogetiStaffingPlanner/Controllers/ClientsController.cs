@@ -7,9 +7,15 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-    public class ClientController : Controller
+    public class ClientsController : Controller
     {
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+
+        //Get: Clients/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
 
 		/*
 		* POST: /Client/AddClient

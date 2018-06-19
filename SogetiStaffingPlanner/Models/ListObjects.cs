@@ -23,4 +23,16 @@ namespace SogetiStaffingPlanner.Models
 		public int SoldStatusId { get; set; }
 		public string SoldStatusName { get; set; }
 	}
+
+	public class RegionList
+	{
+		public int RegionId { get; set; }
+		public string RegionName { get; set; }
+	}
+
+	public class UnitList
+	{
+		public int UnitId { get; set; }
+		public string UnitName { get; set; }
+	}
 }

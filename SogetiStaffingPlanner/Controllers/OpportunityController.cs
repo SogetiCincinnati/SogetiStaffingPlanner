@@ -11,9 +11,15 @@ namespace SogetiStaffingPlanner.Controllers
     {
 		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
+		//Default Index View Method
+		public ActionResult Index()
+		{
+			return View();
+		}
+
 		/*
 		 * GET: /Opportunity/GetClientList
-		 * Returns a JSON list of ClientId, ClientName, and ClientSubbusiness.
+		 * Returns a JSON list of partial ClientList Objects including ClientId, ClientName, and ClientSubbusiness.
 		 */
 		[HttpGet]
 		public ActionResult GetClientList()
@@ -70,7 +76,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 		/*
 		 * GET: /Opportunity/GetOpportunityStatusList
-		 * Returns a JSON list of Active partial Opportunity Status Objects including OpportunityStatusId, OpportunityStatusName.
+		 * Returns a JSON list of Active partial OpportunityStatusList Objects including OpportunityStatusId, OpportunityStatusName.
 		 */
 		[HttpGet]
 		public ActionResult GetOpportunityStatusList()
@@ -100,6 +106,10 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
+		/*
+		 * GET: /Opportunity/GetOpportunityStatusList
+		 * Returns a JSON list of Active SoldStatusList Objects including SoldStatusId and SoldStatusName
+		 */
 		[HttpGet]
 		public ActionResult GetSoldStatusList()
 		{
@@ -128,13 +138,68 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
-		//[HttpGet]
-		//public ActionResult getRegionList();
+		/*
+		 * GET: /Opportunity/GetRegionList
+		 * Returns a JSON list of RegionList Objects including RegionId and RegionName
+		 */
+		[HttpGet]
+		public ActionResult getRegionList()
+		{
+			try
+			{
+				List<Region> regions = db.Regions.ToList();
 
-		//[HttpGet]
-		//public ActionResult getUnitList();
+				List<RegionList> regionList = new List<RegionList>();
+				foreach (Region r in regions)
+				{
+					if (r.Active)
+					{
+						regionList.Add(new RegionList
+						{
+							RegionId = r.RegionId,
+							RegionName = r.RegionName
+						});
+					}
+				}
+				return Json(regionList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
+		/*
+		 * GET: /Opportunity/GetUnitList
+		 * Returns a JSON list of UnitList Objects including UnitId and UnitName
+		 */
+		[HttpGet]
+		public ActionResult getUnitList()
+		{
+			try
+			{
+				List<Unit> units = db.Units.ToList();
 
-
+				List<UnitList> unitList = new List<UnitList>();
+				foreach (Unit u in units)
+				{
+					if (u.Active)
+					{
+						unitList.Add(new UnitList
+						{
+							UnitId = u.UnitId,
+							UnitName = u.UnitName
+						});
+					}
+				}
+				return Json(unitList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 	}
 }

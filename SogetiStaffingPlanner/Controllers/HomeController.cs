@@ -15,11 +15,6 @@ namespace SogetiStaffingPlanner.Controllers
 			return View();
 		}
 
-        public ActionResult SetOpportunity(int OpportunityID, int ClientID, string OpportunityName, string OpportunityNotes, string ClientContact)
-        {
-            return Content(OpportunityName);
-        }
-
 		public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";

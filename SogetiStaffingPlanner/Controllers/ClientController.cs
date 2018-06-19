@@ -11,28 +11,86 @@ namespace SogetiStaffingPlanner.Controllers
     {
         //  private Dev_ClientOpportunitesEntites dbo = new ClientOpportunitesEntites();
 
-        private ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
-        public ActionResult ClientDetails() {
+        //GET ALL CLIENTS INFO
+      //  [HttpGet]
+     /*   public ActionResult Index()
+        {
 
-         
-           var clientInfo = db.Clients;
-            return View(clientInfo);
+            System.Diagnostics.Debug.WriteLine("CLIENT INDEX FUNCTION EXECUTED!!!!!!!!!@@@@@@");
+
+
+            var clientDetails1 = from s in db.Clients
+                                 select new Client
+                                 {
+                                     ClientId = s.ClientId,
+                                     ClientName = s.ClientName,
+                                     ClientSubbusiness = s.ClientSubbusiness,
+                                     LastModifiedUserId = s.LastModifiedUserId,
+                                     LastModified = s.LastModified,
+                                     Active = s.Active,
+
+                                 };
+            return Json(clientDetails1, JsonRequestBehavior.AllowGet);
+
+        } */
+
+
+
+
+        // CLIENT INFO BY ID
+        [HttpGet]
+        public ActionResult ClientDetails(int? id)
+        {
+
+
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            Client client = db.Clients.Find(id);
+            if (client == null)
+            {
+                return HttpNotFound();
+            }
+            return Json(client, JsonRequestBehavior.AllowGet);
+        }
+       
+      /*  public ActionResult Create()
+        {
+            return View();
+        } */
+
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "ClientId, ClientName, ClientSubbusiness, LastModifiedUserId,LastModified, Active")] Client client) {
+
+            if (ModelState.IsValid) {
+
+                db.Clients.Add(client);
+              //  db.CLIENT_DETAILS.Add(client);
+                client.LastModified = DateTime.Now;
+                db.SaveChanges();
+            }
+            return Json("Client Added Successfully", JsonRequestBehavior.AllowGet);
+
+
         }
 
-        // GET: Clients
-        // [Route("getAllClients")]
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public Nullable<int> LastModifiedUserId { get; set; }
+        /*  public ActionResult Create([n(Include = "ClientId, ClientName, ClientSubbusiness,LastModifiedUser, LastModified, Active")] Client client {
 
-        //  [HttpPost]
+              if (ModelState.IsValid) {
 
-        /*  public ActionResult AddClient(String name, String age)
-          {
-              //var clientsIngo = db.Clients.ToList();
-              //var clientsInfo = db.Clients.Include()
-              //return View(clinetsInfo.ToList());
-              System.Diagnostics.Debug.WriteLine(name + " : " + age);
-              return Json("Data send successfully");
+                  db.Clients.Add(client);
+                  client.
+
+              }
 
           }*/
     }
+
 }

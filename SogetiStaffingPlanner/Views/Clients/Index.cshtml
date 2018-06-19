@@ -1,0 +1,24 @@
+﻿@model NewSogetiStaffingPlanner2.Models.Client
+   @{
+       ViewBag.Title = "Clients";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <h2> Single Client Record</h2>
+    <div>
+        Client Id : @Model.ClientId<br/>
+        Client Name : @Model.ClientName<br/>
+        Client Subbusiness : @Model.ClientSubbusiness<br/>
+        Last Modified User Id : @Model.LastModifedUserId<br/>
+        Last Modified : @Model.LastModified<br/>
+        Active : @Model.Active<br/>
+    </div>
+</body>
+</html>

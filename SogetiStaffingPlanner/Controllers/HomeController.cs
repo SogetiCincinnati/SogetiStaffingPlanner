@@ -26,11 +26,19 @@ namespace SogetiStaffingPlanner.Controllers
 
 			return View();
 		}
-        /*
+
+		public ActionResult About()
+		{
+			ViewBag.Message = "Your about page.";
+
+			return View();
+		}
+
+		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-        private String CalculatePriority(MainViewData result)
+		private String CalculatePriority(MainViewData result)
         {
             /*
             if (result.SoldStatusName != null && result.OpportunityStatusName != null)

@@ -30,7 +30,8 @@ new Vue({
             url: "Home/GetMainData",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
+                console.log(data);
                 this.posts = data;
             }.bind(this)
         })

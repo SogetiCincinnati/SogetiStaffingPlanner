@@ -6,9 +6,21 @@ new Vue({
     el: '#app',
     data: {
         showModal: false,
+        newForm: false,
+        buttonText: 'Add New',
         posts: [],
         message: 'Planning view',
         testArr: [{ "name": "mark" }]
+    },
+    methods: {
+        displayAdd: function () {
+            this.newForm = !this.newForm;
+            if (this.newForm === true) {
+                this.buttonText = 'Collapse';
+            } else {
+                this.buttonText = 'Add New';
+            }
+        }
     },
     created: function () {
         $.ajax({

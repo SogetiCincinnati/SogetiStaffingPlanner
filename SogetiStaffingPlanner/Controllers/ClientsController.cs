@@ -7,22 +7,30 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-    public class ClientController : Controller
+    public class ClientsController : Controller
     {
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+
+        //Get: Clients/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
 
 		/*
 		* POST: /Client/AddClient
 		* Adds a client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
 		*/
 		[HttpPost]
-		public ActionResult AddClient(int clientId, string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
+		public ActionResult AddClient(string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
 		{
-			try
+            System.Diagnostics.Debug.WriteLine("AddClient function");
+
+            try
 			{
 				Client client = new Client()
 				{
-					ClientId = clientId,
+					
 					ClientName = clientName,
 					ClientSubbusiness = clientSubbusiness,
 					LastModifiedUserId = 1,

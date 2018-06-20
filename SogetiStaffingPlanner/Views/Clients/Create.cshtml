@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "CreateClient";
+}
+
+<h2>CreateClient</h2>
+
+<div id="createClient" class="main">
+    <label for="ClientName">Client Name: </label>
+    <input type="text" v-model="ClientName" />
+    <label for="ClientSubbusiness">Client Subbusiness </label>
+    <input type="text" v-model="ClientSubbusiness" />
+    <button v-on:click="onSubmit">Add</button>
+    <table class="clientView">
+        <tr>
+            <th>Client Name</th>
+            <th>Client Subbusiness</th>
+        </tr>
+        <tr>
+            <td>Test 1 test 1</td>
+            <td>Test 2 test 2</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" src="../../Scripts/App/Client/client.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

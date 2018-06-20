@@ -1,31 +1,68 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<!---->
+    <div id="appContainer">
+        <div id="app" class='main'>
+            <h1>Practice Manager View</h1>
+            <button v-on:click="displayAdd">{{buttonText}}</button>
+            <div v-if="newForm">
+                <div id="addNew">
+                    <label for="opportunityName">Opportunity Name: </label>
+                    <input type="text" name="opportunityName" />
+                    <label for="positionName">Position Name: </label>
+                    <input type="text" name="positionName"/>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+                </div>
+            </div v-if>
+            <div v-else>
+                <table class='clientView'>
+                    <tr>
+                        <th>NUMBER OF POSITIONS</th>
+                        <th>UNIT</th>
+                        <th>OPPORTUNITY NAME</th>
+                        <th>POSITION NAME</th>
+                        <th>PRIORITY</th>
+                        <th>SOLD</th>
+                        <th>STATUS</th>
+                        <th>CLIENT</th>
+                        <th>AE</th>
+                        <th>ACT LEAD</th>
+                        <th>SKILL SET</th>
+                        <th>MIN CONSULTANT GRADE</th>
+                        <th>MAX CONSULTANT GRADE</th>
+                        <th>RATE</th>
+                        <th>DATE</th>
+                        <th>DURATION</th>
+                        <th>HIRE CANDIDATES</th>
+                        <th>PROPOSED</th>
+                        <th>REJECTED</th>
+                        <th>ACCEPTED</th>
+                        <th>NOTES</th>
+                    </tr>
+                    <tr v-for="post in posts">
+                        <td> {{ post.NumberOfPositions }} </td>
+                        <td> {{ post.UnitName }} </td>
+                        <td> {{ post.OpportunityName }}</td>
+                        <td> {{ post.PositionName }}</td>
+                        <td> {{ post.Priority }}</td>
+                        <td> {{ post.SoldStatusName }}</td>
+                        <td> {{ post.OpportunityStatusName }}</td>
+                        <td> {{ post.ClientSubbusiness }}</td>
+                        <td> {{ post.AEName }}</td>
+                        <td> {{ post.ACTName }}</td>
+                        <td> {{ post.Skillset }}</td>
+                        <td> {{ post.MinConsultantGrade }}</td>
+                        <td> {{ post.MaxConsultantGrade }}</td>
+                        <td> {{ post.Rate }}</td>
+                        <td> {{ post.ExpectedStartDateString }}</td>
+                        <td> {{ post.Duration }}</td>
+                        <td> {{ post.HireCandidate }}</td>
+                        <td> {{ post.ProposedCandidate }}</td>
+                        <td> {{ post.RejectedCandidate }}</td>
+                        <td> {{ post.AcceptedCandidate }}</td>
+                        <td> {{ post.PositionNote }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../Scripts/App/Table/app.js"></script>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>

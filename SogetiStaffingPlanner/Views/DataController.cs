@@ -1,37 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SogetiStaffingPlanner.Models;
 
-namespace SogetiStaffingPlanner.Controllers
+namespace SogetiStaffingPlanner.Views
 {
-	public class HomeController : Controller
-	{
-        public ActionResult Index()
-		{
-			return View();
-		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
-		}
+    public class DataController : Controller
+    {
+        public string Index()
+        {
+            return "AL";
+        }
         /*
-         * Function that calculates the priority of an oppurtunity
-         * Currently only using OpportunityStatus and the number of people to calculate it
-        */
+ * Function that calculates the priority of an oppurtunity
+ * Currently only using OpportunityStatus and the number of people to calculate it
+*/
         private String CalculatePriority(MainViewData result)
         {
             /*
@@ -45,7 +30,7 @@ namespace SogetiStaffingPlanner.Controllers
             */
             if (result.OpportunityStatusName != null)
             {
-                if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions!=null)
+                if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
                 {
                     if (result.NumberOfPositions == 1)
                     {
@@ -60,12 +45,12 @@ namespace SogetiStaffingPlanner.Controllers
             return "Low";
         }
         /*
-         * Method for getting the data for the main view
-         */
+  * Method for getting the data for the main view
+  */
         [HttpGet]
         public JsonResult GetMainData()
         {
-            
+
             ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
             //create the object to connect to the database
             //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
@@ -112,13 +97,13 @@ namespace SogetiStaffingPlanner.Controllers
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);
             }
-            
-            catch(Exception e)
+
+            catch (Exception e)
             {
                 Console.WriteLine("An error occured {0}", e);
                 return null;
             }
-            
+
         }
-	}
+    }
 }

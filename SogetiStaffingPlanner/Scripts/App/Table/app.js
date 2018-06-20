@@ -1,11 +1,6 @@
-Vue.component('modal', {
-    template: '#modal-template'
-});
-
 new Vue({
     el: '#app',
     data: {
-        showModal: false,
         newForm: false,
         buttonText: 'Add New',
         posts: [],

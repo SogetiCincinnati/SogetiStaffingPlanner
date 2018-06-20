@@ -120,5 +120,62 @@ namespace SogetiStaffingPlanner.Controllers
             }
             
         }
-	}
+
+        [HttpPost]
+        public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
+                                                int minConsultantGradeId, string positionName, int numberOfPositions,
+                                                  string skillset, int rate, int expectedStartDate, int duration,
+                                                  string hireCandidate, string proposedCandidate, string acceptedCandidate,
+                                                  string rejectedCandidate, string positionNote,
+                                                  int lastModifiedUserId, int lastModified, bool active)
+        {
+
+            ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+            System.Diagnostics.Debug.WriteLine("AddPosition function");
+
+            try
+            {
+
+                Position position = new Position()
+                {
+                    PositionId = positionId,
+                    OpportunityId = opportunityId,
+                    UnitPracticeId = unitPracticeId,
+                    MaxConsultantGradeId = maxConsultantGradeId,
+                    MinConsultantGradeId = minConsultantGradeId,
+                    PositionName = positionName,
+                    NumberOfPositions = numberOfPositions,
+                    Skillset = skillset,
+                    Rate = rate,
+                    ExpectedStartDate = DateTime.Now,
+                    Duration = duration,
+                    HireCandidate = hireCandidate,
+                    ProposedCandidate = proposedCandidate,
+                    AcceptedCandidate = acceptedCandidate,
+                    RejectedCandidate = rejectedCandidate,
+                    PositionNote = positionNote,
+                    LastModifiedUserId = 1,
+                    LastModified = DateTime.Now,
+                    Active = true
+                };
+
+                db.Positions.Add(position);
+                db.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+                return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
+
+
+
+
+
+        }
+
+    }
 }

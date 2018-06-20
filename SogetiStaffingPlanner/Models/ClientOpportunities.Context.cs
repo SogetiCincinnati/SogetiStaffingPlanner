@@ -13,7 +13,8 @@ namespace SogetiStaffingPlanner.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
-
+    using System.Linq;
+    
     public partial class ClientOpportunitiesEntities : DbContext
     {
         public ClientOpportunitiesEntities()
@@ -25,16 +26,12 @@ namespace SogetiStaffingPlanner.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-        public virtual ObjectResult<MainViewData> MainView()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MainViewData>("MainView");
-        }
+    
         public virtual DbSet<BusinessRole> BusinessRoles { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<DefaultViewRole> DefaultViewRoles { get; set; }
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Opportunity> Opportunities { get; set; }
-        public virtual DbSet<OpportunityStatus> OpportunityStatuses { get; set; }
         public virtual DbSet<PermissionRole> PermissionRoles { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Practice> Practices { get; set; }
@@ -44,5 +41,26 @@ namespace SogetiStaffingPlanner.Models
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserBusinessRole> UserBusinessRoles { get; set; }
+        public virtual DbSet<PositionStatus> PositionStatuses { get; set; }
+    
+        public virtual int MainView()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MainView");
+        }
+    
+        public virtual int MainView2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MainView2");
+        }
+    
+        public virtual ObjectResult<spGetClients_Result> spGetClients()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spGetClients_Result>("spGetClients");
+        }
+    
+        public virtual int spOpportunity()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spOpportunity");
+        }
     }
 }

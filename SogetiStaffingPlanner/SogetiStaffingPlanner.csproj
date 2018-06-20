@@ -192,13 +192,13 @@
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OpportunityStatus.cs">
-      <DependentUpon>ClientOpportunities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Position.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PositionStatus.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Practice.cs">
@@ -208,6 +208,9 @@
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SoldStatus.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetClients_Result.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unit.cs">
@@ -223,7 +226,6 @@
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\DataController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -259,7 +261,6 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
-	 <Content Include="connectionStrings.config" />
     <Content Include="Scripts\App\Seed\seed.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

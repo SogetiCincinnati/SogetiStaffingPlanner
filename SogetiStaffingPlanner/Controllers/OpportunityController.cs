@@ -28,7 +28,7 @@ namespace SogetiStaffingPlanner.Controllers
 		 * Adds a new opportunity to the entity framework when called using HttpPost
 		 */
 		[HttpPost]
-		public ActionResult AddOpportunity(int opportunityID, int clientID, int? accountExecutiveUserId, int unitId, int regionId, int opportunityStatusId, int soldStatusId,  string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int? lastModifiedUserId, DateTime? lastModified, bool? active)
+		public ActionResult AddOpportunity(int opportunityID, int clientID, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId,  string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime lastModified, bool active)
 		{
 			try
 			{
@@ -39,7 +39,6 @@ namespace SogetiStaffingPlanner.Controllers
 					AccountExecutiveUserId = accountExecutiveUserId,
 					UnitId = unitId,
 					RegionId = regionId, 
-					OpportunityStatusId = opportunityStatusId,
 					SoldStatusId = soldStatusId,
 					OpportunityName = opportunityName,
 					OpportunityOwnerUserId = opportunityOwnerUserId,

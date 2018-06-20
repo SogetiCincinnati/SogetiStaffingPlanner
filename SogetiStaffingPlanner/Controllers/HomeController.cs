@@ -67,8 +67,6 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 
 			ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
-			//create the object to connect to the database
-			//Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
 			//get the results
 			try
 			{

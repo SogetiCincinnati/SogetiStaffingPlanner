@@ -50,29 +50,60 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
-		//[HttpGet]
-		//public ActionResult GetAEList()
-		//{
-		//	try
-		//	{
-		//		List<User> users = db.Users.ToList<User>();
+		/*
+		 * GET: /Opportunity/GetAEList
+		 * Returns a JSON list of Active partial Users as AEList Objects including UserId as AEId and UserName as AEName.
+		 */
+		[HttpGet]
+		public ActionResult GetAEList()
+		{
+			try
+			{
+				List<User> users = db.Users.ToList<User>();
 
-		//		List<AEList> aes = new List<AEList>();
-		//		foreach (User u in users)
-		//		{
+				List<AEList> aes = new List<AEList>();
+				foreach (User u in users)
+				{
+					List<UserBusinessRole> ubrList = u.UserBusinessRoles.ToList<UserBusinessRole>();
+					IEnumerable<UserBusinessRole> aeRole = from ubr in ubrList
+														   where ubr.BusinessRoleId == 2
+														   select ubr;
+					if (aeRole.Count() >= 1)
+					{
+						aes.Add(new AEList
+						{
+							AEUserId = u.UserId,
+							AEName = u.FullName
+						});
+					}
+				}
+				return Json(aes, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
-		//		}
-		//		return Json(aes, JsonRequestBehavior.AllowGet);
-		//	}
-		//	catch (Exception e)
-		//	{
-		//		System.Diagnostics.Debug.WriteLine(e.ToString());
-		//	}
-		//	return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
-		//}
 
-		//[HttpGet]
-		//public ActionResult GetACTLeadList();
+		/*
+		* GET: /Opportunity/GetACTLeadList
+		* Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
+		*/
+		[HttpGet]
+		public ActionResult GetACTLeadList()
+		{
+			try
+			{
+				//Call Stored Proc
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
 		/*
 		 * GET: /Opportunity/GetOpportunityStatusList
@@ -143,7 +174,7 @@ namespace SogetiStaffingPlanner.Controllers
 		 * Returns a JSON list of RegionList Objects including RegionId and RegionName
 		 */
 		[HttpGet]
-		public ActionResult getRegionList()
+		public ActionResult GetRegionList()
 		{
 			try
 			{
@@ -175,7 +206,7 @@ namespace SogetiStaffingPlanner.Controllers
 		 * Returns a JSON list of UnitList Objects including UnitId and UnitName
 		 */
 		[HttpGet]
-		public ActionResult getUnitList()
+		public ActionResult GetUnitList()
 		{
 			try
 			{

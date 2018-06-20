@@ -33,7 +33,7 @@ namespace SogetiStaffingPlanner.Controllers
 					
 					ClientName = clientName,
 					ClientSubbusiness = clientSubbusiness,
-					LastModifiedUserId = lastModifiedUserId,
+					LastModifiedUserId = 1,
 					LastModified = DateTime.Now,
 					Active = true
 				};

@@ -1,3 +1,4 @@
+
 new Vue({
     el: '#app',
     data: {
@@ -5,7 +6,24 @@ new Vue({
         buttonText: 'Add New',
         posts: [],
         message: 'Planning view',
-        testArr: [{ "name": "mark" }]
+        newPosition: {
+            PositionId: 0,
+            OpportunityId: '',
+            UnitPracticeId: '',
+            MaxConsultantGradeId: '',
+            MinConsultantGradeId: '',
+            PositionName: 'Tester',
+            NumberOfPositions: '4',
+            Skillset: 'test',
+            Rate: '',
+            ExpectedStartDate: '?',
+            Duration: '',
+            ProposedCandidate: '',
+            RejectedCandidate: '',
+            AcceptedCandidate: '',
+            PositionNote: ''
+        },
+        
     },
     methods: {
         displayAdd: function () {
@@ -15,6 +33,25 @@ new Vue({
             } else {
                 this.buttonText = 'Add New';
             }
+        },
+        submitNew: function () {
+            this.newForm = false; 
+            var data = this.newPosition;
+            console.log(this.newPosition);
+           /* $.ajax({
+                type: "POST",
+                url: "AddClient",
+                dataType: "json",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //Receives message from backend for you to do what you want with it
+                    alert(data);
+                },
+                error: function (e) {
+                    console.log(e, "Error adding data! Please try again.");
+                }
+            }); */
         }
     },
     created: function () {

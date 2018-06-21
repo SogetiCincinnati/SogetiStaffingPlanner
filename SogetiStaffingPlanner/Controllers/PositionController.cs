@@ -14,6 +14,11 @@ namespace SogetiStaffingPlanner.Controllers
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
+        public ActionResult AddPosition()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
                                         int minConsultantGradeId, string positionName, int numberOfPositions,

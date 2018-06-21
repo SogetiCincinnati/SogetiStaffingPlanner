@@ -11,7 +11,7 @@
             data.clientSubbusiness = this.ClientSubbusiness;
             console.log(data);
 
-            /*$.ajax({
+            $.ajax({
                 type: "POST",
                 url: "AddClient",
                 dataType: "json",
@@ -24,7 +24,7 @@
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");
                 }
-            });*/
+            });
         }
     }
 })

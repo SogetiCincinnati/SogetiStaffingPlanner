@@ -35,6 +35,9 @@ namespace SogetiStaffingPlanner.Controllers
 
                 returnPositions.Add(new Position
                 {
+                    PositionId = s.PositionId,
+                    OpportunityId = s.OpportunityId,
+                    UnitPracticeId = s.UnitPracticeId,
                     MaxConsultantGradeId = s.MaxConsultantGradeId,
                     MinConsultantGradeId = s.MinConsultantGradeId,
                     PositionName = s.PositionName,
@@ -48,6 +51,8 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
+                    PositionStatusId = s.PositionStatusId,
+                    Active = true
 
 
 

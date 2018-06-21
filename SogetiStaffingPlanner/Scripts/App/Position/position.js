@@ -55,20 +55,7 @@ new Vue({
 
             console.log(data);
             
-            $.ajax({
-                type: "POST",
-                url: "Home/AddPosition",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    //Receives message from backend for you to do what you want with it
-                    alert(data);
-                },
-                error: function (e) {
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            }); 
+            
         }
     },
     created: function () {
@@ -76,12 +63,12 @@ new Vue({
             async: false,
             cache: false,
             type: "GET",
-            url: "Home/GetMainData",
+            url: "../Postion/GetPosition",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                this.posts = data;
+               
             }.bind(this)
         })
     }

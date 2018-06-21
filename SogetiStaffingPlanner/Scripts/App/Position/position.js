@@ -2,7 +2,8 @@
 new Vue({
     el: '#app',
     data: {
-       positions: ''
+        positions: '',
+        title: 'Positions'
     },
     methods: {
        
@@ -16,8 +17,10 @@ new Vue({
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                
                 console.log(data);
-               
+                this.positions = data;
+                console.log(this.positions);
             }.bind(this)
         })
     }

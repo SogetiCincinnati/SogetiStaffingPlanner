@@ -1,16 +1,20 @@
 ﻿
-<div class="main">
-    <!--
-    <table id="clientView">
+<div id="app" class="main">
+    <h1>Positions</h1>
+    <table >
         <tr>
-            <th>Client Name</th>
-            <th>Client Subbusiness</th>
+            <th>Name</th>
+            <th>Number of Positions</th>
+            <th>Duration</th>
+            <th>Accepted Candidate</th>
         </tr>
-        <tr v-for="client in clients">
-            <td>{{ client.ClientName }}</td>
-            <td>{{ client.ClientSubbusiness }}</td>
+        <tr v-for="position in positions">
+            <td>{{ position.PositionName }}</td>
+            <td>{{ position.NumberOfPositions }}</td>
+            <td>{{ position.Duration }}</td>
+             <td>{{ position.AcceptedCandidate }}</td>
         </tr>
-    </table>-->
+    </table>
 </div>
 <script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
 

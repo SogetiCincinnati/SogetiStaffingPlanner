@@ -50,56 +50,81 @@ namespace SogetiStaffingPlanner.Controllers
 
 
 		//GET ALL CLIENTS INFO
-		//  [HttpGet]
-		/*   public ActionResult Index()
+		 [HttpGet]
+		   public ActionResult GetClients()
 		   {
 
-			   System.Diagnostics.Debug.WriteLine("CLIENT INDEX FUNCTION EXECUTED!!!!!!!!!@@@@@@");
+            List<Client> results = db.Database.SqlQuery<Client>("spGetClients").ToList<Client>();
+            var returner1 = new List<Client> { };
+            System.Diagnostics.Debug.WriteLine("CLIENT INDEX FUNCTION EXECUTED!!!!!!!!!@@@@@@");
 
+            foreach (Client s in results) {
 
-			   var clientDetails1 = from s in db.Clients
-									select new Client
-									{
-										ClientId = s.ClientId,
-										ClientName = s.ClientName,
-										ClientSubbusiness = s.ClientSubbusiness,
-										LastModifiedUserId = s.LastModifiedUserId,
-										LastModified = s.LastModified,
-										Active = s.Active,
-
-									};
-			   return Json(clientDetails1, JsonRequestBehavior.AllowGet);
-
-		   } */
-
-		// CLIENT INFO BY ID
-		//[HttpGet]
-		//public ActionResult ClientDetails(int? id)
-		//{
+                returner1.Add(new Client
+                {
+                    ClientId = s.ClientId,
+                    ClientName = s.ClientName,
+                    ClientSubbusiness = s.ClientSubbusiness,
+                    LastModifiedUserId = s.LastModifiedUserId,
+                    LastModified = s.LastModified,
+                    Active = s.Active,
 
 
 
-		//    if (id == null)
-		//    {
-		//        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-		//    }
-		//    Client client = db.Clients.Find(id);
-		//    if (client == null)
-		//    {
-		//        return HttpNotFound();
-		//    }
-		//    return Json(client, JsonRequestBehavior.AllowGet);
-		//}
+                });
 
-		/*  public ActionResult Create()
+
+
+
+
+            }
+
+            return Json(returner1, JsonRequestBehavior.AllowGet);
+
+        }
+        /* var clientDetails1 = from s in db.Clients
+                              select new Client
+                              {
+                                  ClientId = s.ClientId,
+                                  ClientName = s.ClientName,
+                                  ClientSubbusiness = s.ClientSubbusiness,
+                                  LastModifiedUserId = s.LastModifiedUserId,
+                                  LastModified = s.LastModified,
+                                  Active = s.Active,
+
+                              }; */
+
+
+
+
+        // CLIENT INFO BY ID
+        //[HttpGet]
+        //public ActionResult ClientDetails(int? id)
+        //{
+
+
+
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+        //    }
+        //    Client client = db.Clients.Find(id);
+        //    if (client == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return Json(client, JsonRequestBehavior.AllowGet);
+        //}
+
+        /*  public ActionResult Create()
 		  {
 			  return View();
 		  } */
 
-		// [HttpPost]
-		// [ValidateAntiForgeryToken]
-		// public Nullable<int> LastModifiedUserId { get; set; }
-		/*  public ActionResult Create([n(Include = "ClientId, ClientName, ClientSubbusiness,LastModifiedUser, LastModified, Active")] Client client {
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public Nullable<int> LastModifiedUserId { get; set; }
+        /*  public ActionResult Create([n(Include = "ClientId, ClientName, ClientSubbusiness,LastModifiedUser, LastModified, Active")] Client client {
 
               if (ModelState.IsValid) {
 
@@ -109,6 +134,6 @@ namespace SogetiStaffingPlanner.Controllers
               }
 
           }*/
-	}
+    }
 
 }

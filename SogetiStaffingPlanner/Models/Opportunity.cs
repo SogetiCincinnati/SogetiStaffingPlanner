@@ -21,22 +21,20 @@ namespace SogetiStaffingPlanner.Models
         }
     
         public int OpportunityId { get; set; }
-        public Nullable<int> ClientId { get; set; }
-        public Nullable<int> AccountExecutiveUserId { get; set; }
-        public Nullable<int> UnitId { get; set; }
-        public Nullable<int> RegionId { get; set; }
-        public Nullable<int> OpportunityStatusId { get; set; }
-        public Nullable<int> SoldStatusId { get; set; }
+        public int ClientId { get; set; }
+        public int AccountExecutiveUserId { get; set; }
+        public int UnitId { get; set; }
+        public int RegionId { get; set; }
+        public int SoldStatusId { get; set; }
         public string OpportunityName { get; set; }
-        public Nullable<int> OpportunityOwnerUserId { get; set; }
+        public int OpportunityOwnerUserId { get; set; }
         public string OpportunityNotes { get; set; }
         public string ClientContact { get; set; }
-        public Nullable<int> LastModifiedUserId { get; set; }
-        public Nullable<System.DateTime> LastModified { get; set; }
+        public int LastModifiedUserId { get; set; }
+        public System.DateTime LastModified { get; set; }
         public bool Active { get; set; }
     
         public virtual Client Client { get; set; }
-        public virtual OpportunityStatus OpportunityStatus { get; set; }
         public virtual Region Region { get; set; }
         public virtual SoldStatus SoldStatus { get; set; }
         public virtual Unit Unit { get; set; }

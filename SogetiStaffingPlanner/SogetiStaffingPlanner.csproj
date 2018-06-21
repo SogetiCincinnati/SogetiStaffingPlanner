@@ -110,7 +110,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -156,6 +155,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\OpportunityController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Global.asax.cs">
@@ -188,17 +189,18 @@
     <Compile Include="Models\Grade.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MainViewData.cs" />
     <Compile Include="Models\ListObjects.cs" />
     <Compile Include="Models\Opportunity.cs">
-      <DependentUpon>ClientOpportunities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OpportunityStatus.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Position.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PositionStatus.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Practice.cs">
@@ -208,6 +210,9 @@
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SoldStatus.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spGetClients_Result.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unit.cs">
@@ -233,6 +238,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\logo.png" />
     <Content Include="Models\ClientOpportunities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
@@ -243,6 +249,8 @@
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\App\Table\app.js" />
+    <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -255,6 +263,7 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
+    <Content Include="Scripts\App\Seed\seed.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -271,11 +280,14 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

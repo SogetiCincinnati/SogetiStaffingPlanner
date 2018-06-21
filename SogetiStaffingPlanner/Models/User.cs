@@ -25,14 +25,16 @@ namespace SogetiStaffingPlanner.Models
             this.UserBusinessRoles = new HashSet<UserBusinessRole>();
             this.UserBusinessRoles1 = new HashSet<UserBusinessRole>();
             this.Users1 = new HashSet<User>();
+            this.User1 = new HashSet<User>();
+            this.UserBusinessRoles11 = new HashSet<UserBusinessRole>();
         }
     
         public int UserId { get; set; }
-        public Nullable<int> ViewRoleId { get; set; }
-        public Nullable<int> PermissionRoleId { get; set; }
+        public int ViewRoleId { get; set; }
+        public int PermissionRoleId { get; set; }
         public string FullName { get; set; }
-        public Nullable<int> LastModifiedUserId { get; set; }
-        public Nullable<System.DateTime> LastModified { get; set; }
+        public int LastModifiedUserId { get; set; }
+        public System.DateTime LastModified { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -53,6 +55,9 @@ namespace SogetiStaffingPlanner.Models
         public virtual ICollection<UserBusinessRole> UserBusinessRoles1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users1 { get; set; }
-        public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserBusinessRole> UserBusinessRoles11 { get; set; }
     }
 }

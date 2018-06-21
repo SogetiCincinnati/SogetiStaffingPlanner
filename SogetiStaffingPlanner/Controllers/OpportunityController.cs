@@ -11,8 +11,8 @@ namespace SogetiStaffingPlanner.Controllers
     {
 		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
-		//Default Index View Method
-		public ActionResult Index()
+		//Default Method to return the view of the Index
+		public ViewResult Index()
 		{
 			return View();
 		}
@@ -231,6 +231,43 @@ namespace SogetiStaffingPlanner.Controllers
 				System.Diagnostics.Debug.WriteLine(e.ToString());
 			}
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
+
+		/*
+	* POST: Opportunity/AddOpportunity
+	* Adds a new opportunity to the entity framework when called using HttpPost
+	*/
+		[HttpPost]
+		public ActionResult AddOpportunity(int opportunityID, int clientID, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime lastModified, bool active)
+		{
+			try
+			{
+				Opportunity opportunity = new Opportunity()
+				{
+					OpportunityId = opportunityID,
+					ClientId = clientID,
+					AccountExecutiveUserId = accountExecutiveUserId,
+					UnitId = unitId,
+					RegionId = regionId,
+					SoldStatusId = soldStatusId,
+					OpportunityName = opportunityName,
+					OpportunityOwnerUserId = opportunityOwnerUserId,
+					OpportunityNotes = opportunityNotes,
+					ClientContact = clientContact,
+					LastModifiedUserId = lastModifiedUserId,
+					LastModified = DateTime.Now,
+					Active = true
+				};
+
+				db.Opportunities.Add(opportunity);
+				db.SaveChanges();
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+				return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+			}
+			return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
 		}
 	}
 }

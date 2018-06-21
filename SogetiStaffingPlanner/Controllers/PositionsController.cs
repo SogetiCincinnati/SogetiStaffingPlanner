@@ -30,7 +30,7 @@ namespace SogetiStaffingPlanner.Controllers
             var returnPositions = new List<Position> { };
             System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
 
-            foreach (Position s in returnPositions)
+            foreach (Position s in position)
             {
 
                 returnPositions.Add(new Position

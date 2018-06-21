@@ -9,11 +9,12 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-    public class PositionController : Controller
+    public class PositionsController : Controller
     {
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
+        
 
         /*
          * Method for getting the data for the Positions
@@ -56,7 +57,7 @@ namespace SogetiStaffingPlanner.Controllers
 
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
-
+        }
             /*
          * Method for adding  the data for the Positions
          */
@@ -117,3 +118,4 @@ namespace SogetiStaffingPlanner.Controllers
 
     }
 }
+

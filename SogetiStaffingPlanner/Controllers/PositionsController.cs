@@ -51,7 +51,7 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
-                    PositionStatusId = s.PositionStatusId,
+                  //  PositionStatusId = s.PositionStatusId,
                     Active = true
 
 

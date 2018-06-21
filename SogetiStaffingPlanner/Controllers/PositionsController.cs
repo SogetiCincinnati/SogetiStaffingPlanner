@@ -13,8 +13,11 @@ namespace SogetiStaffingPlanner.Controllers
     {
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-
-        
+        public ActionResult AddPosition()
+        {
+            System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
+            return View();
+        }
 
         /*
          * Method for getting the data for the Positions
@@ -118,4 +121,3 @@ namespace SogetiStaffingPlanner.Controllers
 
     }
 }
-

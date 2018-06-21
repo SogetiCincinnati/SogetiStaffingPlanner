@@ -22,8 +22,7 @@ new Vue({
             RejectedCandidate: 'Peter',
             AcceptedCandidate: 'Dan',
             PositionNote: 'Phil'
-        },
-        
+        }
     },
     methods: {
         displayAdd: function () {
@@ -35,7 +34,7 @@ new Vue({
             }
         },
         submitNew: function () {
-            this.newForm = false; 
+            this.newForm = false;
             var data = {};
             data.positionId = this.newPosition.PositionId;
             data.opportunityId = this.newPosition.OpportunityId;
@@ -54,7 +53,7 @@ new Vue({
             data.positionNote = this.newPosition.PositionName;
 
             console.log(data);
-            
+
             $.ajax({
                 type: "POST",
                 url: "Home/AddPosition",
@@ -68,7 +67,7 @@ new Vue({
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");
                 }
-            }); 
+            });
         }
     },
     created: function () {
@@ -83,6 +82,6 @@ new Vue({
                 console.log(data);
                 this.posts = data;
             }.bind(this)
-        })
+        });
     }
-})
+});

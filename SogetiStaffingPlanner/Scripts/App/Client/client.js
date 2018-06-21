@@ -26,5 +26,19 @@
                 }
             });
         }
+    },
+    created: function () {
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetClients",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+               
+            }.bind(this)
+        });
     }
 });

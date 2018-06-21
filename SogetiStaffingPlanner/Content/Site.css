@@ -79,6 +79,16 @@ td {
     white-space: nowrap;
     width: 80px;
 }
+#clientView {
+    margin: 20px auto;
+}
+#clientView td {
+    font-size: 18px;
+}
+#clientView th {
+    font-size: 18px;
+    font-weight: bold;
+}
 .main{
     background-color: white;
     width: 90%;

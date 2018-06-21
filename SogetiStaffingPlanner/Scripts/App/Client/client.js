@@ -1,26 +1,29 @@
 ﻿new Vue({
     el: '#createClient',
     data: {
+        clients: '',
         ClientName: '',
         ClientSubbusiness: ''
     },
     methods: {
         onSubmit: function () {
-            var data = {};
+            let data = {};
+            let refreshData = {};
+            refreshData.ClientName = this.ClientName;
+            refreshData.ClientSubbusiness = this.ClientSubbusiness;
             data.clientName = this.ClientName;
             data.clientSubbusiness = this.ClientSubbusiness;
-            console.log(data);
-
+         
             $.ajax({
                 type: "POST",
                 url: "AddClient",
                 dataType: "json",
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
-                success: function (data) {
+                success: function (res) {
                     //Receives message from backend for you to do what you want with it
-                    alert(data);
-                },
+                    this.clients.push(refreshData);
+                }.bind(this),
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");
                 }
@@ -36,8 +39,8 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log(data);
-               
+                console.log(this.clients);
+                this.clients = data;
             }.bind(this)
         });
     }

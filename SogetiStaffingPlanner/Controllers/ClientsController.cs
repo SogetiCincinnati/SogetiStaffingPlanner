@@ -67,7 +67,7 @@ namespace SogetiStaffingPlanner.Controllers
                     ClientSubbusiness = s.ClientSubbusiness,
                     LastModifiedUserId = s.LastModifiedUserId,
                     LastModified = s.LastModified,
-                    Active = s.Active,
+                    Active = true
 
 
 

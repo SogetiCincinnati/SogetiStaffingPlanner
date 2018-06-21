@@ -32,7 +32,6 @@ namespace SogetiStaffingPlanner.Controllers
 
             foreach (Position s in returnPositions)
             {
-
                 returnPositions.Add(new Position
                 {
                     MaxConsultantGradeId = s.MaxConsultantGradeId,
@@ -48,16 +47,7 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
-
-
-
-
-
                 });
-
-
-
-
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }

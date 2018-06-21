@@ -69,19 +69,9 @@ namespace SogetiStaffingPlanner.Controllers
                     LastModifiedUserId = s.LastModifiedUserId,
                     LastModified = s.LastModified,
                     Active = true
-
-
-
                 });
-
-
-
-
-
             }
-
             return Json(returner1, JsonRequestBehavior.AllowGet);
-
         }
 
 

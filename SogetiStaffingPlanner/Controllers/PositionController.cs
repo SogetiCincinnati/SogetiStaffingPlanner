@@ -9,13 +9,14 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-    public class PositionController : Controller
+    public class PositionsController : Controller
     {
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
         public ActionResult AddPosition()
         {
+            System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
             return View();
         }
 

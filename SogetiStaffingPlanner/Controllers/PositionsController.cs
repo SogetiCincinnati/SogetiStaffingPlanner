@@ -30,10 +30,14 @@ namespace SogetiStaffingPlanner.Controllers
             var returnPositions = new List<Position> { };
             System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
 
-            foreach (Position s in returnPositions)
+            foreach (Position s in position)
             {
+
                 returnPositions.Add(new Position
                 {
+                    PositionId = s.PositionId,
+                    OpportunityId = s.OpportunityId,
+                    UnitPracticeId = s.UnitPracticeId,
                     MaxConsultantGradeId = s.MaxConsultantGradeId,
                     MinConsultantGradeId = s.MinConsultantGradeId,
                     PositionName = s.PositionName,
@@ -47,7 +51,18 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
+                  //  PositionStatusId = s.PositionStatusId,
+                    Active = true
+
+
+
+
+
                 });
+
+
+
+
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }

@@ -18,14 +18,12 @@ namespace SogetiStaffingPlanner.Controllers
             System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
             return View();
         }
-
         /*
          * Method for getting the data for the Positions
          */
         [HttpGet]
         public ActionResult GetPosition()
         {
-
             List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
             var returnPositions = new List<Position> { };
             System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
@@ -53,16 +51,7 @@ namespace SogetiStaffingPlanner.Controllers
                     PositionNote = s.PositionNote,
                   //  PositionStatusId = s.PositionStatusId,
                     Active = true
-
-
-
-
-
                 });
-
-
-
-
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }
@@ -77,7 +66,6 @@ namespace SogetiStaffingPlanner.Controllers
                                           string rejectedCandidate, string positionNote,
                                           int lastModifiedUserId, int lastModified, bool active)
         {
-
             System.Diagnostics.Debug.WriteLine("AddPosition function");
 
             try
@@ -105,11 +93,9 @@ namespace SogetiStaffingPlanner.Controllers
                     LastModified = DateTime.Now,
                     Active = true
                 };
-
                 db.Positions.Add(position);
                 db.SaveChanges();
             }
-
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());
@@ -117,12 +103,6 @@ namespace SogetiStaffingPlanner.Controllers
             }
 
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
-
         }
-
     }
 }

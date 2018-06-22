@@ -12,19 +12,19 @@ namespace SogetiStaffingPlanner.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OpportunityStatus
+    public partial class PositionStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OpportunityStatus()
+        public PositionStatus()
         {
-            this.Opportunities = new HashSet<Opportunity>();
+            this.Positions = new HashSet<Position>();
         }
     
-        public int OpportunityStatusId { get; set; }
-        public string OpportunityStatusName { get; set; }
+        public int PositionStatusId { get; set; }
+        public string PositionStatusName { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opportunity> Opportunities { get; set; }
+        public virtual ICollection<Position> Positions { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace SogetiStaffingPlanner.Controllers
 {
 	public class HomeController : Controller
 	{
-        public ActionResult Index()
+		public ActionResult Index()
 		{
 			return View();
 		}
@@ -28,13 +28,13 @@ namespace SogetiStaffingPlanner.Controllers
 
 			return View();
 		}
-        /*
+		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-        private String CalculatePriority(MainViewData result)
-        {
-            /*
+		private String CalculatePriority(MainViewData result)
+		{
+			/*
             if (result.SoldStatusName != null && result.OpportunityStatusName != null)
             {
                 if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
@@ -43,23 +43,23 @@ namespace SogetiStaffingPlanner.Controllers
                 }
             }
             */
-            if (result.OpportunityStatusName != null)
-            {
-                if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions!=null)
-                {
-                    if (result.NumberOfPositions == 1)
-                    {
-                        return ("Medium");
-                    }
-                    if (result.NumberOfPositions >= 2)
-                    {
-                        return "High";
-                    }
-                }
-            }
-            return "Low";
-        }
-        /*
+			if (result.OpportunityStatusName != null)
+			{
+				if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
+				{
+					if (result.NumberOfPositions == 1)
+					{
+						return ("Medium");
+					}
+					if (result.NumberOfPositions >= 2)
+					{
+						return "High";
+					}
+				}
+			}
+			return "Low";
+		}
+		/*
          * Method for getting the data for the main view
          */
         [HttpGet]

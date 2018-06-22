@@ -14,14 +14,15 @@ namespace SogetiStaffingPlanner.Models
     
     public partial class UserBusinessRole
     {
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> BusinessRoleId { get; set; }
-        public Nullable<int> LastModifiedUserId { get; set; }
-        public Nullable<System.DateTime> LastModified { get; set; }
+        public int UserId { get; set; }
+        public int BusinessRoleId { get; set; }
+        public int LastModifiedUserId { get; set; }
+        public System.DateTime LastModified { get; set; }
         public bool Active { get; set; }
     
         public virtual BusinessRole BusinessRole { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        public virtual User User11 { get; set; }
     }
 }

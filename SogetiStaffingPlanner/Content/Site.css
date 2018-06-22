@@ -36,6 +36,11 @@ ol, ul {
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
 }
 
+.navBar a {
+    font-size: 22px;
+    text-decoration: none;
+    color: inherit;
+}
 .navLogo {
     top: 15px;
     left: 15px;

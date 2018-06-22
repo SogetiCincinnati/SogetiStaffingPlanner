@@ -23,20 +23,18 @@
         <div id="navContainer">
             <!--<span class='navTitle'>Staffing Planner</span>-->
             <ul class='navItems'>
-                <li>HOME</li>
-                <li>ACCOUNTS</li>
-                <li>PROJECTS</li>
-                <li>OPPORTUNITIES</li>
-                <li>REPORTS</li>
-                <li>CONTACT</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/clients/">Clients</a></li>
+                <li><a href="/positions/">Positions</a></li>
             </ul>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
+        <br /><br />
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Sogeti</p>
         </footer>
     </div>
 

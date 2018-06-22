@@ -3,15 +3,32 @@
     ViewBag.Title = "CreateClient";
 }
 
-<h2>Client List</h2>
 
 <div id="createClient" class="main">
-    <label for="ClientName">Client Name: </label>
-    <input type="text" v-model="ClientName" />
-    <label for="ClientSubbusiness">Client Subbusiness </label>
-    <input type="text" v-model="ClientSubbusiness" />
-    <button v-on:click="onSubmit">Add</button>
+    <h2>Client List</h2>
+
+    <div class="form-horizontal">
+        <label class="col-sm-3" for="ClientName">Client Name: </label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" v-model="ClientName" />
+        </div>
+        <div class="form-group"></div>
+
+        <label class="col-sm-3" for="ClientSubbusiness">Client Subbusiness </label>
+        <div class="col-sm-4">
+            <input class="form-control" type="text" v-model="ClientSubbusiness" />
+        </div>
+
+        <div class="form-group"></div>
+        <div class="col-sm-offset-3 col-sm-6">
+            <button class="btn btn-primary" v-on:click="onSubmit">Add</button>
+        </div>
+        <div class="form-group"></div>
+    </div>
+
+
     <table id="clientView">
+
         <tr>
             <th>Client Name</th>
             <th>Client Subbusiness</th>

@@ -100,10 +100,8 @@
                 <th>Rate</th>
                 <th>Expected Start Date</th>
                 <th>Hire Candidate</th>
-                <th>Proposed Candidate</th>
-                <th>Rejected Candidate</th>
-                <th>Position Note</th>
                 <th>Active</th>
+                <th>Details</th>
             </tr>
             <tr v-for="position in positions">
                 <td>{{ position.PositionName }}</td>
@@ -114,9 +112,8 @@
                 <td>{{ position.Rate }}</td>
                 <td>{{ position.ExpectedStartDate }}</td>
                 <td>{{ position.HireCandidate }}</td>
-                <td>{{ position.ProposedCandidate }}</td>
-                <td>{{ position.AcceptedCandidate }}</td>
-                <td>{{ position.PositionNote }}</td>
+                <td>{{ position.Active }}</td>
+                <td>+</td>
 
             </tr>
         </table>

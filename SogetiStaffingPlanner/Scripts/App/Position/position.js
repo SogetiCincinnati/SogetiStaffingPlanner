@@ -3,10 +3,61 @@ new Vue({
     el: '#app',
     data: {
         positions: '',
-        title: 'Positions'
+        title: 'Positions',
+        addState: false,
+        data: {},
+        positionName: '',
+        positionNumber: '',
+        duration: '',
+        acceptedCandidate: '',
+        skillset: '',
+        rate: '',
+        expectedStartDate: '',
+        hireCandidate: '',
+        proposedCandidate: '',
+        rejectedCandidate: '',
+        positionNote: '',
+        active: '',
+
     },
     methods: {
-       
+        onSubmit: function () {
+            let data = {};
+            data.positionName = this.positionName;
+            data.positionNumber = this.positionNumber;
+            data.duration = this.duration;
+            data.acceptedCandidate = this.acceptedCandidate;
+            
+            data.skillset = this.skillset;
+            data.rate = this.rate;
+            data.expectedStartDate = this.expectedStartDate;
+            data.hireCandidate = this.hireCandidate;
+            data.proposedCandidate = this.proposedCandidate;
+            data.rejectedCandidate = this.rejectedCandidate;
+            data.positionNote = this.positionNote;
+            data.active = this.active;
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "AddPosition",
+                dataType: "json",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    //Receives message from backend for you to do what you want with it
+                    console.log('POST request success');
+                    alert('successfully added');
+                    //alert('Client Name: "' + this.ClientName + '" and Client Subbusiness: "' + this.ClientSubbusiness + '" successfully added.');
+
+
+                   
+                }.bind(this),
+                error: function (e) {
+                    console.log(e, "Error adding data! Please try again.");
+                }
+            });
+        }
     },
     created: function () {
         $.ajax({

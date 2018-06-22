@@ -3,7 +3,8 @@
     data: {
         clients: '',
         ClientName: '',
-        ClientSubbusiness: ''
+        ClientSubbusiness: '',
+        addState: false,
     },
     methods: {
         onSubmit: function () {

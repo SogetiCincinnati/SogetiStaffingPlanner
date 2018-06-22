@@ -2,6 +2,7 @@
 new Vue({
     el: '#app',
     data: {
+        addState: false,
         newForm: false,
         buttonText: 'Add New',
         posts: [],
@@ -22,9 +23,79 @@ new Vue({
             RejectedCandidate: 'Peter',
             AcceptedCandidate: 'Dan',
             PositionNote: 'Phil'
-        }
+        },
+        opportunityName: '',
+        unit: '',
+        numberOfPositions: '',
+        positionName: '',
+        priority: '',
+        sold: '',
+        status: '',
+        client: '',
+        ae: '',
+        actLead: '',
+        skillset: '',
+        minConsultantGrade: '',
+        maxConsultantGrade: '',
+        rate: '',
+        date: '',
+        duration: '',
+        hireCandidate: '',
+        proposed: '',
+        rejected: '',
+        accepted: '',
+        notes: '',
+
     },
     methods: {
+        onSubmit: function() {
+            let data = {};
+            data.opportunityName = this.opportunityName;
+            data.unit = this.unit;
+            data.numberOfPositions = this.numberOfPositions;
+            data.positionName = this.positionName;
+            data.priority = this.priority;
+            data.sold = this.sold;
+            data.status = this.status;
+            data.client = this.client;
+            data.ae = this.ae;
+            data.actLead = this.actLead;
+            data.skillset = this.skillset;
+            data.minConsultantGrade = this.minConsultantGrade;
+            data.maxConsultantGrade = this.maxConsultantGrade;
+            data.rate = this.rate;
+            data.date = this.date;
+            data.duration = this.duration;
+            data.hireCandidate = this.hireCandidate;
+            data.proposed = this.proposed;
+            data.rejected = this.rejected;
+            data.accepted = this.accepted;
+            data.notes = this.notes;
+
+            console.log(data);
+            this.opportunityName = '';
+            this.unit = '';
+            this.numberOfPositions = '';
+            this.positionName = '';
+            this.priority = '';
+            this.sold = '';
+            this.status = '';
+            this.client = '';
+            this.ae = '';
+            this.actLead = '';
+            this.skillset = '';
+            this.minConsultantGrade = '';
+            this.maxConsultantGrade = '';
+            this.rate = '';
+            this.date = '';
+            this.duration = '';
+            this.hireCandidate = '';
+            this.proposed = '';
+            this.rejected = '';
+            this.accepted = '';
+            this.notes = '';
+           
+        },
         displayAdd: function () {
             this.newForm = !this.newForm;
             if (this.newForm === true) {

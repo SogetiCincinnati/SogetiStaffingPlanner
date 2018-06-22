@@ -14,7 +14,7 @@
             refreshData.ClientSubbusiness = this.ClientSubbusiness;
             data.clientName = this.ClientName;
             data.clientSubbusiness = this.ClientSubbusiness;
-         
+            console.log(data);
             $.ajax({
                 type: "POST",
                 url: "AddClient",

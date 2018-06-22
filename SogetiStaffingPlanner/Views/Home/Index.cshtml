@@ -3,81 +3,231 @@
         <div id="app" class='main'>
             <h1>Practice Manager View</h1>
             <!-- VUE'S LOGIC WILL DETERMINE WHICH BUTTON IS DISPLAYED.  EACH BUTTON IS LINKED TO A DIFFERENT METHOD ON THE VUE INSTANCE -->
-            
             <!---
-            <table class="clientView">
-                
-                <tr v-if="newForm">
-                    <td><input v-model="newPost.PositionId" type="text" /></td>
-                    <td><input v-model="newPost.OpportunityId" type="text" /></td>
-                    <td><input v-model="newPost.UnitPracticeId" type="text" /></td>
-                    <td><input v-model="newPost.MaxConsultantGradeId" type="text" /></td>
-                    <td><input v-model="newPost.MixConsultantGradeId" type="text" /></td>
-                    <td><input v-model="newPost.PositionName" type="text" /></td>
-                    <td><input v-model="newPost.NumberOfPositions" type="text" /></td>
-                    <td><input v-model="newPost.Skillset" type="text" /></td>
-                    <td><input v-model="newPost.Rate" type="text" /></td>
-                    <td><input v-model="newPost.ExpectedStartDate" type="text" /></td>
-                    <td><input v-model="newPost.Duration" type="text" /></td>
-                    <td><input v-model="newPost.HireCandidate" type="text" /></td>
-                    <td><input v-model="newPost.ProposedCandidate" type="text" /></td>
-                    <td><input v-model="newPost.AcceptedCandidate" type="text" /></td>
-                    <td><input v-model="newPost.RejectedCandidate" type="text" /></td>
-                    <td><input v-model="newPost.PositionNote" type="text" /></td>
-                </tr>
-            </table>-->
-            <table class='clientView'>
-                <tr>
-                    <th>NUMBER OF POSITIONS</th>
-                    <th>UNIT</th>
-                    <th>OPPORTUNITY NAME</th>
-                    <th>POSITION NAME</th>
-                    <th>PRIORITY</th>
-                    <th>SOLD</th>
-                    <th>STATUS</th>
-                    <th>CLIENT</th>
-                    <th>AE</th>
-                    <th>ACT LEAD</th>
-                    <th>SKILL SET</th>
-                    <th>MIN CONSULTANT GRADE</th>
-                    <th>MAX CONSULTANT GRADE</th>
-                    <th>RATE</th>
-                    <th>DATE</th>
-                    <th>DURATION</th>
-                    <th>HIRE CANDIDATES</th>
-                    <th>PROPOSED</th>
-                    <th>REJECTED</th>
-                    <th>ACCEPTED</th>
-                    <th>NOTES</th>
-                </tr>
-               
-                    
-              
-                <!-- VUE WILL GENERATE EACH ROW BASED ON DATA RECIEVED -->
-                <tr v-for="post in posts">
-                    <td> {{ post.NumberOfPositions }} </td>
-                    <td> {{ post.UnitName }} </td>
-                    <td> {{ post.OpportunityName }}</td>
-                    <td> {{ post.PositionName }}</td>
-                    <td> {{ post.Priority }}</td>
-                    <td> {{ post.SoldStatusName }}</td>
-                    <td> {{ post.OpportunityStatusName }}</td>
-                    <td> {{ post.ClientSubbusiness }}</td>
-                    <td> {{ post.AEName }}</td>
-                    <td> {{ post.ACTName }}</td>
-                    <td> {{ post.Skillset }}</td>
-                    <td> {{ post.MinConsultantGrade }}</td>
-                    <td> {{ post.MaxConsultantGrade }}</td>
-                    <td> {{ post.Rate }}</td>
-                    <td> {{ post.ExpectedStartDateString }}</td>
-                    <td> {{ post.Duration }}</td>
-                    <td> {{ post.HireCandidate }}</td>
-                    <td> {{ post.ProposedCandidate }}</td>
-                    <td> {{ post.RejectedCandidate }}</td>
-                    <td> {{ post.AcceptedCandidate }}</td>
-                    <td> {{ post.PositionNote }}</td>
-                </tr>
-            </table>
+    <table class="clientView">
+
+        <tr v-if="newForm">
+            <td><input v-model="newPost.PositionId" type="text" /></td>
+            <td><input v-model="newPost.OpportunityId" type="text" /></td>
+            <td><input v-model="newPost.UnitPracticeId" type="text" /></td>
+            <td><input v-model="newPost.MaxConsultantGradeId" type="text" /></td>
+            <td><input v-model="newPost.MixConsultantGradeId" type="text" /></td>
+            <td><input v-model="newPost.PositionName" type="text" /></td>
+            <td><input v-model="newPost.NumberOfPositions" type="text" /></td>
+            <td><input v-model="newPost.Skillset" type="text" /></td>
+            <td><input v-model="newPost.Rate" type="text" /></td>
+            <td><input v-model="newPost.ExpectedStartDate" type="text" /></td>
+            <td><input v-model="newPost.Duration" type="text" /></td>
+            <td><input v-model="newPost.HireCandidate" type="text" /></td>
+            <td><input v-model="newPost.ProposedCandidate" type="text" /></td>
+            <td><input v-model="newPost.AcceptedCandidate" type="text" /></td>
+            <td><input v-model="newPost.RejectedCandidate" type="text" /></td>
+            <td><input v-model="newPost.PositionNote" type="text" /></td>
+        </tr>
+    </table>-->
+
+            <div v-if="addState === false">
+                <button v-on:click="addState = true" class="btn btn-primary">
+                    Add Opportunity
+                </button>
+                <div class="form-group"></div>
+            </div>
+            <template v-else>
+                <div class="form-horizontal">
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Opportunity Name: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="opportunityName" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Unit: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="unit" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3"># of Positions: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="numberOfPositions" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Position Name: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="positionName" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Priority: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="priority" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Sold:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="sold" />
+                    </div>
+                    <div class="form-group"></div>
+
+
+                    <label class="col-sm-3">Status:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="status" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Client:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="client" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">AE:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="ae" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">ACT Lead:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="actLead" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Skillset:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="skillset" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Min consultant Grade:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="minConsultantGrade" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Max Consultant Grade:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="maxConsultantGrade" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Rate:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="rate" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Date:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="date" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Duration:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="duration" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Hire Candidate:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="hireCandidate" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Proposed:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="proposed" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Rejected:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="rejected" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Accepted:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="accepted" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <label class="col-sm-3">Notes:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="notes" />
+                    </div>
+                    <div class="form-group"></div>
+
+                    <div class="col-sm-offset-3 col-sm-6">
+                        <button class="btn btn-primary" v-on:click="onSubmit">Add</button>
+                        <button class="btn btn-danger" v-on:click="addState = false">Cancel</button>
+                    </div>
+                    <div class="form-group"></div>
+                </div>
+
+            </template>
+
+
+            <template>
+                <table class='clientView'>
+                    <tr>
+                        <th>OPPORTUNITY NAME</th>
+                        <th>UNIT</th>
+                        <th># OF POSITIONS</th>
+                        <th>POSITION NAME</th>
+                        <th>PRIORITY</th>
+                        <th>SOLD</th>
+                        <th>STATUS</th>
+                        <th>CLIENT</th>
+                        <th>AE</th>
+                        <th>ACT LEAD</th>
+                        <th>SKILL SET</th>
+                        <th>MIN CONSULTANT GRADE</th>
+                        <th>MAX CONSULTANT GRADE</th>
+                        <th>RATE</th>
+                        <th>DATE</th>
+                        <th>DURATION</th>
+                        <th>HIRE CANDIDATES</th>
+                        <th>PROPOSED</th>
+                        <th>REJECTED</th>
+                        <th>ACCEPTED</th>
+                        <th>NOTES</th>
+                    </tr>
+
+
+
+                    <!-- VUE WILL GENERATE EACH ROW BASED ON DATA RECIEVED -->
+                    <tr v-for="post in posts">
+                        <td> {{ post.OpportunityName }}</td>
+                        <td> {{ post.UnitName }} </td>
+                        <td> {{ post.NumberOfPositions }} </td>
+                        <td> {{ post.PositionName }}</td>
+                        <td> {{ post.Priority }}</td>
+                        <td> {{ post.SoldStatusName }}</td>
+                        <td> {{ post.OpportunityStatusName }}</td>
+                        <td> {{ post.ClientSubbusiness }}</td>
+                        <td> {{ post.AEName }}</td>
+                        <td> {{ post.ACTName }}</td>
+                        <td> {{ post.Skillset }}</td>
+                        <td> {{ post.MinConsultantGrade }}</td>
+                        <td> {{ post.MaxConsultantGrade }}</td>
+                        <td> {{ post.Rate }}</td>
+                        <td> {{ post.ExpectedStartDateString }}</td>
+                        <td> {{ post.Duration }}</td>
+                        <td> {{ post.HireCandidate }}</td>
+                        <td> {{ post.ProposedCandidate }}</td>
+                        <td> {{ post.RejectedCandidate }}</td>
+                        <td> {{ post.AcceptedCandidate }}</td>
+                        <td> {{ post.PositionNote }}</td>
+                    </tr>
+                </table>
+            </template>
+
 
         </div>
     </div>

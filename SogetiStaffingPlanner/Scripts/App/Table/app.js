@@ -1,11 +1,8 @@
-
+/* This script corresponds to the Home controller. */
 new Vue({
     el: '#app',
     data: {
-        newForm: false,
-        buttonText: 'Add New',
         posts: [],
-        message: 'Planning view',
         newPosition: {
             PositionId: 1,
             OpportunityId: 1,
@@ -24,53 +21,11 @@ new Vue({
             PositionNote: 'Phil'
         }
     },
-    methods: {
-        displayAdd: function () {
-            this.newForm = !this.newForm;
-            if (this.newForm === true) {
-                this.buttonText = 'Collapse';
-            } else {
-                this.buttonText = 'Add New';
-            }
-        },
-        submitNew: function () {
-            this.newForm = false;
-            var data = {};
-            data.positionId = this.newPosition.PositionId;
-            data.opportunityId = this.newPosition.OpportunityId;
-            data.unitPracticeId = this.newPosition.UnitPracticeId;
-            data.maxConsultantGradeId = this.newPosition.MaxConsultantGradeId;
-            data.minConsultantGradeId = this.newPosition.MinConsultantGradeId;
-            data.positionName = this.newPosition.PositionName;
-            data.numberOfPositions = this.newPosition.NumberOfPositions;
-            data.skillset = this.newPosition.Skillset;
-            data.rate = this.newPosition.Rate;
-            data.expectedStartDate = this.newPosition.ExpectedStartDate;
-            data.duration = this.newPosition.Duration;
-            data.proposedCandidate = this.newPosition.ProposedCandidate;
-            data.rejectedCandidate = this.newPosition.RejectedCandidate;
-            data.acceptedCandidate = this.newPosition.AcceptedCandidate;
-            data.positionNote = this.newPosition.PositionName;
-
-            console.log(data);
-
-            $.ajax({
-                type: "POST",
-                url: "Home/AddPosition",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    //Receives message from backend for you to do what you want with it
-                    alert(data);
-                },
-                error: function (e) {
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
-        }
-    },
     created: function () {
+        /* 
+         * This function will fire as soon as this script loads on the page.
+         * It will fetch the initial dataload from the database.
+         */
         $.ajax({
             async: false,
             cache: false,

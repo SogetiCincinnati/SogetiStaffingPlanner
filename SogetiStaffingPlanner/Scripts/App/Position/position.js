@@ -5,10 +5,11 @@ new Vue({
         positions: '',
         title: 'Positions'
     },
-    methods: {
-       
-    },
     created: function () {
+        /* 
+         * This function will fire as soon as this script loads on the page.
+         * It will fetch the initial dataload from the database.
+         */
         $.ajax({
             async: false,
             cache: false,

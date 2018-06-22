@@ -59,25 +59,8 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			try
 			{
-				List<User> users = db.Users.ToList<User>();
-
-				List<AEList> aes = new List<AEList>();
-				foreach (User u in users)
-				{
-					List<UserBusinessRole> ubrList = u.UserBusinessRoles.ToList<UserBusinessRole>();
-					IEnumerable<UserBusinessRole> aeRole = from ubr in ubrList
-														   where ubr.BusinessRoleId == 2
-														   select ubr;
-					if (aeRole.Count() >= 1)
-					{
-						aes.Add(new AEList
-						{
-							AEUserId = u.UserId,
-							AEName = u.FullName
-						});
-					}
-				}
-				return Json(aes, JsonRequestBehavior.AllowGet);
+				List<AEList> results = db.Database.SqlQuery<AEList>("GetAEList").ToList<AEList>();
+				return Json(results, JsonRequestBehavior.AllowGet);
 			}
 			catch (Exception e)
 			{
@@ -96,7 +79,8 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			try
 			{
-				//Call Stored Proc
+				List<ACTLeadList> results = db.Database.SqlQuery<ACTLeadList>("GetACTLeadList").ToList<ACTLeadList>();
+				return Json(results, JsonRequestBehavior.AllowGet);
 			}
 			catch (Exception e)
 			{
@@ -106,25 +90,25 @@ namespace SogetiStaffingPlanner.Controllers
 		}
 
 		/*
-		 * GET: /Opportunity/GetOpportunityStatusList
-		 * Returns a JSON list of Active partial OpportunityStatusList Objects including OpportunityStatusId, OpportunityStatusName.
+		 * GET: /Opportunity/GetPositionStatusList
+		 * Returns a JSON list of Active partial PositionStatusList Objects including PositionStatusId, PositionStatusName.
 		 */
 		[HttpGet]
-		public ActionResult GetOpportunityStatusList()
+		public ActionResult GetPositionStatusList()
 		{
 			try
 			{
-				List<OpportunityStatus> opportunityStatuses = db.OpportunityStatuses.ToList();
+				List<PositionStatus> positionStatuses = db.PositionStatuses.ToList();
 
-				List<OpportunityStatusList> statuses = new List<OpportunityStatusList>();
-				foreach (OpportunityStatus os in opportunityStatuses)
+				List<PositionStatusList> statuses = new List<PositionStatusList>();
+				foreach (PositionStatus ps in positionStatuses)
 				{
-					if (os.Active)
+					if (ps.Active)
 					{
-						statuses.Add(new OpportunityStatusList
+						statuses.Add(new PositionStatusList
 						{
-							OpportunityStatusId = os.OpportunityStatusId,
-							OpportunityStatusName = os.OpportunityStatusName
+							PositionStatusId = ps.PositionStatusId,
+							PositionStatusName = ps.PositionStatusName
 						});
 					} 
 				}

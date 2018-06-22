@@ -274,7 +274,6 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
-    <Content Include="connectionStrings.config" />
     <Content Include="Scripts\App\Seed\seed.json" />
     <Content Include="Scripts\App\Seed\seed100.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

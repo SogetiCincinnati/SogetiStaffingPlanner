@@ -22,6 +22,11 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
+                    console.log('POST request success');
+                    alert('Client Name: "' + this.ClientName + '" and Client Subbusiness: "' + this.ClientSubbusiness + '" successfully added.');
+                    this.ClientName = '';
+                    this.ClientSubbusiness = '';
+                    
                     this.clients.push(refreshData);
                 }.bind(this),
                 error: function (e) {

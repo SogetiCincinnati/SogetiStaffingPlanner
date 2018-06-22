@@ -12,7 +12,7 @@ namespace SogetiStaffingPlanner.Controllers
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
         //Get: Clients/Create
-        public ActionResult Create()
+        public ActionResult Index()
         {
             return View();
         }

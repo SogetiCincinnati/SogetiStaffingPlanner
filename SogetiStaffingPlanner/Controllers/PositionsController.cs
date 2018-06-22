@@ -13,9 +13,9 @@ namespace SogetiStaffingPlanner.Controllers
     {
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-        public ActionResult AddPosition()
+        public ActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
+            System.Diagnostics.Debug.WriteLine("/posiitons/index.cshtml called.");
             return View();
         }
 
@@ -25,14 +25,11 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpGet]
         public ActionResult GetPosition()
         {
-
+            System.Diagnostics.Debug.WriteLine("/positions GET called.");
             List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
             var returnPositions = new List<Position> { };
-            System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
-
             foreach (Position s in position)
             {
-
                 returnPositions.Add(new Position
                 {
                     PositionId = s.PositionId,

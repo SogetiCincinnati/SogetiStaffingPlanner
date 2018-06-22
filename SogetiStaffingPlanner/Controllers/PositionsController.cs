@@ -20,8 +20,8 @@ namespace SogetiStaffingPlanner.Controllers
         }
 
         /*
-         * Method for getting the data for the Positions
-         */
+        * Method for getting the data for the Positions
+        */
         [HttpGet]
         public ActionResult GetPosition()
         {
@@ -51,31 +51,24 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
-                  //  PositionStatusId = s.PositionStatusId,
+                    // PositionStatusId = s.PositionStatusId,
                     Active = true
 
-
-
-
-
                 });
-
-
-
 
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }
-            /*
-         * Method for adding  the data for the Positions
-         */
+        /*
+        * Method for adding the data for the Positions
+        */
         [HttpPost]
         public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-                                        int minConsultantGradeId, string positionName, int numberOfPositions,
-                                          string skillset, int rate, int expectedStartDate, int duration,
-                                          string hireCandidate, string proposedCandidate, string acceptedCandidate,
-                                          string rejectedCandidate, string positionNote,
-                                          int lastModifiedUserId, int lastModified, bool active)
+        int minConsultantGradeId, string positionName, int numberOfPositions,
+        string skillset, int rate, int expectedStartDate, int duration,
+        string hireCandidate, string proposedCandidate, string acceptedCandidate,
+        string rejectedCandidate, string positionNote,
+        int lastModifiedUserId, int lastModified, bool active)
         {
 
             System.Diagnostics.Debug.WriteLine("AddPosition function");
@@ -117,10 +110,6 @@ namespace SogetiStaffingPlanner.Controllers
             }
 
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
 
         }
 

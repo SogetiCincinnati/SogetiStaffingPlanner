@@ -22,7 +22,7 @@ namespace SogetiStaffingPlanner.Models
         }
     
         public int UnitId { get; set; }
-        public Nullable<int> RegionId { get; set; }
+        public int RegionId { get; set; }
         public string UnitName { get; set; }
         public bool Active { get; set; }
     

@@ -21,8 +21,8 @@ namespace SogetiStaffingPlanner.Models
         }
     
         public int UnitPracticeId { get; set; }
-        public Nullable<int> PracticeId { get; set; }
-        public Nullable<int> UnitId { get; set; }
+        public int PracticeId { get; set; }
+        public int UnitId { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -6,11 +6,14 @@
 <h2>Create a New Client</h2>
 
 <div id="createClient" class="main">
+    <!-- BEGIN FORM FOR ADDING A CLIENT -->
     <label for="ClientName">Client Name: </label>
     <input type="text" v-model="ClientName" />
     <label for="ClientSubbusiness">Client Subbusiness </label>
     <input type="text" v-model="ClientSubbusiness" />
     <button v-on:click="onSubmit">Add</button>
+    <!-- END FORM FOR ADDING A CLIENT -->
+    <!-- BEGIN DYNAMIC VUE TABLE OUTPUT -->
     <table id="clientView">
         <tr>
             <th>Client Name</th>
@@ -21,6 +24,7 @@
             <td>{{ client.ClientSubbusiness }}</td>
         </tr>
     </table>
+    <!-- END DYNAMIC VUE TABLE OUTPUT -->
 </div>
 
 <script type="text/javascript" src="../../Scripts/App/Client/client.js"></script>

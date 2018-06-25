@@ -164,10 +164,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountExecutiveController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PositionsController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -308,6 +311,9 @@
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
     <Content Include="Views\Opportunity\Index.cshtml" />
+    <Content Include="Views\AccountExecutive\Index.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Unit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

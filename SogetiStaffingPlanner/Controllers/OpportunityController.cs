@@ -263,14 +263,14 @@ namespace SogetiStaffingPlanner.Controllers
 	* Adds a new opportunity to the entity framework when called using HttpPost
 	*/
 		[HttpPost]
-		public ActionResult AddOpportunity(int opportunityID, int clientID, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime lastModified, bool active)
+		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{
-			try
+            System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
+            try
 			{
 				Opportunity opportunity = new Opportunity()
 				{
-					OpportunityId = opportunityID,
-					ClientId = clientID,
+					ClientId = clientId,
 					AccountExecutiveUserId = accountExecutiveUserId,
 					UnitId = unitId,
 					RegionId = regionId,
@@ -279,7 +279,7 @@ namespace SogetiStaffingPlanner.Controllers
 					OpportunityOwnerUserId = opportunityOwnerUserId,
 					OpportunityNotes = opportunityNotes,
 					ClientContact = clientContact,
-					LastModifiedUserId = lastModifiedUserId,
+					LastModifiedUserId = 1,
 					LastModified = DateTime.Now,
 					Active = true
 				};

@@ -67,12 +67,5 @@ namespace SogetiStaffingPlanner.Controllers
             }
             return Json(returner1, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
-
-
     }
-
 }

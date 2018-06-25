@@ -146,14 +146,7 @@ namespace SogetiStaffingPlanner.Controllers
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
             }
-
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
-
         }
-
     }
 }

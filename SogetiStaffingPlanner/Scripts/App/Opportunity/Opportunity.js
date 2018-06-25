@@ -5,8 +5,13 @@
         opportunityName: '',
         opportunityNotes: '',
         clientContact: '',
-        clientId: null,
+        clientID: null,
         addState: false,
+        accountExecutiveUserId: null,
+        unitId: null,
+        regionId: null,
+        soldStatusId: null,
+        opportunityOwnerUserId: null
     },
     methods: {
         onSubmit: function () {
@@ -14,7 +19,12 @@
             data.opportunityName = this.opportunityName;
             data.opportunityNotes = this.opportunityNotes;
             data.clientContact = this.clientContact;
-            data.clientId = this.clientId;
+            data.clientID = this.clientID;
+            data.accountExecutiveUserId = this.accountExecutiveUserId;
+            data.unitId = this.unitId;
+            data.regionId = this.regionId;
+            data.soldStatusId = this.soldStatusId;
+            data.opportunityOwnerUserId = this.opportunityOwnerUserId;
             console.log(data);
             $.ajax({
                 type: "POST",
@@ -23,12 +33,23 @@
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
-                    //Receives message from backend for you to do what you want with it
+                    alert("Added " + this.opportunityName + "!");
                     console.log('POST request success');
-                    
-                    this.addState = true;
+                    console.log('data', data);
+                    this.opportunities.push(data);
+                    console.log(this.opportunities);
+                    this.addState = false;
+                    this.opportunityName = '';
+                    this.opportunityNotes = '';
+                    this.clientContact = '';
+                    this.accountExecutiveUserId = null;
+                    this.unitId = null;
+                    this.regionId = null;
+                    this.soldStatusId = null;
+                    this.opportunityOwnerUserId = null;
                 }.bind(this),
                 error: function (e) {
+                    console.log(e);
                     console.log(e, "Error adding data! Please try again.");
                 }
             });

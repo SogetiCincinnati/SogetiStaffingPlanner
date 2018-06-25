@@ -6,8 +6,6 @@
     },
     methods: {
         onSubmit: function () {
-            data.clientName = this.ClientName;
-            data.clientSubbusiness = this.ClientSubbusiness;
             console.log(data);
             $.ajax({
                 type: "POST",
@@ -21,7 +19,6 @@
                     alert('Client Name: "' + this.ClientName + '" and Client Subbusiness: "' + this.ClientSubbusiness + '" successfully added.');
                     this.ClientName = '';
                     this.ClientSubbusiness = '';
-
                     this.clients.push(refreshData);
                 }.bind(this),
                 error: function (e) {
@@ -39,7 +36,6 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                
                 this.opportunities = data;
                 console.log(this.opportunities);
             }.bind(this)

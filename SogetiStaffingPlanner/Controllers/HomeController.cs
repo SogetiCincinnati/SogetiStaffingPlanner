@@ -14,35 +14,12 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			return View();
 		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
-		}
 		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
 		private String CalculatePriority(MainViewData result)
 		{
-			/*
-            if (result.SoldStatusName != null && result.OpportunityStatusName != null)
-            {
-                if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
-                {
-                    return "High";
-                }
-            }
-            */
 			if (result.OpportunityStatusName != null)
 			{
 				if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
@@ -59,6 +36,7 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return "Low";
 		}
+
 		/*
          * Method for getting the data for the main view
          */
@@ -131,7 +109,7 @@ namespace SogetiStaffingPlanner.Controllers
         {
 
             ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
+            System.Diagnostics.Debug.WriteLine("HomeController: AddPosition function");
 
             try
             {

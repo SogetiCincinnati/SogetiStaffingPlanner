@@ -25,7 +25,7 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpGet]
         public ActionResult GetPosition()
         {
-            System.Diagnostics.Debug.WriteLine("/positions GET called.");
+            System.Diagnostics.Debug.WriteLine("positions GET called.");
             List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
             var returnPositions = new List<Position> { };
             foreach (Position s in position)
@@ -50,20 +50,12 @@ namespace SogetiStaffingPlanner.Controllers
                     PositionNote = s.PositionNote,
                   //  PositionStatusId = s.PositionStatusId,
                     Active = true
-
-
-
-
-
                 });
-
-
-
-
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }
-            /*
+
+         /*
          * Method for adding  the data for the Positions
          */
         [HttpPost]
@@ -75,11 +67,9 @@ namespace SogetiStaffingPlanner.Controllers
                                           int lastModifiedUserId, int lastModified, bool active)
         {
 
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
-
+            System.Diagnostics.Debug.WriteLine("Positions Controller: AddPosition function");
             try
             {
-
                 Position position = new Position()
                 {
                     PositionId = positionId,
@@ -102,24 +92,15 @@ namespace SogetiStaffingPlanner.Controllers
                     LastModified = DateTime.Now,
                     Active = true
                 };
-
                 db.Positions.Add(position);
                 db.SaveChanges();
             }
-
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
             }
-
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
-
         }
-
     }
 }

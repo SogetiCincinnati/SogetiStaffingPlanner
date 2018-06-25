@@ -17,7 +17,6 @@ namespace SogetiStaffingPlanner.Models
         public int SoldStatusId { get; set; }
         public string OpportunityName { get; set; }
         public int OpportunityOwnerUserId { get; set; }
-
         public string OpportunityNotes { get; set; }
         public string ClientContact { get; set; }
         public int LastModifiedUserId { get; set; }

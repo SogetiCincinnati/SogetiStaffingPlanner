@@ -5,9 +5,8 @@ new Vue({
         positions: '',
         title: 'Positions',
         addState: false,
-        data: {},
+        numberOfPositions: '',
         positionName: '',
-        positionNumber: '',
         duration: '',
         acceptedCandidate: '',
         skillset: '',
@@ -16,26 +15,29 @@ new Vue({
         hireCandidate: '',
         proposedCandidate: '',
         rejectedCandidate: '',
+        positionStatusId: '',
         positionNote: '',
-        active: '',
-
     },
     methods: {
         onSubmit: function () {
             let data = {};
+            data.positionId = 1;
+            data.opportunityId = 1;
+            data.unitPracticeId = 1;
+            data.maxConsultantGradeId = 1;
+            data.minConsultantGradeId = 1;
+            data.numberOfPositions = 1;
             data.positionName = this.positionName;
-            data.positionNumber = this.positionNumber;
             data.duration = this.duration;
             data.acceptedCandidate = this.acceptedCandidate;
-            
             data.skillset = this.skillset;
             data.rate = this.rate;
             data.expectedStartDate = this.expectedStartDate;
             data.hireCandidate = this.hireCandidate;
             data.proposedCandidate = this.proposedCandidate;
             data.rejectedCandidate = this.rejectedCandidate;
+            data.positionStatusId = 1;
             data.positionNote = this.positionNote;
-            data.active = this.active;
             console.log(data);
 
             $.ajax({
@@ -48,12 +50,9 @@ new Vue({
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
                     alert('successfully added');
-                    //alert('Client Name: "' + this.ClientName + '" and Client Subbusiness: "' + this.ClientSubbusiness + '" successfully added.');
-
-
-                   
                 }.bind(this),
                 error: function (e) {
+                    console.log(e);
                     console.log(e, "Error adding data! Please try again.");
                 }
             });
@@ -76,21 +75,3 @@ new Vue({
         })
     }
 })
-
-/*
- * data.positionId = this.newPosition.PositionId;
-            data.opportunityId = this.newPosition.OpportunityId;
-            data.unitPracticeId = this.newPosition.UnitPracticeId;
-            data.maxConsultantGradeId = this.newPosition.MaxConsultantGradeId;
-            data.minConsultantGradeId = this.newPosition.MinConsultantGradeId;
-            data.positionName = this.newPosition.PositionName;
-            data.numberOfPositions = this.newPosition.NumberOfPositions;
-            data.skillset = this.newPosition.Skillset;
-            data.rate = this.newPosition.Rate;
-            data.expectedStartDate = this.newPosition.ExpectedStartDate;
-            data.duration = this.newPosition.Duration;
-            data.proposedCandidate = this.newPosition.ProposedCandidate;
-            data.rejectedCandidate = this.newPosition.RejectedCandidate;
-            data.acceptedCandidate = this.newPosition.AcceptedCandidate;
-            data.positionNote = this.newPosition.PositionName;
-        */

@@ -14,7 +14,7 @@ namespace SogetiStaffingPlanner.Controllers
 		//Default Method to return the view of the Index
 		public ViewResult Index()
 		{
-            System.Diagnostics.Debug.WriteLine("OPPORTUNITY INDEX CALLED@@@@.");
+            System.Diagnostics.Debug.WriteLine("OPPORTUNITY INDEX CALLED!!!");
             return View();
 		}
 
@@ -32,7 +32,6 @@ namespace SogetiStaffingPlanner.Controllers
                     {
                         opportunityList.Add(new OpportunityModel
                         {
-
                             OpportunityId = o.OpportunityId,
                             ClientId = o.ClientId,
                             AccountExecutiveUserId = o.AccountExecutiveUserId,
@@ -41,12 +40,11 @@ namespace SogetiStaffingPlanner.Controllers
                             SoldStatusId = o.SoldStatusId,
                             OpportunityName = o.OpportunityName,
                             OpportunityOwnerUserId = o.OpportunityOwnerUserId,
-
                             OpportunityNotes = o.OpportunityNotes,
                             ClientContact = o.ClientContact,
                             LastModifiedUserId = o.LastModifiedUserId,
-                            LastModified = o.LastModified,
-                            Active = o.Active,
+                            LastModified = DateTime.Now,
+                            Active = true
                         });
                     }
                 }

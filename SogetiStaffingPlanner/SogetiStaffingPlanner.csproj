@@ -262,8 +262,7 @@
     <Content Include="Scripts\App\Client\client.js" />
     <Content Include="Scripts\App\Opportunity\Opportunity.js" />
     <Content Include="Scripts\App\Position\position.js" />
-    <Content Include="Scripts\App\Table\app.js" />
-    <Content Include="Scripts\axios.js" />
+    <Content Include="Scripts\App\Home\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -276,8 +275,6 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\App\Seed\seed.json" />
-    <Content Include="Scripts\App\Seed\seed100.json" />
     <Content Include="connectionStrings.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

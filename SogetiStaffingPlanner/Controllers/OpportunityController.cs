@@ -218,9 +218,9 @@ namespace SogetiStaffingPlanner.Controllers
 		}
 
 		/*
-	* POST: Opportunity/AddOpportunity
-	* Adds a new opportunity to the entity framework when called using HttpPost
-	*/
+		* POST: Opportunity/AddOpportunity
+		* Adds a new opportunity to the entity framework when called using HttpPost
+		*/
 		[HttpPost]
 		public ActionResult AddOpportunity(int opportunityID, int clientID, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime lastModified, bool active)
 		{

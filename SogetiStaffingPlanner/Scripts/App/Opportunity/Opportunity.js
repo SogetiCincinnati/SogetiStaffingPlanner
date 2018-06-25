@@ -2,24 +2,31 @@
     el: '#opportunity',
     data: {
         opportunities: '',
+        opportunityName: '',
+        opportunityNotes: '',
+        clientContact: '',
+        clientId: null,
         addState: false,
     },
     methods: {
         onSubmit: function () {
+            let data = {};
+            data.opportunityName = this.opportunityName;
+            data.opportunityNotes = this.opportunityNotes;
+            data.clientContact = this.clientContact;
+            data.clientId = this.clientId;
             console.log(data);
             $.ajax({
                 type: "POST",
-                url: "AddClient",
+                url: "AddOpportunity",
                 dataType: "json",
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    alert('Client Name: "' + this.ClientName + '" and Client Subbusiness: "' + this.ClientSubbusiness + '" successfully added.');
-                    this.ClientName = '';
-                    this.ClientSubbusiness = '';
-                    this.clients.push(refreshData);
+                    
+                    this.addState = true;
                 }.bind(this),
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");

@@ -203,6 +203,7 @@
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OpportunityModel.cs" />
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
@@ -259,6 +260,7 @@
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\App\Client\client.js" />
+    <Content Include="Scripts\App\Opportunity\Opportunity.js" />
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Table\app.js" />
     <Content Include="Scripts\axios.js" />
@@ -308,6 +310,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Clients\Index.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Opportunity\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,8 +14,51 @@ namespace SogetiStaffingPlanner.Controllers
 		//Default Method to return the view of the Index
 		public ViewResult Index()
 		{
-			return View();
+            System.Diagnostics.Debug.WriteLine("OPPORTUNITY INDEX CALLED@@@@.");
+            return View();
 		}
+
+        [HttpGet]
+        public ActionResult GetOpportunities()
+        {
+            try
+            {
+                List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
+                var opportunityList = new List<OpportunityModel> { };
+                //List<OpportunityList> opportunityList = new List<OpportunityList>();
+                foreach (Opportunity o in opportunities)
+                {
+                    if (o.Active)
+                    {
+                        opportunityList.Add(new OpportunityModel
+                        {
+
+                            OpportunityId = o.OpportunityId,
+                            ClientId = o.ClientId,
+                            AccountExecutiveUserId = o.AccountExecutiveUserId,
+                            UnitId = o.UnitId,
+                            RegionId = o.RegionId,
+                            SoldStatusId = o.SoldStatusId,
+                            OpportunityName = o.OpportunityName,
+                            OpportunityOwnerUserId = o.OpportunityOwnerUserId,
+
+                            OpportunityNotes = o.OpportunityNotes,
+                            ClientContact = o.ClientContact,
+                            LastModifiedUserId = o.LastModifiedUserId,
+                            LastModified = o.LastModified,
+                            Active = o.Active,
+                        });
+                    }
+                }
+                return Json(opportunityList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+        }
+
 
 		/*
 		 * GET: /Opportunity/GetClientList

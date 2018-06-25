@@ -1,0 +1,55 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div id="opportunity" class="main">
+        <h2>Opportunity List</h2>
+        <div v-if="addState === false">
+            <button v-on:click="addState = true" class="btn btn-primary">
+                Add Opportunity
+            </button>
+            <div class="form-group"></div>
+        </div>
+        <template v-else>
+            <div class="form-horizontal">
+
+
+                <div class="form-group"></div>
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button class="btn btn-primary" v-on:click="onSubmit">Add</button>
+                    <button class="btn btn-danger" v-on:click="addState = false">Cancel</button>
+                </div>
+                <div class="form-group"></div>
+            </div>
+
+        </template>
+        <template>
+            <table>
+                <tr>
+                    <th>Opportunity Name</th>
+                    <th>Active</th>
+                    <th>Client Id</th>
+                    <th>Client Contact</th>
+                </tr>
+                <tr v-for="opportunity in opportunities">
+                    <td>{{ opportunity.OpportunityName }}</td>
+                    <td>{{ opportunity.Active }}</td>
+                    <td>{{ opportunity.ClientId }}</td>
+                    <td>{{ opportunity.ClientContact }}</td>
+                </tr>
+            </table>
+        </template>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../../Scripts/App/opportunity/opportunity.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -42,6 +42,7 @@
                     this.opportunityName = '';
                     this.opportunityNotes = '';
                     this.clientContact = '';
+                    this.clientID = null;
                     this.accountExecutiveUserId = null;
                     this.unitId = null;
                     this.regionId = null;

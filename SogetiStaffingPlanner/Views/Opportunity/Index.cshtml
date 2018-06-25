@@ -81,12 +81,14 @@
                     <th>Active</th>
                     <th>Client Id</th>
                     <th>Client Contact</th>
+                    <th></th>
                 </tr>
                 <tr v-for="opportunity in opportunities">
                     <td>{{ opportunity.OpportunityName }}</td>
                     <td>{{ opportunity.Active }}</td>
                     <td>{{ opportunity.ClientId }}</td>
                     <td>{{ opportunity.ClientContact }}</td>
+                    <td><button class="btn btn-info" v-on:click="onEdit(opportunity.OpportunityName)">Edit</button></td>
                 </tr>
             </table>
         </template>

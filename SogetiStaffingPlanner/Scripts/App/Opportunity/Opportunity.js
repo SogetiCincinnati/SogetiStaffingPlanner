@@ -53,6 +53,9 @@
                     console.log(e, "Error adding data! Please try again.");
                 }
             });
+        },
+        onEdit: function (name) {
+            alert(name);
         }
     },
     created: function () {

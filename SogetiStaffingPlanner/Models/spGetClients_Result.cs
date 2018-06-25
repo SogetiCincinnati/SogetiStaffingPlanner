@@ -10,25 +10,13 @@
 namespace SogetiStaffingPlanner.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Client
+    public partial class spGetClients_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Client()
-        {
-            this.Opportunities = new HashSet<Opportunity>();
-        }
-    
         public int ClientId { get; set; }
         public string ClientName { get; set; }
         public string ClientSubbusiness { get; set; }
-        public int LastModifiedUserId { get; set; }
         public System.DateTime LastModified { get; set; }
-        public bool Active { get; set; }
-    
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opportunity> Opportunities { get; set; }
+        public int LastModifiedUserId { get; set; }
     }
 }

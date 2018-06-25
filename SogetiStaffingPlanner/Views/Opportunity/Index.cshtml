@@ -27,7 +27,7 @@
                 <div class="form-group"></div>
                 <label class="col-sm-3">Client ID: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="clientID" />
+                    <input class="form-control" type="text" v-model="clientId" />
                 </div>
                 <div class="form-group"></div>
                 <label class="col-sm-3">Client Contact: </label>
@@ -84,11 +84,11 @@
                     <th></th>
                 </tr>
                 <tr v-for="opportunity in opportunities">
-                    <td>{{ opportunity.OpportunityName }}</td>
-                    <td>{{ opportunity.Active }}</td>
-                    <td>{{ opportunity.ClientId }}</td>
-                    <td>{{ opportunity.ClientContact }}</td>
-                    <td><button class="btn btn-info" v-on:click="onEdit(opportunity.OpportunityName)">Edit</button></td>
+                    <td>{{ opportunity.opportunityName }}</td>
+                    <td>{{ opportunity.active }}</td>
+                    <td>{{ opportunity.clientId }}</td>
+                    <td>{{ opportunity.clientContact }}</td>
+                    <td><button class="btn btn-info" v-on:click="onEdit(opportunity.opportunityName)">Edit</button></td>
                 </tr>
             </table>
         </template>

@@ -32,19 +32,19 @@ namespace SogetiStaffingPlanner.Controllers
                     {
                         opportunityList.Add(new OpportunityModel
                         {
-                            OpportunityId = o.OpportunityId,
-                            ClientId = o.ClientId,
-                            AccountExecutiveUserId = o.AccountExecutiveUserId,
-                            UnitId = o.UnitId,
-                            RegionId = o.RegionId,
-                            SoldStatusId = o.SoldStatusId,
-                            OpportunityName = o.OpportunityName,
-                            OpportunityOwnerUserId = o.OpportunityOwnerUserId,
-                            OpportunityNotes = o.OpportunityNotes,
-                            ClientContact = o.ClientContact,
-                            LastModifiedUserId = o.LastModifiedUserId,
-                            LastModified = DateTime.Now,
-                            Active = true
+                            opportunityId = o.OpportunityId,
+                            clientId = o.ClientId,
+                            accountExecutiveUserId = o.AccountExecutiveUserId,
+                            unitId = o.UnitId,
+                            regionId = o.RegionId,
+                            soldStatusId = o.SoldStatusId,
+                            opportunityName = o.OpportunityName,
+                            opportunityOwnerUserId = o.OpportunityOwnerUserId,
+                            opportunityNotes = o.OpportunityNotes,
+                            clientContact = o.ClientContact,
+                            lastModifiedUserId = o.LastModifiedUserId,
+                            lastModified = DateTime.Now,
+                            active = true
                         });
                     }
                 }

@@ -5,7 +5,7 @@
         opportunityName: '',
         opportunityNotes: '',
         clientContact: '',
-        clientID: null,
+        clientId: null,
         addState: false,
         accountExecutiveUserId: null,
         unitId: null,
@@ -19,12 +19,13 @@
             data.opportunityName = this.opportunityName;
             data.opportunityNotes = this.opportunityNotes;
             data.clientContact = this.clientContact;
-            data.clientID = this.clientID;
+            data.clientId = this.clientId;
             data.accountExecutiveUserId = this.accountExecutiveUserId;
             data.unitId = this.unitId;
             data.regionId = this.regionId;
             data.soldStatusId = this.soldStatusId;
             data.opportunityOwnerUserId = this.opportunityOwnerUserId;
+            data.active = true;
             console.log(data);
             $.ajax({
                 type: "POST",
@@ -48,6 +49,7 @@
                     this.regionId = null;
                     this.soldStatusId = null;
                     this.opportunityOwnerUserId = null;
+                    this.clientId = null;
                 }.bind(this),
                 error: function (e) {
                     console.log(e);

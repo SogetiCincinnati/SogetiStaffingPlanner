@@ -10,6 +10,8 @@ namespace SogetiStaffingPlanner.Controllers
 {
 	public class HomeController : Controller
 	{
+		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+
 		public ActionResult Index()
 		{
 			return View();
@@ -28,6 +30,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 			return View();
 		}
+
 		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
@@ -59,20 +62,17 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return "Low";
 		}
+
 		/*
          * Method for getting the data for the main view
          */
         [HttpGet]
         public JsonResult GetMainData()
         {
-            
-            ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
-            //create the object to connect to the database
-            //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
             //get the results
             try
             {
-                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView2").ToList<MainViewData>();
+                List<MainViewData> results = db.Database.SqlQuery<MainViewData>("MainView2").ToList<MainViewData>();
                 var returner = new List<MainViewData> { };
                 //map it to a json object
                 foreach (MainViewData mvR in results)
@@ -112,7 +112,6 @@ namespace SogetiStaffingPlanner.Controllers
                 }
                 return Json(returner, JsonRequestBehavior.AllowGet);
             }
-            
             catch(Exception e)
             {
                 Console.WriteLine("An error occured {0}", e);
@@ -129,13 +128,10 @@ namespace SogetiStaffingPlanner.Controllers
                                                   string rejectedCandidate, string positionNote,
                                                   int lastModifiedUserId, int lastModified, bool active)
         {
-
-            ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
             System.Diagnostics.Debug.WriteLine("AddPosition function");
 
             try
             {
-
                 Position position = new Position()
                 {
                     PositionId = positionId,
@@ -162,20 +158,12 @@ namespace SogetiStaffingPlanner.Controllers
                 db.Positions.Add(position);
                 db.SaveChanges();
             }
-
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
             }
-
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
-
         }
-
     }
 }

@@ -165,9 +165,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountExecutiveController.cs" />
-    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PositionsController.cs" />
+    <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
@@ -201,12 +201,12 @@
     <Compile Include="Models\Grade.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MainViewData.cs" />
-    <Compile Include="Models\ListObjects.cs" />
+    <Compile Include="Models\PracticeManagerData.cs" />
+    <Compile Include="Models\DropdownListData.cs" />
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OpportunityModel.cs" />
+    <Compile Include="Models\OpportunityData.cs" />
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
@@ -278,7 +278,6 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
-    <Content Include="connectionStrings.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -308,8 +307,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
-    <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Position\Index.cshtml" />
     <Content Include="Views\Opportunity\Index.cshtml" />
     <Content Include="Views\AccountExecutive\Index.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />

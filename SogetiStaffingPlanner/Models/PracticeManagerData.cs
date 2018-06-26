@@ -7,7 +7,7 @@ namespace SogetiStaffingPlanner.Models
 {
             using System;
     
-    public partial class MainViewData
+    public partial class PracticeManagerData
     {
         public string OpportunityName { get; set; }
         public string ClientContact { get; set; }

@@ -55,4 +55,26 @@ namespace SogetiStaffingPlanner.Models
 		public int UnitId { get; set; }
 		public string UnitName { get; set; }
 	}
+
+	//Used for storing UnitPractice data for sending the dropdown list of UnitPractices for dropdowns on the front end
+	public class UnitPracticeList
+	{
+		public int UnitPracticeId { get; set; }
+		public int PracticeId { get; set; }
+		public string PracticeName { get; set; }
+	}
+
+	//Used for storing Opportunity Data for sending the dropdown list of Opportunities for dropdowns on the front end
+	public class OpportunityList
+	{
+		public int OpportunityId { get; set; }
+		public string OpportunityName { get; set; }
+	}
+
+	//Used for storing Grade data for sending the dropdown list of UnitPractices for dropdowns on the front end
+	public class GradeList
+	{
+		public int GradeId { get; set; }
+		public string GradeName { get; set; }
+	}
 }

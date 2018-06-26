@@ -26,13 +26,12 @@ namespace SogetiStaffingPlanner.Controllers
             try
             {
                 List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
-                var opportunityList = new List<OpportunityModel> { };
-                //List<OpportunityList> opportunityList = new List<OpportunityList>();
+                List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
                     if (o.Active)
                     {
-                        opportunityList.Add(new OpportunityModel
+                        opportunityList.Add(new OpportunityData
                         {
                             opportunityId = o.OpportunityId,
                             clientId = o.ClientId,
@@ -114,9 +113,9 @@ namespace SogetiStaffingPlanner.Controllers
 
 
 		/*
-		* GET: /Opportunity/GetACTLeadList
-		* Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
-		*/
+		 * GET: /Opportunity/GetACTLeadList
+		 * Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
+		 */
 		[HttpGet]
 		public ActionResult GetACTLeadList()
 		{
@@ -132,40 +131,9 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
-		/*
-		 * GET: /Opportunity/GetPositionStatusList
-		 * Returns a JSON list of Active partial PositionStatusList Objects including PositionStatusId, PositionStatusName.
-		 */
-		[HttpGet]
-		public ActionResult GetPositionStatusList()
-		{
-			try
-			{
-				List<PositionStatus> positionStatuses = db.PositionStatuses.ToList();
-
-				List<PositionStatusList> statuses = new List<PositionStatusList>();
-				foreach (PositionStatus ps in positionStatuses)
-				{
-					if (ps.Active)
-					{
-						statuses.Add(new PositionStatusList
-						{
-							PositionStatusId = ps.PositionStatusId,
-							PositionStatusName = ps.PositionStatusName
-						});
-					} 
-				}
-				return Json(statuses, JsonRequestBehavior.AllowGet);
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.ToString());
-			}
-			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
-		}
 
 		/*
-		 * GET: /Opportunity/GetOpportunityStatusList
+		 * GET: /Opportunity/GetSoldStatusList
 		 * Returns a JSON list of Active SoldStatusList Objects including SoldStatusId and SoldStatusName
 		 */
 		[HttpGet]
@@ -260,9 +228,9 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 		/*
-	* POST: Opportunity/AddOpportunity
-	* Adds a new opportunity to the entity framework when called using HttpPost
-	*/
+		* POST: Opportunity/AddOpportunity
+		* Adds a new opportunity to the entity framework when called using HttpPost
+		*/
 		[HttpPost]
 		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{

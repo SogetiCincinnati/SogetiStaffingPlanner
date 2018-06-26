@@ -2,18 +2,16 @@
     el: '#createClient',
     data: {
         clients: '',
-        ClientName: '',
-        ClientSubbusiness: ''
+        clientName: '',
+        clientSubbusiness: '',
+        addState: false,
     },
     methods: {
         onSubmit: function () {
             let data = {};
-            let refreshData = {};
-            refreshData.ClientName = this.ClientName;
-            refreshData.ClientSubbusiness = this.ClientSubbusiness;
-            data.clientName = this.ClientName;
-            data.clientSubbusiness = this.ClientSubbusiness;
-         
+            data.clientName = this.clientName;
+            data.clientSubbusiness = this.clientSubbusiness;
+            console.log(data);
             $.ajax({
                 type: "POST",
                 url: "AddClient",
@@ -22,7 +20,11 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
-                    this.clients.push(refreshData);
+                    console.log('POST request success');
+                    alert('Client Name: "' + this.clientName + '" and Client Subbusiness: "' + this.clientSubbusiness + '" successfully added.');
+                    this.clientName = '';
+                    this.clientSubbusiness = '';
+                    this.clients.push(data);
                 }.bind(this),
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");

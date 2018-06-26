@@ -7,8 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-    <script type="text/javascript" src="../../Scripts/axios.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../../Content/Site.css">
     <script type="text/javascript"
             src="../../Scripts/vue.min.js"></script>
@@ -23,20 +22,22 @@
         <div id="navContainer">
             <!--<span class='navTitle'>Staffing Planner</span>-->
             <ul class='navItems'>
-                <li>HOME</li>
-                <li>ACCOUNTS</li>
-                <li>PROJECTS</li>
-                <li>OPPORTUNITIES</li>
-                <li>REPORTS</li>
-                <li>CONTACT</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/clients/">Clients</a></li>
+                <li><a href="/positions/">Positions</a></li>
+                <li><a href="/opportunity/">Opportunities</a></li>
+                <li><a href="/AccountExecutive/">AE</a></li>
+                <li><a href="/Unit/">Unit</a></li>
+                <li><a href="/Region/">Region</a></li>
             </ul>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="body-content">
         @RenderBody()
+        <br /><br />
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Sogeti</p>
         </footer>
     </div>
 

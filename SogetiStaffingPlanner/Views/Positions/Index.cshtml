@@ -1,0 +1,115 @@
+﻿
+<div id="app" class="main">
+    <h1>Position List</h1>
+    <div v-if="addState === false">
+        <button v-on:click="addState = true" class="btn btn-primary">
+            Add Position
+        </button>
+        <div class="form-group"></div>
+    </div>
+    <template v-else>
+        <div class="form-horizontal">
+            <label class="col-sm-3" for="">Position Name: </label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="positionName" />
+            </div>
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Duration:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="duration" />
+            </div>
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Accepted Candidate:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="acceptedCandidate" />
+            </div>
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Skillset:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="skillset" />
+            </div>
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Rate:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="rate" />
+            </div>
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Expected Start Date:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="expectedStartDate" />
+            </div>
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Hire Candidate:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="hireCandidate" />
+            </div>
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Proposed Candidate:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="proposedCandidate" />
+            </div>
+
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Rejected Candidate:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="rejectedCandidate" />
+            </div>
+
+
+            <div class="form-group"></div>
+            <label class="col-sm-3" for="">Position Note:</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" v-model="positionNote" />
+            </div>
+
+
+            <div class="form-group"></div>
+            <div class="col-sm-offset-3 col-sm-6">
+                <button v-on:click="onSubmit" class="btn btn-primary">Submit</button>
+                <button v-on:click="addState = false" class="btn btn-danger">Cancel</button>
+            </div>
+
+            <div class="form-group"></div>
+        </div>
+    </template>
+
+
+    <template>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Number of Positions</th>
+                <th>Duration</th>
+                <th>Accepted Candidate</th>
+                <th>Skillset</th>
+                <th>Rate</th>
+                <th>Expected Start Date</th>
+                <th>Hire Candidate</th>
+                <th>Details</th>
+            </tr>
+            <tr v-for="position in positions">
+                <td>{{ position.PositionName }}</td>
+                <td>{{ position.NumberOfPositions }}</td>
+                <td>{{ position.Duration }} months</td>
+                <td>{{ position.AcceptedCandidate }}</td>
+                <td>{{ position.Skillset }}</td>
+                <td>{{ position.Rate }}</td>
+                <td>{{ position.ExpectedStartDate }}</td>
+                <td>{{ position.HireCandidate }}</td>
+                <td>+</td>
+
+            </tr>
+        </table>
+    </template>
+
+</div>
+<script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

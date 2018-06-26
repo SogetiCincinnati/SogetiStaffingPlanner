@@ -1,6 +1,6 @@
 body{
     background-color: #E0E0E0;
-    font-family: roboto;
+    font-family: verdana;
 }
 ol, ul {
     margin-top: 0;
@@ -36,6 +36,11 @@ ol, ul {
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
 }
 
+.navBar a {
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+}
 .navLogo {
     top: 15px;
     left: 15px;
@@ -70,44 +75,28 @@ tr:nth-child(even) {background-color: #EEEEEE;}
 }
 
 th {
-    font-size: 6px;
+    font-size: 14px;
+    white-space: nowrap;
 }
 td {
     font-size: 10px;
     overflow-y: auto;
-    text-overflow:clip;
-    white-space: nowrap;
     width: 80px;
 }
-#clientView {
-    margin: 20px auto;
-}
-#clientView td {
-    font-size: 18px;
-}
-#clientView th {
-    font-size: 18px;
-    font-weight: bold;
-}
+
 .main{
     background-color: white;
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     position: relative;
-    top: 30px;
+    top: 20px;
     padding: 30px;
     -webkit-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
 }
 
-.clientView{
-    width: 100%;
-    display: inline-block;
-    border-collapse: collapse;
-    font-size: 13px;
-    overflow-x: auto;
-}
+
 
 .pageCount{
     float: right;
@@ -124,3 +113,7 @@ td {
 }
 
 .pageList li:hover{background-color: #E0E0E0;}
+
+footer {
+    padding: 10px;
+}

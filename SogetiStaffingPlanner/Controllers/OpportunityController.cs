@@ -14,8 +14,49 @@ namespace SogetiStaffingPlanner.Controllers
 		//Default Method to return the view of the Index
 		public ViewResult Index()
 		{
-			return View();
+            System.Diagnostics.Debug.WriteLine("OPPORTUNITY INDEX CALLED!!!");
+            return View();
 		}
+
+        [HttpGet]
+        public ActionResult GetOpportunities()
+        {
+            try
+            {
+                List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
+                var opportunityList = new List<OpportunityModel> { };
+                //List<OpportunityList> opportunityList = new List<OpportunityList>();
+                foreach (Opportunity o in opportunities)
+                {
+                    if (o.Active)
+                    {
+                        opportunityList.Add(new OpportunityModel
+                        {
+                            opportunityId = o.OpportunityId,
+                            clientId = o.ClientId,
+                            accountExecutiveUserId = o.AccountExecutiveUserId,
+                            unitId = o.UnitId,
+                            regionId = o.RegionId,
+                            soldStatusId = o.SoldStatusId,
+                            opportunityName = o.OpportunityName,
+                            opportunityOwnerUserId = o.OpportunityOwnerUserId,
+                            opportunityNotes = o.OpportunityNotes,
+                            clientContact = o.ClientContact,
+                            lastModifiedUserId = o.LastModifiedUserId,
+                            lastModified = DateTime.Now,
+                            active = true
+                        });
+                    }
+                }
+                return Json(opportunityList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+        }
+
 
 		/*
 		 * GET: /Opportunity/GetClientList
@@ -191,14 +232,14 @@ namespace SogetiStaffingPlanner.Controllers
 		* Adds a new opportunity to the entity framework when called using HttpPost
 		*/
 		[HttpPost]
-		public ActionResult AddOpportunity(int opportunityID, int clientID, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, int lastModifiedUserId, DateTime lastModified, bool active)
+		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{
-			try
+            System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
+            try
 			{
 				Opportunity opportunity = new Opportunity()
 				{
-					OpportunityId = opportunityID,
-					ClientId = clientID,
+					ClientId = clientId,
 					AccountExecutiveUserId = accountExecutiveUserId,
 					UnitId = unitId,
 					RegionId = regionId,
@@ -207,7 +248,7 @@ namespace SogetiStaffingPlanner.Controllers
 					OpportunityOwnerUserId = opportunityOwnerUserId,
 					OpportunityNotes = opportunityNotes,
 					ClientContact = clientContact,
-					LastModifiedUserId = lastModifiedUserId,
+					LastModifiedUserId = 1,
 					LastModified = DateTime.Now,
 					Active = true
 				};

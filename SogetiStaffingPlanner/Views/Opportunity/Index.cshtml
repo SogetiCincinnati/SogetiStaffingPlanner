@@ -1,0 +1,115 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div id="opportunity" class="main">
+        <h2>Opportunity List</h2>
+        <hr />
+        <template v-if="errors.length">
+            <p>
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors" style="color: red;">{{ error }}</li>
+                </ul>
+            </p>
+        </template>
+        <div v-if="addState === false">
+            <button v-on:click="addState = true" class="btn btn-primary">
+                Add Opportunity
+            </button>
+            <div class="form-group"></div>
+        </div>
+        <template v-else>
+
+            <div class="form-horizontal">
+                <div class="form-group"></div>
+                <label class="col-sm-3">Opportunity Name: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="opportunityName" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Client ID: </label>
+                <div class="col-sm-4">
+                    <select v-model="clientId">
+                        <option selected v-for="client in clients" :value="client.ClientId">{{client.ClientId}}: {{client.ClientName}} - {{client.ClientSubbusiness}}</option>
+                    </select>
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Client Contact: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="clientContact" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Opportunity Notes: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="opportunityNotes" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Account Executive User Id: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="accountExecutiveUserId" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Unit Id: </label>
+                <div class="col-sm-4">
+                    <select v-model="unitId">
+                        <option v-for="unit in units">{{unit.UnitId}}</option>
+                    </select>
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Region Id: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="regionId" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Sold Status Id: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="soldStatusId" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3">Opportunity Owner User Id: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="opportunityOwnerUserId" />
+                </div>
+                <div class="form-group"></div>
+                <div class="form-group"></div>
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button class="btn btn-primary" v-on:click="onSubmit">{{ updateState ? 'Update' : 'Add'}}</button>
+                    <button class="btn btn-danger" v-on:click="clearForm">Cancel</button>
+                </div>
+                <div class="form-group"></div>
+            </div>
+
+        </template>
+        <template>
+            <table>
+                <tr>
+                    <th>Opportunity Name</th>
+                    <th>Active</th>
+                    <th>Client Id</th>
+                    <th>Client Contact</th>
+                    <th></th>
+                </tr>
+                <tr v-for="opportunity in opportunities">
+                    <td>{{ opportunity.opportunityName }}</td>
+                    <td>{{ opportunity.active }}</td>
+                    <td>{{ opportunity.clientId }}</td>
+                    <td>{{ opportunity.clientContact }}</td>
+                    <td><button class="btn btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
+                </tr>
+            </table>
+        </template>
+    </div>
+</body>
+</html>
+<script type="text/javascript" src="../../Scripts/App/opportunity/opportunity.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

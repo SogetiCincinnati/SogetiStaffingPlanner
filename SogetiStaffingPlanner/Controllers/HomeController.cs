@@ -14,33 +14,12 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			return View();
 		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application.";
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-			return View();
-		}
 		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
 		private String CalculatePriority(MainViewData result)
 		{
-			/*
-            if (result.SoldStatusName != null && result.OpportunityStatusName != null)
-            {
-                if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
-                {
-                    return "High";
-                }
-            }
-            */
 			if (result.OpportunityStatusName != null)
 			{
 				if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
@@ -57,12 +36,14 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return "Low";
 		}
+
 		/*
          * Method for getting the data for the main view
          */
         [HttpGet]
         public JsonResult GetMainData()
-        {   
+        {
+            
             ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
             //create the object to connect to the database
             //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
@@ -114,8 +95,10 @@ namespace SogetiStaffingPlanner.Controllers
             {
                 Console.WriteLine("An error occured {0}", e);
                 return null;
-            }          
+            }
+            
         }
+
         [HttpPost]
         public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
                                                 int minConsultantGradeId, string positionName, int numberOfPositions,
@@ -124,11 +107,13 @@ namespace SogetiStaffingPlanner.Controllers
                                                   string rejectedCandidate, string positionNote,
                                                   int lastModifiedUserId, int lastModified, bool active)
         {
+
             ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
+            System.Diagnostics.Debug.WriteLine("HomeController: AddPosition function");
 
             try
             {
+
                 Position position = new Position()
                 {
                     PositionId = positionId,
@@ -151,9 +136,11 @@ namespace SogetiStaffingPlanner.Controllers
                     LastModified = DateTime.Now,
                     Active = true
                 };
+
                 db.Positions.Add(position);
                 db.SaveChanges();
             }
+
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());

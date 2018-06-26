@@ -11,20 +11,20 @@ namespace SogetiStaffingPlanner.Controllers
     {
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
-        //Get: Clients/Create
-        public ActionResult Create()
+        //Get: Clients
+        public ActionResult Index()
         {
             return View();
         }
 
-		/* POST: /Client/AddClient
-		*  Adds a client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
+        /*
+		* POST:
+		* Adds a client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
 		*/
         [HttpPost]
         public ActionResult AddClient(string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
         {
-            System.Diagnostics.Debug.WriteLine("AddClient function");
-
+            System.Diagnostics.Debug.WriteLine("CLIENT POST FUNCTION EXECUTED.");
             try
             {
                 Client client = new Client()
@@ -52,8 +52,7 @@ namespace SogetiStaffingPlanner.Controllers
         {
             List<Client> results = db.Database.SqlQuery<Client>("spGetClients").ToList<Client>();
             var returner1 = new List<Client> { };
-            System.Diagnostics.Debug.WriteLine("CLIENT INDEX FUNCTION EXECUTED!!!!!!!!!@@@@@@");
-
+            System.Diagnostics.Debug.WriteLine("CLIENT GET FUNCTION EXECUTED!!!!!!!!!");
             foreach (Client s in results)
             {
                 returner1.Add(new Client

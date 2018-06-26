@@ -13,26 +13,23 @@ namespace SogetiStaffingPlanner.Controllers
     {
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-        public ActionResult AddPosition()
+        public ActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
+            System.Diagnostics.Debug.WriteLine("/posiitons/index.cshtml called.");
             return View();
         }
 
         /*
-        * Method for getting the data for the Positions
-        */
+         * Method for getting the data for the Positions
+         */
         [HttpGet]
         public ActionResult GetPosition()
         {
-
+            System.Diagnostics.Debug.WriteLine("positions GET called.");
             List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
             var returnPositions = new List<Position> { };
-            System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
-
             foreach (Position s in position)
             {
-
                 returnPositions.Add(new Position
                 {
                     PositionId = s.PositionId,
@@ -51,31 +48,28 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
-                    // PositionStatusId = s.PositionStatusId,
+                  //  PositionStatusId = s.PositionStatusId,
                     Active = true
-
                 });
-
             }
             return Json(returnPositions, JsonRequestBehavior.AllowGet);
         }
-        /*
-        * Method for adding the data for the Positions
-        */
+
+         /*
+         * Method for adding  the data for the Positions
+         */
         [HttpPost]
         public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-        int minConsultantGradeId, string positionName, int numberOfPositions,
-        string skillset, int rate, int expectedStartDate, int duration,
-        string hireCandidate, string proposedCandidate, string acceptedCandidate,
-        string rejectedCandidate, string positionNote,
-        int lastModifiedUserId, int lastModified, bool active)
+                                        int minConsultantGradeId, string positionName, int numberOfPositions,
+                                          string skillset, int rate, int expectedStartDate, int duration,
+                                          string hireCandidate, string proposedCandidate, string acceptedCandidate,
+                                          string rejectedCandidate, string positionNote,
+                                          int lastModifiedUserId, int lastModified, bool active)
         {
 
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
-
+            System.Diagnostics.Debug.WriteLine("Positions Controller: AddPosition function");
             try
             {
-
                 Position position = new Position()
                 {
                     PositionId = positionId,
@@ -98,20 +92,15 @@ namespace SogetiStaffingPlanner.Controllers
                     LastModified = DateTime.Now,
                     Active = true
                 };
-
                 db.Positions.Add(position);
                 db.SaveChanges();
             }
-
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
             }
-
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
         }
-
     }
 }

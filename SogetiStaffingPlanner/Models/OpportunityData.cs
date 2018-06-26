@@ -7,7 +7,7 @@ namespace SogetiStaffingPlanner.Models
 {
 
     //Used for storing Client data for sending the dropdown list of Clients for dropdowns on the front end
-    public class OpportunityModel
+    public class OpportunityData
     {
         public int opportunityId { get; set; }
         public int clientId { get; set; }

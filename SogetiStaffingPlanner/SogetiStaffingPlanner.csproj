@@ -206,7 +206,7 @@
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OpportunityModel.cs" />
+    <Compile Include="Models\OpportunityData.cs" />
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>

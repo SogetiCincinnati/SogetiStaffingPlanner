@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
@@ -25,13 +26,12 @@ namespace SogetiStaffingPlanner.Controllers
             try
             {
                 List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
-                var opportunityList = new List<OpportunityModel> { };
-                //List<OpportunityList> opportunityList = new List<OpportunityList>();
+                List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
                     if (o.Active)
                     {
-                        opportunityList.Add(new OpportunityModel
+                        opportunityList.Add(new OpportunityData
                         {
                             opportunityId = o.OpportunityId,
                             clientId = o.ClientId,
@@ -113,9 +113,9 @@ namespace SogetiStaffingPlanner.Controllers
 
 
 		/*
-		* GET: /Opportunity/GetACTLeadList
-		* Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
-		*/
+		 * GET: /Opportunity/GetACTLeadList
+		 * Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
+		 */
 		[HttpGet]
 		public ActionResult GetACTLeadList()
 		{
@@ -131,40 +131,9 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
-		/*
-		 * GET: /Opportunity/GetPositionStatusList
-		 * Returns a JSON list of Active partial PositionStatusList Objects including PositionStatusId, PositionStatusName.
-		 */
-		[HttpGet]
-		public ActionResult GetPositionStatusList()
-		{
-			try
-			{
-				List<PositionStatus> positionStatuses = db.PositionStatuses.ToList();
-
-				List<PositionStatusList> statuses = new List<PositionStatusList>();
-				foreach (PositionStatus ps in positionStatuses)
-				{
-					if (ps.Active)
-					{
-						statuses.Add(new PositionStatusList
-						{
-							PositionStatusId = ps.PositionStatusId,
-							PositionStatusName = ps.PositionStatusName
-						});
-					} 
-				}
-				return Json(statuses, JsonRequestBehavior.AllowGet);
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.ToString());
-			}
-			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
-		}
 
 		/*
-		 * GET: /Opportunity/GetOpportunityStatusList
+		 * GET: /Opportunity/GetSoldStatusList
 		 * Returns a JSON list of Active SoldStatusList Objects including SoldStatusId and SoldStatusName
 		 */
 		[HttpGet]
@@ -258,7 +227,6 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
-
 		/*
 		* POST: Opportunity/AddOpportunity
 		* Adds a new opportunity to the entity framework when called using HttpPost
@@ -284,7 +252,6 @@ namespace SogetiStaffingPlanner.Controllers
 					LastModified = DateTime.Now,
 					Active = true
 				};
-
 				db.Opportunities.Add(opportunity);
 				db.SaveChanges();
 			}
@@ -293,7 +260,7 @@ namespace SogetiStaffingPlanner.Controllers
 				System.Diagnostics.Debug.WriteLine(e.ToString());
 				return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 			}
-			return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
+		return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
 		}
         // GET: Opportunity/Edit/5 
         //[HttpPost]
@@ -311,50 +278,34 @@ namespace SogetiStaffingPlanner.Controllers
             }
             ViewBag.Opportunity.OpportunityId = new SelectList(db.Opportunities, "OpportunityId", "ClientId", "OpportunityName", "OpportunitiyNotes", "ClientContact");
             return View(opportunity);
-
         }
-
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Edit([Bind(Include = "ClientId,AccountExecutiveUserId,UnitId,RegionId,SoldStatusId,OpportunityName,OpportunityOwnerUserId,OpportunityNotes,ClientContact,Active")] Opportunity opportunity)
-         {
-             if (ModelState.IsValid)
-               {
-                 opportunity.Active = true;
-                 opportunity.LastModified = DateTime.Now;
-                 db.Entry(opportunity).State = EntityState.Modified;
-                 db.SaveChanges(); 
-                 }
-
-             return Json("Opportuninty Edited Successfully", JsonRequestBehavior.AllowGet);
-
-             } */
-
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        [HttpPost]
+        public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
         {
-            System.Diagnostics.Debug.WriteLine("Update route activated");
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var opportunityToUpdate = db.Opportunities.Find(id);
-            if (TryUpdateModel(opportunityToUpdate, "",
-            new string[] { "ClientId", "AccountExecutiveUserId", "UnitId", "RegionId", "SoldStatusId", "OpportunityName", "OpportunityOwnerUserId", "OpportunityNotes", "ClientContact", "Active" }))
-            {
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.ToString());
-                    return Json("Opportunity Edit Failed", JsonRequestBehavior.AllowGet);
-                }
+            System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
+            Opportunity opportunity = db.Opportunities.Find(id);
+            if (opportunity != null) {
 
+                opportunity.ClientId = clientId;
+                opportunity.AccountExecutiveUserId = accountExecutiveUserId;
+                opportunity.UnitId = unitId;
+                opportunity.RegionId = regionId;
+                opportunity.SoldStatusId = soldStatusId;
+                opportunity.OpportunityName = opportunityName;
+                opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
+                opportunity.OpportunityNotes = opportunityNotes;
+                opportunity.ClientContact = clientContact;
+
+                opportunity.LastModified = DateTime.Now;
+                db.Entry(opportunity).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return Json("Opportunity Succeded", JsonRequestBehavior.AllowGet);
             }
-            return Json("Opportunity Edited Successfully", JsonRequestBehavior.AllowGet);
+            return Json("Error Message", JsonRequestBehavior.AllowGet);
         }
+
+       
+
     }
 }

@@ -14,7 +14,8 @@
         unitId: null,
         regionId: null,
         soldStatusId: null,
-        opportunityOwnerUserId: null
+        opportunityOwnerUserId: null,
+        errors: []
     },
     methods: {
         /* Clear out forms */
@@ -31,15 +32,19 @@
             this.soldStatusId = null;
             this.opportunityOwnerUserId = null;
             this.clientId = null;
+            this.errors = [];
         },
         onSubmit: function () {
             /* Check to see if updating preexisting Opportunity, or if adding a new one */
-            if (this.updateState) {
-                this.updateOpportunity();
-            }
-            else if (this.addState) {
-                this.addOpportunity();
-            }
+            this.checkForm();
+            if (!this.errors.length) {
+                if (this.updateState) {
+                    this.updateOpportunity();
+                }
+                else if (this.addState) {
+                    this.addOpportunity();
+                }
+            } 
         },
         onEdit: function (opportunity) {
             /* Specify that status is being updated */
@@ -97,7 +102,47 @@
             data.opportunityOwnerUserId = this.opportunityOwnerUserId;
             data.active = true;
             return data;
-        }
+        },
+        /* Form validation method */
+        checkForm: function () {
+            this.errors = [];
+
+            /*Checks to see if forms are empty */
+            if (!this.opportunityName) {
+                this.errors.push('Opportunity Name required.');
+            } if (!this.clientId) {
+                this.errors.push('Client ID required.');
+            } if (!this.clientContact) {
+                this.errors.push('Client Contact required.');
+            } if (!this.opportunityNotes) {
+                this.errors.push('Opportunity Notes required.');
+            } if (!this.accountExecutiveUserId) {
+                this.errors.push('Account Executive User ID required.');
+            } if (!this.clientId) {
+                this.errors.push('Client ID required.');
+            } if (!this.regionId) {
+                this.errors.push('Region ID required.');
+            } if (!this.soldStatusId) {
+                this.errors.push('Sold Status ID required.');
+            } if (!this.opportunityOwnerUserId) {
+                this.errors.push('Opportunity Owner User ID required.');
+            }
+            console.log('opportunityname: ' + typeof (this.opportunityName)); console.log('clientId: ' + typeof (this.clientId));
+            /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
+            if (!this.updateState) {
+                for (let i = 0; i < this.opportunities.length; i++) {
+                    if (this.opportunityName == this.opportunities[i]['opportunityName']) {
+                        this.errors.push('Opportunity Name: "' + this.opportunityName + '" already exists.')
+                        break;
+                    }
+                }
+            }
+            if (!this.errors.length) { return true; }
+        },
+        cancel: function () {
+            this.errors = [];
+            this.addState = false;
+        },
     },
     created: function () {
         // GET OPPORTUNITY LIST

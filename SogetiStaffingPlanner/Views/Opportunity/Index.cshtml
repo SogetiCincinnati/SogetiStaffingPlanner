@@ -10,6 +10,15 @@
 <body>
     <div id="opportunity" class="main">
         <h2>Opportunity List</h2>
+        <hr />
+        <template v-if="errors.length">
+            <p>
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors" style="color: red;">{{ error }}</li>
+                </ul>
+            </p>
+        </template>
         <div v-if="addState === false">
             <button v-on:click="addState = true" class="btn btn-primary">
                 Add Opportunity
@@ -17,7 +26,7 @@
             <div class="form-group"></div>
         </div>
         <template v-else>
-            
+
             <div class="form-horizontal">
                 <div class="form-group"></div>
                 <label class="col-sm-3">Opportunity Name: </label>
@@ -50,7 +59,7 @@
                 <label class="col-sm-3">Unit Id: </label>
                 <div class="col-sm-4">
                     <select v-model="unitId">
-                        <option v-for="unit in units">{{unit.UnitId}}</option>  
+                        <option v-for="unit in units">{{unit.UnitId}}</option>
                     </select>
                 </div>
                 <div class="form-group"></div>

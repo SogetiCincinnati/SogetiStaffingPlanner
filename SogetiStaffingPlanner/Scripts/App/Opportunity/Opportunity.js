@@ -3,6 +3,7 @@
     data: {
         opportunities: '',
         clients: '',
+        units: '',
         opportunityName: '',
         opportunityNotes: '',
         clientContact: '',
@@ -56,6 +57,7 @@
             this.active = true;
             /* Set form to drop down */
             this.addState = true;
+            console.log(this.clientId);
         },
         addOpportunity: function () {
             let data = this.buildJSON();
@@ -98,6 +100,7 @@
         }
     },
     created: function () {
+        // GET OPPORTUNITY LIST
         $.ajax({
             async: false,
             cache: false,
@@ -107,6 +110,7 @@
             dataType: "json",
             success: function (data) {
                 this.opportunities = data;
+                // GET CLIENT LIST
                 $.ajax({
                     async: false,
                     cache: false,
@@ -116,7 +120,19 @@
                     dataType: "json",
                     success: function (data) {
                         this.clients = data;
-
+                        // GET UNIT LIST
+                        $.ajax({
+                            async: false,
+                            cache: false,
+                            type: "GET",
+                            url: "GetUnitList",
+                            contentType: "application/json;charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                this.units = data;
+                                console.log(data);
+                            }.bind(this)
+                        });
                     }.bind(this)
                 });
             }.bind(this)

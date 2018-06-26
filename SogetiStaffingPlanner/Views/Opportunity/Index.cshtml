@@ -28,7 +28,7 @@
                 <label class="col-sm-3">Client ID: </label>
                 <div class="col-sm-4">
                     <select v-model="clientId">
-                        <option v-for="client in clients">{{client.ClientId}} : {{client.ClientName}} - {{client.ClientSubbusiness}}</option>
+                        <option selected v-for="client in clients" :value="client.ClientId">{{client.ClientId}}: {{client.ClientName}} - {{client.ClientSubbusiness}}</option>
                     </select>
                 </div>
                 <div class="form-group"></div>
@@ -49,7 +49,9 @@
                 <div class="form-group"></div>
                 <label class="col-sm-3">Unit Id: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="unitId" />
+                    <select v-model="unitId">
+                        <option v-for="unit in units">{{unit.UnitId}}</option>  
+                    </select>
                 </div>
                 <div class="form-group"></div>
                 <label class="col-sm-3">Region Id: </label>

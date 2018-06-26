@@ -14,35 +14,12 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			return View();
 		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
-		}
 		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-		private String CalculatePriority(MainViewData result)
+		private String CalculatePriority(PracticeManagerData result)
 		{
-			/*
-            if (result.SoldStatusName != null && result.OpportunityStatusName != null)
-            {
-                if (result.SoldStatusName.Trim() == "Yes" && result.OpportunityStatusName.Trim() != "Closed")
-                {
-                    return "High";
-                }
-            }
-            */
 			if (result.OpportunityStatusName != null)
 			{
 				if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
@@ -59,6 +36,7 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return "Low";
 		}
+
 		/*
          * Method for getting the data for the main view
          */
@@ -72,12 +50,12 @@ namespace SogetiStaffingPlanner.Controllers
             //get the results
             try
             {
-                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView2").ToList<MainViewData>();
-                var returner = new List<MainViewData> { };
+                List<PracticeManagerData> results = item.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
+                var returner = new List<PracticeManagerData> { };
                 //map it to a json object
-                foreach (MainViewData mvR in results)
+                foreach (PracticeManagerData mvR in results)
                 {
-                    returner.Add(new MainViewData
+                    returner.Add(new PracticeManagerData
                     {
                         OpportunityName = mvR.OpportunityName,
                         AEName = mvR.AEName,
@@ -131,7 +109,7 @@ namespace SogetiStaffingPlanner.Controllers
         {
 
             ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
+            System.Diagnostics.Debug.WriteLine("HomeController: AddPosition function");
 
             try
             {
@@ -168,14 +146,7 @@ namespace SogetiStaffingPlanner.Controllers
                 System.Diagnostics.Debug.WriteLine(e.ToString());
                 return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
             }
-
             return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
-
-
-
-
-
         }
-
     }
 }

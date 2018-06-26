@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="ClientOpportunitiesModel.Client" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientOpportunitiesModel.DefaultViewRole" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientOpportunitiesModel.Grade" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClientOpportunitiesModel.Opportunity" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClientOpportunitiesModel.Opportunity" Width="4.25" PointX="7.5" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientOpportunitiesModel.PermissionRole" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientOpportunitiesModel.Position" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClientOpportunitiesModel.Practice" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />

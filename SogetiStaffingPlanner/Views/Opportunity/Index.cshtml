@@ -34,10 +34,12 @@
                     <input class="form-control" type="text" v-model="opportunityName" />
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3">Client ID: </label>
+                <label class="col-sm-3">Client: </label>
                 <div class="col-sm-4">
-                    <select v-model="clientId">
-                        <option selected v-for="client in clients" :value="client.ClientId">{{client.ClientId}}: {{client.ClientName}} - {{client.ClientSubbusiness}}</option>
+                    <select class="form-control" v-model="clientId">
+                        <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                            {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                        </option>
                     </select>
                 </div>
                 <div class="form-group"></div>
@@ -46,38 +48,47 @@
                     <input class="form-control" type="text" v-model="clientContact" />
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3">Opportunity Notes: </label>
+                <label class="col-sm-3">Account Executive: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="opportunityNotes" />
-                </div>
-                <div class="form-group"></div>
-                <label class="col-sm-3">Account Executive User Id: </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="accountExecutiveUserId" />
-                </div>
-                <div class="form-group"></div>
-                <label class="col-sm-3">Unit Id: </label>
-                <div class="col-sm-4">
-                    <select v-model="unitId">
-                        <option v-for="unit in units">{{unit.UnitId}}</option>
+                    <select class="form-control" v-model="accountExecutiveUserId">
+                        <option v-for="ae in aes" :value="ae.UserId">{{ ae.FullName }}</option>
                     </select>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3">Region Id: </label>
+                <label class="col-sm-3">Unit: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="regionId" />
+                    <select class="form-control" v-model="unitId">
+                        <option v-for="unit in units" :value="unit.UnitId">{{ unit.UnitName }}</option>
+                    </select>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3">Sold Status Id: </label>
+                <label class="col-sm-3">Region: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="soldStatusId" />
+                    <select class="form-control" v-model="regionId">
+                        <option v-for="region in regions" :value="region.RegionId">{{ region.RegionName }}</option>
+                    </select>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3">Opportunity Owner User Id: </label>
+                <label class="col-sm-3">Sold Status: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="opportunityOwnerUserId" />
+                    <select class="form-control" v-model="soldStatusId">
+                        <option v-for="soldStatus in soldStatuses" :value="soldStatus.SoldStatusId">{{ soldStatus.SoldStatusName }}</option>
+                    </select>
                 </div>
                 <div class="form-group"></div>
+                <label class="col-sm-3">Opportunity Owner: </label>
+                <div class="col-sm-4">
+                    <select class="form-control" v-model="opportunityOwnerUserId">
+                        <option v-for="ACTLead in ACTLeads" :value="ACTLead.UserId">{{ ACTLead.FullName }}</option>
+                    </select>
+                </div>
+                <div class="form-group"></div>
+
+                <label class="col-sm-3">Opportunity Notes: </label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" type="text" v-model="opportunityNotes">
+                    </textarea>
+                </div>
                 <div class="form-group"></div>
                 <div class="col-sm-offset-3 col-sm-6">
                     <button class="btn btn-primary" v-on:click="onSubmit">{{ updateState ? 'Update' : 'Add'}}</button>
@@ -91,16 +102,24 @@
             <table>
                 <tr>
                     <th>Opportunity Name</th>
-                    <th>Active</th>
-                    <th>Client Id</th>
+                    <th>Client</th>
+                    <th>AE</th>
+                    <th>Unit</th>
                     <th>Client Contact</th>
+                    <th>Region</th>
+                    <th>Sold Status</th>
+                    <th>Opportunity Owner</th>
                     <th></th>
                 </tr>
                 <tr v-for="opportunity in opportunities">
                     <td>{{ opportunity.opportunityName }}</td>
-                    <td>{{ opportunity.active }}</td>
-                    <td>{{ opportunity.clientId }}</td>
+                    <td>{{ getClientName(opportunity.clientId) }}</td>
+                    <td>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                    <td>{{ getUnitName(opportunity.unitId) }}</td>
                     <td>{{ opportunity.clientContact }}</td>
+                    <td>{{ getRegionName(opportunity.regionId) }}</td>
+                    <td>{{ getSoldStatus(opportunity.soldStatusId) }}</td>
+                    <td>{{ getOpportunityName(opportunity.opportunityOwnerUserId) }}</td>
                     <td><button class="btn btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
                 </tr>
             </table>

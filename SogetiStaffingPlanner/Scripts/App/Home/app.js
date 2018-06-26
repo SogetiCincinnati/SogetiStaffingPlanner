@@ -24,7 +24,7 @@ new Vue({
         rejected: '',
         accepted: '',
         notes: '',
-
+        posts: []
     },
     methods: {
         onSubmit: function() {
@@ -131,7 +131,11 @@ new Vue({
             success: function (data) {
                 console.log(data);
                 this.posts = data;
-            }.bind(this)
+                console.log(this.posts);
+            }.bind(this), error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
         });
     }
 });

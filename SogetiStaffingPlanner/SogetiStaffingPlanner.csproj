@@ -202,7 +202,7 @@
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PracticeManagerData.cs" />
-    <Compile Include="Models\ListObjects.cs" />
+    <Compile Include="Models\DropdownListData.cs" />
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>

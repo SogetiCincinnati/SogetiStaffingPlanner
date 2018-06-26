@@ -24,13 +24,12 @@ namespace SogetiStaffingPlanner.Controllers
             try
             {
                 List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
-                var opportunityList = new List<OpportunityModel> { };
-                //List<OpportunityList> opportunityList = new List<OpportunityList>();
+                List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
                     if (o.Active)
                     {
-                        opportunityList.Add(new OpportunityModel
+                        opportunityList.Add(new OpportunityData
                         {
                             opportunityId = o.OpportunityId,
                             clientId = o.ClientId,

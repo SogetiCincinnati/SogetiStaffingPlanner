@@ -260,17 +260,17 @@ namespace SogetiStaffingPlanner.Controllers
         //[HttpPost]
         public ActionResult Edit(int? id)
         {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        if (id == null) {
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
 
-            Opportunity opportunity = db.Opportunities.Find(id);
-            if (opportunity == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Opportunity.OpportunityId = new SelectList(db.Opportunities, "OpportunityId", "ClientId", "OpportunityName", "OpportunitiyNotes", "ClientContact");
-            return View(opportunity);
+        Opportunity opportunity = db.Opportunities.Find(id);
+        if (opportunity == null)
+        {
+            return HttpNotFound();
+        }
+        ViewBag.Opportunity.OpportunityId = new SelectList(db.Opportunities, "OpportunityId", "ClientId", "OpportunityName", "OpportunitiyNotes", "ClientContact");
+        return View(opportunity);
 
         } 
 
@@ -290,30 +290,30 @@ namespace SogetiStaffingPlanner.Controllers
                 
             } */
 
-            [HttpPost, ActionName("Edit")]
-            [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
-            {
+        {
             if(id == null)
-                {
-                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             var opportunityToUpdate = db.Opportunities.Find(id);
             if(TryUpdateModel(opportunityToUpdate, "",
-                new string[] {"ClientId","AccountExecutiveUserId","UnitId","RegionId","SoldStatusId","OpportunityName","OpportunityOwnerUserId","OpportunityNotes","ClientContact","Active"}))
-                {
+            new string[] {"ClientId","AccountExecutiveUserId","UnitId","RegionId","SoldStatusId","OpportunityName","OpportunityOwnerUserId","OpportunityNotes","ClientContact","Active"}))
+            {
                 try
-                    {
-                 db.SaveChanges();
-                     } 
-            catch (Exception e)
-                 {
-                      System.Diagnostics.Debug.WriteLine(e.ToString());
-                     return Json("Opportunity Edit Failed", JsonRequestBehavior.AllowGet);
-                  }  
+                {
+                    db.SaveChanges();
+                } 
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.ToString());
+                    return Json("Opportunity Edit Failed", JsonRequestBehavior.AllowGet);
+                }  
                 
-                }
+            }
             return Json("Opportunity Edited Successfully", JsonRequestBehavior.AllowGet);
         }        
-        }
+    }
 }

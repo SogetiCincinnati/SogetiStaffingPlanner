@@ -18,7 +18,7 @@ namespace SogetiStaffingPlanner.Controllers
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-		private String CalculatePriority(MainViewData result)
+		private String CalculatePriority(PracticeManagerData result)
 		{
 			if (result.OpportunityStatusName != null)
 			{
@@ -50,12 +50,12 @@ namespace SogetiStaffingPlanner.Controllers
             //get the results
             try
             {
-                List<MainViewData> results = item.Database.SqlQuery<MainViewData>("MainView2").ToList<MainViewData>();
-                var returner = new List<MainViewData> { };
+                List<PracticeManagerData> results = item.Database.SqlQuery<PracticeManagerData>("MainView2").ToList<PracticeManagerData>();
+                var returner = new List<PracticeManagerData> { };
                 //map it to a json object
-                foreach (MainViewData mvR in results)
+                foreach (PracticeManagerData mvR in results)
                 {
-                    returner.Add(new MainViewData
+                    returner.Add(new PracticeManagerData
                     {
                         OpportunityName = mvR.OpportunityName,
                         AEName = mvR.AEName,

@@ -71,9 +71,9 @@ namespace SogetiStaffingPlanner.Controllers
 
 
 		/*
-		* GET: /Opportunity/GetACTLeadList
-		* Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
-		*/
+		 * GET: /Opportunity/GetACTLeadList
+		 * Returns a JSON list of Active partial Users as ACTLeadList Objects including ACTLeadId, ACTLeadName.
+		 */
 		[HttpGet]
 		public ActionResult GetACTLeadList()
 		{
@@ -89,40 +89,9 @@ namespace SogetiStaffingPlanner.Controllers
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
-		/*
-		 * GET: /Opportunity/GetPositionStatusList
-		 * Returns a JSON list of Active partial PositionStatusList Objects including PositionStatusId, PositionStatusName.
-		 */
-		[HttpGet]
-		public ActionResult GetPositionStatusList()
-		{
-			try
-			{
-				List<PositionStatus> positionStatuses = db.PositionStatuses.ToList();
-
-				List<PositionStatusList> statuses = new List<PositionStatusList>();
-				foreach (PositionStatus ps in positionStatuses)
-				{
-					if (ps.Active)
-					{
-						statuses.Add(new PositionStatusList
-						{
-							PositionStatusId = ps.PositionStatusId,
-							PositionStatusName = ps.PositionStatusName
-						});
-					} 
-				}
-				return Json(statuses, JsonRequestBehavior.AllowGet);
-			}
-			catch (Exception e)
-			{
-				System.Diagnostics.Debug.WriteLine(e.ToString());
-			}
-			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
-		}
 
 		/*
-		 * GET: /Opportunity/GetOpportunityStatusList
+		 * GET: /Opportunity/GetSoldStatusList
 		 * Returns a JSON list of Active SoldStatusList Objects including SoldStatusId and SoldStatusName
 		 */
 		[HttpGet]

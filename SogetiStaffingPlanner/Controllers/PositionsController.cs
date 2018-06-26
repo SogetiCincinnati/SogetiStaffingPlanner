@@ -9,120 +9,267 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-    public class PositionsController : Controller
-    {
+	public class PositionsController : Controller
+	{
 
-        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
-        public ActionResult AddPosition()
-        {
-            System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
-            return View();
-        }
+		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
-        /*
-         * Method for getting the data for the Positions
-         */
-        [HttpGet]
-        public ActionResult GetPosition()
-        {
+		public ActionResult AddPosition()
+		{
+			System.Diagnostics.Debug.WriteLine("GET ADDPOSITION FUNCTION@@@@@@@@@");
+			return View();
+		}
 
-            List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
-            var returnPositions = new List<Position> { };
-            System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
+		/*
+		* Method for getting the data for the Positions
+        */
+		[HttpGet]
+		public ActionResult GetPosition()
+		{
+			List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
+			var returnPositions = new List<Position> { };
+			System.Diagnostics.Debug.WriteLine("GET POSITION FUNCTION EXECUTED!!!!!!!!!@@@@@@");
 
-            foreach (Position s in position)
-            {
+			foreach (Position s in position)
+			{
 
-                returnPositions.Add(new Position
-                {
-                    PositionId = s.PositionId,
-                    OpportunityId = s.OpportunityId,
-                    UnitPracticeId = s.UnitPracticeId,
-                    MaxConsultantGradeId = s.MaxConsultantGradeId,
-                    MinConsultantGradeId = s.MinConsultantGradeId,
-                    PositionName = s.PositionName,
-                    NumberOfPositions = s.NumberOfPositions,
-                    Skillset = s.Skillset,
-                    Rate = s.Rate,
-                    ExpectedStartDate = s.ExpectedStartDate,
-                    Duration = s.Duration,
-                    HireCandidate = s.HireCandidate,
-                    ProposedCandidate = s.ProposedCandidate,
-                    AcceptedCandidate = s.AcceptedCandidate,
-                    RejectedCandidate = s.RejectedCandidate,
-                    PositionNote = s.PositionNote,
-                  //  PositionStatusId = s.PositionStatusId,
-                    Active = true
+				returnPositions.Add(new Position
+				{
+					PositionId = s.PositionId,
+					OpportunityId = s.OpportunityId,
+					UnitPracticeId = s.UnitPracticeId,
+					MaxConsultantGradeId = s.MaxConsultantGradeId,
+					MinConsultantGradeId = s.MinConsultantGradeId,
+					PositionName = s.PositionName,
+					NumberOfPositions = s.NumberOfPositions,
+					Skillset = s.Skillset,
+					Rate = s.Rate,
+					ExpectedStartDate = s.ExpectedStartDate,
+					Duration = s.Duration,
+					HireCandidate = s.HireCandidate,
+					ProposedCandidate = s.ProposedCandidate,
+					AcceptedCandidate = s.AcceptedCandidate,
+					RejectedCandidate = s.RejectedCandidate,
+					PositionNote = s.PositionNote,
+					//  PositionStatusId = s.PositionStatusId,
+					Active = true
+				});
+			}
+			return Json(returnPositions, JsonRequestBehavior.AllowGet);
+		}
 
+		/*
+        * Method for adding  the data for the Positions
+        */
+		[HttpPost]
+		public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
+										int minConsultantGradeId, string positionName, int numberOfPositions,
+										  string skillset, int rate, int expectedStartDate, int duration,
+										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
+										  string rejectedCandidate, string positionNote,
+										  int lastModifiedUserId, int lastModified, bool active)
+		{
 
+			System.Diagnostics.Debug.WriteLine("AddPosition function");
 
+			try
+			{
 
+				Position position = new Position()
+				{
+					PositionId = positionId,
+					OpportunityId = opportunityId,
+					UnitPracticeId = unitPracticeId,
+					MaxConsultantGradeId = maxConsultantGradeId,
+					MinConsultantGradeId = minConsultantGradeId,
+					PositionName = positionName,
+					NumberOfPositions = numberOfPositions,
+					Skillset = skillset,
+					Rate = rate,
+					ExpectedStartDate = DateTime.Now,
+					Duration = duration,
+					HireCandidate = hireCandidate,
+					ProposedCandidate = proposedCandidate,
+					AcceptedCandidate = acceptedCandidate,
+					RejectedCandidate = rejectedCandidate,
+					PositionNote = positionNote,
+					LastModifiedUserId = 1,
+					LastModified = DateTime.Now,
+					Active = true
+				};
 
-                });
+				db.Positions.Add(position);
+				db.SaveChanges();
+			}
 
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+				return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
+			}
 
+			return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
+		}
 
+		/*
+		 * GET: /Position/GetUnitList
+		 * Returns a JSON list of UnitList Objects including UnitId and UnitName
+		 */
+		[HttpGet]
+		public ActionResult GetUnitList()
+		{
+			try
+			{
+				List<Unit> units = db.Units.ToList();
 
-            }
-            return Json(returnPositions, JsonRequestBehavior.AllowGet);
-        }
-            /*
-         * Method for adding  the data for the Positions
-         */
-        [HttpPost]
-        public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-                                        int minConsultantGradeId, string positionName, int numberOfPositions,
-                                          string skillset, int rate, int expectedStartDate, int duration,
-                                          string hireCandidate, string proposedCandidate, string acceptedCandidate,
-                                          string rejectedCandidate, string positionNote,
-                                          int lastModifiedUserId, int lastModified, bool active)
-        {
+				List<UnitList> unitList = new List<UnitList>();
+				foreach (Unit u in units)
+				{
+					if (u.Active)
+					{
+						unitList.Add(new UnitList
+						{
+							UnitId = u.UnitId,
+							UnitName = u.UnitName
+						});
+					}
+				}
+				return Json(unitList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
-            System.Diagnostics.Debug.WriteLine("AddPosition function");
+		/*
+		 * POST: /Position/GetUnitPracticeList
+		 * Takes a Unit Id of the current Unit selected, and returns a list of active practices.
+		 */
+		[HttpPost]
+		public ActionResult GetUnitPracticeList(int UnitId)
+		{
+			try
+			{
+				List<UnitPracticeList> unitPracticesList = new List<UnitPracticeList>();
+				Unit unit = db.Units.Find(UnitId);
+				List<UnitPractice> unitPractices = unit.UnitPractices.ToList<UnitPractice>();
+				foreach (UnitPractice up in unitPractices)
+				{
+					if (up.Active)
+					{
+						unitPracticesList.Add(new UnitPracticeList
+						{
+							UnitPracticeId = up.UnitPracticeId,
+							PracticeId = up.PracticeId,
+							PracticeName = up.Practice.PracticeName
+						});
+					}
+				}
+				return Json(unitPracticesList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+				return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+			}
+		}
 
-            try
-            {
+		/*
+		 * GET: /Position/GetPositionStatusList
+		 * Returns a JSON list of Active partial PositionStatusList Objects including PositionStatusId, PositionStatusName.
+		 */
+		[HttpGet]
+		public ActionResult GetPositionStatusList()
+		{
+			try
+			{
+				List<PositionStatus> positionStatuses = db.PositionStatuses.ToList();
 
-                Position position = new Position()
-                {
-                    PositionId = positionId,
-                    OpportunityId = opportunityId,
-                    UnitPracticeId = unitPracticeId,
-                    MaxConsultantGradeId = maxConsultantGradeId,
-                    MinConsultantGradeId = minConsultantGradeId,
-                    PositionName = positionName,
-                    NumberOfPositions = numberOfPositions,
-                    Skillset = skillset,
-                    Rate = rate,
-                    ExpectedStartDate = DateTime.Now,
-                    Duration = duration,
-                    HireCandidate = hireCandidate,
-                    ProposedCandidate = proposedCandidate,
-                    AcceptedCandidate = acceptedCandidate,
-                    RejectedCandidate = rejectedCandidate,
-                    PositionNote = positionNote,
-                    LastModifiedUserId = 1,
-                    LastModified = DateTime.Now,
-                    Active = true
-                };
+				List<PositionStatusList> statuses = new List<PositionStatusList>();
+				foreach (PositionStatus ps in positionStatuses)
+				{
+					if (ps.Active)
+					{
+						statuses.Add(new PositionStatusList
+						{
+							PositionStatusId = ps.PositionStatusId,
+							PositionStatusName = ps.PositionStatusName
+						});
+					}
+				}
+				return Json(statuses, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
-                db.Positions.Add(position);
-                db.SaveChanges();
-            }
+		/*
+		 * GET: /Position/GetOpportunityList
+		 * Returns a JSON list of Active partial OpportunityList Objects including OpportunityId, OpportunityName.
+		 */
+		[HttpGet]
+		public ActionResult GetOpportunityList()
+		{
+			try
+			{
+				List<Opportunity> opportunities = db.Opportunities.ToList();
 
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
-                return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
-            }
+				List<OpportunityList> opportunityList = new List<OpportunityList>();
+				foreach (Opportunity o in opportunities)
+				{
+					if (o.Active)
+					{
+						opportunityList.Add(new OpportunityList
+						{
+							OpportunityId = o.OpportunityId,
+							OpportunityName = o.OpportunityName
+						});
+					}
+				}
+				return Json(opportunityList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
-            return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
+		/*
+		 * GET: /Position/GetGradeList
+		 * Returns a JSON list of Active partial GradeList Objects including GradeId, GradeName.
+		 */
+		[HttpGet]
+		public ActionResult GetGradeList()
+		{
+			try
+			{
+				List<Grade> grades = db.Grades.ToList();
 
-
-
-
-
-        }
-
-    }
+				List<GradeList> gradeList = new List<GradeList>();
+				foreach (Grade g in grades)
+				{
+					if (g.Active)
+					{
+						gradeList.Add(new GradeList
+						{
+							GradeId = g.ConsultantGradeId,
+							GradeName = g.ConsultantGradeName
+						});
+					}
+				}
+				return Json(gradeList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
+	}
 }

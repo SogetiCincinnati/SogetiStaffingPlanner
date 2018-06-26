@@ -4,6 +4,10 @@
         opportunities: '',
         clients: '',
         units: '',
+        regions: '',
+        aes: '',
+        ACTLeads: '',
+        soldStatuses: '',
         opportunityName: '',
         opportunityId: null,
         opportunityNotes: '',
@@ -66,7 +70,6 @@
             this.active = true;
             /* Set form to drop down */
             this.addState = true;
-            console.log(this.clientId);
         },
         addOpportunity: function () {
             let data = this.buildJSON();
@@ -133,23 +136,20 @@
             if (!this.opportunityName) {
                 this.errors.push('Opportunity Name required.');
             } if (!this.clientId) {
-                this.errors.push('Client ID required.');
+                this.errors.push('Client required.');
             } if (!this.clientContact) {
                 this.errors.push('Client Contact required.');
-            } if (!this.opportunityNotes) {
-                this.errors.push('Opportunity Notes required.');
             } if (!this.accountExecutiveUserId) {
-                this.errors.push('Account Executive User ID required.');
+                this.errors.push('Account Executive required.');
             } if (!this.clientId) {
-                this.errors.push('Client ID required.');
+                this.errors.push('Client required.');
             } if (!this.regionId) {
-                this.errors.push('Region ID required.');
+                this.errors.push('Region required.');
             } if (!this.soldStatusId) {
-                this.errors.push('Sold Status ID required.');
+                this.errors.push('Sold Status required.');
             } if (!this.opportunityOwnerUserId) {
-                this.errors.push('Opportunity Owner User ID required.');
+                this.errors.push('Opportunity Owner required.');
             }
-            console.log('opportunityname: ' + typeof (this.opportunityName)); console.log('clientId: ' + typeof (this.clientId));
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
             if (!this.updateState) {
                 for (let i = 0; i < this.opportunities.length; i++) {
@@ -165,6 +165,49 @@
             this.errors = [];
             this.addState = false;
         },
+        getClientName: function (clientId) { // pass id and get name back
+            for (client in this.clients) {
+                if (this.clients[client].ClientId == clientId) {
+                    return(this.clients[clientId].ClientName);
+                }
+            }
+        },
+        getAEName: function (AEId) { // pass ID and get name back
+            for (ae in this.aes) {
+                if (this.aes[ae].UserId == AEId) {
+                    return (this.aes[ae].FullName);
+                }
+            }
+        },
+        getUnitName: function (unitId) {
+            for (unit in this.units) {
+                if (this.units[unit].UnitId == unitId) {
+                    return (this.units[unit].UnitName);
+                }
+            }
+        },
+        getRegionName: function (regionId) {
+            for (region in this.regions) {
+                if (this.regions[region].RegionId == regionId) {
+                    return (this.regions[region].RegionName);
+                }
+            }
+        },
+        getSoldStatus: function (soldStatusId) {
+            for (soldStatus in this.soldStatuses) {
+                if (this.soldStatuses[soldStatus].SoldStatusId == soldStatusId) {
+                    return (this.soldStatuses[soldStatus].SoldStatusName);
+                }
+            }
+        },
+        getOpportunityName: function (opportunityOwnerUserId) {
+            
+            for (ACTLead in this.ACTLeads) {
+                if (this.ACTLeads[ACTLead].UserId == opportunityOwnerUserId) {
+                    return (this.ACTLeads[ACTLead].FullName);
+                }
+            }
+        }
     },
     created: function () {
         // GET OPPORTUNITY LIST
@@ -198,12 +241,67 @@
                             dataType: "json",
                             success: function (data) {
                                 this.units = data;
-                                console.log(data);
                             }.bind(this)
                         });
                     }.bind(this)
                 });
             }.bind(this)
+        });
+        $.ajax({ // Region List
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetRegionList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.regions = data;
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        $.ajax({ // AE list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetAEList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.aes = data;
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        $.ajax({ // sold status list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetSoldStatusList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.soldStatuses = data;
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        $.ajax({ // ACT LEAD aka opportunity owner
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetACTLeadList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.ACTLeads = data;
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
         });
     }
 });

@@ -9,7 +9,7 @@ using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
 {
-	public class PositionsController : Controller
+	public class PositionController : Controller
 	{
 
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();

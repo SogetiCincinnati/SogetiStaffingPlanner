@@ -10,19 +10,23 @@ namespace SogetiStaffingPlanner.Controllers
 {
 	public class HomeController : Controller
 	{
+
+		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+
 		public ActionResult Index()
 		{
 			return View();
 		}
+
 		/*
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
 		private String CalculatePriority(PracticeManagerData result)
 		{
-			if (result.OpportunityStatusName != null)
+			if (result.PositionStatusName != null)
 			{
-				if (result.OpportunityStatusName == "Need Candidates" && result.NumberOfPositions != null)
+				if (result.PositionStatusName == "Need Candidates" && result.NumberOfPositions != null)
 				{
 					if (result.NumberOfPositions == 1)
 					{
@@ -43,14 +47,10 @@ namespace SogetiStaffingPlanner.Controllers
         [HttpGet]
         public JsonResult GetMainData()
         {
-            
-            ClientOpportunitiesEntities item = new ClientOpportunitiesEntities();
-            //create the object to connect to the database
-            //Dev_ClientOpportunitiesEntities item = new Dev_ClientOpportunitiesEntities();
             //get the results
             try
             {
-                List<PracticeManagerData> results = item.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
+                List<PracticeManagerData> results = db.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
                 var returner = new List<PracticeManagerData> { };
                 //map it to a json object
                 foreach (PracticeManagerData mvR in results)
@@ -76,7 +76,7 @@ namespace SogetiStaffingPlanner.Controllers
                         Duration = mvR.Duration,
                         HireCandidate = mvR.HireCandidate,
                         MinConsultantGrade = mvR.MinConsultantGrade,
-                        OpportunityStatusName = mvR.OpportunityStatusName,
+                        PositionStatusName = mvR.PositionStatusName,
                         PositionNote = mvR.PositionNote,
                         RejectedCandidate = mvR.RejectedCandidate,
                         SActive = mvR.SActive,
@@ -108,7 +108,7 @@ namespace SogetiStaffingPlanner.Controllers
                                                   int lastModifiedUserId, int lastModified, bool active)
         {
 
-            ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+
             System.Diagnostics.Debug.WriteLine("HomeController: AddPosition function");
 
             try

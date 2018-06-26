@@ -1,10 +1,10 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SogetiStaffingPlanner.Models;
+using System.Data.Entity;
 
 
 namespace SogetiStaffingPlanner.Controllers
@@ -48,7 +48,7 @@ namespace SogetiStaffingPlanner.Controllers
                     AcceptedCandidate = s.AcceptedCandidate,
                     RejectedCandidate = s.RejectedCandidate,
                     PositionNote = s.PositionNote,
-                  //  PositionStatusId = s.PositionStatusId,
+                    PositionStatusId = s.PositionStatusId,
                     Active = true
                 });
             }
@@ -64,7 +64,7 @@ namespace SogetiStaffingPlanner.Controllers
 										  string skillset, int rate, int expectedStartDate, int duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
-										  int lastModifiedUserId, int lastModified, bool active)
+										  int lastModifiedUserId, int lastModified, bool active, int positionStatusId)
 		{
 
 			System.Diagnostics.Debug.WriteLine("Positions Controller: AddPosition function");
@@ -90,7 +90,8 @@ namespace SogetiStaffingPlanner.Controllers
 					PositionNote = positionNote,
 					LastModifiedUserId = 1,
 					LastModified = DateTime.Now,
-					Active = true
+					Active = true,
+					PositionStatusId = positionStatusId
 				};
 				db.Positions.Add(position);
 				db.SaveChanges();
@@ -101,6 +102,48 @@ namespace SogetiStaffingPlanner.Controllers
 				return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
 			}
 			return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
+		}
+
+		/*
+		* POST: /Position/EditPosition
+		* Gets the information from the edited Opportunity and saves any changes made to the entity framework
+		*/
+		[HttpPost]
+		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId, int minConsultantGradeId, 
+										string positionName, int numberOfPositions, string skillset, int rate, DateTime expectedStartDate, 
+										int duration, string hireCandidate, string proposedCandidate, string acceptedCandidate, string rejectedCandidate,
+										string positionNote, bool active, int positionStatusId)
+		{
+			System.Diagnostics.Debug.WriteLine("Edit Position Called");
+			Position position = db.Positions.Find(positionId);
+			if (position != null)
+			{
+				position.PositionId = positionId;
+				position.OpportunityId = opportunityId;
+				position.UnitPracticeId = unitPracticeId;
+				position.MaxConsultantGradeId = maxConsultantGradeId;
+				position.MinConsultantGradeId = minConsultantGradeId;
+				position.PositionName = positionName;
+				position.NumberOfPositions = numberOfPositions;
+				position.Skillset = skillset;
+				position.Rate = rate;
+				position.ExpectedStartDate = expectedStartDate;
+				position.Duration = duration;
+				position.HireCandidate = hireCandidate;
+				position.ProposedCandidate = proposedCandidate;
+				position.AcceptedCandidate = acceptedCandidate;
+				position.RejectedCandidate = rejectedCandidate;
+				position.PositionNote = positionNote;
+				position.LastModifiedUserId = 1;
+				position.LastModified = DateTime.Now;
+				position.Active = active;
+				position.PositionStatusId = positionStatusId;
+
+				db.Entry(position).State = EntityState.Modified;
+				db.SaveChanges();
+				return Json("Position Edited Successfully", JsonRequestBehavior.AllowGet);
+			}
+			return Json("Error Occurred", JsonRequestBehavior.AllowGet);
 		}
 
 		/*

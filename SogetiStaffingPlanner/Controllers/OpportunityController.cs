@@ -20,7 +20,13 @@ namespace SogetiStaffingPlanner.Controllers
             return View();
 		}
 
-        [HttpGet]
+		/*
+		* GET: /Opportunity/GetOpportunities
+		* Returns a JSON list of active partial OpportunityData Objects including OpportunityId, ClientId, AccountExecutiveUserId, UnitId,
+		* RegionId, SoldStatusId, OpportunityName, OpportunityOwnerUserId, OpportunityNotes, ClientContact, LastModifiedUserId,
+		* LastModified, and Active.
+		*/
+		[HttpGet]
         public ActionResult GetOpportunities()
         {
             try
@@ -227,6 +233,7 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
+
 		/*
 		* POST: Opportunity/AddOpportunity
 		* Adds a new opportunity to the entity framework when called using HttpPost
@@ -262,50 +269,36 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 		return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
 		}
-        // GET: Opportunity/Edit/5 
-        //[HttpPost]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
-            Opportunity opportunity = db.Opportunities.Find(id);
-            if (opportunity == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Opportunity.OpportunityId = new SelectList(db.Opportunities, "OpportunityId", "ClientId", "OpportunityName", "OpportunitiyNotes", "ClientContact");
-            return View(opportunity);
-        }
-        [HttpPost]
-        public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
-        {
-            System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
-            Opportunity opportunity = db.Opportunities.Find(id);
-            if (opportunity != null) {
+		/*
+		* POST: Opportunity/EditPost
+		* Gets the information from the edited Opportunity and saves any changes made to the entity framework
+		*/
+		[HttpPost]
+		public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
+		{
+			System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
+			Opportunity opportunity = db.Opportunities.Find(id);
+			if (opportunity != null)
+			{
 
-                opportunity.ClientId = clientId;
-                opportunity.AccountExecutiveUserId = accountExecutiveUserId;
-                opportunity.UnitId = unitId;
-                opportunity.RegionId = regionId;
-                opportunity.SoldStatusId = soldStatusId;
-                opportunity.OpportunityName = opportunityName;
-                opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
-                opportunity.OpportunityNotes = opportunityNotes;
-                opportunity.ClientContact = clientContact;
+				opportunity.ClientId = clientId;
+				opportunity.AccountExecutiveUserId = accountExecutiveUserId;
+				opportunity.UnitId = unitId;
+				opportunity.RegionId = regionId;
+				opportunity.SoldStatusId = soldStatusId;
+				opportunity.OpportunityName = opportunityName;
+				opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
+				opportunity.OpportunityNotes = opportunityNotes;
+				opportunity.ClientContact = clientContact;
 
-                opportunity.LastModified = DateTime.Now;
-                db.Entry(opportunity).State = EntityState.Modified;
+				opportunity.LastModified = DateTime.Now;
+				db.Entry(opportunity).State = EntityState.Modified;
 
-                db.SaveChanges();
-                return Json("Opportunity Succeded", JsonRequestBehavior.AllowGet);
-            }
-            return Json("Error Message", JsonRequestBehavior.AllowGet);
-        }
-
-       
-
+				db.SaveChanges();
+				return Json("Opportunity Succeded", JsonRequestBehavior.AllowGet);
+			}
+			return Json("Error Message", JsonRequestBehavior.AllowGet);
+		}
     }
 }

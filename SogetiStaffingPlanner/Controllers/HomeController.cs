@@ -50,7 +50,7 @@ namespace SogetiStaffingPlanner.Controllers
             //get the results
             try
             {
-                List<PracticeManagerData> results = item.Database.SqlQuery<PracticeManagerData>("MainView2").ToList<PracticeManagerData>();
+                List<PracticeManagerData> results = item.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
                 var returner = new List<PracticeManagerData> { };
                 //map it to a json object
                 foreach (PracticeManagerData mvR in results)

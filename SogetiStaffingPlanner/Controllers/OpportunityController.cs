@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using SogetiStaffingPlanner.Models;
 
 namespace SogetiStaffingPlanner.Controllers
@@ -258,7 +259,6 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 		}
-
 		/*
 	* POST: Opportunity/AddOpportunity
 	* Adds a new opportunity to the entity framework when called using HttpPost
@@ -284,7 +284,6 @@ namespace SogetiStaffingPlanner.Controllers
 					LastModified = DateTime.Now,
 					Active = true
 				};
-
 				db.Opportunities.Add(opportunity);
 				db.SaveChanges();
 			}
@@ -293,7 +292,7 @@ namespace SogetiStaffingPlanner.Controllers
 				System.Diagnostics.Debug.WriteLine(e.ToString());
 				return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
 			}
-			return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
+		return Json("Opportunity Added Successfully", JsonRequestBehavior.AllowGet);
 		}
         // GET: Opportunity/Edit/5 
         //[HttpPost]
@@ -311,49 +310,34 @@ namespace SogetiStaffingPlanner.Controllers
             }
             ViewBag.Opportunity.OpportunityId = new SelectList(db.Opportunities, "OpportunityId", "ClientId", "OpportunityName", "OpportunitiyNotes", "ClientContact");
             return View(opportunity);
-
         }
-
-        /* [HttpPost]
-         [ValidateAntiForgeryToken]
-         public ActionResult Edit([Bind(Include = "ClientId,AccountExecutiveUserId,UnitId,RegionId,SoldStatusId,OpportunityName,OpportunityOwnerUserId,OpportunityNotes,ClientContact,Active")] Opportunity opportunity)
-         {
-             if (ModelState.IsValid)
-               {
-                 opportunity.Active = true;
-                 opportunity.LastModified = DateTime.Now;
-                 db.Entry(opportunity).State = EntityState.Modified;
-                 db.SaveChanges(); 
-                 }
-
-             return Json("Opportuninty Edited Successfully", JsonRequestBehavior.AllowGet);
-
-             } */
-
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        [HttpPost]
+        public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var opportunityToUpdate = db.Opportunities.Find(id);
-            if (TryUpdateModel(opportunityToUpdate, "",
-            new string[] { "ClientId", "AccountExecutiveUserId", "UnitId", "RegionId", "SoldStatusId", "OpportunityName", "OpportunityOwnerUserId", "OpportunityNotes", "ClientContact", "Active" }))
-            {
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e.ToString());
-                    return Json("Opportunity Edit Failed", JsonRequestBehavior.AllowGet);
-                }
+            System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
+            Opportunity opportunity = db.Opportunities.Find(id);
+            if (opportunity != null) {
 
+                opportunity.ClientId = clientId;
+                opportunity.AccountExecutiveUserId = accountExecutiveUserId;
+                opportunity.UnitId = unitId;
+                opportunity.RegionId = regionId;
+                opportunity.SoldStatusId = soldStatusId;
+                opportunity.OpportunityName = opportunityName;
+                opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
+                opportunity.OpportunityNotes = opportunityNotes;
+                opportunity.ClientContact = clientContact;
+
+                opportunity.LastModified = DateTime.Now;
+                db.Entry(opportunity).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return Json("Opportunity Succeded", JsonRequestBehavior.AllowGet);
             }
-            return Json("Opportunity Edited Successfully", JsonRequestBehavior.AllowGet);
+            return Json("Error Message", JsonRequestBehavior.AllowGet);
         }
+
+       
+
     }
 }

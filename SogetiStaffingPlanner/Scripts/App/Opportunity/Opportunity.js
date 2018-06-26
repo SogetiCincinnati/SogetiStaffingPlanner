@@ -85,8 +85,27 @@
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
-            alert(this.opportunityName + ' updated!');
+            data.id = 1;
+            console.log(data);
+            //alert(this.opportunityName + ' updated!');
             this.clearForm();
+            $.ajax({
+                type: "POST",
+                url: "EditPost",
+                dataType: "json",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                   // alert("Added " + this.opportunityName + "!");
+                    this.opportunities.push(data);
+                    this.clearForm();
+                }.bind(this),
+                error: function (e) {
+                    console.log(e);
+                    console.log(e, "Error adding data! Please try again.");
+                }
+            });
+          
         },
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
         buildJSON: function () {

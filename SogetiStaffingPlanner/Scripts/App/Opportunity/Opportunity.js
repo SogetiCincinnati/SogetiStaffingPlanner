@@ -5,6 +5,7 @@
         clients: '',
         units: '',
         opportunityName: '',
+        opportunityId: null,
         opportunityNotes: '',
         clientContact: '',
         clientId: null,
@@ -15,6 +16,7 @@
         regionId: null,
         soldStatusId: null,
         opportunityOwnerUserId: null,
+        lastModifiedUserId: null,
         errors: []
     },
     methods: {
@@ -51,6 +53,7 @@
             this.updateState = true;
             /* Populate form with selected values */
             this.opportunityName = opportunity.opportunityName;
+            this.opporunityName = opportunity.opportunityName;
             this.opportunityNotes = opportunity.opportunityNotes;
             this.clientContact = opportunity.clientContact;
             this.clientId = opportunity.clientId;
@@ -59,6 +62,7 @@
             this.regionId = opportunity.regionId;
             this.soldStatusId = opportunity.soldStatusId;
             this.opportunityOwnerUserId = opportunity.opportunityOwnerUserId;
+            this.lastModifiedUserId = opportunity.lastModifiedUserId;
             this.active = true;
             /* Set form to drop down */
             this.addState = true;
@@ -85,6 +89,24 @@
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "EditPost",
+                dataType: "json",
+                data: JSON.stringify(1),
+                contentType: "application/json; charset=utf-8",
+                success: function (res) {
+                    alert("Added " + this.opportunityName + "!");
+                    this.opportunities.push(data);
+                    this.clearForm();
+                }.bind(this),
+                error: function (e) {
+                    console.log(e);
+                    console.log(e, "Error adding data! Please try again.");
+                }
+            });
             alert(this.opportunityName + ' updated!');
             this.clearForm();
         },
@@ -155,6 +177,7 @@
             dataType: "json",
             success: function (data) {
                 this.opportunities = data;
+                console.log(this.opportunities);
                 // GET CLIENT LIST
                 $.ajax({
                     async: false,

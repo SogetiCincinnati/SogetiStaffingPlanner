@@ -3,10 +3,19 @@ new Vue({
     el: '#app',
     data: {
         positions: '',
+        positionDetail: null,
         title: 'Positions',
         addState: false,
+        moreState: false,
+        updateState: false,
         numberOfPositions: '',
         positionName: '',
+        positionId: null,
+        opportunityId: null,
+        unitPracticeId: null,
+        maxConsultantGradeId: null,
+        minConsultantGradeId: null,
+        numberOfPositions: null,
         duration: '',
         acceptedCandidate: '',
         skillset: '',
@@ -16,7 +25,7 @@ new Vue({
         proposedCandidate: '',
         rejectedCandidate: '',
         positionStatusId: '',
-        positionNote: '',
+        positionNote: ''
     },
     methods: {
         onSubmit: function () {
@@ -56,6 +65,11 @@ new Vue({
                     console.log(e, "Error adding data! Please try again.");
                 }
             });
+        },
+        displayDetail: function (position) {
+            this.positionDetail = position;
+            console.log(this.positionDetail);
+            this.moreState = true;
         }
     },
     created: function () {

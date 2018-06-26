@@ -334,6 +334,7 @@ namespace SogetiStaffingPlanner.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(int? id)
         {
+            System.Diagnostics.Debug.WriteLine("Update route activated");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

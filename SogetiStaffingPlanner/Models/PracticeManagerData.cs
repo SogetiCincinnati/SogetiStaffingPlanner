@@ -11,7 +11,7 @@ namespace SogetiStaffingPlanner.Models
     {
         public string OpportunityName { get; set; }
         public string ClientContact { get; set; }
-        public string OpportunityStatusName { get; set; }
+        public string PositionStatusName { get; set; }
         public bool OpActive { get; set; }
         public string Skillset { get; set; }
         public Nullable<int> AE { get; set; }

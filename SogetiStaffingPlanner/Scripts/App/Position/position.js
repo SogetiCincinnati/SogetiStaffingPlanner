@@ -36,7 +36,7 @@ new Vue({
                     this.updateOpportunity();
                 }
                 else if (this.addState) {
-                    this.addOpportunity();
+                    this.addPosition();
                 }
             } 
         },
@@ -117,10 +117,14 @@ new Vue({
             let data = {};
             data.positionId = 1;
             data.opportunityId = 1;
-            data.unitPracticeId = 1;
+            data.unitPracticeId = 4;
             data.maxConsultantGradeId = 1;
             data.minConsultantGradeId = 1;
             data.numberOfPositions = 1;
+            data.active = true;
+            data.positionStatusId = 1;
+            data.lastModifiedUserId = 1;
+            data.lastModified = 1;
             data.positionName = this.positionName;
             data.duration = this.duration;
             data.acceptedCandidate = this.acceptedCandidate;

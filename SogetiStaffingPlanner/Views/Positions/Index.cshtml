@@ -1,0 +1,163 @@
+﻿
+<div id="app" class="main">
+    <div v-if="moreState === false">
+        <h2>Position List</h2>
+        <hr />
+        <template v-if="errors.length">
+            <p>
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors" style="color: red;">{{ error }}</li>
+                </ul>
+            </p>
+        </template>
+        <div v-if="addState === false">
+            <button v-on:click="addState = true" class="btn btn-primary">
+                Add Position
+            </button>
+            <div class="form-group"></div>
+        </div>
+        <template v-else>
+            <div class="form-horizontal">
+                <label class="col-sm-3" for="">Position Name: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="positionName" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Duration:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="duration" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Accepted Candidate:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="acceptedCandidate" />
+                </div>
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Skillset:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="skillset" />
+                </div>
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Rate:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="rate" />
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Expected Start Date:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="expectedStartDate" />
+                </div>
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Hire Candidate:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="hireCandidate" />
+                </div>
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Proposed Candidate:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="proposedCandidate" />
+                </div>
+
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Rejected Candidate:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="rejectedCandidate" />
+                </div>
+
+
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="">Position Note:</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="positionNote" />
+                </div>
+
+
+                <div class="form-group"></div>
+                <div class="col-sm-offset-3 col-sm-6">
+                    <button v-on:click="onSubmit" class="btn btn-primary">{{ updateState ? 'Update' : 'Add' }} </button>
+                    <button v-on:click="clearForm" class="btn btn-danger">Cancel</button>
+                </div>
+
+                <div class="form-group"></div>
+            </div>
+        </template>
+
+
+        <template>
+            <table>
+                <tr>
+                    <th>Position Name</th>
+                    <th>Number of Positions</th>
+                    <th>Duration</th>
+                    <th>Accepted Candidate</th>
+                    <th>Skillset</th>
+                    <th>Rate</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr v-for="position in positions">
+                    <td>{{ position.PositionName }}</td>
+                    <td>{{ position.NumberOfPositions }}</td>
+                    <td>{{ position.Duration }} months</td>
+                    <td>{{ position.AcceptedCandidate }}</td>
+                    <td>{{ position.Skillset }}</td>
+                    <td>{{ position.Rate }}</td>
+                    <td><button class="btn btn-info" v-on:click="onEdit(position)">Edit</button></td>
+                    <td><button class="btn btn-warning" v-on:click="displayDetail(position)">Details</button></td>
+                    <td><button class="btn btn-danger">Delete</button></td>
+
+                </tr>
+            </table>
+        </template>
+    </div>
+    <!-- DISPLAY DETAILED INFORMATION ABOUT POSITION -->
+    <template v-else>
+        <button class="btn btn-warning" v-on:click="positionDetail = false; moreState = false;">Back</button>
+        <h3>{{this.positionDetail.PositionName}}</h3>
+        <h5>Number of Positions: {{this.positionDetail.NumberOfPositions}}</h5>
+        <h5>Duration: {{this.positionDetail.Duration}} Months</h5>
+        <h5>Client contact: {{this.positionDetail.ClientContact}}</h5>
+        <table>
+            <tr>
+                <th>Accepted Candidate</th>
+                <th>Proposed Candidate</th>
+                <th>Hire Candidate</th>
+                <th>Rejected Candidate</th>
+            </tr>
+            <tr>
+                <td>{{this.positionDetail.AcceptedCandidate}}</td>
+                <td>{{this.positionDetail.ProposedCandidate}}</td>
+                <td>{{this.positionDetail.HireCandidate}}</td>
+                <td>{{this.positionDetail.RejectedCandidate}}</td>
+            </tr>
+            <tr>
+                <th>Number of Positions</th>
+                <th>Max Consultant Grade</th>
+                <th>Min Consultant Grade</th>
+                <th>Rate</th>
+            </tr>
+            <tr>
+                <td>{{this.positionDetail.NumberOfPositions}}</td>
+                <td>{{this.positionDetail.MaxConsultantGradeId}}</td>
+                <td>{{this.positionDetail.MinConsultantGradeId}}</td>
+                <td>{{this.positionDetail.Rate}}</td>
+            </tr>
+        </table>
+        <h4><strong>Skillset:</strong></h4>
+        <h5>{{this.positionDetail.Skillset}}</h5>
+        <h4>Notes:</h4>
+        <p>{{this.positionDetail.PositionNote}}</p>
+    </template>
+</div>
+<script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

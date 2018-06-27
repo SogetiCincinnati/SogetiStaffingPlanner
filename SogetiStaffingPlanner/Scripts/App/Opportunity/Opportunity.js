@@ -15,6 +15,7 @@
         clientId: null,
         addState: false,
         updateState: false,
+        moreState: false,
         accountExecutiveUserId: null,
         unitId: null,
         regionId: null,
@@ -187,6 +188,8 @@
                 this.errors.push('Sold Status required.');
             } if (!this.opportunityOwnerUserId) {
                 this.errors.push('Opportunity Owner required.');
+            } if (!this.opportunityNotes) {
+                this.errors.push('Opportunity Note required.');
             }
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
             if (!this.updateState) {
@@ -245,6 +248,11 @@
                     return (this.ACTLeads[ACTLead].FullName);
                 }
             }
+        },
+        displayDetail: function (opportunity) {
+            this.opportunityDetail = opportunity;
+            console.log(this.opportunityDetail);
+            this.moreState = true;
         }
     },
     created: function () {

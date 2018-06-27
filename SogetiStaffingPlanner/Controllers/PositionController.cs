@@ -106,7 +106,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 		/*
 		* POST: /Position/EditPosition
-		* Gets the information from the edited Opportunity and saves any changes made to the entity framework
+		* Gets the information from the edited Position and saves any changes made to the entity framework
 		*/
 		[HttpPost]
 		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId, int minConsultantGradeId, 

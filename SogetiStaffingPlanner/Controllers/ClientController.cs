@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SogetiStaffingPlanner.Models;
+using System.Data.Entity;
 
 namespace SogetiStaffingPlanner.Controllers
 {
@@ -11,17 +12,49 @@ namespace SogetiStaffingPlanner.Controllers
     {
         ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
-        //Get: Clients
+        //Default Index View Method
         public ActionResult Index()
         {
             return View();
         }
 
-        /*
-		* POST:
-		* Adds a client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
+		/*
+		* GET: /Client/GetClients
+		* Returns a Json Serialized List of Client information in the ClientData object.
 		*/
-        [HttpPost]
+		[HttpGet]
+		public ActionResult GetClients()
+		{
+			System.Diagnostics.Debug.WriteLine("Get Client List");
+
+			List<Client> clients = db.Database.SqlQuery<Client>("spGetClients").ToList<Client>();
+			List<ClientData> clientList = new List<ClientData> { };
+
+			foreach (Client c in clients)
+			{
+				if (c.Active)
+				{
+					ClientData clientData = new ClientData();
+					clientData.ClientId = c.ClientId;
+					clientData.ClientName = c.ClientName;
+					clientData.ClientSubbusiness = c.ClientSubbusiness;
+					clientData.LastModifiedUserId = c.LastModifiedUserId;
+					User user = db.Users.Find(c.LastModifiedUserId);
+					clientData.LastModifiedUserName = user.FullName;
+					clientData.LastModified = c.LastModified;
+					clientData.Active = c.Active;
+
+					clientList.Add(clientData);
+				}
+			}
+			return Json(clientList, JsonRequestBehavior.AllowGet);
+		}
+
+		/*
+		* POST:
+		* Adds a new client into the entity framwork using a Post call. Last Modified Date and Active are set in this method.
+		*/
+		[HttpPost]
         public ActionResult AddClient(string clientName, string clientSubbusiness, int? lastModifiedUserId, DateTime? lastModified, bool? active)
         {
             System.Diagnostics.Debug.WriteLine("CLIENT POST FUNCTION EXECUTED.");
@@ -31,7 +64,8 @@ namespace SogetiStaffingPlanner.Controllers
                 {
                     ClientName = clientName,
                     ClientSubbusiness = clientSubbusiness,
-                    LastModifiedUserId = 1,
+					//Hardcoding LastModifiedUserId until login/sessions get implemented
+					LastModifiedUserId = 1,
                     LastModified = DateTime.Now,
                     Active = true
                 };
@@ -46,26 +80,29 @@ namespace SogetiStaffingPlanner.Controllers
             return Json("Client Added Successfully", JsonRequestBehavior.AllowGet);
         }
 
-        //GET ALL CLIENTS INFO
-        [HttpGet]
-        public ActionResult GetClients()
-        {
-            List<Client> results = db.Database.SqlQuery<Client>("spGetClients").ToList<Client>();
-            var returner1 = new List<Client> { };
-            System.Diagnostics.Debug.WriteLine("CLIENT GET FUNCTION EXECUTED!!!!!!!!!");
-            foreach (Client s in results)
-            {
-                returner1.Add(new Client
-                {
-                    ClientId = s.ClientId,
-                    ClientName = s.ClientName,
-                    ClientSubbusiness = s.ClientSubbusiness,
-                    LastModifiedUserId = s.LastModifiedUserId,
-                    LastModified = s.LastModified,
-                    Active = true
-                });
-            }
-            return Json(returner1, JsonRequestBehavior.AllowGet);
-        }
-    }
+		/*
+		* POST: /Client/EditClient
+		* Gets edited client information, updates the item in the entity, and saves the changes
+		*/
+		[HttpPost]
+		public ActionResult EditClient(int clientId, string clientName, string clientSubbusiness, bool active)
+		{
+			System.Diagnostics.Debug.WriteLine("Edit Client");
+			Client client = db.Clients.Find(clientId);
+			if (client != null)
+			{
+				client.ClientName = clientName;
+				client.ClientSubbusiness = clientSubbusiness;
+				//Hardcoding LastModifiedUserId until login/sessions get implemented
+				client.LastModifiedUserId = 1;
+				client.LastModified = DateTime.Now;
+				client.Active = active;
+
+				db.Entry(client).State = EntityState.Modified;
+				db.SaveChanges();
+				return Json("Client Edited Successfully", JsonRequestBehavior.AllowGet);
+			}
+			return Json("Error Occurred", JsonRequestBehavior.AllowGet);
+		}
+	}
 }

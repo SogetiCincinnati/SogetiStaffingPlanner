@@ -1,8 +1,16 @@
 ﻿
 <div id="app" class="main">
     <div v-if="moreState === false">
-        <h1>Position List</h1>
+        <h2>Position List</h2>
         <hr />
+        <template v-if="errors.length">
+            <p>
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors" style="color: red;">{{ error }}</li>
+                </ul>
+            </p>
+        </template>
         <div v-if="addState === false">
             <button v-on:click="addState = true" class="btn btn-primary">
                 Add Position
@@ -147,13 +155,15 @@
         <template>
             <table>
                 <tr>
-                    <th>Name</th>
+                    <th>Position Name</th>
                     <th>Number of Positions</th>
                     <th>Duration</th>
                     <th>Accepted Candidate</th>
                     <th>Skillset</th>
-                    <th>Rate</th>                
-                    <th>Details</th>
+                    <th>Rate</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <tr v-for="position in positions">
                     <td>{{ position.PositionName }}</td>
@@ -162,14 +172,16 @@
                     <td>{{ position.AcceptedCandidate }}</td>
                     <td>{{ position.Skillset }}</td>
                     <td>{{ position.Rate }}</td>
-                    
-                    <td><button class="btn btn-info" v-on:click="displayDetail(position)">More</button></td>
+                    <td><button class="btn btn-info" v-on:click="onEdit(position)">Edit</button></td>
+                    <td><button class="btn btn-warning" v-on:click="displayDetail(position)">Details</button></td>
+                    <td><button class="btn btn-danger">Delete</button></td>
+
                 </tr>
             </table>
         </template>
     </div>
     <!-- DISPLAY DETAILED INFORMATION ABOUT POSITION -->
-    <div v-else>
+    <template v-else>
         <button class="btn btn-warning" v-on:click="positionDetail = false; moreState = false;">Back</button>
         <h3>{{this.positionDetail.PositionName}}</h3>
         <hr />
@@ -210,9 +222,9 @@
         <h5>{{this.positionDetail.Skillset}}</h5>
         <h4>Notes:</h4>
         <p>{{this.positionDetail.PositionNote}}</p>
-    </div>
+    </template>
 </div>
-    
+</div>
 <script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
 
 @section Scripts {

@@ -180,6 +180,7 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientData.cs" />
     <Compile Include="Models\ClientOpportunities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

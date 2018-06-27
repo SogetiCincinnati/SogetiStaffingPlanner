@@ -25,6 +25,7 @@ new Vue({
         proposedCandidate: '',
         rejectedCandidate: '',
         positionStatusId: '',
+        unitPracticeId: null,
         positionNote: '',
         opportunities: '',
         units: '',
@@ -120,13 +121,13 @@ new Vue({
         buildJSON: function () {
             let data = {};
             data.positionId = 1;
-            data.opportunityId = 1;
+            data.opportunityId = this.opportunityId;
             data.unitPracticeId = 4;
-            data.maxConsultantGradeId = 1;
-            data.minConsultantGradeId = 1;
-            data.numberOfPositions = 1;
+            data.maxConsultantGradeId = this.maxConsultantGradeId;
+            data.minConsultantGradeId = this.minConsultantGradeId;
+            data.numberOfPositions = this.numberOfPositions;
             data.active = true;
-            data.positionStatusId = 1;
+            data.positionStatusId = this.positionStatusId;
             data.lastModifiedUserId = 1;
             data.lastModified = 1;
             data.positionName = this.positionName;
@@ -143,7 +144,7 @@ new Vue({
             return data;
         },
         onEdit: function (position) {
-            console.log(position);
+            
             /* Specify that status is being updated */
             this.updateState = true;
             /* Populate form with selected values */
@@ -157,6 +158,14 @@ new Vue({
             this.proposedCandidate = position.ProposedCandidate;
             this.rejectedCandidate = position.RejectedCandidate;
             this.positionNote = position.PositionNote;
+            this.numberOfPositions = position.NumberOfPositions;
+            this.maxConsultantGradeId = position.MaxConsultantGradeId;
+            this.minConsultantGradeId = position.MinConsultantGradeId;
+            this.opportunityId = position.OpportunityId;
+            this.unitPracticeId = position.UnitPracticeId;
+            this.positionStatusId = position.PositionStatusId;
+            console.log(position.UnitPracticeId);
+            console.log(this.unitPracticeId);
             /* Set form to drop down */
             this.addState = true;
             

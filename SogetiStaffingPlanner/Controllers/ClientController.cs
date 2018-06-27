@@ -104,5 +104,37 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return Json("Error Occurred", JsonRequestBehavior.AllowGet);
 		}
+
+		/*
+		* GET: /Client/GetUserList
+		* Returns a JSON list of UnitList Objects including UnitId and UnitName
+		*/
+		[HttpGet]
+		public ActionResult GetUserList()
+		{
+			try
+			{
+				List<User> users = db.Users.ToList();
+
+				List<UserList> userList = new List<UserList>();
+				foreach (User u in users)
+				{
+					if (u.Active)
+					{
+						userList.Add(new UserList
+						{
+							UserId = u.UserId,
+							UserFullName = u.FullName
+						});
+					}
+				}
+				return Json(userList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 	}
 }

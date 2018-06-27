@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4">Position Status Id: </label>
+                    <label class="col-sm-4">Position Status: </label>
                     <div class="col-sm-8">
                         <select class="form-control" v-model="positionStatusId">
                             <option v-for="positionStatus in positionStatuses" :value="positionStatus.PositionStatusId">{{ positionStatus.PositionStatusName }}</option>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="form-group"></div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4">Opportunity Id: </label>
+                    <label class="col-sm-4">Opportunity: </label>
                     <div class="col-sm-8">
                         <select class="form-control" v-model="opportunityId">
                             <option v-for="opportunity in opportunities" :value="opportunity.OpportunityId">{{ opportunity.OpportunityName }}</option>
@@ -118,7 +118,7 @@
 
 
                 <div class="col-sm-6">
-                    <label class="col-sm-4">Unit Practice Id: </label>
+                    <label class="col-sm-4">Unit Practice: </label>
                     <div class="col-sm-8">
                         <select class="form-control" v-model="unitPracticeId">
                             <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="form-group"></div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4">Min Consultant Grade Id: </label>
+                    <label class="col-sm-4">Min Consultant Grade: </label>
                     <div class="col-sm-8">
                         <select class="form-control" v-model="minConsultantGradeId">
                             <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4">Max Consultant Grade Id: </label>
+                    <label class="col-sm-4">Max Consultant Grade: </label>
                     <div class="col-sm-8">
                         <select class="form-control" v-model="maxConsultantGradeId">
                             <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
@@ -145,7 +145,7 @@
                 <!--/////////////FORM SUBMISSION AND CANCEL BUTTONS/////////////////-->
                 <div class="col-sm-offset-3 col-sm-6">
                     <button v-on:click="onSubmit" class="btn btn-primary">Submit</button>
-                    <button v-on:click="addState = false" class="btn btn-danger">Cancel</button>
+                    <button v-on:click="cancel" class="btn btn-danger">Cancel</button>
                 </div>
 
                 <div class="form-group"></div>
@@ -186,12 +186,12 @@
         <button class="btn btn-warning" v-on:click="positionDetail = false; moreState = false;">Back</button>
         <h3>{{this.positionDetail.PositionName}}</h3>
         <hr />
-        <h5>Number of Positions: {{this.positionDetail.NumberOfPositions}}</h5>
-        <h5>Duration: {{this.positionDetail.Duration}} Months</h5>
+        <h5>Number of Positions: {{ this.positionDetail.NumberOfPositions }}</h5>
+        <h5>Duration: {{ this.positionDetail.Duration }} Months</h5>
         <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
-        <h5>Position Status ID: {{this.positionDetail.PositionStatusId}}</h5>
-        <h5>Unit Practice ID: {{this.positionDetail.UnitPracticeId}}</h5>
-        <h5>Opportunity ID: {{this.positionDetail.OpportunityId}}</h5>
+        <h5>Position Status ID: {{ getPositionStatus(this.positionDetail.PositionStatusId) }}</h5>
+        <h5>Unit Practice ID: {{ getUnitName(this.positionDetail.UnitPracticeId) }}</h5>
+        <h5>Opportunity ID: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
         <br />
         <table>
             <tr>
@@ -214,8 +214,8 @@
             </tr>
             <tr>
                 <td>{{this.positionDetail.NumberOfPositions}}</td>
-                <td>{{this.positionDetail.MaxConsultantGradeId}}</td>
-                <td>{{this.positionDetail.MinConsultantGradeId}}</td>
+                <td>{{ getGradeName(this.positionDetail.MaxConsultantGradeId) }}</td>
+                <td>{{ getGradeName(this.positionDetail.MinConsultantGradeId) }}</td>
                 <td>{{this.positionDetail.Rate}}</td>
             </tr>
         </table>

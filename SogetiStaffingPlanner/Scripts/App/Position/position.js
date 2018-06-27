@@ -45,6 +45,12 @@ new Vue({
                 }
             } 
         },
+        cancel: function () {
+            this.errors = [];
+            this.addState = false;
+            this.clearForm();
+            
+        },
         addPosition: function () {
             let data = this.buildJSON();
 
@@ -74,6 +80,8 @@ new Vue({
                 this.errors.push('Position Name required.');
             } if (!this.duration) {
                 this.errors.push('Duration required.');
+            } if (!this.acceptedCandidate) {
+                this.errors.push('Accepted Candidate required.');
             } if (!this.skillset) {
                 this.errors.push('Skillset required.');
             } if (!this.rate) {
@@ -88,6 +96,18 @@ new Vue({
                 this.errors.push('Rejected Candidate required.');
             } if (!this.positionNote) {
                 this.errors.push('Position Note required.');
+            } if (!this.numberOfPositions) {
+                this.errors.push('Number of Positions required.');
+            } if (!this.positionStatusId) {
+                this.errors.push('Position Status required.');
+            } if (!this.opportunityId) {
+                this.errors.push('Opportunity required.');
+            } if (!this.unitPracticeId) {
+                this.errors.push('Unit Practice required.');
+            } if (!this.maxConsultantGradeId) {
+                this.errors.push('Max Consultant Grade required.');
+            } if (!this.minConsultantGradeId) {
+                this.errors.push('Min Consultant Grade required.');
             }
 
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
@@ -105,6 +125,7 @@ new Vue({
         clearForm: function () {
             this.addState = false;
             this.updateState = false;
+            this.errors = [];
             this.positionName = '';
             this.opportunityNotes = '';
             this.duration = '';
@@ -116,7 +137,12 @@ new Vue({
             this.proposedCandidate = null;
             this.rejectedCandidate = null;
             this.positionNote = '';
-            this.errors = [];
+            this.numberOfPositions = '';
+            this.positionStatusId = null;
+            this.opportunityId = null;
+            this.unitPracticeId = null;
+            this.maxConsultantGradeId = null;
+            this.minConsultantGradeId = null;
         },
         buildJSON: function () {
             let data = {};
@@ -182,6 +208,27 @@ new Vue({
                 }
             }
         },
+        getGradeName: function (gradeId) {
+            for (grade in this.grades) {
+                if (this.grades[grade].GradeId == gradeId) {
+                    return (this.grades[grade].GradeName);
+                }
+            }
+        },
+        getPositionStatus: function (positionStatusId) {
+            for (positionStatus in this.positionStatuses) {
+                if (this.positionStatuses[positionStatus].PositionStatusId == positionStatusId) {
+                    return (this.positionStatuses[positionStatus].PositionStatusName);
+                }
+            }
+        },
+        getOpportunityName: function (opportunityId) {
+            for (opportunity in this.opportunities) {
+                if (this.opportunities[opportunity].OpportunityId == opportunityId) {
+                    return (this.opportunities[opportunity].OpportunityName);
+                }
+            }
+        }
     },
     created: function () {
         $.ajax({ // get positions
@@ -218,7 +265,7 @@ new Vue({
             async: false,
             cache: false,
             type: "GET",
-            url: "GetUnitList",
+            url: "GetUnitList", 
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {

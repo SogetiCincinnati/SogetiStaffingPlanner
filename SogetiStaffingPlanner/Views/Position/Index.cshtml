@@ -10,65 +10,129 @@
         </div>
         <template v-else>
             <div class="form-horizontal">
-                <label class="col-sm-3" for="">Position Name: </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="positionName" />
+                <!-- ROW ONE BEGIN-->
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Position Name: </label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="positionName" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Duration:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="duration" />
+                    </div>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3" for="">Duration:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="duration" />
+
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Accepted Candidate:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="acceptedCandidate" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="col-sm-4" for="">Skillset:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="skillset" />
+                    </div>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3" for="">Accepted Candidate:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="acceptedCandidate" />
+
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Rate:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="rate" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Expected Start Date:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="expectedStartDate" />
+                    </div>
+                </div>
+                <div class="form-group"></div>
+
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Hire Candidate:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="hireCandidate" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <label class="col-sm-4" for="">Proposed Candidate:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="proposedCandidate" />
+                    </div>
+                </div>
+                <div class="form-group"></div>
+
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Rejected Candidate:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="rejectedCandidate" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Position Note:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="positionNote" />
+                    </div>
+                </div>
+                <div class="form-group"></div>
+
+                <div class="col-sm-6">
+                    <label class="col-sm-4" for="">Number of Positions:</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" type="text" v-model="numberOfPositions" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Position Status Id: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"></div>
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Opportunity Id: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Skillset:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="skillset" />
-                </div>
 
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Rate:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="rate" />
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Unit Practice Id: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group"></div>
-                <label class="col-sm-3" for="">Expected Start Date:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="expectedStartDate" />
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Min Consultant Grade Id: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Hire Candidate:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="hireCandidate" />
+                <div class="col-sm-6">
+                    <label class="col-sm-4">Max Consultant Grade Id: </label>
+                    <div class="col-sm-8">
+                        <select class="form-control">
+                            <option>1</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Proposed Candidate:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="proposedCandidate" />
-                </div>
-
-
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Rejected Candidate:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="rejectedCandidate" />
-                </div>
-
-
-                <div class="form-group"></div>
-                <label class="col-sm-3" for="">Position Note:</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="positionNote" />
-                </div>
-
-                <div class="form-group"></div>
                 <div class="col-sm-offset-3 col-sm-6">
                     <button v-on:click="onSubmit" class="btn btn-primary">Submit</button>
                     <button v-on:click="addState = false" class="btn btn-danger">Cancel</button>
@@ -107,9 +171,14 @@
     <div v-else>
         <button class="btn btn-warning" v-on:click="positionDetail = false; moreState = false;">Back</button>
         <h3>{{this.positionDetail.PositionName}}</h3>
+        <hr />
         <h5>Number of Positions: {{this.positionDetail.NumberOfPositions}}</h5>
         <h5>Duration: {{this.positionDetail.Duration}} Months</h5>
-        <h5>Client contact: {{this.positionDetail.ClientContact}}</h5>
+        <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
+        <h5>Position Status ID: {{this.positionDetail.PositionStatusId}}</h5>
+        <h5>Unit Practice ID: {{this.positionDetail.UnitPracticeId}}</h5>
+        <h5>Opportunity ID: {{this.positionDetail.OpportunityId}}</h5>
+        <br />
         <table>
             <tr>
                 <th>Accepted Candidate</th>

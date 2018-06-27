@@ -101,8 +101,8 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4">Position Status Id: </label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select class="form-control" v-model="positionStatusId">
+                            <option v-for="positionStatus in positionStatuses" :value="positionStatus.PositionStatusId">{{ positionStatus.PositionStatusName }}</option>
                         </select>
                     </div>
                 </div>
@@ -110,8 +110,8 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4">Opportunity Id: </label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select class="form-control" v-model="opportunityId">
+                            <option v-for="opportunity in opportunities" :value="opportunity.OpportunityId">{{ opportunity.OpportunityName }}</option>
                         </select>
                     </div>
                 </div>
@@ -120,8 +120,8 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4">Unit Practice Id: </label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select class="form-control" v-model="unitPracticeId">
+                            <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
                         </select>
                     </div>
                 </div>
@@ -129,16 +129,16 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4">Min Consultant Grade Id: </label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select class="form-control" v-model="minConsultantGradeId">
+                            <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4">Max Consultant Grade Id: </label>
                     <div class="col-sm-8">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select class="form-control" v-model="maxConsultantGradeId">
+                            <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
                         </select>
                     </div>
                 </div>

@@ -26,6 +26,10 @@ new Vue({
         rejectedCandidate: '',
         positionStatusId: '',
         positionNote: '',
+        opportunities: '',
+        units: '',
+        positionStatuses: '',
+        grades: '',
         errors: [],
     },
     methods: {
@@ -161,10 +165,17 @@ new Vue({
             this.positionDetail = position;
             console.log(this.positionDetail);
             this.moreState = true;
-        }
+        },
+        getUnitName: function (unitId) {
+            for (unit in this.units) {
+                if (this.units[unit].UnitId == unitId) {
+                    return (this.units[unit].UnitName);
+                }
+            }
+        },
     },
     created: function () {
-        $.ajax({
+        $.ajax({ // get positions
             async: false,
             cache: false,
             type: "GET",
@@ -178,5 +189,58 @@ new Vue({
                 console.log(this.positions);
             }.bind(this)
         })
+
+
+
+        $.ajax({ // get opportunity list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetOpportunityList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                this.opportunities = data;
+            }.bind(this)
+        });
+
+
+        $.ajax({ // get Unit list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetUnitList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                this.units = data;
+            }.bind(this)
+        });
+
+
+        $.ajax({ // Get Position Status List 
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetPositionStatusList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                this.positionStatuses = data;
+            }.bind(this)
+        });
+
+        $.ajax({ // Get Grade List 
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetGradeList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                this.grades = data;
+            }.bind(this)
+        });
+        
     }
 })

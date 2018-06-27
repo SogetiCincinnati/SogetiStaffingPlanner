@@ -314,6 +314,7 @@
     <Content Include="Views\AccountExecutive\Index.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
+    <Content Include="Views\Positions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

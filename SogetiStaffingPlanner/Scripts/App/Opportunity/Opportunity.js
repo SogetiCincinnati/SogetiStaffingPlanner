@@ -15,6 +15,7 @@
         clientId: null,
         addState: false,
         updateState: false,
+        moreState: false,
         accountExecutiveUserId: null,
         unitId: null,
         regionId: null,
@@ -92,27 +93,65 @@
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
+            data.id = 1;
             console.log(data);
-
+            //alert(this.opportunityName + ' updated!');
+            this.clearForm();
             $.ajax({
                 type: "POST",
                 url: "EditPost",
                 dataType: "json",
-                data: JSON.stringify(1),
+                data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
-                    alert("Added " + this.opportunityName + "!");
+                    // alert("Added " + this.opportunityName + "!");
                     this.opportunities.push(data);
                     this.clearForm();
+                    /* This code will update the table.  It needs to be in it's own function */
+                    $.ajax({
+                        async: false,
+                        cache: false,
+                        type: "GET",
+                        url: "GetOpportunities",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            this.opportunities = data;
+                            console.log(this.opportunities);
+                            // GET CLIENT LIST
+                            $.ajax({
+                                async: false,
+                                cache: false,
+                                type: "GET",
+                                url: "GetClientList",
+                                contentType: "application/json;charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    this.clients = data;
+                                    // GET UNIT LIST
+                                    $.ajax({
+                                        async: false,
+                                        cache: false,
+                                        type: "GET",
+                                        url: "GetUnitList",
+                                        contentType: "application/json;charset=utf-8",
+                                        dataType: "json",
+                                        success: function (data) {
+                                            this.units = data;
+                                        }.bind(this)
+                                    });
+                                }.bind(this)
+                            });
+                        }.bind(this)
+                    });
                 }.bind(this),
                 error: function (e) {
                     console.log(e);
                     console.log(e, "Error adding data! Please try again.");
                 }
             });
-            alert(this.opportunityName + ' updated!');
-            this.clearForm();
         },
+        
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
         buildJSON: function () {
             let data = {};
@@ -149,6 +188,8 @@
                 this.errors.push('Sold Status required.');
             } if (!this.opportunityOwnerUserId) {
                 this.errors.push('Opportunity Owner required.');
+            } if (!this.opportunityNotes) {
+                this.errors.push('Opportunity Note required.');
             }
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
             if (!this.updateState) {
@@ -207,6 +248,11 @@
                     return (this.ACTLeads[ACTLead].FullName);
                 }
             }
+        },
+        displayDetail: function (opportunity) {
+            this.opportunityDetail = opportunity;
+            console.log(this.opportunityDetail);
+            this.moreState = true;
         }
     },
     created: function () {

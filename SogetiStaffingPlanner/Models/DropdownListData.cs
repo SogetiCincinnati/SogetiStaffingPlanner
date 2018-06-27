@@ -77,4 +77,10 @@ namespace SogetiStaffingPlanner.Models
 		public int GradeId { get; set; }
 		public string GradeName { get; set; }
 	}
+
+	//Used for storing User data for sending the dropdown list of Users for dropdowns on the front end
+	public class UserList{
+		public int UserId { get; set; }
+		public string UserFullName { get; set; }
+	}
 }

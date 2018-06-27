@@ -117,3 +117,7 @@ td {
 footer {
     padding: 10px;
 }
+
+.col-sm-6 {
+    padding-top: 10px;
+}

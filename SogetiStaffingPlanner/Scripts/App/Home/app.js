@@ -27,6 +27,9 @@ new Vue({
         posts: []
     },
     methods: {
+        getDate: function () {
+            console.log(this.date)
+        },
         onSubmit: function() {
             let data = {};
             data.opportunityName = this.opportunityName;

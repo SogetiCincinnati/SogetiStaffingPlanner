@@ -34,6 +34,10 @@ new Vue({
         errors: [],
     },
     methods: {
+        getStartDate: function () {
+            console.log(this.expectedStartDate)
+
+        },
         onSubmit: function () {
             this.checkForm();
             if (!this.errors.length) {

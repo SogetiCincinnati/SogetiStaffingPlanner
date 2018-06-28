@@ -20,7 +20,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 		/*
 		* GET: /Client/GetClients
-		* Returns a Json Serialized List of Client information in the ClientData object.
+		* Returns a Json Serialized List of Active Client information in the ClientData object.
 		*/
 		[HttpGet]
 		public ActionResult GetClients()
@@ -107,7 +107,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 		/*
 		* GET: /Client/GetUserList
-		* Returns a JSON list of UnitList Objects including UnitId and UnitName
+		* Returns a JSON list of Active UnitList Objects including UnitId and UnitName
 		*/
 		[HttpGet]
 		public ActionResult GetUserList()

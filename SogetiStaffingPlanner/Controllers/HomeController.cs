@@ -53,6 +53,7 @@ namespace SogetiStaffingPlanner.Controllers
                 List<PracticeManagerData> results = db.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
                 var returner = new List<PracticeManagerData> { };
                 //map it to a json object
+				//TODO: Correct SQL stored procedure to include Active attribute, and only display active.
                 foreach (PracticeManagerData mvR in results)
                 {
                     returner.Add(new PracticeManagerData
@@ -97,56 +98,6 @@ namespace SogetiStaffingPlanner.Controllers
                 return null;
             }
             
-        }
-
-        [HttpPost]
-        public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-                                                int minConsultantGradeId, string positionName, int numberOfPositions,
-                                                  string skillset, int rate, int expectedStartDate, int duration,
-                                                  string hireCandidate, string proposedCandidate, string acceptedCandidate,
-                                                  string rejectedCandidate, string positionNote,
-                                                  int lastModifiedUserId, int lastModified, bool active)
-        {
-
-
-            System.Diagnostics.Debug.WriteLine("HomeController: AddPosition function");
-
-            try
-            {
-
-                Position position = new Position()
-                {
-                    PositionId = positionId,
-                    OpportunityId = opportunityId,
-                    UnitPracticeId = unitPracticeId,
-                    MaxConsultantGradeId = maxConsultantGradeId,
-                    MinConsultantGradeId = minConsultantGradeId,
-                    PositionName = positionName,
-                    NumberOfPositions = numberOfPositions,
-                    Skillset = skillset,
-                    Rate = rate,
-                    ExpectedStartDate = DateTime.Now,
-                    Duration = duration,
-                    HireCandidate = hireCandidate,
-                    ProposedCandidate = proposedCandidate,
-                    AcceptedCandidate = acceptedCandidate,
-                    RejectedCandidate = rejectedCandidate,
-                    PositionNote = positionNote,
-                    LastModifiedUserId = 1,
-                    LastModified = DateTime.Now,
-                    Active = true
-                };
-
-                db.Positions.Add(position);
-                db.SaveChanges();
-            }
-
-            catch (Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.ToString());
-                return Json("Position Add Failed", JsonRequestBehavior.AllowGet);
-            }
-            return Json("Position Added Successfully", JsonRequestBehavior.AllowGet);
         }
     }
 }

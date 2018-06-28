@@ -85,7 +85,7 @@ namespace SogetiStaffingPlanner.Controllers
 					NumberOfPositions = numberOfPositions,
 					Skillset = skillset,
 					Rate = rate,
-					ExpectedStartDate = DateTime.Now,
+					ExpectedStartDate = expectedStartDate,
 					Duration = duration,
 					HireCandidate = hireCandidate,
 					ProposedCandidate = proposedCandidate,

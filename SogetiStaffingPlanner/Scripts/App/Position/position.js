@@ -53,9 +53,15 @@ new Vue({
         },
         addPosition: function () {
             let data = this.buildJSON();
-
+            /* Get user submitted date value and convert to proper format for controller method */
+            let parts = '2018-06-15'.split('-')
+            let date = new Date(parts);
+            date = date.toISOString();
+            data.expectedStartDate = date;
+            /* Set last modified date to present time, as this is initial creation of position */
+            
+            data.lastModified = new Date().toISOString();
             console.log(data);
-
             $.ajax({
                 type: "POST",
                 url: "AddPosition",
@@ -267,7 +273,10 @@ new Vue({
                     console.log(data);
                     this.positions = data;
                     console.log(this.positions);
-                }.bind(this)
+                }.bind(this),
+                error: function (e) {
+                    console.log(e);
+                }
             })
         }
     },
@@ -311,6 +320,7 @@ new Vue({
             dataType: "json",
             success: function (data) {
                 this.positionStatuses = data;
+                console.log(this.positionStatuses);
             }.bind(this)
         });
 

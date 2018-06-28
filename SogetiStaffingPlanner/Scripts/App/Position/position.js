@@ -187,7 +187,7 @@ new Vue({
                     //Receives message from backend for you to do what you want with it
                     
                     alert('Successfully updated ' + this.positionName + '.');
-                   // this.clearForm();
+                    this.clearForm();
                     this.fetchPositions();
                 }.bind(this),
                 error: function (e) {

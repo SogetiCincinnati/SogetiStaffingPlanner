@@ -316,7 +316,7 @@ new Vue({
             this.expectedStartDate = new Date(this.expectedStartDate);
             this.expectedStartDate = this.expectedStartDate.toISOString();
             this.expectedStartDate = this.expectedStartDate.slice(0, 10);
-            console.log(this.expectedStartDate);
+            
             this.hireCandidate = position.HireCandidate;
             this.proposedCandidate = position.ProposedCandidate;
             this.rejectedCandidate = position.RejectedCandidate;
@@ -335,6 +335,10 @@ new Vue({
         },
         displayDetail: function (position) {
             this.positionDetail = position;
+            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.slice(6);
+            this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
+            this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
+            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0,10);
             console.log(this.positionDetail);
             this.moreState = true;
         },

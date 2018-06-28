@@ -7,47 +7,49 @@
 <div id="createClient" class="main">
     <h2>Client List</h2>
     <hr />
-    <div v-if="addState === false">
+    <div v-if="addState === false" class="addButton">
         <button v-on:click="addState = true" class="btn btn-primary">
-            Add Client
+            <i class="fa fa-pencil"></i> Add Client
         </button>
         <div class="form-group"></div>
     </div>
     <template v-else>
-        <div class="form-horizontal">
-            <label class="col-sm-3" for="clientName">Client Name: </label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" v-model="clientName" />
-            </div>
-            <div class="form-group"></div>
+        <div class="addButton">
+            <div class="form-horizontal">
+                <label class="col-sm-3" for="clientName">Client Name: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="clientName" />
+                </div>
+                <div class="form-group"></div>
 
-            <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" v-model="clientSubbusiness" />
-            </div>
+                <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="clientSubbusiness" />
+                </div>
 
-            <div class="form-group"></div>
-            <div class="col-sm-offset-3 col-sm-6">
-                <button class="btn btn-primary" v-on:click="onSubmit">Add</button>
-                <button class="btn btn-danger" v-on:click="addState = false">Cancel</button>
+                <div class="form-group"></div>
+                    <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> Add</button>
+                    <button class="btn btn-danger" v-on:click="addState = false"><i class="fa fa-times"></i> Cancel</button>
+                <div class="form-group"></div>
             </div>
-            <div class="form-group"></div>
         </div>
+        
 
     </template>
 
     <template>
-        <table id="clientView">
-
-            <tr>
-                <th>Client Name</th>
-                <th>Client Subbusiness</th>
-            </tr>
-            <tr v-for="client in clients">
-                <td>{{ client.ClientName }}</td>
-                <td>{{ client.ClientSubbusiness }}</td>
-            </tr>
-        </table>
+        <div class="scrollBar">
+            <table id="clientView">
+                <tr>
+                    <th>Client Name</th>
+                    <th>Client Subbusiness</th>
+                </tr>
+                <tr v-for="client in clients">
+                    <td>{{ client.ClientName }}</td>
+                    <td>{{ client.ClientSubbusiness }}</td>
+                </tr>
+            </table>
+        </div>
     </template>
 
 </div>

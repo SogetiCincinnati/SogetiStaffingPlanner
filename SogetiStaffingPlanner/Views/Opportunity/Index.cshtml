@@ -141,7 +141,7 @@
             <h5>Sold Status: {{ getSoldStatus(this.opportunityDetail.soldStatusId) }}</h5>
             <h5> Opportunity Owner: {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h5>
             <h5>Last Modified Date: {{ this.opportunityDetail.lastModified }}</h5>
-            <h5>Last Modified By: {{ this.opportunityDetail.opportunityId }}</h5>
+            <h5>Last Modified By: {{ getLastModifiedUserName(this.opportunityDetail.lastModifiedUserId) }}</h5>
             <h5>Active: {{ this.opportunityDetail.active }}</h5>
 
 

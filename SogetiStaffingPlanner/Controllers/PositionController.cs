@@ -32,7 +32,7 @@ namespace SogetiStaffingPlanner.Controllers
             var returnPositions = new List<Position> { };
             foreach (Position s in position)
             {
-				if (s.Active)
+				if (s.Active == true)
 				{
 					returnPositions.Add(new Position
 					{

@@ -3,226 +3,227 @@
     <div v-if="moreState === false">
         <h2>Position List</h2>
         <hr />
-        <template v-if="errors.length">
-            <p>
-                <b>Please correct the following error(s):</b>
-                <ul>
-                    <li v-for="error in errors" style="color: red;">{{ error }}</li>
-                </ul>
-            </p>
-        </template>
-        <div v-if="addState === false">
+
+        <div v-if="addState === false" class="addButton">
             <button v-on:click="addState = true" class="btn btn-primary">
-                Add Position
+                <i class="fa fa-pencil"></i> Add Position
             </button>
             <div class="form-group"></div>
         </div>
         <template v-else>
-            <div class="form-horizontal">
-                <!-- ROW ONE BEGIN-->
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Position Name: </label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="positionName"/>
-                        <span class="error">{{ errors.positionName }}</span>
+            <div class="addButton">
+                <div class="form-horizontal">
+                    <!-- ROW ONE BEGIN-->
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Position Name: </label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="positionName" />
+                            <span class="error">{{ errors.positionName }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Duration (months):</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="duration" />
-                        <template v-if="errors.duration"><span class="error">{{ errors.duration }}</span></template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Duration (months):</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" v-model="duration" />
+                            <template v-if="errors.duration">
+                                <span class="error">{{ errors.duration }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Accepted Candidate:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="acceptedCandidate" />
-                        <template v-if="errors.acceptedCandidate">
-                            <span class="error">{{ errors.acceptedCandidate }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Accepted Candidate:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="acceptedCandidate" />
+                            <template v-if="errors.acceptedCandidate">
+                                <span class="error">{{ errors.acceptedCandidate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
+                    <div class="col-sm-6">
 
-                    <label class="col-sm-4" for="">Skillset:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="skillset" />
-                        <template v-if="errors.skillset">
-                            <span class="error">{{ errors.skillset }}</span>
-                        </template>
+                        <label class="col-sm-4" for="">Skillset:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="skillset" />
+                            <template v-if="errors.skillset">
+                                <span class="error">{{ errors.skillset }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Rate:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="rate" />
-                        <template v-if="errors.rate">
-                            <span class="error">{{ errors.rate }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Rate:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" v-model="rate" />
+                            <template v-if="errors.rate">
+                                <span class="error">{{ errors.rate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Expected Start Date:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="date" v-model="expectedStartDate"/>
-                        <template v-if="errors.expectedStartDate">
-                            <span class="error">{{ errors.expectedStartDate }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Expected Start Date:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="date" v-model="expectedStartDate" v-on:change="getStartDate" />
+                            <template v-if="errors.expectedStartDate">
+                                <span class="error">{{ errors.expectedStartDate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Hire Candidate:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="hireCandidate" />
-                        <template v-if="errors.hireCandidate">
-                            <span class="error">{{ errors.hireCandidate }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Hire Candidate:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="hireCandidate" />
+                            <template v-if="errors.hireCandidate">
+                                <span class="error">{{ errors.hireCandidate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
+                    <div class="col-sm-6">
 
-                    <label class="col-sm-4" for="">Proposed Candidate:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="proposedCandidate" />
-                        <template v-if="errors.proposedCandidate">
-                            <span class="error">{{ errors.proposedCandidate }}</span>
-                        </template>
+                        <label class="col-sm-4" for="">Proposed Candidate:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="proposedCandidate" />
+                            <template v-if="errors.proposedCandidate">
+                                <span class="error">{{ errors.proposedCandidate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Rejected Candidate:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="rejectedCandidate" />
-                        <template v-if="errors.rejectedCandidate">
-                            <span class="error">{{ errors.rejectedCandidate }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Rejected Candidate:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="rejectedCandidate" />
+                            <template v-if="errors.rejectedCandidate">
+                                <span class="error">{{ errors.rejectedCandidate }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Position Note:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="positionNote" />
-                        <template v-if="errors.positionNote">
-                            <span class="error">{{ errors.positionNote }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Position Note:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" v-model="positionNote" />
+                            <template v-if="errors.positionNote">
+                                <span class="error">{{ errors.positionNote }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Number of Positions:</label>
-                    <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="numberOfPositions" />
-                        <template v-if="errors.numberOfPositions">
-                            <span class="error">{{ errors.numberOfPositions }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4" for="">Number of Positions:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" v-model="numberOfPositions" />
+                            <template v-if="errors.numberOfPositions">
+                                <span class="error">{{ errors.numberOfPositions }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4">Position Status: </label>
-                    <div class="col-sm-8">
-                        <select class="form-control" v-model="positionStatusId">
-                            <option v-for="positionStatus in positionStatuses" :value="positionStatus.PositionStatusId">{{ positionStatus.PositionStatusName }}</option>
-                        </select>
-                        <template v-if="errors.positionStatusId">
-                            <span class="error">{{ errors.positionStatusId }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Position Status: </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" v-model="positionStatusId">
+                                <option v-for="positionStatus in positionStatuses" :value="positionStatus.PositionStatusId">{{ positionStatus.PositionStatusName }}</option>
+                            </select>
+                            <template v-if="errors.positionStatusId">
+                                <span class="error">{{ errors.positionStatusId }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4">Opportunity: </label>
-                    <div class="col-sm-8">
-                        <select class="form-control" v-model="opportunityId">
-                            <option v-for="opportunity in opportunities" :value="opportunity.OpportunityId">{{ opportunity.OpportunityName }}</option>
-                        </select>
-                        <template v-if="errors.opportunityId">
-                            <span class="error">{{ errors.opportunityId }}</span>
-                        </template>
+                    <div class="form-group"></div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Opportunity: </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" v-model="opportunityId">
+                                <option v-for="opportunity in opportunities" :value="opportunity.OpportunityId">{{ opportunity.OpportunityName }}</option>
+                            </select>
+                            <template v-if="errors.opportunityId">
+                                <span class="error">{{ errors.opportunityId }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="col-sm-6">
-                    <label class="col-sm-4">Unit Practice: </label>
-                    <div class="col-sm-8">
-                        <select class="form-control" v-model="unitPracticeId">
-                            <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
-                        </select>
-                        <template v-if="errors.unitPracticeId">
-                            <span class="error">{{ errors.unitPracticeId }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Unit Practice: </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" v-model="unitPracticeId">
+                                <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
+                            </select>
+                            <template v-if="errors.unitPracticeId">
+                                <span class="error">{{ errors.unitPracticeId }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group"></div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4">Min Consultant Grade: </label>
-                    <div class="col-sm-8">
-                        <select class="form-control" v-model="minConsultantGradeId">
-                            <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
-                        </select>
-                        <template v-if="errors.minConsultantGradeId">
-                            <span class="error">{{ errors.minConsultantGradeId }}</span>
-                        </template>
+                    <div class="form-group"></div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Min Consultant Grade: </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" v-model="minConsultantGradeId">
+                                <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
+                            </select>
+                            <template v-if="errors.minConsultantGradeId">
+                                <span class="error">{{ errors.minConsultantGradeId }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4">Max Consultant Grade: </label>
-                    <div class="col-sm-8">
-                        <select class="form-control" v-model="maxConsultantGradeId">
-                            <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
-                        </select>
-                        <template v-if="errors.maxConsultantGradeId">
-                            <span class="error">{{ errors.maxConsultantGradeId }}</span>
-                        </template>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Max Consultant Grade: </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" v-model="maxConsultantGradeId">
+                                <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
+                            </select>
+                            <template v-if="errors.maxConsultantGradeId">
+                                <span class="error">{{ errors.maxConsultantGradeId }}</span>
+                            </template>
+                        </div>
                     </div>
-                </div>
-                <!--/////////////FORM SUBMISSION AND CANCEL BUTTONS/////////////////-->
-                <div class="col-sm-offset-3 col-sm-6">
-                    <button v-on:click="onSubmit" class="btn btn-primary">Submit</button>
-                    <button v-on:click="cancel" class="btn btn-danger">Cancel</button>
-                </div>
+                    <!--/////////////FORM SUBMISSION AND CANCEL BUTTONS/////////////////-->
+                    <div class="form-group"></div>
+                    <div class="col-sm-6">
+                        <button v-on:click="onSubmit" class="btn btn-primary"><i class="fa fa-pencil"></i> Submit</button>
+                        <button v-on:click="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
+                    </div>
 
-                <div class="form-group"></div>
+                    <div class="form-group"></div>
+                </div>
             </div>
+
         </template>
 
 
         <template>
-            <table>
-                <tr>
-                    <th>Position Name</th>
-                    <th>Number of Positions</th>
-                    <th>Duration</th>
-                    <th>Accepted Candidate</th>
-                    <th>Skillset</th>
-                    <th>Rate</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr v-for="position in positions">
-                    <td>{{ position.PositionName }}</td>
-                    <td>{{ position.NumberOfPositions }}</td>
-                    <td>{{ position.Duration }} months</td>
-                    <td>{{ position.AcceptedCandidate }}</td>
-                    <td>{{ position.Skillset }}</td>
-                    <td>{{ position.Rate }}</td>
-                    <td><button class="btn btn-success" v-on:click="onEdit(position)">Edit</button></td>
-                    <td><button class="btn btn-warning" v-on:click="displayDetail(position)">Details</button></td>
-                    <td><button class="btn btn-danger">Delete</button></td>
+            <div class="scrollBar">
+                <table>
+                    <tr>
+                        <th>Position Name</th>
+                        <th>Number of Positions</th>
+                        <th>Duration</th>
+                        <th>Accepted Candidate</th>
+                        <th>Skillset</th>
+                        <th>Rate</th>
+                        <th>Edit</th>
+                        <th>Details</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr v-for="position in positions">
+                        <td>{{ position.PositionName }}</td>
+                        <td>{{ position.NumberOfPositions }}</td>
+                        <td>{{ position.Duration }} months</td>
+                        <td>{{ position.AcceptedCandidate }}</td>
+                        <td>{{ position.Skillset }}</td>
+                        <td>{{ position.Rate }}</td>
+                        <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
+                        <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
+                        <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
 
-                </tr>
-            </table>
+                    </tr>
+                </table>
+            </div>
         </template>
     </div>
     <!-- DISPLAY DETAILED INFORMATION ABOUT POSITION -->

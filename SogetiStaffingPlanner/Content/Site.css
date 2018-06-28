@@ -9,6 +9,10 @@ ol, ul {
 .error {
     color: red;
 }
+
+.scrollBar {
+    overflow-x: auto;
+}
 #app h1 {
     margin-top: -5px;
 }
@@ -60,12 +64,20 @@ ol, ul {
     padding: 10px;
     font-size: 12px;
 }
+.addButton {
+    margin-left: 5%;
+}
 
+h2 {
+    margin-left: 5%;
+}
 /* Table Styles */
 
 table, table th, table td{
     border: 1px solid #BDBDBD;
     text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 table th {
     padding: 10px;

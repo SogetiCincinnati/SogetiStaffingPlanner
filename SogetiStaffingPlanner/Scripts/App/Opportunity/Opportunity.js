@@ -368,7 +368,7 @@
                 console.log(e);
             }
         });
-        $.ajax({ // AE list
+        $.ajax({ // User list
             async: false,
             cache: false,
             type: "GET",

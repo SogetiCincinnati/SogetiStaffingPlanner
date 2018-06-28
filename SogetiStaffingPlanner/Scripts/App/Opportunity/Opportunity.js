@@ -23,16 +23,46 @@
         soldStatusId: null,
         opportunityOwnerUserId: null,
         lastModifiedUserId: null,
-        errors: []
+        errors: {}
+    },
+    watch: {
+        opportunityName: function (val) {
+            try {
+                if (val.length || val) { this.errors.opportunityName = ''; }
+                else {
+                    this.errors.opportunityName = 'Opportunity Name required';
+                }
+                if (!this.updateState) {
+                    for (let i = 0; i < this.opportunities.length; i++) {
+                        if (val == this.opportunities[i].opportunityName) {
+                            this.errors.opportunityName = '"' + this.opportunityName + '" already exists.';
+                            break;
+                        }
+                    }
+                }
+            } catch (e) { }
+        },
+        clientContact: function (val) {
+            try {
+                if (val.length || val) { this.errors.clientContact = ''; }
+                else { this.errors.clientContact = 'Client Contact required'; }
+            } catch (e) { }
+        },
+        opportunityNotes: function (val) {
+            try {
+                if (val.length || val) { this.errors.duration = ''; }
+                else { this.errors.opportunityNotes = 'Opportunity Notes required'; }
+            } catch (e) { }
+        },
     },
     methods: {
         /* Clear out forms */
         clearForm: function () {
             this.addState = false;
             this.updateState = false;
-            this.opportunityName = '';
-            this.opportunityNotes = '';
-            this.clientContact = '';
+            this.opportunityName = null;
+            this.opportunityNotes = null;
+            this.clientContact = null;
             this.clientID = null;
             this.accountExecutiveUserId = null;
             this.unitId = null;
@@ -170,27 +200,29 @@
         },
         /* Form validation method */
         checkForm: function () {
-            this.errors = [];
+            this.errors = {};
 
             /*Checks to see if forms are empty */
             if (!this.opportunityName) {
-                this.errors.push('Opportunity Name required.');
+                this.errors.opportunityName = 'Opportunity Name required.';
             } if (!this.clientId) {
-                this.errors.push('Client required.');
+                this.errors.clientId = 'Client required.';
             } if (!this.clientContact) {
-                this.errors.push('Client Contact required.');
+                this.errors.clientContact = 'Client Contact required.';
             } if (!this.accountExecutiveUserId) {
-                this.errors.push('Account Executive required.');
+                this.errors.accountExecutiveUserId = 'Account Executive required.';
             } if (!this.clientId) {
-                this.errors.push('Client required.');
+                this.errors.clientId = 'Client required.';
             } if (!this.regionId) {
-                this.errors.push('Region required.');
+                this.errors.regionId = 'Region required.';
             } if (!this.soldStatusId) {
-                this.errors.push('Sold Status required.');
+                this.errors.soldStatusId = 'Sold Status required.';
             } if (!this.opportunityOwnerUserId) {
-                this.errors.push('Opportunity Owner required.');
+                this.errors.opportunityOwnerUserId = 'Opportunity Owner required.';
             } if (!this.opportunityNotes) {
-                this.errors.push('Opportunity Note required.');
+                this.errors.opportunityNotes = 'Opportunity Note required.';
+            } if (!this.unitId) {
+                this.errors.unitId = 'Unit Id required.';   
             }
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
             if (!this.updateState) {
@@ -204,7 +236,7 @@
             if (!this.errors.length) { return true; }
         },
         cancel: function () {
-            this.errors = [];
+            this.errors = {};
             this.addState = false;
         },
         getClientName: function (clientId) { // pass id and get name back

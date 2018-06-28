@@ -23,13 +23,15 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Position Name: </label>
                     <div class="col-sm-8">
-                        <input class="form-control" type="text" v-model="positionName" />
+                        <input class="form-control" type="text" v-model="positionName"/>
+                        <span class="error">{{ errors.positionName }}</span>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4" for="">Duration:</label>
+                    <label class="col-sm-4" for="">Duration (months):</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="duration" />
+                        <template v-if="errors.duration"><span class="error">{{ errors.duration }}</span></template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -38,6 +40,9 @@
                     <label class="col-sm-4" for="">Accepted Candidate:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="acceptedCandidate" />
+                        <template v-if="errors.acceptedCandidate">
+                            <span class="error">{{ errors.acceptedCandidate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -45,6 +50,9 @@
                     <label class="col-sm-4" for="">Skillset:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="skillset" />
+                        <template v-if="errors.skillset">
+                            <span class="error">{{ errors.skillset }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -53,12 +61,18 @@
                     <label class="col-sm-4" for="">Rate:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="rate" />
+                        <template v-if="errors.rate">
+                            <span class="error">{{ errors.rate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Expected Start Date:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="expectedStartDate" />
+                        <template v-if="errors.expectedStartDate">
+                            <span class="error">{{ errors.expectedStartDate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -67,6 +81,9 @@
                     <label class="col-sm-4" for="">Hire Candidate:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="hireCandidate" />
+                        <template v-if="errors.hireCandidate">
+                            <span class="error">{{ errors.hireCandidate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -74,6 +91,9 @@
                     <label class="col-sm-4" for="">Proposed Candidate:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="proposedCandidate" />
+                        <template v-if="errors.proposedCandidate">
+                            <span class="error">{{ errors.proposedCandidate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -82,12 +102,18 @@
                     <label class="col-sm-4" for="">Rejected Candidate:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="rejectedCandidate" />
+                        <template v-if="errors.rejectedCandidate">
+                            <span class="error">{{ errors.rejectedCandidate }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Position Note:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="positionNote" />
+                        <template v-if="errors.positionNote">
+                            <span class="error">{{ errors.positionNote }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -96,6 +122,9 @@
                     <label class="col-sm-4" for="">Number of Positions:</label>
                     <div class="col-sm-8">
                         <input class="form-control" type="text" v-model="numberOfPositions" />
+                        <template v-if="errors.numberOfPositions">
+                            <span class="error">{{ errors.numberOfPositions }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -104,6 +133,9 @@
                         <select class="form-control" v-model="positionStatusId">
                             <option v-for="positionStatus in positionStatuses" :value="positionStatus.PositionStatusId">{{ positionStatus.PositionStatusName }}</option>
                         </select>
+                        <template v-if="errors.positionStatusId">
+                            <span class="error">{{ errors.positionStatusId }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -113,6 +145,9 @@
                         <select class="form-control" v-model="opportunityId">
                             <option v-for="opportunity in opportunities" :value="opportunity.OpportunityId">{{ opportunity.OpportunityName }}</option>
                         </select>
+                        <template v-if="errors.opportunityId">
+                            <span class="error">{{ errors.opportunityId }}</span>
+                        </template>
                     </div>
                 </div>
 
@@ -123,6 +158,9 @@
                         <select class="form-control" v-model="unitPracticeId">
                             <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
                         </select>
+                        <template v-if="errors.unitPracticeId">
+                            <span class="error">{{ errors.unitPracticeId }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -132,6 +170,9 @@
                         <select class="form-control" v-model="minConsultantGradeId">
                             <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
                         </select>
+                        <template v-if="errors.minConsultantGradeId">
+                            <span class="error">{{ errors.minConsultantGradeId }}</span>
+                        </template>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -140,6 +181,9 @@
                         <select class="form-control" v-model="maxConsultantGradeId">
                             <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
                         </select>
+                        <template v-if="errors.maxConsultantGradeId">
+                            <span class="error">{{ errors.maxConsultantGradeId }}</span>
+                        </template>
                     </div>
                 </div>
                 <!--/////////////FORM SUBMISSION AND CANCEL BUTTONS/////////////////-->

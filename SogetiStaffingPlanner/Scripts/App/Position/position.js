@@ -298,6 +298,7 @@ new Vue({
             return data;
         },
         onEdit: function (position) {
+            
             this.errors = {};
             /* Specify that status is being updated */
             this.updateState = true;
@@ -308,7 +309,14 @@ new Vue({
             this.acceptedCandidate = position.AcceptedCandidate;
             this.skillset = position.Skillset;
             this.rate = position.Rate;
+            /* Format expected start date to correctly display data */
             this.expectedStartDate = position.ExpectedStartDate;
+            this.expectedStartDate = this.expectedStartDate.slice(6);
+            this.expectedStartDate = parseInt(this.expectedStartDate);
+            this.expectedStartDate = new Date(this.expectedStartDate);
+            this.expectedStartDate = this.expectedStartDate.toISOString();
+            this.expectedStartDate = this.expectedStartDate.slice(0, 10);
+            console.log(this.expectedStartDate);
             this.hireCandidate = position.HireCandidate;
             this.proposedCandidate = position.ProposedCandidate;
             this.rejectedCandidate = position.RejectedCandidate;

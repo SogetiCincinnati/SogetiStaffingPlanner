@@ -39,7 +39,7 @@ ol, ul {
 }
 
 .navBar a {
-    font-size: 24px;
+    font-size: 20px;
     text-decoration: none;
     color: white;
 }
@@ -51,7 +51,7 @@ ol, ul {
 .navTitle {
     top: 25px;
     left: 25px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -65,8 +65,14 @@ ol, ul {
 
 table, table th, table td{
     border: 1px solid #BDBDBD;
-    text-align: left;
+    text-align: center;
+}
+table th {
     padding: 10px;
+}
+
+table td {
+    padding: 5px;
 }
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}

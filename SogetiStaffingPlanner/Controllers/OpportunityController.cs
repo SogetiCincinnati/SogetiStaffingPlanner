@@ -276,20 +276,22 @@ namespace SogetiStaffingPlanner.Controllers
             System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
             try
 			{
-				Opportunity opportunity = new Opportunity()
-				{
-					ClientId = clientId,
-					AccountExecutiveUserId = accountExecutiveUserId,
-					UnitId = unitId,
-					RegionId = regionId,
-					SoldStatusId = soldStatusId,
-					OpportunityName = opportunityName,
-					OpportunityOwnerUserId = opportunityOwnerUserId,
-					OpportunityNotes = opportunityNotes,
-					ClientContact = clientContact,
-					LastModifiedUserId = 1,
-					LastModified = DateTime.Now,
-					Active = true
+
+                Opportunity opportunity = new Opportunity()
+                {
+
+                    ClientId = clientId,
+                    AccountExecutiveUserId = accountExecutiveUserId,
+                    UnitId = unitId,
+                    RegionId = regionId,
+                    SoldStatusId = soldStatusId,
+                    OpportunityName = opportunityName,
+                    OpportunityOwnerUserId = opportunityOwnerUserId,
+                    OpportunityNotes = opportunityNotes,
+                    ClientContact = clientContact,
+                    LastModifiedUserId = 1,
+                    LastModified = DateTime.Now,
+                    Active = true,
 				};
 				db.Opportunities.Add(opportunity);
 				db.SaveChanges();
@@ -307,10 +309,11 @@ namespace SogetiStaffingPlanner.Controllers
 		* Gets the information from the edited Opportunity and saves any changes made to the entity framework
 		*/
 		[HttpPost]
-		public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
+		public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, bool active)
 		{
 			System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
-			Opportunity opportunity = db.Opportunities.Find(id);
+            System.Diagnostics.Debug.WriteLine(active);
+            Opportunity opportunity = db.Opportunities.Find(id);
 			if (opportunity != null)
 			{
 
@@ -323,8 +326,9 @@ namespace SogetiStaffingPlanner.Controllers
 				opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
 				opportunity.OpportunityNotes = opportunityNotes;
 				opportunity.ClientContact = clientContact;
-
-				opportunity.LastModified = DateTime.Now;
+                opportunity.Active = active;
+                System.Diagnostics.Debug.WriteLine(opportunity.Active);
+                opportunity.LastModified = DateTime.Now;
 				db.Entry(opportunity).State = EntityState.Modified;
 
 				db.SaveChanges();

@@ -31,7 +31,97 @@ new Vue({
         units: '',
         positionStatuses: '',
         grades: '',
-        errors: [],
+        errors: {}, // builds all the errors
+    },
+    watch: {
+        positionName: function (val) {
+            try {
+                if (val.length || val) { this.errors.positionName = ''; }
+                else {
+                    this.errors.positionName = 'Position Name required';
+                }
+                if (!this.updateState) {
+                    for (let i = 0; i < this.positions.length; i++) {
+                        if (val == this.positions[i].PositionName) {
+                            this.errors.positionName = '"' + this.positionName + '" already exists.';
+                            break;
+                        }
+                    }
+                }
+            } catch (e) {}
+
+        },
+        duration: function (val) {
+            try {
+                if (val.length || val) { this.errors.duration = ''; }
+                else { this.errors.duration = 'Duration required'; }
+            } catch (e) {}
+
+        },
+        acceptedCandidate: function (val) {
+            try {
+                if (val.length) { this.errors.acceptedCandidate = ''; }
+                else { this.errors.acceptedCandidate = 'Accepted Candidate required'; }
+            } catch (e) {}
+
+        },
+        skillset: function (val) {
+            try {
+                if (val.length) { this.errors.skillset = ''; }
+                else { this.errors.skillset = 'Duration required'; }
+            } catch (e) { }
+
+        },
+        rate: function (val) {
+            try {
+                if (val.length || val) { this.errors.rate = ''; }
+                else { this.errors.rate = 'Rate required'; }
+            } catch (e) { }
+
+        },
+        expectedStartDate: function (val) {
+            try {
+                if (val.length) { this.errors.expectedStartDate = ''; }
+                else { this.errors.expectedStartDate = 'Expected Start Date required'; }
+            } catch (e) { }
+
+        },
+        hireCandidate: function (val) {
+            try {
+                if (val.length) { this.errors.hireCandidate = ''; }
+                else { this.errors.hireCandidate = 'Hire Candidate required'; }
+            } catch (e) { }
+
+        },
+        proposedCandidate: function (val) {
+            try {
+                if (val.length) { this.errors.proposedCandidate = ''; }
+                else { this.errors.proposedCandidate = 'Proposed Candidate required'; }
+            } catch (e) { }
+
+        },
+        rejectedCandidate: function (val) {
+            try {
+                if (val.length) { this.errors.rejectedCandidate = ''; }
+                else { this.errors.rejectedCandidate = 'Rejected Candidate required'; }
+            } catch (e) { }
+
+        },
+        positionNote: function (val) {
+            try {
+                if (val.length) { this.errors.positionNote = ''; }
+                else { this.errors.positionNote = 'Position Note required'; }
+            } catch (e) { }
+
+        },
+        numberOfPositions: function (val) {
+            try {
+                if (val.length || val) { this.errors.numberOfPositions = ''; }
+                else { this.errors.numberOfPositions = 'Number of Positions required'; }
+            } catch (e) { }
+
+        },
+
     },
     methods: {
         getStartDate: function () {
@@ -39,7 +129,7 @@ new Vue({
 
         },
         onSubmit: function () {
-            this.checkForm();
+            
             if (!this.errors.length) {
                 if (this.updateState) {
                     this.updatePosition();
@@ -50,12 +140,15 @@ new Vue({
             } 
         },
         cancel: function () {
-            this.errors = [];
+            this.errors = {};
             this.addState = false;
             this.clearForm();
             
         },
         addPosition: function () {
+            this.errors = {};
+            //this.clearForm();
+            this.checkForm();
             let data = this.buildJSON();
             /* Get user submitted date value and convert to proper format for controller method */
             let parts = this.expectedStartDate.split('-')
@@ -99,7 +192,7 @@ new Vue({
                     //Receives message from backend for you to do what you want with it
                     
                     alert('Successfully updated ' + this.positionName + '.');
-                    this.clearForm();
+                   // this.clearForm();
                     this.fetchPositions();
                 }.bind(this),
                 error: function (e) {
@@ -109,40 +202,40 @@ new Vue({
             });
         },
         checkForm: function () {
-            this.errors = [];
+            this.errors = {};
             /*Checks to see if forms are empty */
             if (!this.positionName) {
-                this.errors.push('Position Name required.');
+                this.errors.positionName = 'Position Name required';
             } if (!this.duration) {
-                this.errors.push('Duration required.');
+                this.errors.duration = 'Duration required';
             } if (!this.acceptedCandidate) {
-                this.errors.push('Accepted Candidate required.');
+                this.errors.acceptedCandidate = 'Accepted Candidate required';
             } if (!this.skillset) {
-                this.errors.push('Skillset required.');
+                this.errors.skillset = 'Skillset required';
             } if (!this.rate) {
-                this.errors.push('Rate required.');
+                this.errors.rate = 'Rate required';
             } if (!this.expectedStartDate) {
-                this.errors.push('Exepcted Start Date required.');
+                this.errors.expectedStartDate = 'Exepcted Start Date required';
             } if (!this.hireCandidate) {
-                this.errors.push('Hire Candidate required.');
+                this.errors.hireCandidate = 'Hire Candidate required.';
             } if (!this.proposedCandidate) {
-                this.errors.push('Proposed Candidate required.');
+                this.errors.proposedCandidate = 'Proposed Candidate required';
             } if (!this.rejectedCandidate) {
-                this.errors.push('Rejected Candidate required.');
+                this.errors.rejectedCandidate = 'Rejected Candidate required.';
             } if (!this.positionNote) {
-                this.errors.push('Position Note required.');
+                this.errors.positionNote = 'Position Note required';
             } if (!this.numberOfPositions) {
-                this.errors.push('Number of Positions required.');
+                this.errors.numberOfPositions = 'Number of Positions required';
             } if (!this.positionStatusId) {
-                this.errors.push('Position Status required.');
+                this.errors.positionStatusId = 'Position Status required';
             } if (!this.opportunityId) {
-                this.errors.push('Opportunity required.');
+                this.errors.opportunityId = 'Opportunity required';
             } if (!this.unitPracticeId) {
-                this.errors.push('Unit Practice required.');
+                this.errors.unitPracticeId = 'Unit Practice required';
             } if (!this.maxConsultantGradeId) {
-                this.errors.push('Max Consultant Grade required.');
+                this.errors.maxConsultantGradeId = 'Max Consultant Grade required';
             } if (!this.minConsultantGradeId) {
-                this.errors.push('Min Consultant Grade required.');
+                this.errors.minConsultantGradeId = 'Min Consultant Grade required.';
             }
 
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
@@ -160,10 +253,10 @@ new Vue({
         clearForm: function () {
             this.addState = false;
             this.updateState = false;
-            this.errors = [];
-            this.positionName = '';
-            this.opportunityNotes = '';
-            this.duration = '';
+            this.errors = {};
+            this.positionName = null;
+            this.opportunityNotes = null;
+            this.duration = null;
             this.acceptedCandidate = null;
             this.skillset = null;
             this.rate = null;
@@ -171,8 +264,8 @@ new Vue({
             this.hireCandidate = null;
             this.proposedCandidate = null;
             this.rejectedCandidate = null;
-            this.positionNote = '';
-            this.numberOfPositions = '';
+            this.positionNote = null;
+            this.numberOfPositions = null;
             this.positionStatusId = null;
             this.opportunityId = null;
             this.unitPracticeId = null;
@@ -205,7 +298,7 @@ new Vue({
             return data;
         },
         onEdit: function (position) {
-            
+            this.errors = {};
             /* Specify that status is being updated */
             this.updateState = true;
             /* Populate form with selected values */

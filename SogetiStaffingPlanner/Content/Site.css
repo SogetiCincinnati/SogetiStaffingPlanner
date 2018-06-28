@@ -9,6 +9,10 @@ ol, ul {
 .error {
     color: red;
 }
+
+.scrollBar {
+    overflow-x: auto;
+}
 #app h1 {
     margin-top: -5px;
 }
@@ -39,7 +43,7 @@ ol, ul {
 }
 
 .navBar a {
-    font-size: 24px;
+    font-size: 20px;
     text-decoration: none;
     color: white;
 }
@@ -51,7 +55,7 @@ ol, ul {
 .navTitle {
     top: 25px;
     left: 25px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -60,13 +64,27 @@ ol, ul {
     padding: 10px;
     font-size: 12px;
 }
+.addButton {
+    margin-left: 5%;
+}
 
+h2 {
+    margin-left: 5%;
+}
 /* Table Styles */
 
 table, table th, table td{
     border: 1px solid #BDBDBD;
-    text-align: left;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+table th {
     padding: 10px;
+}
+
+table td {
+    padding: 5px;
 }
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}

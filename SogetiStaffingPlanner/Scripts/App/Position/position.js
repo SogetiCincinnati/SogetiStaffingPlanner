@@ -58,7 +58,7 @@ new Vue({
         addPosition: function () {
             let data = this.buildJSON();
             /* Get user submitted date value and convert to proper format for controller method */
-            let parts = '2018-06-15'.split('-')
+            let parts = this.expectedStartDate.split('-')
             let date = new Date(parts);
             date = date.toISOString();
             data.expectedStartDate = date;
@@ -74,8 +74,9 @@ new Vue({
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
+                    this.clearForm();
                     console.log('POST request success');
-                    alert('successfully added');
+                    alert('Successfully added');
                 }.bind(this),
                 error: function (e) {
                     console.log(e);

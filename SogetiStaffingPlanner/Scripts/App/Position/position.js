@@ -86,7 +86,7 @@ new Vue({
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
-                    console.log(res);
+                    
                     alert('Successfully updated ' + this.positionName + '.');
                     this.clearForm();
                     this.fetchPositions();
@@ -137,7 +137,7 @@ new Vue({
             /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
             if (!this.updateState) {
                 for (let i = 0; i < this.positions.length; i++) {
-                    console.log(this.positionName);
+                    
                     if (this.positionName == this.positions[i].PositionName) {
                         this.errors.push('Position Name: "' + this.positionName + '" already exists.')
                         break;

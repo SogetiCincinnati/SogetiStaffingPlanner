@@ -7,6 +7,7 @@
         regions: '',
         aes: '',
         ACTLeads: '',
+        users: '',
         soldStatuses: '',
         opportunityName: '',
         opportunityId: null,
@@ -227,6 +228,15 @@
                 }
             }
         },
+        getLastModifiedUserName: function (id) {
+          
+            for (let i = 0; i < this.users.length; i++) {
+                console.log(this.users[i].UserId);
+                if (this.users[i].UserId === this.opportunityDetail.lastModifiedUserId) {
+                    return this.users[i].UserFullName;
+                }
+            }
+        },
         getRegionName: function (regionId) {
             for (region in this.regions) {
                 if (this.regions[region].RegionId == regionId) {
@@ -251,7 +261,12 @@
         },
         displayDetail: function (opportunity) {
             this.opportunityDetail = opportunity;
-            console.log(this.opportunityDetail);
+            /* Produces a human readable string for the details view panel */
+            this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.slice(6);
+            this.opportunityDetail.lastModified = parseInt(this.opportunityDetail.lastModified);
+            this.opportunityDetail.lastModified = new Date(this.opportunityDetail.lastModified);
+            this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.toDateString();
+            /* Expands the pane */
             this.moreState = true;
         }
     },
@@ -316,6 +331,21 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 this.aes = data;
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+        $.ajax({ // AE list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetUserList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.users = data;
+                console.log('work', this.users);
             }.bind(this),
             error: function (e) {
                 console.log(e);

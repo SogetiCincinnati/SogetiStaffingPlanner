@@ -119,9 +119,9 @@
                         <td>{{ getUnitName(opportunity.unitId) }}</td>
                         <td>{{ opportunity.clientContact }}</td>
                         <td>{{ getRegionName(opportunity.regionId) }}</td>
-                        <td><button class="btn btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
-                        <td><button class="btn btn-warning" v-on:click="displayDetail(opportunity)">Details</button></td>
-                        <td><button class="btn btn-danger">Delete</button></td>
+                        <td><button class="btn btn-sm btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
+                        <td><button class="btn btn-sm btn-warning" v-on:click="displayDetail(opportunity)">Details</button></td>
+                        <td><button class="btn btn-sm btn-danger">Delete</button></td>
                     </tr>
                 </table>
             </template>
@@ -141,7 +141,7 @@
             <h5>Sold Status: {{ getSoldStatus(this.opportunityDetail.soldStatusId) }}</h5>
             <h5> Opportunity Owner: {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h5>
             <h5>Last Modified Date: {{ this.opportunityDetail.lastModified }}</h5>
-            <h5>Last Modified By: {{ this.opportunityDetail.opportunityId }}</h5>
+            <h5>Last Modified By: {{ getLastModifiedUserName(this.opportunityDetail.lastModifiedUserId) }}</h5>
             <h5>Active: {{ this.opportunityDetail.active }}</h5>
 
 

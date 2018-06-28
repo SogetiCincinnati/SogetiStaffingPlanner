@@ -155,8 +155,7 @@ new Vue({
             let date = new Date(parts);
             date = date.toISOString();
             data.expectedStartDate = date;
-            /* Set last modified date to present time, as this is initial creation of position */
-            
+            /* Set last modified date to present time, as this is initial creation of position */  
             data.lastModified = new Date().toISOString();
             console.log(data);
             $.ajax({
@@ -179,7 +178,13 @@ new Vue({
         },
         updatePosition: function () {
             let data = this.buildJSON();
-            data.expectedStartDate = new Date(data.expectedStartDate);
+            /* Get user submitted date value and convert to proper format for controller method */
+            let parts = this.expectedStartDate.split('-')
+            let date = new Date(parts);
+            date = date.toISOString();
+            data.expectedStartDate = date;
+            /* Set last modified date to present time, as this is initial creation of position */
+            data.lastModified = new Date().toISOString();
 
             console.log('data', data);
             $.ajax({

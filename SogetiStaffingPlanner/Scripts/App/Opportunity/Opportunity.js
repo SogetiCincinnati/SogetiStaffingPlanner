@@ -251,7 +251,12 @@
         },
         displayDetail: function (opportunity) {
             this.opportunityDetail = opportunity;
-            console.log(this.opportunityDetail);
+            /* Produces a human readable string for the details view panel */
+            this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.slice(6);
+            this.opportunityDetail.lastModified = parseInt(this.opportunityDetail.lastModified);
+            this.opportunityDetail.lastModified = new Date(this.opportunityDetail.lastModified);
+            this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.toDateString();
+            /* Expands the pane */
             this.moreState = true;
         }
     },

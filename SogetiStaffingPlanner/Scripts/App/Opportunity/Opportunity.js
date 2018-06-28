@@ -23,6 +23,7 @@
         soldStatusId: null,
         opportunityOwnerUserId: null,
         lastModifiedUserId: null,
+        active: '',
         errors: {}
     },
     watch: {
@@ -99,7 +100,7 @@
             this.soldStatusId = opportunity.soldStatusId;
             this.opportunityOwnerUserId = opportunity.opportunityOwnerUserId;
             this.lastModifiedUserId = opportunity.lastModifiedUserId;
-            this.active = true;
+            this.active = this.active;
             /* Set form to drop down */
             this.addState = true;
         },
@@ -195,7 +196,7 @@
             data.regionId = this.regionId;
             data.soldStatusId = this.soldStatusId;
             data.opportunityOwnerUserId = this.opportunityOwnerUserId;
-            data.active = true;
+            data.active = this.active;
             return data;
         },
         /* Form validation method */
@@ -263,7 +264,6 @@
         getLastModifiedUserName: function (id) {
           
             for (let i = 0; i < this.users.length; i++) {
-                console.log(this.users[i].UserId);
                 if (this.users[i].UserId === this.opportunityDetail.lastModifiedUserId) {
                     return this.users[i].UserFullName;
                 }
@@ -313,7 +313,6 @@
             dataType: "json",
             success: function (data) {
                 this.opportunities = data;
-                console.log(this.opportunities);
                 // GET CLIENT LIST
                 $.ajax({
                     async: false,
@@ -368,7 +367,7 @@
                 console.log(e);
             }
         });
-        $.ajax({ // AE list
+        $.ajax({ // User list
             async: false,
             cache: false,
             type: "GET",

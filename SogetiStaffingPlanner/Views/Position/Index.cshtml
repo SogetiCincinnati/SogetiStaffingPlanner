@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Expected Start Date:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="date" v-model="expectedStartDate" v-on:change="getStartDate" />
+                            <input class="form-control" type="date" v-model="expectedStartDate" />
                             <template v-if="errors.expectedStartDate">
                                 <span class="error">{{ errors.expectedStartDate }}</span>
                             </template>
@@ -151,8 +151,8 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4">Unit Practice: </label>
                         <div class="col-sm-8">
-                            <select class="form-control" v-model="unitPracticeId">
-                                <option v-for="unit in units" :value="unit.UnitId"> {{ unit.UnitName }}</option>
+                            <select class="form-control">
+                                <option selected> ACT</option>
                             </select>
                             <template v-if="errors.unitPracticeId">
                                 <span class="error">{{ errors.unitPracticeId }}</span>
@@ -216,7 +216,7 @@
                         <td>{{ position.Duration }} months</td>
                         <td>{{ position.AcceptedCandidate }}</td>
                         <td>{{ position.Skillset }}</td>
-                        <td>{{ position.Rate }}</td>
+                        <td>${{ position.Rate }}</td>
                         <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
                         <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
                         <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
@@ -235,7 +235,7 @@
         <h5>Duration: {{ this.positionDetail.Duration }} Months</h5>
         <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
         <h5>Position Status ID: {{ getPositionStatus(this.positionDetail.PositionStatusId) }}</h5>
-        <h5>Unit Practice ID: {{ getUnitName(this.positionDetail.UnitPracticeId) }}</h5>
+        <h5>Unit Practice ID: ACT</h5>
         <h5>Opportunity ID: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
         <br />
         <table>
@@ -261,7 +261,7 @@
                 <td>{{this.positionDetail.NumberOfPositions}}</td>
                 <td>{{ getGradeName(this.positionDetail.MaxConsultantGradeId) }}</td>
                 <td>{{ getGradeName(this.positionDetail.MinConsultantGradeId) }}</td>
-                <td>{{this.positionDetail.Rate}}</td>
+                <td>${{this.positionDetail.Rate}}</td>
             </tr>
         </table>
         <h4><strong>Skillset:</strong></h4>

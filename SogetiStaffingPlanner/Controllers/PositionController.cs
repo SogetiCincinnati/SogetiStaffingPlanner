@@ -32,7 +32,7 @@ namespace SogetiStaffingPlanner.Controllers
             var returnPositions = new List<Position> { };
             foreach (Position s in position)
             {
-				if (s.Active)
+				if (s.Active == true)
 				{
 					returnPositions.Add(new Position
 					{
@@ -64,7 +64,7 @@ namespace SogetiStaffingPlanner.Controllers
 		* Method for adding  the data for the Positions
 		*/
 		[HttpPost]
-		public ActionResult AddPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId,
+		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int maxConsultantGradeId,
 										int minConsultantGradeId, string positionName, int numberOfPositions,
 										  string skillset, int rate, DateTime expectedStartDate, int duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
@@ -77,7 +77,6 @@ namespace SogetiStaffingPlanner.Controllers
 			{
 				Position position = new Position()
 				{
-					PositionId = positionId,
 					OpportunityId = opportunityId,
 					UnitPracticeId = unitPracticeId,
 					MaxConsultantGradeId = maxConsultantGradeId,

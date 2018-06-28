@@ -26,7 +26,7 @@
 
                     <label class="col-sm-3"># of Positions: </label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" v-model="numberOfPositions" />
+                        <input class="form-control" type="number" v-model="numberOfPositions" />
                     </div>
                     <div class="form-group"></div>
 
@@ -93,19 +93,19 @@
 
                     <label class="col-sm-3">Rate:</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" v-model="rate" />
+                        <input class="form-control" type="number" v-model="rate" />
                     </div>
                     <div class="form-group"></div>
 
                     <label class="col-sm-3">Date:</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" v-model="date" />
+                        <input class="form-control" type="date"v-on:change="getSDate" v-model="date" />
                     </div>
                     <div class="form-group"></div>
 
                     <label class="col-sm-3">Duration:</label>
                     <div class="col-sm-4">
-                        <input class="form-control" type="text" v-model="duration" />
+                        <input class="form-control" type="number" v-model="duration" />
                     </div>
                     <div class="form-group"></div>
 

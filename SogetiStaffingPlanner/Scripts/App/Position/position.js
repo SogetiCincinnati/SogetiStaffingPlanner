@@ -29,6 +29,7 @@ new Vue({
         positionNote: '',
         opportunities: '',
         units: '',
+        users: '',
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
@@ -124,10 +125,6 @@ new Vue({
 
     },
     methods: {
-        getStartDate: function () {
-            console.log(this.expectedStartDate)
-
-        },
         onSubmit: function () {
             
             if (!this.errors.length) {
@@ -155,10 +152,8 @@ new Vue({
             let date = new Date(parts);
             date = date.toISOString();
             data.expectedStartDate = date;
-            /* Set last modified date to present time, as this is initial creation of position */
-            
+            /* Set last modified date to present time, as this is initial creation of position */        
             data.lastModified = new Date().toISOString();
-            console.log(data);
             $.ajax({
                 type: "POST",
                 url: "AddPosition",
@@ -327,8 +322,7 @@ new Vue({
             this.opportunityId = position.OpportunityId;
             this.unitPracticeId = position.UnitPracticeId;
             this.positionStatusId = position.PositionStatusId;
-            console.log(position.UnitPracticeId);
-            console.log(this.unitPracticeId);
+            
             /* Set form to drop down */
             this.addState = true;
             
@@ -339,8 +333,18 @@ new Vue({
             this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
             this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
             this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0,10);
-            console.log(this.positionDetail);
+            
             this.moreState = true;
+        },
+        getLastModifiedUserName: function (id) {
+            
+            for (let i = 0; i < this.users.length; i++) {
+                if (this.users[i].UserId === this.positionDetail.LastModifiedUserId) {
+                    console.log('found');
+                    return this.users[i].UserFullName;
+                }
+            }
+            return this.users[1].UserFullName;
         },
         getUnitName: function (unitId) {
             for (unit in this.units) {
@@ -392,8 +396,20 @@ new Vue({
     },
     created: function () {
         this.fetchPositions();
-
-
+        $.ajax({ // User list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetUserList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                this.users = data;          
+            }.bind(this),
+            error: function (e) {
+                console.log(e);
+            }
+        });
 
         $.ajax({ // get opportunity list
             async: false,
@@ -430,7 +446,6 @@ new Vue({
             dataType: "json",
             success: function (data) {
                 this.positionStatuses = data;
-                console.log(this.positionStatuses);
             }.bind(this)
         });
 

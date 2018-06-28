@@ -119,9 +119,9 @@
                         <td>{{ getUnitName(opportunity.unitId) }}</td>
                         <td>{{ opportunity.clientContact }}</td>
                         <td>{{ getRegionName(opportunity.regionId) }}</td>
-                        <td><button class="btn btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
-                        <td><button class="btn btn-warning" v-on:click="displayDetail(opportunity)">Details</button></td>
-                        <td><button class="btn btn-danger">Delete</button></td>
+                        <td><button class="btn btn-sm btn-info" v-on:click="onEdit(opportunity)">Edit</button></td>
+                        <td><button class="btn btn-sm btn-warning" v-on:click="displayDetail(opportunity)">Details</button></td>
+                        <td><button class="btn btn-sm btn-danger">Delete</button></td>
                     </tr>
                 </table>
             </template>

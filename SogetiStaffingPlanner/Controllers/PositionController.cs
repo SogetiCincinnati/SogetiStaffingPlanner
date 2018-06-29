@@ -20,45 +20,55 @@ namespace SogetiStaffingPlanner.Controllers
             return View();
         }
 
-        /*
-         * GET: /Position/GetPosition
-		 * A method to return a serialized list of Positions that are active.
-         */
-        [HttpGet]
-        public ActionResult GetPosition()
-        {
-            System.Diagnostics.Debug.WriteLine("Get Posistion called.");
-            List<Position> position = db.Database.SqlQuery<Position>("spPosition").ToList<Position>();
-            var returnPositions = new List<Position> { };
-            foreach (Position s in position)
-            {
-				if (s.Active == true)
+		/*
+		* GET: /Position/GetPosition
+		* A method to return a serialized list of Positions that are active.
+		*/
+		[HttpGet]
+		public ActionResult GetPosition()
+		{
+			System.Diagnostics.Debug.WriteLine("Get Posistion called.");
+			try
+			{
+				List<Position> positions = db.Positions.ToList<Position>();
+				List<PositionData> positionList = new List<PositionData> { };
+				foreach (Position p in positions)
 				{
-					returnPositions.Add(new Position
+					if (p.Active)
 					{
-						PositionId = s.PositionId,
-						OpportunityId = s.OpportunityId,
-						UnitPracticeId = s.UnitPracticeId,
-						MaxConsultantGradeId = s.MaxConsultantGradeId,
-						MinConsultantGradeId = s.MinConsultantGradeId,
-						PositionName = s.PositionName,
-						NumberOfPositions = s.NumberOfPositions,
-						Skillset = s.Skillset,
-						Rate = s.Rate,
-						ExpectedStartDate = s.ExpectedStartDate,
-						Duration = s.Duration,
-						HireCandidate = s.HireCandidate,
-						ProposedCandidate = s.ProposedCandidate,
-						AcceptedCandidate = s.AcceptedCandidate,
-						RejectedCandidate = s.RejectedCandidate,
-						PositionNote = s.PositionNote,
-						PositionStatusId = s.PositionStatusId,
-						Active = true
-					});
+						positionList.Add(new PositionData
+						{
+							PositionId = p.PositionId,
+							OpportunityId = p.OpportunityId,
+							UnitPracticeId = p.UnitPracticeId,
+							MaxConsultantGradeId = p.MaxConsultantGradeId,
+							MinConsultantGradeId = p.MinConsultantGradeId,
+							LastModifiedUserId = p.LastModifiedUserId,
+							PositionStatusId = p.PositionStatusId,
+							PositionName = p.PositionName,
+							NumberOfPositions = p.NumberOfPositions,
+							Skillset = p.Skillset,
+							Rate = p.Rate,
+							ExpectedStartDate = p.ExpectedStartDate,
+							Duration = p.Duration,
+							HireCandidate = p.HireCandidate,
+							ProposedCandidate = p.ProposedCandidate,
+							AcceptedCandidate = p.AcceptedCandidate,
+							RejectedCandidate = p.RejectedCandidate,
+							PositionNote = p.PositionNote,
+							LastModified = p.LastModified,
+							Active = p.Active
+						});
+					}
 				}
-            }
-            return Json(returnPositions, JsonRequestBehavior.AllowGet);
-        }
+				return Json(positionList, JsonRequestBehavior.AllowGet);
+			}
+			catch (Exception e)
+			{
+				System.Diagnostics.Debug.WriteLine(e.ToString());
+			}
+			return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+		}
 
 		/*
 		* Method for adding  the data for the Positions

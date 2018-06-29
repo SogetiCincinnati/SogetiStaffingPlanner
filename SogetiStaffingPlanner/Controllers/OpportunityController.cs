@@ -35,7 +35,7 @@ namespace SogetiStaffingPlanner.Controllers
                 List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
-                    if (o.Active)
+					if (o.Active == true)
                     {
                         opportunityList.Add(new OpportunityData
                         {
@@ -50,8 +50,8 @@ namespace SogetiStaffingPlanner.Controllers
                             opportunityNotes = o.OpportunityNotes,
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,
-                            lastModified = DateTime.Now,
-                            active = true
+                            lastModified = o.LastModified,
+                            active = o.Active
                         });
                     }
                 }
@@ -79,7 +79,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<ClientList> clientList = new List<ClientList>();
 				foreach (Client c in clients)
 				{
-					if (c.Active)
+					if (c.Active == true)
 					{
 						clientList.Add(new ClientList
 						{
@@ -152,7 +152,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<SoldStatusList> statuses = new List<SoldStatusList>();
 				foreach (SoldStatus ss in soldStatuses)
 				{
-					if (ss.Active)
+					if (ss.Active == true)
 					{
 						statuses.Add(new SoldStatusList
 						{
@@ -184,7 +184,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<RegionList> regionList = new List<RegionList>();
 				foreach (Region r in regions)
 				{
-					if (r.Active)
+					if (r.Active == true)
 					{
 						regionList.Add(new RegionList
 						{
@@ -216,7 +216,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UnitList> unitList = new List<UnitList>();
 				foreach (Unit u in units)
 				{
-					if (u.Active)
+					if (u.Active == true)
 					{
 						unitList.Add(new UnitList
 						{
@@ -248,7 +248,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UserList> userList = new List<UserList>();
 				foreach (User u in users)
 				{
-					if (u.Active)
+					if (u.Active == true)
 					{
 						userList.Add(new UserList
 						{
@@ -326,9 +326,10 @@ namespace SogetiStaffingPlanner.Controllers
 				opportunity.OpportunityOwnerUserId = opportunityOwnerUserId;
 				opportunity.OpportunityNotes = opportunityNotes;
 				opportunity.ClientContact = clientContact;
-                opportunity.Active = active;
-                System.Diagnostics.Debug.WriteLine(opportunity.Active);
-                opportunity.LastModified = DateTime.Now;
+				opportunity.Active = active;
+				//Hardcoded until session states are active and we can pull user from there
+				opportunity.LastModifiedUserId = 1;
+				opportunity.LastModified = DateTime.Now;
 				db.Entry(opportunity).State = EntityState.Modified;
 
 				db.SaveChanges();
@@ -336,5 +337,5 @@ namespace SogetiStaffingPlanner.Controllers
 			}
 			return Json("Error Message", JsonRequestBehavior.AllowGet);
 		}
-    }
+	}
 }

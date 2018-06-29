@@ -32,7 +32,7 @@ namespace SogetiStaffingPlanner.Controllers
 
 			foreach (Client c in clients)
 			{
-				if (c.Active)
+				if (c.Active == true)
 				{
 					ClientData clientData = new ClientData();
 					clientData.ClientId = c.ClientId;
@@ -119,7 +119,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UserList> userList = new List<UserList>();
 				foreach (User u in users)
 				{
-					if (u.Active)
+					if (u.Active == true)
 					{
 						userList.Add(new UserList
 						{

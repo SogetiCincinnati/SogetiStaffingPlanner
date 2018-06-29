@@ -34,7 +34,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<PositionData> positionList = new List<PositionData> { };
 				foreach (Position p in positions)
 				{
-					if (p.Active)
+					if (p.Active == true)
 					{
 						positionList.Add(new PositionData
 						{
@@ -102,6 +102,7 @@ namespace SogetiStaffingPlanner.Controllers
 					AcceptedCandidate = acceptedCandidate,
 					RejectedCandidate = rejectedCandidate,
 					PositionNote = positionNote,
+					//Hardcoding in Last Modified User Id until this value can be pulled from session
 					LastModifiedUserId = 1,
 					LastModified = DateTime.Now,
 					Active = true,
@@ -148,6 +149,7 @@ namespace SogetiStaffingPlanner.Controllers
 				position.AcceptedCandidate = acceptedCandidate;
 				position.RejectedCandidate = rejectedCandidate;
 				position.PositionNote = positionNote;
+				//Hardcoding User until this can be pulled from session
 				position.LastModifiedUserId = 1;
 				position.LastModified = DateTime.Now;
 				position.Active = active;
@@ -174,7 +176,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UnitList> unitList = new List<UnitList>();
 				foreach (Unit u in units)
 				{
-					if (u.Active)
+					if (u.Active == true)
 					{
 						unitList.Add(new UnitList
 						{
@@ -206,7 +208,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UnitPractice> unitPractices = unit.UnitPractices.ToList<UnitPractice>();
 				foreach (UnitPractice up in unitPractices)
 				{
-					if (up.Active)
+					if (up.Active == true)
 					{
 						unitPracticesList.Add(new UnitPracticeList
 						{
@@ -239,7 +241,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<PositionStatusList> statuses = new List<PositionStatusList>();
 				foreach (PositionStatus ps in positionStatuses)
 				{
-					if (ps.Active)
+					if (ps.Active == true)
 					{
 						statuses.Add(new PositionStatusList
 						{
@@ -271,7 +273,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<OpportunityList> opportunityList = new List<OpportunityList>();
 				foreach (Opportunity o in opportunities)
 				{
-					if (o.Active)
+					if (o.Active == true)
 					{
 						opportunityList.Add(new OpportunityList
 						{
@@ -303,7 +305,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<GradeList> gradeList = new List<GradeList>();
 				foreach (Grade g in grades)
 				{
-					if (g.Active)
+					if (g.Active == true)
 					{
 						gradeList.Add(new GradeList
 						{
@@ -335,7 +337,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<UserList> userList = new List<UserList>();
 				foreach (User u in users)
 				{
-					if (u.Active)
+					if (u.Active == true)
 					{
 						userList.Add(new UserList
 						{

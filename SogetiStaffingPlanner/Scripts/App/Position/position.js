@@ -163,6 +163,7 @@ new Vue({
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     this.clearForm();
+                    this.fetchPositions();
                     console.log('POST request success');
                     alert('Successfully added');
                 }.bind(this),

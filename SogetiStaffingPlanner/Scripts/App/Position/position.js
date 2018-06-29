@@ -8,7 +8,6 @@ new Vue({
         addState: false,
         moreState: false,
         updateState: false,
-        numberOfPositions: '',
         positionName: '',
         positionId: null,
         opportunityId: null,
@@ -25,7 +24,6 @@ new Vue({
         proposedCandidate: '',
         rejectedCandidate: '',
         positionStatusId: '',
-        unitPracticeId: null,
         positionNote: '',
         opportunities: '',
         units: '',
@@ -149,8 +147,7 @@ new Vue({
         }
     },
     methods: {
-        onSubmit: function () {
-            
+        onSubmit: function () {   
             if (!this.errors.length) {
                 if (this.updateState) {
                     this.updatePosition();
@@ -170,7 +167,7 @@ new Vue({
             this.errors = {};
             //this.clearForm();
             this.checkForm();
-            let data = this.buildJSON();
+            let data = requests.buildJSON(this);
             /* Get user submitted date value and convert to proper format for controller method */
             let parts = this.expectedStartDate.split('-')
             let date = new Date(parts);
@@ -187,7 +184,7 @@ new Vue({
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     this.clearForm();
-                    this.fetchPositions();
+                    request.fetchPositions(this);
                     console.log('POST request success');
                     alert('Successfully added');
                 }.bind(this),
@@ -198,7 +195,7 @@ new Vue({
             });
         },
         updatePosition: function () {
-            let data = this.buildJSON();
+            let data = requests.buildPositionJSON(this);
             data.expectedStartDate = new Date(data.expectedStartDate);
 
             console.log('data', data);
@@ -213,7 +210,7 @@ new Vue({
                     
                     alert('Successfully updated ' + this.positionName + '.');
                     this.clearForm();
-                    this.fetchPositions();
+                    requests.fetchPositions(this);
                 }.bind(this),
                 error: function (e) {
                     console.log(e);
@@ -292,31 +289,6 @@ new Vue({
             this.maxConsultantGradeId = null;
             this.minConsultantGradeId = null;
         },
-        buildJSON: function () {
-            let data = {};
-            data.positionId = this.positionId;
-            data.opportunityId = this.opportunityId;
-            data.unitPracticeId = 4;
-            data.maxConsultantGradeId = this.maxConsultantGradeId;
-            data.minConsultantGradeId = this.minConsultantGradeId;
-            data.numberOfPositions = this.numberOfPositions;
-            data.active = true;
-            data.positionStatusId = this.positionStatusId;
-            data.lastModifiedUserId = 1;
-            data.lastModified = 1;
-            data.positionName = this.positionName;
-            data.duration = this.duration;
-            data.acceptedCandidate = this.acceptedCandidate;
-            data.skillset = this.skillset;
-            data.rate = this.rate;
-            data.expectedStartDate = this.expectedStartDate;
-            data.hireCandidate = this.hireCandidate;
-            data.proposedCandidate = this.proposedCandidate;
-            data.rejectedCandidate = this.rejectedCandidate;
-            data.positionStatusId = 1;
-            data.positionNote = this.positionNote;
-            return data;
-        },
         onEdit: function (position) {
             
             this.errors = {};
@@ -344,7 +316,9 @@ new Vue({
             this.numberOfPositions = position.NumberOfPositions;
             this.maxConsultantGradeId = position.MaxConsultantGradeId;
             this.minConsultantGradeId = position.MinConsultantGradeId;
+            
             this.opportunityId = position.OpportunityId;
+            
             this.unitPracticeId = position.UnitPracticeId;
             this.positionStatusId = position.PositionStatusId;
             
@@ -403,85 +377,19 @@ new Vue({
                     return (this.opportunities[opportunity].OpportunityName);
                 }
             }
-        },
-        fetchPositions: function () {
-            $.ajax({ // get positions
-                async: false,
-                cache: false,
-                type: "GET",
-                url: "GetPosition",
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-
-                    this.positions = data;
-                    console.log('Works', this.positions);
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                }
-            })
-        }
-    },
-    watch: {
-        expectedStartDate: function (val) {
-            /* Function to validate proper date selected */
         }
     },
     created: function () {
-        this.fetchPositions();
-        $.ajax({ // User list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetUserList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.users = data;          
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-
-        $.ajax({ // get opportunity list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetOpportunityList",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.opportunities = data;
-            }.bind(this)
-        });
+        requests.postPosition();
+        requests.fetchPositions(this);
+        requests.getUserList(this);
+        requests.getOpportunityList(this);
+        requests.getUnitList(this);
+        requests.getPositionStatusList(this);
+        
 
 
-        $.ajax({ // get Unit list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetUnitList", 
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.units = data;
-            }.bind(this)
-        });
-
-
-        $.ajax({ // Get Position Status List 
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetPositionStatusList",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.positionStatuses = data;
-            }.bind(this)
-        });
+        
 
         $.ajax({ // Get Grade List 
             async: false,

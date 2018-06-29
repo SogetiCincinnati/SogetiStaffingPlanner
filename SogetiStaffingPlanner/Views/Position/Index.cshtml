@@ -209,7 +209,7 @@
                         <th>Rate</th>
                         <th>Edit</th>
                         <th>Details</th>
-                        <th>Delete</th>
+                        <!--<th>Delete</th>-->
                     </tr>
                     <tr v-for="position in positions">
                         <td>{{ position.PositionName }}</td>
@@ -221,7 +221,7 @@
                         <td>${{ position.Rate }}</td>
                         <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
                         <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
-                        <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                        <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
 
                     </tr>
                 </table>

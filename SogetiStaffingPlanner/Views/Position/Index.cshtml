@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Expected Start Date:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="date" v-model="expectedStartDate" />
+                            <input class="form-control" type="date" min="1990-06-15" v-model="expectedStartDate" />
                             <template v-if="errors.expectedStartDate">
                                 <span class="error">{{ errors.expectedStartDate }}</span>
                             </template>

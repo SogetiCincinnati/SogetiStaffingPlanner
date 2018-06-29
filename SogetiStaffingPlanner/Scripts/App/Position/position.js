@@ -413,7 +413,7 @@ new Vue({
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    
+
                     this.positions = data;
                     console.log('Works', this.positions);
                 }.bind(this),
@@ -421,6 +421,11 @@ new Vue({
                     console.log(e);
                 }
             })
+        }
+    },
+    watch: {
+        expectedStartDate: function (val) {
+            /* Function to validate proper date selected */
         }
     },
     created: function () {

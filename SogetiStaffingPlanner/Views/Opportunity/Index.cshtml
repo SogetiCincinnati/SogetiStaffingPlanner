@@ -166,22 +166,27 @@
         <template v-else>
             <button class="btn btn-warning" v-on:click="opportunityDetail = false; moreState = false;"><i class="fa fa-caret-left"></i> Back</button>
             <h3>Opportunity Name: {{ this.opportunityDetail.opportunityName }}</h3>
-            
-            <h5>Client Name: {{ getClientName(this.opportunityDetail.clientId) }}</h5>
+
+            <hr />
+            <h4> <strong>Opportunity Owner: {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h4>
+            <h4>Client Name: {{ getClientName(this.opportunityDetail.clientId) }}</h4>
+            <h4>Client Contact: {{ this.opportunityDetail.clientContact }}</h4>
+            <br />
             <h5>AE: {{ getAEName(this.opportunityDetail.accountExecutiveUserId) }}</h5>
             <h5>Unit: {{ getUnitName(this.opportunityDetail.unitId) }}</h5>
-            <h5>Client Contact: {{ this.opportunityDetail.clientContact }}</h5>
+
             <h5>Region: {{ getRegionName(this.opportunityDetail.regionId) }}</h5>
             <h5>Sold Status: {{ getSoldStatus(this.opportunityDetail.soldStatusId) }}</h5>
-            <h5> Opportunity Owner: {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h5>
-            <h5>Last Modified Date: {{ this.opportunityDetail.lastModified }}</h5>
-            <h5>Last Modified By: {{ getLastModifiedUserName(this.opportunityDetail.lastModifiedUserId) }}</h5>
-            <h5>Active: {{ this.opportunityDetail.active }}</h5>
 
 
-            <h4>Notes:</h4>
+
+            <h5 v-if="opportunityDetail.active">Active</h5>
+
+            <br />
+            <h3>Notes:</h3>
             <p>{{this.opportunityDetail.opportunityNotes}}</p>
-</template>
+            <h5><em>Last Modified By: {{ getLastModifiedUserName(this.opportunityDetail.lastModifiedUserId) }} on {{this.opportunityDetail.lastModified}}</em></h5>
+        </template>
     </div>
 </body>
 </html>

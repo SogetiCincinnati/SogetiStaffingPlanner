@@ -73,32 +73,20 @@ let requests = {
             }.bind(that)
         });
     },
+    getGradeList: function (that) {
+        $.ajax({ // Get Grade List 
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetGradeList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                that.grades = data;
+            }.bind(that)
+        });
+    },
     postPosition: function (that, data) {
         console.log(this);
-    },
-    buildPositionJSON: function (that) {  
-            let data = {};
-            data.positionId = that.positionId;
-            data.opportunityId = that.opportunityId;
-            data.unitPracticeId = 4;
-            data.maxConsultantGradeId = that.maxConsultantGradeId;
-            data.minConsultantGradeId = that.minConsultantGradeId;
-            data.numberOfPositions = that.numberOfPositions;
-            data.active = true;
-            data.positionStatusId = that.positionStatusId;
-            data.lastModifiedUserId = 1;
-            data.lastModified = 1;
-            data.positionName = that.positionName;
-            data.duration = that.duration;
-            data.acceptedCandidate = that.acceptedCandidate;
-            data.skillset = that.skillset;
-            data.rate = that.rate;
-            data.expectedStartDate = that.expectedStartDate;
-            data.hireCandidate = that.hireCandidate;
-            data.proposedCandidate = that.proposedCandidate;
-            data.rejectedCandidate = that.rejectedCandidate;
-            data.positionStatusId = that.positionStatusId;
-            data.positionNote = that.positionNote;
-            return data;       
     }
 };

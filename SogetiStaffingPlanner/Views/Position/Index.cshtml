@@ -1,4 +1,5 @@
-﻿
+﻿<script type="text/javascript" src="../../Scripts/App/Position/names.js"></script>
+<script type="text/javascript" src="../../Scripts/App/Position/helpers.js"></script>
 <div id="app" class="main">
     <div v-if="moreState === false">
         <h2>Position List</h2>
@@ -236,9 +237,9 @@
         <h5>Number of Positions: {{ this.positionDetail.NumberOfPositions }}</h5>
         <h5>Duration: {{ this.positionDetail.Duration }} Months</h5>
         <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
-        <h5>Position Status: {{ getPositionStatus(this.positionDetail.PositionStatusId) }}</h5>
+        <h5>Position Status: {{ names.getPositionStatus(this.positionDetail.PositionStatusId, this) }}</h5>
         <h5>Unit Practice: ACT</h5>
-        <h5>Opportunity: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
+        <h5>Opportunity: {{ names.getOpportunityName(this.positionDetail.OpportunityId, this) }}</h5>
         <br />
         <table>
             <tr>
@@ -261,8 +262,8 @@
             </tr>
             <tr>
                 <td>{{this.positionDetail.NumberOfPositions}}</td>
-                <td>{{ getGradeName(this.positionDetail.MaxConsultantGradeId) }}</td>
-                <td>{{ getGradeName(this.positionDetail.MinConsultantGradeId) }}</td>
+                <td>{{ names.getGradeName(this.positionDetail.MaxConsultantGradeId, this) }}</td>
+                <td>{{ names.getGradeName(this.positionDetail.MinConsultantGradeId, this) }}</td>
                 <td>${{this.positionDetail.Rate}}</td>
             </tr>
         </table>
@@ -272,7 +273,7 @@
         <h4><strong>Notes:</strong></h4>
         <p>{{this.positionDetail.PositionNote}}</p>
         <br />
-        <h5><em>Last modified by: {{this.getLastModifiedUserName(this.positionDetail.LastModifiedUserId)}} on {{this.positionDetail.LastModified}}</em></h5>
+        <h5><em>Last modified by: {{names.getLastModifiedUserName(this.positionDetail.LastModifiedUserId, this)}} on {{this.positionDetail.LastModified}}</em></h5>
     </template>
 </div>
 </div>

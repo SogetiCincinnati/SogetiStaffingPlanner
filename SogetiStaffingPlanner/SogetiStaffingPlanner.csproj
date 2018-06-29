@@ -270,6 +270,8 @@
     <Content Include="Scripts\App\Client\client.js" />
     <Content Include="Scripts\App\lib\requests.js" />
     <Content Include="Scripts\App\Opportunity\Opportunity.js" />
+    <Content Include="Scripts\App\Position\helpers.js" />
+    <Content Include="Scripts\App\Position\names.js" />
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Home\app.js" />
     <Content Include="Scripts\bootstrap.js" />

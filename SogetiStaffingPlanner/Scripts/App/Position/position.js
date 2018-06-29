@@ -226,7 +226,7 @@ new Vue({
             } if (!this.opportunityId) {
                 this.errors.opportunityId = 'Opportunity required';
             } if (!this.unitPracticeId) {
-                this.errors.unitPracticeId = 'Unit Practice required';
+                //this.errors.unitPracticeId = 'Unit Practice required';
             } if (!this.maxConsultantGradeId) {
                 this.errors.maxConsultantGradeId = 'Max Consultant Grade required';
             } if (!this.minConsultantGradeId) {
@@ -332,7 +332,13 @@ new Vue({
             this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.slice(6);
             this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
             this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
-            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0,10);
+            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0, 10);
+
+            /* Produces a human readable string for the details view panel */
+            this.positionDetail.LastModified = this.positionDetail.LastModified.slice(6);
+            this.positionDetail.LastModified = parseInt(this.positionDetail.LastModified);
+            this.positionDetail.LastModified = new Date(this.positionDetail.LastModified);
+            this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();
             
             this.moreState = true;
         },
@@ -340,7 +346,6 @@ new Vue({
             
             for (let i = 0; i < this.users.length; i++) {
                 if (this.users[i].UserId === this.positionDetail.LastModifiedUserId) {
-                    console.log('found');
                     return this.users[i].UserFullName;
                 }
             }
@@ -383,10 +388,9 @@ new Vue({
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-
-                    console.log(data);
+                    
                     this.positions = data;
-                    console.log(this.positions);
+                    console.log('Works', this.positions);
                 }.bind(this),
                 error: function (e) {
                     console.log(e);

@@ -122,7 +122,31 @@ new Vue({
             } catch (e) { }
 
         },
-
+        positionStatusId: function (val) {
+            if (val) {
+                this.errors.positionStatusId = '';
+            }
+        },
+        opportunityId: function (val) {
+            if (val) {
+                this.errors.opportunityId = '';
+            }
+        },
+        unitPracticeId: function (val) {
+            if (val) {
+                this.errors.unitPracticeId = '';
+            }
+        },
+        minConsultantGradeId: function (val) {
+            if (val) {
+                this.errors.minConsultantGradeId = '';
+            }
+        },
+        maxConsultantGradeId: function (val) {
+            if (val) {
+                this.errors.maxConsultantGradeId = '';
+            }
+        }
     },
     methods: {
         onSubmit: function () {

@@ -51,10 +51,50 @@
         },
         opportunityNotes: function (val) {
             try {
-                if (val.length || val) { this.errors.duration = ''; }
+                if (val.length) { this.errors.opportunityNotes = ''; }
                 else { this.errors.opportunityNotes = 'Opportunity Notes required'; }
             } catch (e) { }
         },
+        clientId: function (val) {
+            try {
+                if (val || val.length) {
+                    this.errors.clientId = '';
+                } else { this.errors.clientId = 'Client required'; }
+            } catch (e) { }
+
+        },
+        accountExecutiveUserId: function (val) {
+            try {
+                if (val || val.length) { this.errors.accountExecutiveUserId = ''; }
+                else { this.errors.accountExecutiveUserId = 'AE required'; }
+            } catch (e) { }
+            
+        },
+        unitId: function (val) {
+            try {
+                if (val || val.length) { this.errors.unitId = ''; }
+                else { this.errors.unitId = 'Unit required'; }
+            } catch (e) { }
+        },
+        regionId: function (val) {
+            try {
+                if (val || val.length) { this.errors.regionId = ''; }
+                else { this.errors.regionId = 'Region required'; }
+            } catch (e) { }
+
+        },
+        soldStatusId: function (val) {
+            try {
+                if (val || val.length) { this.errors.soldStatusId = ''; }
+                else { this.errors.soldStatusId = 'Sold status required'; }
+            } catch (e) { }
+
+        },
+        opportunityOwnerUserId: function (val) {
+            if (val || val.length) { this.errors.opportunityOwnerUserId = ''; }
+            else { this.errors.opportunityOwnerUserId = 'Opportunity Owner required'; }
+        },
+
     },
     methods: {
         /* Clear out forms */

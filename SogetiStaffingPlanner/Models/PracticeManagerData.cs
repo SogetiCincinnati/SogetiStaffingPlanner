@@ -5,8 +5,6 @@ using System.Web;
 
 namespace SogetiStaffingPlanner.Models
 {
-            using System;
-    
     public partial class PracticeManagerData
     {
         public string OpportunityName { get; set; }

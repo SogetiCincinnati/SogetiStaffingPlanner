@@ -29,7 +29,7 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Duration:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="duration" />
+                        <input class="form-control" type="number" name="quantity" min="1" max="1825" v-model="duration" />
                     </div>
                 </div>
                 <div class="form-group"></div>
@@ -52,7 +52,7 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Rate:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="rate" />
+                        <input class="form-control" type="number" name="quantity" min="30" max="1000" v-model="rate" />
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -95,7 +95,7 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4" for="">Number of Positions:</label>
                     <div class="col-sm-8">
-                        <input class="form-control" type="number" v-model="numberOfPositions" />
+                        <input class="form-control" type="number" name="quantity" min="1" max="1000" v-model="numberOfPositions" />
                     </div>
                 </div>
                 <div class="col-sm-6">

@@ -201,6 +201,7 @@
                 <table>
                     <tr>
                         <th>Position Name</th>
+                        <th>Opportunity Name</th>
                         <th>Number of Positions</th>
                         <th>Duration</th>
                         <th>Accepted Candidate</th>
@@ -212,6 +213,7 @@
                     </tr>
                     <tr v-for="position in positions">
                         <td>{{ position.PositionName }}</td>
+                        <td>{{ getOpportunityName(position.OpportunityId) }}</td>
                         <td>{{ position.NumberOfPositions }}</td>
                         <td>{{ position.Duration }} months</td>
                         <td>{{ position.AcceptedCandidate }}</td>
@@ -234,9 +236,9 @@
         <h5>Number of Positions: {{ this.positionDetail.NumberOfPositions }}</h5>
         <h5>Duration: {{ this.positionDetail.Duration }} Months</h5>
         <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
-        <h5>Position Status ID: {{ getPositionStatus(this.positionDetail.PositionStatusId) }}</h5>
-        <h5>Unit Practice ID: ACT</h5>
-        <h5>Opportunity ID: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
+        <h5>Position Status: {{ getPositionStatus(this.positionDetail.PositionStatusId) }}</h5>
+        <h5>Unit Practice: ACT</h5>
+        <h5>Opportunity: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
         <br />
         <table>
             <tr>
@@ -264,10 +266,13 @@
                 <td>${{this.positionDetail.Rate}}</td>
             </tr>
         </table>
+        <br />
         <h4><strong>Skillset:</strong></h4>
         <h5>{{this.positionDetail.Skillset}}</h5>
-        <h4>Notes:</h4>
+        <h4><strong>Notes:</strong></h4>
         <p>{{this.positionDetail.PositionNote}}</p>
+        <br />
+        <h5><em>Last modified by: {{this.getLastModifiedUserName(this.positionDetail.LastModifiedUserId)}} on {{this.positionDetail.LastModified}}</em></h5>
     </template>
 </div>
 </div>

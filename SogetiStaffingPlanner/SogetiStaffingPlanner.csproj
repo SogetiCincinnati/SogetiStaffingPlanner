@@ -202,6 +202,7 @@
     <Compile Include="Models\Grade.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PositionData.cs" />
     <Compile Include="Models\PracticeManagerData.cs" />
     <Compile Include="Models\DropdownListData.cs" />
     <Compile Include="Models\Opportunity.cs">

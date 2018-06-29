@@ -24,7 +24,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Duration (months):</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="number" v-model="duration" />
+                            <input class="form-control" type="number" name="quantity" min="1" max="1825" v-model="duration" />
                             <template v-if="errors.duration">
                                 <span class="error">{{ errors.duration }}</span>
                             </template>
@@ -56,7 +56,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Rate:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="number" v-model="rate" />
+                            <input class="form-control" type="number" name="quantity" min="30" max="1000" v-model="rate" />
                             <template v-if="errors.rate">
                                 <span class="error">{{ errors.rate }}</span>
                             </template>
@@ -117,7 +117,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Number of Positions:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="number" v-model="numberOfPositions" />
+                            <input class="form-control" type="number" name="quantity" min="1" max="1000" v-model="numberOfPositions" />
                             <template v-if="errors.numberOfPositions">
                                 <span class="error">{{ errors.numberOfPositions }}</span>
                             </template>

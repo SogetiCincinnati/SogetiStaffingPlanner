@@ -114,23 +114,7 @@ let position = new Vue({
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
-            $.ajax({
-                type: "POST",
-                url: "EditPosition",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    //Receives message from backend for you to do what you want with it              
-                    alert('Successfully updated ' + this.positionName + '.');
-                    posHelpers.clearForm(this);
-                    requests.fetchPositions(this);
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            requests.editPosition(data, this);
         },
         checkForm: function () {
             validate.checkForm(this);
@@ -148,12 +132,7 @@ let position = new Vue({
             this.rate = position.Rate;
             /* Check if data is initial grab from DB or not */
             if (position.ExpectedStartDate.length > 10) {
-                this.expectedStartDate = position.ExpectedStartDate;
-                this.expectedStartDate = this.expectedStartDate.slice(6);
-                this.expectedStartDate = parseInt(this.expectedStartDate);
-                this.expectedStartDate = new Date(this.expectedStartDate);
-                this.expectedStartDate = this.expectedStartDate.toISOString();
-                this.expectedStartDate = this.expectedStartDate.slice(0, 10);
+                this.expectedStartDate = posHelpers.displayDate(position.ExpectedStartDate);
             } else {
                 this.expectedStartDate = position.ExpectedStartDate;
             }
@@ -169,22 +148,13 @@ let position = new Vue({
             this.positionStatusId = position.PositionStatusId;           
             /* Set form to drop down */
             this.addState = true;  
-
         },
         displayDetail: function (position) {
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
-                this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.slice(6);
-                this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
-                this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
-                this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0, 10);
-                /* Produces a human readable string for the details view panel */
-                this.positionDetail.LastModified = this.positionDetail.LastModified.slice(6);
-                this.positionDetail.LastModified = parseInt(this.positionDetail.LastModified);
-                this.positionDetail.LastModified = new Date(this.positionDetail.LastModified);
-                this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();     
-            }
-                 
+                this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);
+                this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
+            }                
             this.moreState = true;
         },
          getOpportunityName: function (opportunityId) {

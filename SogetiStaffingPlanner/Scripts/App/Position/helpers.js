@@ -47,10 +47,10 @@
         return data;
     },
     displayDate: function (date) {
-        let dateVal = date.slice(6);
-            dateVal = parseInt(dateVal);
-            dateVal = new Date(dateVal);
-            dateVal = dateVal.toISOString().slice(0, 10);
-        return dateVal;
+        let returnDate = date;
+            returnDate = parseInt(returnDate.slice(6));
+            returnDate = new Date(returnDate);
+            returnDate = returnDate.toISOString().slice(0, 10);
+            return returnDate;
     }
 }

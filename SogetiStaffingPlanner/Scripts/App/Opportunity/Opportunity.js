@@ -236,7 +236,7 @@
             data.regionId = this.regionId;
             data.soldStatusId = this.soldStatusId;
             data.opportunityOwnerUserId = this.opportunityOwnerUserId;
-            data.active = this.active;
+            data.active = 1;
             return data;
         },
         /* Form validation method */

@@ -229,7 +229,6 @@
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
         buildJSON: function () {
             let data = {};
-
             data.id = this.opportunityId;
             data.opportunityName = this.opportunityName;
             data.opportunityNotes = this.opportunityNotes;
@@ -240,7 +239,7 @@
             data.regionId = this.regionId;
             data.soldStatusId = this.soldStatusId;
             data.opportunityOwnerUserId = this.opportunityOwnerUserId;
-            data.active = 1;
+            data.active = this.active;
             return data;
         },
         /* Form validation method */

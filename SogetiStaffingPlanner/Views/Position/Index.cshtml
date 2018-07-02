@@ -1,5 +1,4 @@
-﻿<script type="text/javascript" src="../../Scripts/App/Position/names.js"></script>
-<script type="text/javascript" src="../../Scripts/App/Position/helpers.js"></script>
+﻿
 <div id="app" class="main">
     <div v-if="moreState === false">
         <h2>Position List</h2>
@@ -239,7 +238,7 @@
         <h5>Expected Start: {{this.positionDetail.ExpectedStartDate}}</h5>
         <h5>Position Status: {{ names.getPositionStatus(this.positionDetail.PositionStatusId, this) }}</h5>
         <h5>Unit Practice: ACT</h5>
-        <h5>Opportunity: {{ names.getOpportunityName(this.positionDetail.OpportunityId, this) }}</h5>
+        <h5>Opportunity: {{ getOpportunityName(this.positionDetail.OpportunityId) }}</h5>
         <br />
         <table>
             <tr>
@@ -276,8 +275,11 @@
         <h5><em>Last modified by: {{names.getLastModifiedUserName(this.positionDetail.LastModifiedUserId, this)}} on {{this.positionDetail.LastModified}}</em></h5>
     </template>
 </div>
-</div>
+
 <script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
+<script type="text/javascript" src="../../Scripts/App/Position/names.js"></script>
+<script type="text/javascript" src="../../Scripts/App/Position/helpers.js"></script>
+<script type="text/javascript" src="../../Scripts/App/Position/validate.js"></script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

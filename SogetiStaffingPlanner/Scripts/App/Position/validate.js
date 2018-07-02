@@ -37,6 +37,7 @@
         } if (!that.minConsultantGradeId) {
             that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
         }
+        this.checkForMark(that);
 
         /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
         if (!that.updateState) {
@@ -160,6 +161,11 @@
     checkMaxConsultantGradeId: function (val, that) {
         if (val) {
             that.errors.maxConsultantGradeId = '';
+        }
+    }, 
+    checkForMark: function (that) {
+        if (that.positionName === "Steve") {
+            that.errors.positionName = "Mark not allowed";
         }
     }
 }

@@ -170,7 +170,7 @@
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
-            //alert(this.opportunityName + ' updated!');
+            alert(this.opportunityName + ' updated!');
             this.clearForm();
             $.ajax({
                 type: "POST",
@@ -183,41 +183,9 @@
                     this.opportunities.push(data);
                     this.clearForm();
                     /* This code will update the table.  It needs to be in it's own function */
-                    $.ajax({
-                        async: false,
-                        cache: false,
-                        type: "GET",
-                        url: "GetOpportunities",
-                        contentType: "application/json;charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            this.opportunities = data;
-                            // GET CLIENT LIST
-                            $.ajax({
-                                async: false,
-                                cache: false,
-                                type: "GET",
-                                url: "GetClientList",
-                                contentType: "application/json;charset=utf-8",
-                                dataType: "json",
-                                success: function (data) {
-                                    this.clients = data;
-                                    // GET UNIT LIST
-                                    $.ajax({
-                                        async: false,
-                                        cache: false,
-                                        type: "GET",
-                                        url: "GetUnitList",
-                                        contentType: "application/json;charset=utf-8",
-                                        dataType: "json",
-                                        success: function (data) {
-                                            this.units = data;
-                                        }.bind(this)
-                                    });
-                                }.bind(this)
-                            });
-                        }.bind(this)
-                    });
+                    requests.getOpportunityList(this);
+                    requests.getClientList(this);
+                    requests.getUnitList(this);
                 }.bind(this),
                 error: function (e) {
                     console.log(e);
@@ -347,112 +315,13 @@
         }
     },
     created: function () {
-        // GET OPPORTUNITY LIST
-        $.ajax({
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetOpportunities",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.opportunities = data;
-                // GET CLIENT LIST
-                $.ajax({
-                    async: false,
-                    cache: false,
-                    type: "GET",
-                    url: "GetClientList",
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        this.clients = data;
-                        // GET UNIT LIST
-                        $.ajax({
-                            async: false,
-                            cache: false,
-                            type: "GET",
-                            url: "GetUnitList",
-                            contentType: "application/json;charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-                                this.units = data;
-                                
-                            }.bind(this)
-                        });
-                    }.bind(this)
-                });
-            }.bind(this)
-        });
-        $.ajax({ // Region List
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetRegionList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.regions = data;
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-        $.ajax({ // AE list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetAEList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.aes = data;
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-        $.ajax({ // User list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetUserList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.users = data;
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-        $.ajax({ // sold status list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetSoldStatusList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.soldStatuses = data;
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-        $.ajax({ // ACT LEAD aka opportunity owner
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetACTLeadList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.ACTLeads = data;
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
+        requests.getOpportunityList(this);
+        requests.getRegionList(this);
+        requests.getUserList(this);
+        requests.getAEList(this);
+        requests.getSoldStatusList(this);
+        requests.getACTLeadList(this);
+        requests.getUnitList(this);
+        requests.getClientList(this);
     }
 });

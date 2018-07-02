@@ -1,5 +1,5 @@
 
-new Vue({
+let position = new Vue({
     el: '#app',
     data: {
         positions: '',
@@ -8,7 +8,6 @@ new Vue({
         addState: false,
         moreState: false,
         updateState: false,
-        numberOfPositions: '',
         positionName: '',
         positionId: null,
         opportunityId: null,
@@ -25,7 +24,6 @@ new Vue({
         proposedCandidate: '',
         rejectedCandidate: '',
         positionStatusId: '',
-        unitPracticeId: null,
         positionNote: '',
         opportunities: '',
         units: '',
@@ -36,121 +34,56 @@ new Vue({
     },
     watch: {
         positionName: function (val) {
-            try {
-                if (val.length || val) { this.errors.positionName = ''; }
-                else {
-                    this.errors.positionName = 'Position Name required';
-                }
-                if (!this.updateState) {
-                    for (let i = 0; i < this.positions.length; i++) {
-                        if (val == this.positions[i].PositionName) {
-                            this.errors.positionName = '"' + this.positionName + '" already exists.';
-                            break;
-                        }
-                    }
-                }
-            } catch (e) {}
-
+            validate.checkPositionName(val, this);
         },
         duration: function (val) {
-            try {
-                if (val.length || val) { this.errors.duration = ''; }
-                else { this.errors.duration = 'Duration required'; }
-            } catch (e) {}
-
+            validate.checkDuration(val, this);
         },
         acceptedCandidate: function (val) {
-            try {
-                if (val.length) { this.errors.acceptedCandidate = ''; }
-                else { this.errors.acceptedCandidate = 'Accepted Candidate required'; }
-            } catch (e) {}
-
+            validate.checkAcceptedCandidate(val, this);
         },
         skillset: function (val) {
-            try {
-                if (val.length) { this.errors.skillset = ''; }
-                else { this.errors.skillset = 'Duration required'; }
-            } catch (e) { }
-
+            validate.checkSkillset(val, this);
         },
         rate: function (val) {
-            try {
-                if (val.length || val) { this.errors.rate = ''; }
-                else { this.errors.rate = 'Rate required'; }
-            } catch (e) { }
-
+            validate.checkRate(val, this);
         },
         expectedStartDate: function (val) {
-            try {
-                if (val.length) { this.errors.expectedStartDate = ''; }
-                else { this.errors.expectedStartDate = 'Expected Start Date required'; }
-            } catch (e) { }
-
+            validate.checkExpectedStartDate(val, this);
         },
         hireCandidate: function (val) {
-            try {
-                if (val.length) { this.errors.hireCandidate = ''; }
-                else { this.errors.hireCandidate = 'Hire Candidate required'; }
-            } catch (e) { }
-
+            validate.checkHireCandidate(val, this);
         },
         proposedCandidate: function (val) {
-            try {
-                if (val.length) { this.errors.proposedCandidate = ''; }
-                else { this.errors.proposedCandidate = 'Proposed Candidate required'; }
-            } catch (e) { }
-
+            validate.checkProposedCandidate(val, this);
         },
         rejectedCandidate: function (val) {
-            try {
-                if (val.length) { this.errors.rejectedCandidate = ''; }
-                else { this.errors.rejectedCandidate = 'Rejected Candidate required'; }
-            } catch (e) { }
-
+            validate.checkRejectedCandidate(val, this);
         },
         positionNote: function (val) {
-            try {
-                if (val.length) { this.errors.positionNote = ''; }
-                else { this.errors.positionNote = 'Position Note required'; }
-            } catch (e) { }
-
+            validate.checkPositionNote(val, this);
         },
         numberOfPositions: function (val) {
-            try {
-                if (val.length || val) { this.errors.numberOfPositions = ''; }
-                else { this.errors.numberOfPositions = 'Number of Positions required'; }
-            } catch (e) { }
-
+            validate.checkNumberOfPositions(val, this);
         },
         positionStatusId: function (val) {
-            if (val) {
-                this.errors.positionStatusId = '';
-            }
+            validate.checkPositionStatusId(val, this);
         },
         opportunityId: function (val) {
-            if (val) {
-                this.errors.opportunityId = '';
-            }
+            validate.checkOpportunityId(val, this);
         },
         unitPracticeId: function (val) {
-            if (val) {
-                this.errors.unitPracticeId = '';
-            }
+            validate.checkUnitPracticeId(val, this);
         },
         minConsultantGradeId: function (val) {
-            if (val) {
-                this.errors.minConsultantGradeId = '';
-            }
+            validate.checkMinConsultantGradeId(val, this);
         },
         maxConsultantGradeId: function (val) {
-            if (val) {
-                this.errors.maxConsultantGradeId = '';
-            }
+            validate.checkMaxConsultantGradeId(val, this);
         }
     },
     methods: {
-        onSubmit: function () {
-            
+        onSubmit: function () {   
             if (!this.errors.length) {
                 if (this.updateState) {
                     this.updatePosition();
@@ -163,14 +96,13 @@ new Vue({
         cancel: function () {
             this.errors = {};
             this.addState = false;
-            this.clearForm();
+            posHelpers.clearForm(this);
             
         },
         addPosition: function () {
             this.errors = {};
-            //this.clearForm();
             this.checkForm();
-            let data = this.buildJSON();
+            let data = posHelpers.buildJSON(this);
             /* Get user submitted date value and convert to proper format for controller method */
             let parts = this.expectedStartDate.split('-')
             let date = new Date(parts);
@@ -186,8 +118,8 @@ new Vue({
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
-                    this.clearForm();
-                    this.fetchPositions();
+                    posHelpers.clearForm(this);
+                    requests.fetchPositions(this);
                     console.log('POST request success');
                     alert('Successfully added');
                 }.bind(this),
@@ -198,7 +130,7 @@ new Vue({
             });
         },
         updatePosition: function () {
-            let data = this.buildJSON();
+            let data = posHelpers.buildJSON(this);
             data.expectedStartDate = new Date(data.expectedStartDate);
 
             console.log('data', data);
@@ -212,8 +144,8 @@ new Vue({
                     //Receives message from backend for you to do what you want with it
                     
                     alert('Successfully updated ' + this.positionName + '.');
-                    this.clearForm();
-                    this.fetchPositions();
+                    posHelpers.clearForm(this);
+                    requests.fetchPositions(this);
                 }.bind(this),
                 error: function (e) {
                     console.log(e);
@@ -222,103 +154,9 @@ new Vue({
             });
         },
         checkForm: function () {
-            this.errors = {};
-            /*Checks to see if forms are empty */
-            if (!this.positionName) {
-                this.errors.positionName = 'Position Name required';
-            } if (!this.duration) {
-                this.errors.duration = 'Duration required';
-            } if (!this.acceptedCandidate) {
-                this.errors.acceptedCandidate = 'Accepted Candidate required';
-            } if (!this.skillset) {
-                this.errors.skillset = 'Skillset required';
-            } if (!this.rate) {
-                this.errors.rate = 'Rate required';
-            } if (!this.expectedStartDate) {
-                this.errors.expectedStartDate = 'Exepcted Start Date required';
-            } if (!this.hireCandidate) {
-                this.errors.hireCandidate = 'Hire Candidate required.';
-            } if (!this.proposedCandidate) {
-                this.errors.proposedCandidate = 'Proposed Candidate required';
-            } if (!this.rejectedCandidate) {
-                this.errors.rejectedCandidate = 'Rejected Candidate required.';
-            } if (!this.positionNote) {
-                this.errors.positionNote = 'Position Note required';
-            } if (!this.numberOfPositions) {
-                this.errors.numberOfPositions = 'Number of Positions required';
-            } if (!this.positionStatusId) {
-                this.errors.positionStatusId = 'Position Status required';
-            } if (!this.opportunityId) {
-                this.errors.opportunityId = 'Opportunity required';
-            } if (!this.unitPracticeId) {
-                //this.errors.unitPracticeId = 'Unit Practice required';
-            } if (!this.maxConsultantGradeId) {
-                this.errors.maxConsultantGradeId = 'Max Consultant Grade required';
-            } if (!this.minConsultantGradeId) {
-                this.errors.minConsultantGradeId = 'Min Consultant Grade required.';
-            }
-
-            /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
-            if (!this.updateState) {
-                for (let i = 0; i < this.positions.length; i++) {
-                    
-                    if (this.positionName == this.positions[i].PositionName) {
-                        this.errors.push('Position Name: "' + this.positionName + '" already exists.')
-                        break;
-                    }
-                }
-            }
-            if (!this.errors.length) { return true; }
+            validate.checkForm(this);
         },
-        clearForm: function () {
-            this.addState = false;
-            this.updateState = false;
-            this.errors = {};
-            this.positionName = null;
-            this.opportunityNotes = null;
-            this.duration = null;
-            this.acceptedCandidate = null;
-            this.skillset = null;
-            this.rate = null;
-            this.expectedStartDate = null;
-            this.hireCandidate = null;
-            this.proposedCandidate = null;
-            this.rejectedCandidate = null;
-            this.positionNote = null;
-            this.numberOfPositions = null;
-            this.positionStatusId = null;
-            this.opportunityId = null;
-            this.unitPracticeId = null;
-            this.maxConsultantGradeId = null;
-            this.minConsultantGradeId = null;
-        },
-        buildJSON: function () {
-            let data = {};
-            data.positionId = this.positionId;
-            data.opportunityId = this.opportunityId;
-            data.unitPracticeId = 4;
-            data.maxConsultantGradeId = this.maxConsultantGradeId;
-            data.minConsultantGradeId = this.minConsultantGradeId;
-            data.numberOfPositions = this.numberOfPositions;
-            data.active = true;
-            data.positionStatusId = this.positionStatusId;
-            data.lastModifiedUserId = 1;
-            data.lastModified = 1;
-            data.positionName = this.positionName;
-            data.duration = this.duration;
-            data.acceptedCandidate = this.acceptedCandidate;
-            data.skillset = this.skillset;
-            data.rate = this.rate;
-            data.expectedStartDate = this.expectedStartDate;
-            data.hireCandidate = this.hireCandidate;
-            data.proposedCandidate = this.proposedCandidate;
-            data.rejectedCandidate = this.rejectedCandidate;
-            data.positionStatusId = 1;
-            data.positionNote = this.positionNote;
-            return data;
-        },
-        onEdit: function (position) {
-            
+        onEdit: function (position) {           
             this.errors = {};
             /* Specify that status is being updated */
             this.updateState = true;
@@ -335,22 +173,19 @@ new Vue({
             this.expectedStartDate = parseInt(this.expectedStartDate);
             this.expectedStartDate = new Date(this.expectedStartDate);
             this.expectedStartDate = this.expectedStartDate.toISOString();
-            this.expectedStartDate = this.expectedStartDate.slice(0, 10);
-            
+            this.expectedStartDate = this.expectedStartDate.slice(0, 10);           
             this.hireCandidate = position.HireCandidate;
             this.proposedCandidate = position.ProposedCandidate;
             this.rejectedCandidate = position.RejectedCandidate;
             this.positionNote = position.PositionNote;
             this.numberOfPositions = position.NumberOfPositions;
             this.maxConsultantGradeId = position.MaxConsultantGradeId;
-            this.minConsultantGradeId = position.MinConsultantGradeId;
-            this.opportunityId = position.OpportunityId;
+            this.minConsultantGradeId = position.MinConsultantGradeId;   
+            this.opportunityId = position.OpportunityId;        
             this.unitPracticeId = position.UnitPracticeId;
-            this.positionStatusId = position.PositionStatusId;
-            
+            this.positionStatusId = position.PositionStatusId;           
             /* Set form to drop down */
-            this.addState = true;
-            
+            this.addState = true;          
         },
         displayDetail: function (position) {
             this.positionDetail = position;
@@ -358,142 +193,28 @@ new Vue({
             this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
             this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
             this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0, 10);
-
             /* Produces a human readable string for the details view panel */
             this.positionDetail.LastModified = this.positionDetail.LastModified.slice(6);
             this.positionDetail.LastModified = parseInt(this.positionDetail.LastModified);
             this.positionDetail.LastModified = new Date(this.positionDetail.LastModified);
-            this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();
-            
+            this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();           
             this.moreState = true;
         },
-        getLastModifiedUserName: function (id) {
-            
-            for (let i = 0; i < this.users.length; i++) {
-                if (this.users[i].UserId === this.positionDetail.LastModifiedUserId) {
-                    return this.users[i].UserFullName;
-                }
-            }
-            return this.users[1].UserFullName;
-        },
-        getUnitName: function (unitId) {
-            for (unit in this.units) {
-                if (this.units[unit].UnitId == unitId) {
-                    return (this.units[unit].UnitName);
-                }
-            }
-        },
-        getGradeName: function (gradeId) {
-            for (grade in this.grades) {
-                if (this.grades[grade].GradeId == gradeId) {
-                    return (this.grades[grade].GradeName);
-                }
-            }
-        },
-        getPositionStatus: function (positionStatusId) {
-            for (positionStatus in this.positionStatuses) {
-                if (this.positionStatuses[positionStatus].PositionStatusId == positionStatusId) {
-                    return (this.positionStatuses[positionStatus].PositionStatusName);
-                }
-            }
-        },
-        getOpportunityName: function (opportunityId) {
+         getOpportunityName: function (opportunityId) {
             for (opportunity in this.opportunities) {
                 if (this.opportunities[opportunity].OpportunityId == opportunityId) {
                     return (this.opportunities[opportunity].OpportunityName);
                 }
             }
         },
-        fetchPositions: function () {
-            $.ajax({ // get positions
-                async: false,
-                cache: false,
-                type: "GET",
-                url: "GetPosition",
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-
-                    this.positions = data;
-                    console.log('Works', this.positions);
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                }
-            })
-        }
-    },
-    watch: {
-        expectedStartDate: function (val) {
-            /* Function to validate proper date selected */
-        }
     },
     created: function () {
-        this.fetchPositions();
-        $.ajax({ // User list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetUserList",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                this.users = data;          
-            }.bind(this),
-            error: function (e) {
-                console.log(e);
-            }
-        });
-
-        $.ajax({ // get opportunity list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetOpportunityList",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.opportunities = data;
-            }.bind(this)
-        });
-
-
-        $.ajax({ // get Unit list
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetUnitList", 
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.units = data;
-            }.bind(this)
-        });
-
-
-        $.ajax({ // Get Position Status List 
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetPositionStatusList",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.positionStatuses = data;
-            }.bind(this)
-        });
-
-        $.ajax({ // Get Grade List 
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetGradeList",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                this.grades = data;
-            }.bind(this)
-        });
-        
+        requests.postPosition();
+        requests.fetchPositions(this);
+        requests.getUserList(this);
+        requests.getOpportunityList(this);
+        requests.getUnitList(this);
+        requests.getPositionStatusList(this);
+        requests.getGradeList(this);
     }
 })

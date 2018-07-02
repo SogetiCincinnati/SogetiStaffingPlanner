@@ -51,7 +51,7 @@ namespace SogetiStaffingPlanner.Controllers
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,
                             lastModified = o.LastModified,
-                            active = o.Active
+                            active = o.Active,
                         });
                     }
                 }
@@ -313,10 +313,10 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
             System.Diagnostics.Debug.WriteLine(active);
+            System.Diagnostics.Debug.WriteLine(id);
             Opportunity opportunity = db.Opportunities.Find(id);
 			if (opportunity != null)
 			{
-
 				opportunity.ClientId = clientId;
 				opportunity.AccountExecutiveUserId = accountExecutiveUserId;
 				opportunity.UnitId = unitId;

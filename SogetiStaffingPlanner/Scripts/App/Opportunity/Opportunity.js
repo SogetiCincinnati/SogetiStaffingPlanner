@@ -23,7 +23,7 @@
         soldStatusId: null,
         opportunityOwnerUserId: null,
         lastModifiedUserId: null,
-        active: '',
+        active: false,
         errors: {}
     },
     watch: {
@@ -91,14 +91,16 @@
 
         },
         opportunityOwnerUserId: function (val) {
-            if (val || val.length) { this.errors.opportunityOwnerUserId = ''; }
-            else { this.errors.opportunityOwnerUserId = 'Opportunity Owner required'; }
+            try {
+                if (val || val.length) { this.errors.opportunityOwnerUserId = ''; }
+                else { this.errors.opportunityOwnerUserId = 'Opportunity Owner required'; }
+            } catch (e) { }
         },
-
     },
     methods: {
         /* Clear out forms */
         clearForm: function () {
+            this.opportunityId = null;
             this.addState = false;
             this.updateState = false;
             this.opportunityName = null;
@@ -111,6 +113,7 @@
             this.soldStatusId = null;
             this.opportunityOwnerUserId = null;
             this.clientId = null;
+            this.active = false;
             this.errors = [];
         },
         onSubmit: function () {
@@ -127,6 +130,7 @@
         },
         onEdit: function (opportunity) {
             /* Specify that status is being updated */
+            this.opportunityId = opportunity.opportunityId;
             this.updateState = true;
             /* Populate form with selected values */
             this.opportunityName = opportunity.opportunityName;
@@ -140,9 +144,10 @@
             this.soldStatusId = opportunity.soldStatusId;
             this.opportunityOwnerUserId = opportunity.opportunityOwnerUserId;
             this.lastModifiedUserId = opportunity.lastModifiedUserId;
-            this.active = this.active;
+            this.active = opportunity.active;
             /* Set form to drop down */
             this.addState = true;
+            window.scrollTo(0, 100);
         },
         addOpportunity: function () {
             let data = this.buildJSON();
@@ -165,8 +170,6 @@
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
-            data.id = 1;
-            console.log(data);
             //alert(this.opportunityName + ' updated!');
             this.clearForm();
             $.ajax({
@@ -189,7 +192,6 @@
                         dataType: "json",
                         success: function (data) {
                             this.opportunities = data;
-                            console.log(this.opportunities);
                             // GET CLIENT LIST
                             $.ajax({
                                 async: false,
@@ -227,6 +229,8 @@
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
         buildJSON: function () {
             let data = {};
+
+            data.id = this.opportunityId;
             data.opportunityName = this.opportunityName;
             data.opportunityNotes = this.opportunityNotes;
             data.clientContact = this.clientContact;
@@ -340,6 +344,7 @@
             this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.toDateString();
             /* Expands the pane */
             this.moreState = true;
+            window.scrollTo(0, 100);
         }
     },
     created: function () {
@@ -373,6 +378,7 @@
                             dataType: "json",
                             success: function (data) {
                                 this.units = data;
+                                
                             }.bind(this)
                         });
                     }.bind(this)
@@ -416,7 +422,6 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 this.users = data;
-                console.log('work', this.users);
             }.bind(this),
             error: function (e) {
                 console.log(e);

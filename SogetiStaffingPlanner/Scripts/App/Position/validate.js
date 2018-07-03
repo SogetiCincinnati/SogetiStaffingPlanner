@@ -37,6 +37,7 @@
         } if (!that.minConsultantGradeId) {
             that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
         }
+        this.checkForMark(that);
 
         //Check for sql-injection
         
@@ -168,6 +169,11 @@
     checkMaxConsultantGradeId: function (val, that) {
         if (val) {
             that.errors.maxConsultantGradeId = '';
+        }
+    }, 
+    checkForMark: function (that) {
+        if (that.positionName === "Steve") {
+            that.errors.positionName = "Mark not allowed";
         }
     }
 }

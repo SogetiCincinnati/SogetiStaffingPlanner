@@ -96,44 +96,24 @@ let position = new Vue({
         cancel: function () {
             this.errors = {};
             this.addState = false;
-            posHelpers.clearForm(this);
-            
+            posHelpers.clearForm(this);           
         },
-        addPosition: function () {
+        addPosition: function () {    
             this.errors = {};
             this.checkForm();
             let data = posHelpers.buildJSON(this);
-            /* Get user submitted date value and convert to proper format for controller method */
+            /* Code to format the date for the controller to recieve */
             let parts = this.expectedStartDate.split('-')
             let date = new Date(parts);
             date = date.toISOString();
-            data.expectedStartDate = date;
+            data.expectedStartDate = date;     
             /* Set last modified date to present time, as this is initial creation of position */        
             data.lastModified = new Date().toISOString();
-            $.ajax({
-                type: "POST",
-                url: "AddPosition",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    //Receives message from backend for you to do what you want with it
-                    posHelpers.clearForm(this);
-                    requests.fetchPositions(this);
-                    console.log('POST request success');
-                    alert('Successfully added');
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            /* Submit the data */
+            requests.postPosition(data, this);
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
-            data.expectedStartDate = new Date(data.expectedStartDate);
-
-            console.log('data', data);
             $.ajax({
                 type: "POST",
                 url: "EditPosition",
@@ -141,8 +121,7 @@ let position = new Vue({
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 success: function (res) {
-                    //Receives message from backend for you to do what you want with it
-                    
+                    //Receives message from backend for you to do what you want with it              
                     alert('Successfully updated ' + this.positionName + '.');
                     posHelpers.clearForm(this);
                     requests.fetchPositions(this);
@@ -156,7 +135,7 @@ let position = new Vue({
         checkForm: function () {
             validate.checkForm(this);
         },
-        onEdit: function (position) {           
+        onEdit: function (position) {
             this.errors = {};
             /* Specify that status is being updated */
             this.updateState = true;
@@ -167,13 +146,17 @@ let position = new Vue({
             this.acceptedCandidate = position.AcceptedCandidate;
             this.skillset = position.Skillset;
             this.rate = position.Rate;
-            /* Format expected start date to correctly display data */
-            this.expectedStartDate = position.ExpectedStartDate;
-            this.expectedStartDate = this.expectedStartDate.slice(6);
-            this.expectedStartDate = parseInt(this.expectedStartDate);
-            this.expectedStartDate = new Date(this.expectedStartDate);
-            this.expectedStartDate = this.expectedStartDate.toISOString();
-            this.expectedStartDate = this.expectedStartDate.slice(0, 10);           
+            /* Check if data is initial grab from DB or not */
+            if (position.ExpectedStartDate.length > 10) {
+                this.expectedStartDate = position.ExpectedStartDate;
+                this.expectedStartDate = this.expectedStartDate.slice(6);
+                this.expectedStartDate = parseInt(this.expectedStartDate);
+                this.expectedStartDate = new Date(this.expectedStartDate);
+                this.expectedStartDate = this.expectedStartDate.toISOString();
+                this.expectedStartDate = this.expectedStartDate.slice(0, 10);
+            } else {
+                this.expectedStartDate = position.ExpectedStartDate;
+            }
             this.hireCandidate = position.HireCandidate;
             this.proposedCandidate = position.ProposedCandidate;
             this.rejectedCandidate = position.RejectedCandidate;
@@ -185,19 +168,23 @@ let position = new Vue({
             this.unitPracticeId = position.UnitPracticeId;
             this.positionStatusId = position.PositionStatusId;           
             /* Set form to drop down */
-            this.addState = true;          
+            this.addState = true;  
+
         },
         displayDetail: function (position) {
             this.positionDetail = position;
-            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.slice(6);
-            this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
-            this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
-            this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0, 10);
-            /* Produces a human readable string for the details view panel */
-            this.positionDetail.LastModified = this.positionDetail.LastModified.slice(6);
-            this.positionDetail.LastModified = parseInt(this.positionDetail.LastModified);
-            this.positionDetail.LastModified = new Date(this.positionDetail.LastModified);
-            this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();           
+            if (this.positionDetail.ExpectedStartDate.length > 10) {
+                this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.slice(6);
+                this.positionDetail.ExpectedStartDate = parseInt(this.positionDetail.ExpectedStartDate);
+                this.positionDetail.ExpectedStartDate = new Date(this.positionDetail.ExpectedStartDate);
+                this.positionDetail.ExpectedStartDate = this.positionDetail.ExpectedStartDate.toISOString().slice(0, 10);
+                /* Produces a human readable string for the details view panel */
+                this.positionDetail.LastModified = this.positionDetail.LastModified.slice(6);
+                this.positionDetail.LastModified = parseInt(this.positionDetail.LastModified);
+                this.positionDetail.LastModified = new Date(this.positionDetail.LastModified);
+                this.positionDetail.LastModified = this.positionDetail.LastModified.toDateString();     
+            }
+                 
             this.moreState = true;
         },
          getOpportunityName: function (opportunityId) {
@@ -209,7 +196,6 @@ let position = new Vue({
         },
     },
     created: function () {
-        requests.postPosition();
         requests.fetchPositions(this);
         requests.getUserList(this);
         requests.getOpportunityList(this);

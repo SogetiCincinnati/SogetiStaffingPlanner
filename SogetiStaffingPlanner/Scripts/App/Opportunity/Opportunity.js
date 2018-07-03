@@ -27,75 +27,15 @@
         errors: {}
     },
     watch: {
-        opportunityName: function (val) {
-            try {
-                if (val.length || val) { this.errors.opportunityName = ''; }
-                else {
-                    this.errors.opportunityName = 'Opportunity Name required';
-                }
-                if (!this.updateState) {
-                    for (let i = 0; i < this.opportunities.length; i++) {
-                        if (val == this.opportunities[i].opportunityName) {
-                            this.errors.opportunityName = '"' + this.opportunityName + '" already exists.';
-                            break;
-                        }
-                    }
-                }
-            } catch (e) { }
-        },
-        clientContact: function (val) {
-            try {
-                if (val.length || val) { this.errors.clientContact = ''; }
-                else { this.errors.clientContact = 'Client Contact required'; }
-            } catch (e) { }
-        },
-        opportunityNotes: function (val) {
-            try {
-                if (val.length) { this.errors.opportunityNotes = ''; }
-                else { this.errors.opportunityNotes = 'Opportunity Notes required'; }
-            } catch (e) { }
-        },
-        clientId: function (val) {
-            try {
-                if (val || val.length) {
-                    this.errors.clientId = '';
-                } else { this.errors.clientId = 'Client required'; }
-            } catch (e) { }
-
-        },
-        accountExecutiveUserId: function (val) {
-            try {
-                if (val || val.length) { this.errors.accountExecutiveUserId = ''; }
-                else { this.errors.accountExecutiveUserId = 'AE required'; }
-            } catch (e) { }
-            
-        },
-        unitId: function (val) {
-            try {
-                if (val || val.length) { this.errors.unitId = ''; }
-                else { this.errors.unitId = 'Unit required'; }
-            } catch (e) { }
-        },
-        regionId: function (val) {
-            try {
-                if (val || val.length) { this.errors.regionId = ''; }
-                else { this.errors.regionId = 'Region required'; }
-            } catch (e) { }
-
-        },
-        soldStatusId: function (val) {
-            try {
-                if (val || val.length) { this.errors.soldStatusId = ''; }
-                else { this.errors.soldStatusId = 'Sold status required'; }
-            } catch (e) { }
-
-        },
-        opportunityOwnerUserId: function (val) {
-            try {
-                if (val || val.length) { this.errors.opportunityOwnerUserId = ''; }
-                else { this.errors.opportunityOwnerUserId = 'Opportunity Owner required'; }
-            } catch (e) { }
-        },
+        opportunityName: function (val) { validate.checkOpportunityName(val, this) },
+        clientContact: function (val) { validate.checkClientContact(val, this) },
+        opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
+        clientId: function (val) { validate.checkClientId(val, this) },
+        accountExecutiveUserId: function (val) { validate.checkAccountExecutiveUserId(val, this) },
+        unitId: function (val) { validate.checkUserId(val, this) },
+        regionId: function (val) { validate.checkRegionId(val, this) },
+        soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
+        opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
     },
     methods: {
         /* Clear out forms */
@@ -118,7 +58,7 @@
         },
         onSubmit: function () {
             /* Check to see if updating preexisting Opportunity, or if adding a new one */
-            this.checkForm();
+            validate.checkForm(this);
             if (!this.errors.length) {
                 if (this.updateState) {
                     this.updateOpportunity();
@@ -175,43 +115,6 @@
             data.active = this.active;
             return data;
         },
-        /* Form validation method */
-        checkForm: function () {
-            this.errors = {};
-
-            /*Checks to see if forms are empty */
-            if (!this.opportunityName) {
-                this.errors.opportunityName = 'Opportunity Name required.';
-            } if (!this.clientId) {
-                this.errors.clientId = 'Client required.';
-            } if (!this.clientContact) {
-                this.errors.clientContact = 'Client Contact required.';
-            } if (!this.accountExecutiveUserId) {
-                this.errors.accountExecutiveUserId = 'Account Executive required.';
-            } if (!this.clientId) {
-                this.errors.clientId = 'Client required.';
-            } if (!this.regionId) {
-                this.errors.regionId = 'Region required.';
-            } if (!this.soldStatusId) {
-                this.errors.soldStatusId = 'Sold Status required.';
-            } if (!this.opportunityOwnerUserId) {
-                this.errors.opportunityOwnerUserId = 'Opportunity Owner required.';
-            } if (!this.opportunityNotes) {
-                this.errors.opportunityNotes = 'Opportunity Note required.';
-            } if (!this.unitId) {
-                this.errors.unitId = 'Unit Id required.';   
-            }
-            /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
-            if (!this.updateState) {
-                for (let i = 0; i < this.opportunities.length; i++) {
-                    if (this.opportunityName == this.opportunities[i]['opportunityName']) {
-                        this.errors.push('Opportunity Name: "' + this.opportunityName + '" already exists.')
-                        break;
-                    }
-                }
-            }
-            if (!this.errors.length) { return true; }
-        },
         cancel: function () {
             this.errors = {};
             this.addState = false;
@@ -237,8 +140,7 @@
                 }
             }
         },
-        getLastModifiedUserName: function (id) {
-          
+        getLastModifiedUserName: function (id) {      
             for (let i = 0; i < this.users.length; i++) {
                 if (this.users[i].UserId === this.opportunityDetail.lastModifiedUserId) {
                     return this.users[i].UserFullName;
@@ -259,8 +161,7 @@
                 }
             }
         },
-        getOpportunityName: function (opportunityOwnerUserId) {
-            
+        getOpportunityName: function (opportunityOwnerUserId) {            
             for (ACTLead in this.ACTLeads) {
                 if (this.ACTLeads[ACTLead].UserId == opportunityOwnerUserId) {
                     return (this.ACTLeads[ACTLead].FullName);

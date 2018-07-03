@@ -124,9 +124,9 @@ namespace SogetiStaffingPlanner.Controllers
 		* Gets the information from the edited Position and saves any changes made to the entity framework
 		*/
 		[HttpPost]
-		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId, int minConsultantGradeId, 
-										string positionName, int numberOfPositions, string skillset, int rate, DateTime expectedStartDate, 
-										int duration, string hireCandidate, string proposedCandidate, string acceptedCandidate, string rejectedCandidate,
+		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int? maxConsultantGradeId, int? minConsultantGradeId, 
+										string positionName, int numberOfPositions, string skillset, int? rate, DateTime? expectedStartDate, 
+										int? duration, string hireCandidate, string proposedCandidate, string acceptedCandidate, string rejectedCandidate,
 										string positionNote, bool active, int positionStatusId)
 		{
 			System.Diagnostics.Debug.WriteLine("Edit Position Called");

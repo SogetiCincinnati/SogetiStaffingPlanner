@@ -151,49 +151,14 @@
         },
         addOpportunity: function () {
             let data = this.buildJSON();
-            $.ajax({
-                type: "POST",
-                url: "AddOpportunity",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    alert("Added " + this.opportunityName + "!");
-                    this.opportunities.push(data);
-                    this.clearForm();
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            requests.addOpportunity(data, this);
         },
         updateOpportunity: function () {
             let data = this.buildJSON();
             alert(this.opportunityName + ' updated!');
             this.clearForm();
-            $.ajax({
-                type: "POST",
-                url: "EditPost",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    // alert("Added " + this.opportunityName + "!");
-                    this.opportunities.push(data);
-                    this.clearForm();
-                    /* This code will update the table.  It needs to be in it's own function */
-                    requests.getOpportunityList(this);
-                    requests.getClientList(this);
-                    requests.getUnitList(this);
-                }.bind(this),
-                error: function (e) {
-                    console.log(e);
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            requests.editOpportunity(data, this);
         },
-        
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
         buildJSON: function () {
             let data = {};

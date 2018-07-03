@@ -283,6 +283,8 @@
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\App\Client\client.js" />
+    <Content Include="Scripts\App\Opportunity\helpers.js" />
+    <Content Include="Scripts\App\Opportunity\names.js" />
     <Content Include="Scripts\App\Position\requests.js" />
     <Content Include="Scripts\App\Opportunity\Opportunity.js" />
     <Content Include="Scripts\App\Opportunity\requests.js" />

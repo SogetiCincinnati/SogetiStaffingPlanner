@@ -38,6 +38,14 @@
             that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
         }
 
+        //Check for sql-injection
+        
+        //if (!that.positionName === "") {
+        //    that.errors.positionName = 'Invalid charachers input';
+       // }
+        //contains "" or;; tha.eeror.postionNmae = "Invalid charachers input"
+
+
         /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
         if (!that.updateState) {
             for (let i = 0; i < that.positions.length; i++) {

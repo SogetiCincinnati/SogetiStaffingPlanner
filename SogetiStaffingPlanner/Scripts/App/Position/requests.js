@@ -11,6 +11,7 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                console.log('POSITIONS RECIEVED!!!!!', data);
                 that.positions = data;
             }.bind(that),
             error: function (e) {

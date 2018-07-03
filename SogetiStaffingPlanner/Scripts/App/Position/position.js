@@ -36,33 +36,6 @@ let position = new Vue({
         positionName: function (val) {
             validate.checkPositionName(val, this);
         },
-        duration: function (val) {
-            validate.checkDuration(val, this);
-        },
-        acceptedCandidate: function (val) {
-            validate.checkAcceptedCandidate(val, this);
-        },
-        skillset: function (val) {
-            validate.checkSkillset(val, this);
-        },
-        rate: function (val) {
-            validate.checkRate(val, this);
-        },
-        expectedStartDate: function (val) {
-            validate.checkExpectedStartDate(val, this);
-        },
-        hireCandidate: function (val) {
-            validate.checkHireCandidate(val, this);
-        },
-        proposedCandidate: function (val) {
-            validate.checkProposedCandidate(val, this);
-        },
-        rejectedCandidate: function (val) {
-            validate.checkRejectedCandidate(val, this);
-        },
-        positionNote: function (val) {
-            validate.checkPositionNote(val, this);
-        },
         numberOfPositions: function (val) {
             validate.checkNumberOfPositions(val, this);
         },
@@ -74,12 +47,6 @@ let position = new Vue({
         },
         unitPracticeId: function (val) {
             validate.checkUnitPracticeId(val, this);
-        },
-        minConsultantGradeId: function (val) {
-            validate.checkMinConsultantGradeId(val, this);
-        },
-        maxConsultantGradeId: function (val) {
-            validate.checkMaxConsultantGradeId(val, this);
         }
     },
     methods: {
@@ -103,10 +70,13 @@ let position = new Vue({
             this.checkForm();
             let data = posHelpers.buildJSON(this);
             /* Code to format the date for the controller to recieve */
-            let parts = this.expectedStartDate.split('-')
-            let date = new Date(parts);
-            date = date.toISOString();
-            data.expectedStartDate = date;     
+            if (this.expectedStartDate) {
+                let parts = this.expectedStartDate.split('-')
+                let date = new Date(parts);
+                date = date.toISOString();
+                data.expectedStartDate = date;   
+            }
+              
             /* Set last modified date to present time, as this is initial creation of position */        
             data.lastModified = new Date().toISOString();
             /* Submit the data */

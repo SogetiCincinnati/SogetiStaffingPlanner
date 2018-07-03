@@ -36,21 +36,21 @@ namespace SogetiStaffingPlanner.Controllers
 				{
 					if (p.Active == true)
 					{
-						positionList.Add(new PositionData
-						{
-							PositionId = p.PositionId,
+                        positionList.Add(new PositionData
+                        {
+                            PositionId = p.PositionId,
 							OpportunityId = p.OpportunityId,
 							UnitPracticeId = p.UnitPracticeId,
-							MaxConsultantGradeId = (int)p.MaxConsultantGradeId,
-							MinConsultantGradeId =(int) p.MinConsultantGradeId,
+							MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
+							MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int) p.MinConsultantGradeId,
 							LastModifiedUserId = (int)p.LastModifiedUserId,
 							PositionStatusId = p.PositionStatusId,
 							PositionName = p.PositionName,
 							NumberOfPositions = p.NumberOfPositions,
 							Skillset = p.Skillset,
-							Rate =(int) p.Rate,
-							ExpectedStartDate = (System.DateTime)p.ExpectedStartDate,
-							Duration = (int)p.Duration,
+							Rate = p.Rate == null ? 0 : (int)p.Rate,
+							ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
+							Duration = p.Duration == null ? 0 : (int)p.Duration,
 							HireCandidate = p.HireCandidate,
 							ProposedCandidate = p.ProposedCandidate,
 							AcceptedCandidate = p.AcceptedCandidate,
@@ -74,9 +74,9 @@ namespace SogetiStaffingPlanner.Controllers
 		* Method for adding  the data for the Positions
 		*/
 		[HttpPost]
-		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-										int minConsultantGradeId, string positionName, int numberOfPositions,
-										  string skillset, int? rate, DateTime expectedStartDate, int duration,
+		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int? maxConsultantGradeId,
+										int? minConsultantGradeId, string positionName, int numberOfPositions,
+										  string skillset, int? rate, DateTime? expectedStartDate, int? duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
 										  int lastModifiedUserId, DateTime lastModified, bool active, int positionStatusId)

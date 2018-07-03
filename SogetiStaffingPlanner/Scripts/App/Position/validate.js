@@ -7,23 +7,23 @@
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';
         } if (!that.duration) {
-            that.errors.duration = 'Duration required';
+            //that.errors.duration = 'Duration required';
         } if (!that.acceptedCandidate) {
-            that.errors.acceptedCandidate = 'Accepted Candidate required';
+            //that.errors.acceptedCandidate = 'Accepted Candidate required';
         } if (!that.skillset) {
-            that.errors.skillset = 'Skillset required';
+            //that.errors.skillset = 'Skillset required';
         } if (!that.rate) {
-            that.errors.rate = 'Rate required';
+            //that.errors.rate = 'Rate required';
         } if (!that.expectedStartDate) {
-            that.errors.expectedStartDate = 'Exepcted Start Date required';
+            //that.errors.expectedStartDate = 'Exepcted Start Date required';
         } if (!that.hireCandidate) {
-            that.errors.hireCandidate = 'Hire Candidate required.';
+            //that.errors.hireCandidate = 'Hire Candidate required.';
         } if (!that.proposedCandidate) {
-            that.errors.proposedCandidate = 'Proposed Candidate required';
+            //that.errors.proposedCandidate = 'Proposed Candidate required';
         } if (!that.rejectedCandidate) {
-            that.errors.rejectedCandidate = 'Rejected Candidate required.';
+            //that.errors.rejectedCandidate = 'Rejected Candidate required.';
         } if (!that.positionNote) {
-            that.errors.positionNote = 'Position Note required';
+            //that.errors.positionNote = 'Position Note required';
         } if (!that.numberOfPositions) {
             that.errors.numberOfPositions = 'Number of Positions required';
         } if (!that.positionStatusId) {
@@ -33,11 +33,11 @@
         } if (!that.unitPracticeId) {
             //that.errors.unitPracticeId = 'Unit Practice required';
         } if (!that.maxConsultantGradeId) {
-            that.errors.maxConsultantGradeId = 'Max Consultant Grade required';
+            //that.errors.maxConsultantGradeId = 'Max Consultant Grade required';
         } if (!that.minConsultantGradeId) {
-            that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
+            //that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
         }
-        this.checkForMark(that);
+        
 
         //Check for sql-injection
         
@@ -76,41 +76,46 @@
         } catch (e) { }
 
     },
+    /*
     checkDuration: function (val, that) {
         try {
             if (val.length || val) { that.errors.duration = ''; }
             else { that.errors.duration = 'Duration required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkAcceptedCandidate: function (val, that) {
         try {
             if (val.length) { that.errors.acceptedCandidate = ''; }
             else { that.errors.acceptedCandidate = 'Accepted Candidate required'; }
         } catch (e) { }
 
-    },
-    checkSkillset: function (val, that) {
+    },*/
+    /*checkSkillset: function (val, that) {
         try {
             if (val.length) { that.errors.skillset = ''; }
             else { that.errors.skillset = 'Duration required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkRate: function (val, that) {
         try {
             if (val.length || val) { that.errors.rate = ''; }
             else { that.errors.rate = 'Rate required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkExpectedStartDate: function (val, that) {
         try {
             if (val.length) { that.errors.expectedStartDate = ''; }
             else { that.errors.expectedStartDate = 'Expected Start Date required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkHireCandidate: function (val, that) {
         try {
             if (val.length) { that.errors.hireCandidate = ''; }
@@ -124,21 +129,23 @@
             else { that.errors.proposedCandidate = 'Proposed Candidate required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkRejectedCandidate: function (val, that) {
         try {
             if (val.length) { that.errors.rejectedCandidate = ''; }
             else { that.errors.rejectedCandidate = 'Rejected Candidate required'; }
         } catch (e) { }
 
-    },
+    },*/
+    /*
     checkPositionNote: function (val, that) {
         try {
             if (val.length) { that.errors.positionNote = ''; }
             else { that.errors.positionNote = 'Position Note required'; }
         } catch (e) { }
 
-    },
+    },*/
     checkNumberOfPositions: function (val, that) {
         try {
             if (val.length || val) { that.errors.numberOfPositions = ''; }
@@ -160,20 +167,16 @@
         if (val) {
             that.errors.unitPracticeId = '';
         }
-    },
+    },/*
     checkMinConsultantGradeId: function (val, that) {
         if (val) {
             that.errors.minConsultantGradeId = '';
         }
-    },
+    },*/
+    /*
     checkMaxConsultantGradeId: function (val, that) {
         if (val) {
             that.errors.maxConsultantGradeId = '';
         }
-    }, 
-    checkForMark: function (that) {
-        if (that.positionName === "Steve") {
-            that.errors.positionName = "Mark not allowed";
-        }
-    }
+    }, */
 }

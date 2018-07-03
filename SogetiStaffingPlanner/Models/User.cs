@@ -25,8 +25,6 @@ namespace SogetiStaffingPlanner.Models
             this.UserBusinessRoles = new HashSet<UserBusinessRole>();
             this.UserBusinessRoles1 = new HashSet<UserBusinessRole>();
             this.Users1 = new HashSet<User>();
-            this.User1 = new HashSet<User>();
-            this.UserBusinessRoles11 = new HashSet<UserBusinessRole>();
         }
     
         public int UserId { get; set; }
@@ -55,9 +53,6 @@ namespace SogetiStaffingPlanner.Models
         public virtual ICollection<UserBusinessRole> UserBusinessRoles1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserBusinessRole> UserBusinessRoles11 { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

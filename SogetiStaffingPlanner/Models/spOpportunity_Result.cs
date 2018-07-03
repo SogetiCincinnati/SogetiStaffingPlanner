@@ -11,13 +11,13 @@ namespace SogetiStaffingPlanner.Models
 {
     using System;
     
-    public partial class spGetClients_Result
+    public partial class spOpportunity_Result
     {
+        public int OpportunityId { get; set; }
         public int ClientId { get; set; }
-        public string ClientName { get; set; }
-        public string ClientSubbusiness { get; set; }
-        public System.DateTime LastModified { get; set; }
-        public int LastModifiedUserId { get; set; }
-        public bool Active { get; set; }
+        public int AccountExecutiveUserId { get; set; }
+        public int UnitId { get; set; }
+        public Nullable<int> OpportunityOwnerUserId { get; set; }
+        public string OpportunityNotes { get; set; }
     }
 }

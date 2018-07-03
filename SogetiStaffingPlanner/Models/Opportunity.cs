@@ -25,9 +25,9 @@ namespace SogetiStaffingPlanner.Models
         public int AccountExecutiveUserId { get; set; }
         public int UnitId { get; set; }
         public int RegionId { get; set; }
-        public int SoldStatusId { get; set; }
+        public Nullable<int> SoldStatusId { get; set; }
         public string OpportunityName { get; set; }
-        public int OpportunityOwnerUserId { get; set; }
+        public Nullable<int> OpportunityOwnerUserId { get; set; }
         public string OpportunityNotes { get; set; }
         public string ClientContact { get; set; }
         public int LastModifiedUserId { get; set; }
@@ -43,10 +43,5 @@ namespace SogetiStaffingPlanner.Models
         public virtual User User2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Position> Positions { get; set; }
-
-        internal static object Where(Func<object, bool> p)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

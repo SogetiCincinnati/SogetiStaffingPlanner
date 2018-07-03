@@ -11,13 +11,9 @@ namespace SogetiStaffingPlanner.Models
 {
     using System;
     
-    public partial class spGetClients_Result
+    public partial class GetAEList_Result
     {
-        public int ClientId { get; set; }
-        public string ClientName { get; set; }
-        public string ClientSubbusiness { get; set; }
-        public System.DateTime LastModified { get; set; }
-        public int LastModifiedUserId { get; set; }
-        public bool Active { get; set; }
+        public int UserId { get; set; }
+        public string FullName { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace SogetiStaffingPlanner.Controllers
 {
     public class ClientController : Controller
     {
-        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
 
         //Default Index View Method
         public ActionResult Index()

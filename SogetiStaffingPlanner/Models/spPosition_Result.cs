@@ -10,9 +10,8 @@
 namespace SogetiStaffingPlanner.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Position
+    public partial class spPosition_Result
     {
         public int PositionId { get; set; }
         public int OpportunityId { get; set; }
@@ -34,12 +33,5 @@ namespace SogetiStaffingPlanner.Models
         public System.DateTime LastModified { get; set; }
         public bool Active { get; set; }
         public int PositionStatusId { get; set; }
-    
-        public virtual Grade Grade { get; set; }
-        public virtual Grade Grade1 { get; set; }
-        public virtual Opportunity Opportunity { get; set; }
-        public virtual PositionStatus PositionStatus { get; set; }
-        public virtual UnitPractice UnitPractice { get; set; }
-        public virtual User User { get; set; }
     }
 }

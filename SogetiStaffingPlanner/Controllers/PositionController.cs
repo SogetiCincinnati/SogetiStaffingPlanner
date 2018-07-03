@@ -12,7 +12,7 @@ namespace SogetiStaffingPlanner.Controllers
 	public class PositionController : Controller
 	{
 
-        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
 
         public ActionResult Index()
         {
@@ -41,16 +41,16 @@ namespace SogetiStaffingPlanner.Controllers
 							PositionId = p.PositionId,
 							OpportunityId = p.OpportunityId,
 							UnitPracticeId = p.UnitPracticeId,
-							MaxConsultantGradeId = p.MaxConsultantGradeId,
-							MinConsultantGradeId = p.MinConsultantGradeId,
-							LastModifiedUserId = p.LastModifiedUserId,
+							MaxConsultantGradeId = (int)p.MaxConsultantGradeId,
+							MinConsultantGradeId =(int) p.MinConsultantGradeId,
+							LastModifiedUserId = (int)p.LastModifiedUserId,
 							PositionStatusId = p.PositionStatusId,
 							PositionName = p.PositionName,
 							NumberOfPositions = p.NumberOfPositions,
 							Skillset = p.Skillset,
-							Rate = p.Rate,
-							ExpectedStartDate = p.ExpectedStartDate,
-							Duration = p.Duration,
+							Rate =(int) p.Rate,
+							ExpectedStartDate = (System.DateTime)p.ExpectedStartDate,
+							Duration = (int)p.Duration,
 							HireCandidate = p.HireCandidate,
 							ProposedCandidate = p.ProposedCandidate,
 							AcceptedCandidate = p.AcceptedCandidate,
@@ -76,7 +76,7 @@ namespace SogetiStaffingPlanner.Controllers
 		[HttpPost]
 		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int maxConsultantGradeId,
 										int minConsultantGradeId, string positionName, int numberOfPositions,
-										  string skillset, int rate, DateTime expectedStartDate, int duration,
+										  string skillset, int? rate, DateTime expectedStartDate, int duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
 										  int lastModifiedUserId, DateTime lastModified, bool active, int positionStatusId)

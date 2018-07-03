@@ -11,7 +11,7 @@ namespace SogetiStaffingPlanner.Controllers
 {
     public class OpportunityController : Controller
     {
-		ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
 
 		//Default Method to return the view of the Index
 		public ViewResult Index()
@@ -44,9 +44,9 @@ namespace SogetiStaffingPlanner.Controllers
                             accountExecutiveUserId = o.AccountExecutiveUserId,
                             unitId = o.UnitId,
                             regionId = o.RegionId,
-                            soldStatusId = o.SoldStatusId,
+                            soldStatusId =(int) o.SoldStatusId,
                             opportunityName = o.OpportunityName,
-                            opportunityOwnerUserId = o.OpportunityOwnerUserId,
+                            opportunityOwnerUserId = (int)o.OpportunityOwnerUserId,
                             opportunityNotes = o.OpportunityNotes,
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,

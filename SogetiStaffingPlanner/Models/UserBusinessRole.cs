@@ -23,6 +23,5 @@ namespace SogetiStaffingPlanner.Models
         public virtual BusinessRole BusinessRole { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
-        public virtual User User11 { get; set; }
     }
 }

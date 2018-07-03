@@ -32,7 +32,7 @@
         opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
         clientId: function (val) { validate.checkClientId(val, this) },
         accountExecutiveUserId: function (val) { validate.checkAccountExecutiveUserId(val, this) },
-        unitId: function (val) { validate.checkUserId(val, this) },
+        unitId: function (val) { validate.checkUnitId(val, this) },
         regionId: function (val) { validate.checkRegionId(val, this) },
         soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
         opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
@@ -90,38 +90,23 @@
             window.scrollTo(0, 100);
         },
         addOpportunity: function () {
-            let data = this.buildJSON();
+            let data = helpers.buildJSON(this);
             requests.addOpportunity(data, this);
         },
         updateOpportunity: function () {
-            let data = this.buildJSON();
+            let data = helpers.buildJSON(this);
             alert(this.opportunityName + ' updated!');
             this.clearForm();
             requests.editOpportunity(data, this);
         },
-        /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */
-        buildJSON: function () {
-            let data = {};
-            data.id = this.opportunityId;
-            data.opportunityName = this.opportunityName;
-            data.opportunityNotes = this.opportunityNotes;
-            data.clientContact = this.clientContact;
-            data.clientId = this.clientId;
-            data.accountExecutiveUserId = this.accountExecutiveUserId;
-            data.unitId = this.unitId;
-            data.regionId = this.regionId;
-            data.soldStatusId = this.soldStatusId;
-            data.opportunityOwnerUserId = this.opportunityOwnerUserId;
-            data.active = this.active;
-            return data;
-        },
+        /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */   
         cancel: function () {
             this.errors = {};
             this.addState = false;
         },
         getClientName: function (clientId) { // pass id and get name back
             for (client in this.clients) {
-                if (this.clients[client].ClientId == clientId) {
+                if (this.clients[client].ClientId === clientId) {
                     return(this.clients[clientId].ClientName);
                 }
             }

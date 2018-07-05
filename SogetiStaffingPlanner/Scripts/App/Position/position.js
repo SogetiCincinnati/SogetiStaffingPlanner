@@ -47,6 +47,12 @@ let position = new Vue({
         },
         unitPracticeId: function (val) {
             validate.checkUnitPracticeId(val, this);
+        },
+        duration: function (val) {
+            validate.checkDuration(val, this);
+        },
+        rate: function (val) {
+            validate.checkRate(val, this);
         }
     },
     methods: {

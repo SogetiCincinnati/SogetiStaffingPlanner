@@ -66,7 +66,6 @@
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
                     alert('Client Name: "' + this.formData.clientName + '" and Client Subbusiness: "' + this.formData.clientSubbusiness + '" successfully edited.');
-                    this.formData = [];
                     this.states.addState = false;
                     this.states.updateState = false;
                     $.ajax({
@@ -97,7 +96,7 @@
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
                     alert('Client Name: "' + this.formData.clientName + '" and Client Subbusiness: "' + this.formData.clientSubbusiness + '" successfully added.');
-                    this.formData = [];
+                    this.formData = {};
                     this.states.addState = false;
                     $.ajax({
                         async: false,
@@ -123,7 +122,8 @@
             this.formData.clientId = client.ClientId;
             this.formData.clientName = client.ClientName;
             this.formData.clientSubbusiness = client.ClientSubbusiness;
-            this.formData.active = 1;
+            this.formData.active = true;
+            console.log(this.formData);
             window.scrollTo(0, 100);
         },
         cancel: function () {

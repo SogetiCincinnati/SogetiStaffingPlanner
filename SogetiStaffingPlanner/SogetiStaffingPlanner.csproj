@@ -199,28 +199,37 @@
     <Compile Include="Models\DefaultViewRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetACTLeadList_Result.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetAEList_Result.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetPracticeManagerReportData_Result.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Grade.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PositionData.cs" />
-    <Compile Include="Models\PracticeManagerData.cs" />
-    <Compile Include="Models\DropdownListData.cs" />
     <Compile Include="Models\Opportunity.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OpportunityData.cs" />
     <Compile Include="Models\PermissionRole.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Position.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PositionData.cs" />
     <Compile Include="Models\PositionStatus.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Practice.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PracticeManagerData.cs" />
+    <Compile Include="Models\DropdownListData.cs" />
+    <Compile Include="Models\OpportunityData.cs" />
     <Compile Include="Models\Region.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
@@ -228,6 +237,12 @@
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\spGetClients_Result.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spOpportunity_Result.cs">
+      <DependentUpon>ClientOpportunities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spPosition_Result.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Unit.cs">
@@ -268,6 +283,8 @@
       <LastGenOutput>ClientOpportunities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\App\Client\client.js" />
+    <Content Include="Scripts\App\Opportunity\helpers.js" />
+    <Content Include="Scripts\App\Opportunity\names.js" />
     <Content Include="Scripts\App\Position\requests.js" />
     <Content Include="Scripts\App\Opportunity\Opportunity.js" />
     <Content Include="Scripts\App\Opportunity\requests.js" />
@@ -282,6 +299,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <EntityDeploy Include="Models\ClientOpportunities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ClientOpportunities.Designer.cs</LastGenOutput>
@@ -289,11 +311,6 @@
     <Content Include="Models\ClientOpportunities.edmx.diagram">
       <DependentUpon>ClientOpportunities.edmx</DependentUpon>
     </Content>
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="fonts\fontawesome-webfont.woff2" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

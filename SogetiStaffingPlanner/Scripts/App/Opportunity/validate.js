@@ -15,18 +15,18 @@
             }
         } catch (e) { }
     },
-    checkClientContact: function (val, that) {
+    /*checkClientContact: function (val, that) {
         try {
             if (val.length || val) { that.errors.clientContact = ''; }
             else { that.errors.clientContact = 'Client Contact required'; }
         } catch (e) { }
-    },
-    checkOpportunityNotes: function (val, that) {
+    },*/
+    /*checkOpportunityNotes: function (val, that) {
         try {
             if (val.length) { that.errors.opportunityNotes = ''; }
             else { that.errors.opportunityNotes = 'Opportunity Notes required'; }
         } catch (e) { }
-    },
+    },*/
     checkClientId: function (val, that) {
         try {
             if (val || val.length) {
@@ -52,18 +52,6 @@
             else { that.errors.regionId = 'Region required'; }
         } catch (e) { }
     },
-    checkSoldStatusId: function (val, that) {
-        try {
-            if (val || val.length) { that.errors.soldStatusId = ''; }
-            else { that.errors.soldStatusId = 'Sold status required'; }
-        } catch (e) { }
-    },
-    checkOpportunityOwnerUserId: function (val, that) {
-        try {
-            if (val || val.length) { that.errors.opportunityOwnerUserId = ''; }
-            else { that.errors.opportunityOwnerUserId = 'Opportunity Owner required'; }
-        } catch (e) { }
-    },
     checkForm: function (that) {
         that.errors = {};
 
@@ -73,7 +61,7 @@
         } if (!that.clientId) {
             that.errors.clientId = 'Client required.';
         } if (!that.clientContact) {
-            that.errors.clientContact = 'Client Contact required.';
+            //that.errors.clientContact = 'Client Contact required.';
         } if (!that.accountExecutiveUserId) {
             that.errors.accountExecutiveUserId = 'Account Executive required.';
         } if (!that.clientId) {
@@ -81,11 +69,11 @@
         } if (!that.regionId) {
             that.errors.regionId = 'Region required.';
         } if (!that.soldStatusId) {
-            that.errors.soldStatusId = 'Sold Status required.';
+            //that.errors.soldStatusId = 'Sold Status required.';
         } if (!that.opportunityOwnerUserId) {
-            that.errors.opportunityOwnerUserId = 'Opportunity Owner required.';
+            //that.errors.opportunityOwnerUserId = 'Opportunity Owner required.';
         } if (!that.opportunityNotes) {
-            that.errors.opportunityNotes = 'Opportunity Note required.';
+            //that.errors.opportunityNotes = 'Opportunity Note required.';
         } if (!that.unitId) {
             that.errors.unitId = 'Unit Id required.';
         }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClientOpportunitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Dev_ClientOpportunitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BusinessRoles">
           <Key>
             <PropertyRef Name="BusinessRoleId" />
@@ -19,7 +19,7 @@
           </Key>
           <Property Name="ClientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ClientName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="ClientSubbusiness" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ClientSubbusiness" Type="varchar" MaxLength="200" />
           <Property Name="LastModifiedUserId" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="date" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -49,11 +49,11 @@
           <Property Name="AccountExecutiveUserId" Type="int" Nullable="false" />
           <Property Name="UnitId" Type="int" Nullable="false" />
           <Property Name="RegionId" Type="int" Nullable="false" />
-          <Property Name="SoldStatusId" Type="int" Nullable="false" />
+          <Property Name="SoldStatusId" Type="int" />
           <Property Name="OpportunityName" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="OpportunityOwnerUserId" Type="int" Nullable="false" />
-          <Property Name="OpportunityNotes" Type="varchar(max)" Nullable="false" />
-          <Property Name="ClientContact" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="OpportunityOwnerUserId" Type="int" />
+          <Property Name="OpportunityNotes" Type="varchar(max)" />
+          <Property Name="ClientContact" Type="varchar" MaxLength="200" />
           <Property Name="LastModifiedUserId" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="date" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -73,20 +73,20 @@
           <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OpportunityId" Type="int" Nullable="false" />
           <Property Name="UnitPracticeId" Type="int" Nullable="false" />
-          <Property Name="MaxConsultantGradeId" Type="int" Nullable="false" />
-          <Property Name="MinConsultantGradeId" Type="int" Nullable="false" />
+          <Property Name="MaxConsultantGradeId" Type="int" />
+          <Property Name="MinConsultantGradeId" Type="int" />
           <Property Name="PositionName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NumberOfPositions" Type="int" Nullable="false" />
-          <Property Name="Skillset" Type="varchar(max)" Nullable="false" />
-          <Property Name="Rate" Type="int" Nullable="false" />
-          <Property Name="ExpectedStartDate" Type="date" Nullable="false" />
-          <Property Name="Duration" Type="int" Nullable="false" />
-          <Property Name="HireCandidate" Type="varchar(max)" Nullable="false" />
-          <Property Name="ProposedCandidate" Type="varchar(max)" Nullable="false" />
-          <Property Name="AcceptedCandidate" Type="varchar(max)" Nullable="false" />
-          <Property Name="RejectedCandidate" Type="varchar(max)" Nullable="false" />
-          <Property Name="PositionNote" Type="varchar(max)" Nullable="false" />
-          <Property Name="LastModifiedUserId" Type="int" Nullable="false" />
+          <Property Name="Skillset" Type="varchar(max)" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="ExpectedStartDate" Type="date" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="HireCandidate" Type="varchar(max)" />
+          <Property Name="ProposedCandidate" Type="varchar(max)" />
+          <Property Name="AcceptedCandidate" Type="varchar(max)" />
+          <Property Name="RejectedCandidate" Type="varchar(max)" />
+          <Property Name="PositionNote" Type="varchar(max)" />
+          <Property Name="LastModifiedUserId" Type="int" />
           <Property Name="LastModified" Type="date" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="PositionStatusId" Type="int" Nullable="false" />
@@ -145,10 +145,10 @@
 warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UserBusinessRoles">
           <Key>
-            
-            
-            
-            
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="BusinessRoleId" />
+            <PropertyRef Name="LastModifiedUserId" />
+            <PropertyRef Name="LastModified" />
             <PropertyRef Name="Active" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
@@ -206,7 +206,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Opportunities_SoldStatuses">
-          <End Role="SoldStatuses" Type="Self.SoldStatuses" Multiplicity="1" />
+          <End Role="SoldStatuses" Type="Self.SoldStatuses" Multiplicity="0..1" />
           <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SoldStatuses">
@@ -254,7 +254,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Opportunities_Users_OppOwner">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Opportunities" Type="Self.Opportunities" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -266,7 +266,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Grades_Max">
-          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -278,7 +278,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Grades_Min">
-          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -326,7 +326,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Positions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -445,11 +445,14 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetACTLeadList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAEList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPracticeManagerReportData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="MainView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="MainView2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetClients" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spOpportunity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="ClientOpportunitiesModelStoreContainer">
+        <Function Name="spPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Dev_ClientOpportunitiesModelStoreContainer">
           <EntitySet Name="BusinessRoles" EntityType="Self.BusinessRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DefaultViewRoles" EntityType="Self.DefaultViewRoles" Schema="dbo" store:Type="Tables" />
@@ -566,10 +569,11 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ClientOpportunitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Dev_ClientOpportunitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="BusinessRole">
           <Key>
             <PropertyRef Name="BusinessRoleId" />
@@ -577,7 +581,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="BusinessRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BusinessRoleName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="UserBusinessRoles" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles_BusinessRoles" FromRole="BusinessRoles" ToRole="UserBusinessRoles" />
+          <NavigationProperty Name="UserBusinessRoles" Relationship="Self.fk_UserBusinessRoles_BusinessRoles" FromRole="BusinessRoles" ToRole="UserBusinessRoles" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -585,12 +589,12 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </Key>
           <Property Name="ClientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClientSubbusiness" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientSubbusiness" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedUserId" Type="Int32" Nullable="false" />
-          <Property Name="LastModified" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="ClientOpportunitiesModel.fk_Clients_Users" FromRole="Clients" ToRole="Users" />
-          <NavigationProperty Name="Opportunities" Relationship="ClientOpportunitiesModel.fk_Opportunities_Clients" FromRole="Clients" ToRole="Opportunities" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Clients_Users" FromRole="Clients" ToRole="Users" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Clients" FromRole="Clients" ToRole="Opportunities" />
         </EntityType>
         <EntityType Name="DefaultViewRole">
           <Key>
@@ -599,7 +603,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="ViewRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ViewName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="ClientOpportunitiesModel.fk_Users_DefaultViewRoles" FromRole="DefaultViewRoles" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.fk_Users_DefaultViewRoles" FromRole="DefaultViewRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -608,8 +612,8 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="ConsultantGradeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ConsultantGradeName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Positions" Relationship="ClientOpportunitiesModel.fk_Positions_Grades_Max" FromRole="Grades" ToRole="Positions" />
-          <NavigationProperty Name="Positions1" Relationship="ClientOpportunitiesModel.fk_Positions_Grades_Min" FromRole="Grades" ToRole="Positions" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Grades_Max" FromRole="Grades" ToRole="Positions" />
+          <NavigationProperty Name="Positions1" Relationship="Self.fk_Positions_Grades_Min" FromRole="Grades" ToRole="Positions" />
         </EntityType>
         <EntityType Name="Opportunity">
           <Key>
@@ -620,21 +624,21 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="AccountExecutiveUserId" Type="Int32" Nullable="false" />
           <Property Name="UnitId" Type="Int32" Nullable="false" />
           <Property Name="RegionId" Type="Int32" Nullable="false" />
-          <Property Name="SoldStatusId" Type="Int32" Nullable="false" />
+          <Property Name="SoldStatusId" Type="Int32" />
           <Property Name="OpportunityName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OpportunityOwnerUserId" Type="Int32" Nullable="false" />
-          <Property Name="OpportunityNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClientContact" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OpportunityOwnerUserId" Type="Int32" />
+          <Property Name="OpportunityNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ClientContact" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LastModifiedUserId" Type="Int32" Nullable="false" />
-          <Property Name="LastModified" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="ClientOpportunitiesModel.fk_Opportunities_Clients" FromRole="Opportunities" ToRole="Clients" />
-          <NavigationProperty Name="Region" Relationship="ClientOpportunitiesModel.fk_Opportunities_Regions" FromRole="Opportunities" ToRole="Regions" />
-          <NavigationProperty Name="SoldStatus" Relationship="ClientOpportunitiesModel.fk_Opportunities_SoldStatuses" FromRole="Opportunities" ToRole="SoldStatuses" />
-          <NavigationProperty Name="Unit" Relationship="ClientOpportunitiesModel.fk_Opportunities_UnitId" FromRole="Opportunities" ToRole="Units" />
-          <NavigationProperty Name="User" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_AE" FromRole="Opportunities" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_LastModifiedBy" FromRole="Opportunities" ToRole="Users" />
-          <NavigationProperty Name="User2" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_OppOwner" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="Client" Relationship="Self.fk_Opportunities_Clients" FromRole="Opportunities" ToRole="Clients" />
+          <NavigationProperty Name="Region" Relationship="Self.fk_Opportunities_Regions" FromRole="Opportunities" ToRole="Regions" />
+          <NavigationProperty Name="SoldStatus" Relationship="Self.fk_Opportunities_SoldStatuses" FromRole="Opportunities" ToRole="SoldStatuses" />
+          <NavigationProperty Name="Unit" Relationship="Self.fk_Opportunities_UnitId" FromRole="Opportunities" ToRole="Units" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Opportunities_Users_AE" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_Opportunities_Users_LastModifiedBy" FromRole="Opportunities" ToRole="Users" />
+          <NavigationProperty Name="User2" Relationship="Self.fk_Opportunities_Users_OppOwner" FromRole="Opportunities" ToRole="Users" />
           <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Opportunities" FromRole="Opportunities" ToRole="Positions" />
         </EntityType>
         <EntityType Name="PermissionRole">
@@ -653,29 +657,38 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="PositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OpportunityId" Type="Int32" Nullable="false" />
           <Property Name="UnitPracticeId" Type="Int32" Nullable="false" />
-          <Property Name="MaxConsultantGradeId" Type="Int32" Nullable="false" />
-          <Property Name="MinConsultantGradeId" Type="Int32" Nullable="false" />
+          <Property Name="MaxConsultantGradeId" Type="Int32" />
+          <Property Name="MinConsultantGradeId" Type="Int32" />
           <Property Name="PositionName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NumberOfPositions" Type="Int32" Nullable="false" />
-          <Property Name="Skillset" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Rate" Type="Int32" Nullable="false" />
-          <Property Name="ExpectedStartDate" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="Duration" Type="Int32" Nullable="false" />
-          <Property Name="HireCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ProposedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AcceptedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RejectedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PositionNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastModifiedUserId" Type="Int32" Nullable="false" />
-          <Property Name="LastModified" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="Skillset" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="ExpectedStartDate" Type="DateTime" Precision="0" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="HireCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProposedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AcceptedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RejectedCandidate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PositionNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedUserId" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Grade" Relationship="ClientOpportunitiesModel.fk_Positions_Grades_Max" FromRole="Positions" ToRole="Grades" />
-          <NavigationProperty Name="Grade1" Relationship="ClientOpportunitiesModel.fk_Positions_Grades_Min" FromRole="Positions" ToRole="Grades" />
-          <NavigationProperty Name="Opportunity" Relationship="ClientOpportunitiesModel.fk_Positions_Opportunities" FromRole="Positions" ToRole="Opportunities" />
-          <NavigationProperty Name="UnitPractice" Relationship="ClientOpportunitiesModel.fk_Positions_UnitPractices" FromRole="Positions" ToRole="UnitPractices" />
-          <NavigationProperty Name="User" Relationship="ClientOpportunitiesModel.fk_Positions_Users" FromRole="Positions" ToRole="Users" />
           <Property Name="PositionStatusId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PositionStatus" Relationship="ClientOpportunitiesModel.fk_Positions_PositionStatus" FromRole="Position" ToRole="PositionStatus" />
+          <NavigationProperty Name="Grade" Relationship="Self.fk_Positions_Grades_Max" FromRole="Positions" ToRole="Grades" />
+          <NavigationProperty Name="Grade1" Relationship="Self.fk_Positions_Grades_Min" FromRole="Positions" ToRole="Grades" />
+          <NavigationProperty Name="Opportunity" Relationship="Self.fk_Positions_Opportunities" FromRole="Positions" ToRole="Opportunities" />
+          <NavigationProperty Name="PositionStatus" Relationship="Self.fk_Positions_PositionStatus" FromRole="Positions" ToRole="PositionStatuses" />
+          <NavigationProperty Name="UnitPractice" Relationship="Self.fk_Positions_UnitPractices" FromRole="Positions" ToRole="UnitPractices" />
+          <NavigationProperty Name="User" Relationship="Self.fk_Positions_Users" FromRole="Positions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="PositionStatus">
+          <Key>
+            <PropertyRef Name="PositionStatusId" />
+          </Key>
+          <Property Name="PositionStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionStatusName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_PositionStatus" FromRole="PositionStatuses" ToRole="Positions" />
         </EntityType>
         <EntityType Name="Practice">
           <Key>
@@ -693,7 +706,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RegionName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Opportunities" Relationship="ClientOpportunitiesModel.fk_Opportunities_Regions" FromRole="Regions" ToRole="Opportunities" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Regions" FromRole="Regions" ToRole="Opportunities" />
           <NavigationProperty Name="Units" Relationship="Self.fk_Units_Regions" FromRole="Regions" ToRole="Units" />
         </EntityType>
         <EntityType Name="SoldStatus">
@@ -714,8 +727,8 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="UnitId" Type="Int32" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_UnitPractices" FromRole="UnitPractices" ToRole="Positions" />
-          <NavigationProperty Name="Practice" Relationship="ClientOpportunitiesModel.fk_UnitsPractices_Practices" FromRole="UnitPractices" ToRole="Practices" />
-          <NavigationProperty Name="Unit" Relationship="ClientOpportunitiesModel.fk_UnitsPractices_Units" FromRole="UnitPractices" ToRole="Units" />
+          <NavigationProperty Name="Practice" Relationship="Self.fk_UnitsPractices_Practices" FromRole="UnitPractices" ToRole="Practices" />
+          <NavigationProperty Name="Unit" Relationship="Self.fk_UnitsPractices_Units" FromRole="UnitPractices" ToRole="Units" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -725,8 +738,8 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="RegionId" Type="Int32" Nullable="false" />
           <Property Name="UnitName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Opportunities" Relationship="ClientOpportunitiesModel.fk_Opportunities_UnitId" FromRole="Units" ToRole="Opportunities" />
-          <NavigationProperty Name="Region" Relationship="ClientOpportunitiesModel.fk_Units_Regions" FromRole="Units" ToRole="Regions" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_UnitId" FromRole="Units" ToRole="Opportunities" />
+          <NavigationProperty Name="Region" Relationship="Self.fk_Units_Regions" FromRole="Units" ToRole="Regions" />
           <NavigationProperty Name="UnitPractices" Relationship="Self.fk_UnitsPractices_Units" FromRole="Units" ToRole="UnitPractices" />
         </EntityType>
         <EntityType Name="User">
@@ -738,34 +751,36 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <Property Name="PermissionRoleId" Type="Int32" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastModifiedUserId" Type="Int32" Nullable="false" />
-          <Property Name="LastModified" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="ClientOpportunitiesModel.fk_Clients_Users" FromRole="Users" ToRole="Clients" />
-          <NavigationProperty Name="DefaultViewRole" Relationship="ClientOpportunitiesModel.fk_Users_DefaultViewRoles" FromRole="Users" ToRole="DefaultViewRoles" />
-          <NavigationProperty Name="Opportunities" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_AE" FromRole="Users" ToRole="Opportunities" />
-          <NavigationProperty Name="Opportunities1" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_LastModifiedBy" FromRole="Users" ToRole="Opportunities" />
-          <NavigationProperty Name="Opportunities2" Relationship="ClientOpportunitiesModel.fk_Opportunities_Users_OppOwner" FromRole="Users" ToRole="Opportunities" />
-          <NavigationProperty Name="PermissionRole" Relationship="ClientOpportunitiesModel.fk_Users_PermissionRoles" FromRole="Users" ToRole="PermissionRoles" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_Clients_Users" FromRole="Users" ToRole="Clients" />
+          <NavigationProperty Name="DefaultViewRole" Relationship="Self.fk_Users_DefaultViewRoles" FromRole="Users" ToRole="DefaultViewRoles" />
+          <NavigationProperty Name="Opportunities" Relationship="Self.fk_Opportunities_Users_AE" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="Opportunities1" Relationship="Self.fk_Opportunities_Users_LastModifiedBy" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="Opportunities2" Relationship="Self.fk_Opportunities_Users_OppOwner" FromRole="Users" ToRole="Opportunities" />
+          <NavigationProperty Name="PermissionRole" Relationship="Self.fk_Users_PermissionRoles" FromRole="Users" ToRole="PermissionRoles" />
           <NavigationProperty Name="Positions" Relationship="Self.fk_Positions_Users" FromRole="Users" ToRole="Positions" />
           <NavigationProperty Name="UserBusinessRoles" Relationship="Self.fk_UserBusinessRoles__Users_UserLastModified" FromRole="Users" ToRole="UserBusinessRoles" />
           <NavigationProperty Name="UserBusinessRoles1" Relationship="Self.fk_UserBusinessRoles_Users_User" FromRole="Users" ToRole="UserBusinessRoles" />
-          <NavigationProperty Name="Users1" Relationship="ClientOpportunitiesModel.fk_Users_Users" FromRole="Users" ToRole="Users1" />
-          <NavigationProperty Name="User1" Relationship="ClientOpportunitiesModel.fk_Users_Users" FromRole="Users" ToRole="Users1" />
-          <NavigationProperty Name="UserBusinessRoles11" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles_Users_User1" FromRole="User" ToRole="UserBusinessRole" />
+          <NavigationProperty Name="Users1" Relationship="Self.fk_Users_Users" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_Users_Users" FromRole="Users1" ToRole="Users" />
         </EntityType>
         <EntityType Name="UserBusinessRole">
           <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="BusinessRoleId" />
+            <PropertyRef Name="LastModifiedUserId" />
+            <PropertyRef Name="LastModified" />
             <PropertyRef Name="Active" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="BusinessRoleId" Type="Int32" Nullable="false" />
           <Property Name="LastModifiedUserId" Type="Int32" Nullable="false" />
-          <Property Name="LastModified" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="BusinessRole" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles_BusinessRoles" FromRole="UserBusinessRoles" ToRole="BusinessRoles" />
-          <NavigationProperty Name="User" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles__Users_UserLastModified" FromRole="UserBusinessRoles" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles_Users_User" FromRole="UserBusinessRoles" ToRole="Users" />
-          <NavigationProperty Name="User11" Relationship="ClientOpportunitiesModel.fk_UserBusinessRoles_Users_User1" FromRole="UserBusinessRole" ToRole="User" />
+          <NavigationProperty Name="BusinessRole" Relationship="Self.fk_UserBusinessRoles_BusinessRoles" FromRole="UserBusinessRoles" ToRole="BusinessRoles" />
+          <NavigationProperty Name="User" Relationship="Self.fk_UserBusinessRoles__Users_UserLastModified" FromRole="UserBusinessRoles" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.fk_UserBusinessRoles_Users_User" FromRole="UserBusinessRoles" ToRole="Users" />
         </EntityType>
         <Association Name="fk_UserBusinessRoles_BusinessRoles">
           <End Role="BusinessRoles" Type="Self.BusinessRole" Multiplicity="1" />
@@ -816,7 +831,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Grades_Max">
-          <End Role="Grades" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -828,7 +843,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Grades_Min">
-          <End Role="Grades" Type="Self.Grade" Multiplicity="1" />
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Grades">
@@ -852,7 +867,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Opportunities_SoldStatuses">
-          <End Role="SoldStatuses" Type="Self.SoldStatus" Multiplicity="1" />
+          <End Role="SoldStatuses" Type="Self.SoldStatus" Multiplicity="0..1" />
           <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SoldStatuses">
@@ -900,7 +915,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Opportunities_Users_OppOwner">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Opportunities" Type="Self.Opportunity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -935,6 +950,18 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Positions_PositionStatus">
+          <End Role="PositionStatuses" Type="Self.PositionStatus" Multiplicity="1" />
+          <End Role="Positions" Type="Self.Position" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionStatuses">
+              <PropertyRef Name="PositionStatusId" />
+            </Principal>
+            <Dependent Role="Positions">
+              <PropertyRef Name="PositionStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Positions_UnitPractices">
           <End Role="UnitPractices" Type="Self.UnitPractice" Multiplicity="1" />
           <End Role="Positions" Type="Self.Position" Multiplicity="*" />
@@ -948,7 +975,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Positions_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
           <End Role="Positions" Type="Self.Position" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -1031,7 +1058,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ClientOpportunitiesEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Dev_ClientOpportunitiesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BusinessRoles" EntityType="Self.BusinessRole" />
           <EntitySet Name="Clients" EntityType="Self.Client" />
           <EntitySet Name="DefaultViewRoles" EntityType="Self.DefaultViewRole" />
@@ -1039,6 +1066,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
           <EntitySet Name="Opportunities" EntityType="Self.Opportunity" />
           <EntitySet Name="PermissionRoles" EntityType="Self.PermissionRole" />
           <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="PositionStatuses" EntityType="Self.PositionStatus" />
           <EntitySet Name="Practices" EntityType="Self.Practice" />
           <EntitySet Name="Regions" EntityType="Self.Region" />
           <EntitySet Name="SoldStatuses" EntityType="Self.SoldStatus" />
@@ -1102,6 +1130,10 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             <End Role="PermissionRoles" EntitySet="PermissionRoles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="fk_Positions_PositionStatus" Association="Self.fk_Positions_PositionStatus">
+            <End Role="PositionStatuses" EntitySet="PositionStatuses" />
+            <End Role="Positions" EntitySet="Positions" />
+          </AssociationSet>
           <AssociationSet Name="fk_Positions_UnitPractices" Association="Self.fk_Positions_UnitPractices">
             <End Role="UnitPractices" EntitySet="UnitPractices" />
             <End Role="Positions" EntitySet="Positions" />
@@ -1134,68 +1166,101 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             <End Role="Users" EntitySet="Users" />
             <End Role="Users1" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="PositionStatuses" EntityType="ClientOpportunitiesModel.PositionStatus" />
-          <AssociationSet Name="fk_Positions_PositionStatus" Association="ClientOpportunitiesModel.fk_Positions_PositionStatus">
-            <End Role="PositionStatus" EntitySet="PositionStatuses" />
-            <End Role="Position" EntitySet="Positions" />
-          </AssociationSet>
+          <FunctionImport Name="GetACTLeadList" ReturnType="Collection(Dev_ClientOpportunitiesModel.GetACTLeadList_Result)" />
+          <FunctionImport Name="GetAEList" ReturnType="Collection(Dev_ClientOpportunitiesModel.GetAEList_Result)" />
+          <FunctionImport Name="GetPracticeManagerReportData" ReturnType="Collection(Dev_ClientOpportunitiesModel.GetPracticeManagerReportData_Result)" />
           <FunctionImport Name="MainView" />
-          <FunctionImport Name="MainView2" />
-          <FunctionImport Name="spGetClients" ReturnType="Collection(ClientOpportunitiesModel.spGetClients_Result)" />
-          <FunctionImport Name="spOpportunity" />
-          <AssociationSet Name="fk_UserBusinessRoles_Users_User1" Association="ClientOpportunitiesModel.fk_UserBusinessRoles_Users_User1">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserBusinessRole" EntitySet="UserBusinessRoles" />
-          </AssociationSet>
+          <FunctionImport Name="spGetClients" ReturnType="Collection(Dev_ClientOpportunitiesModel.spGetClients_Result)" />
+          <FunctionImport Name="spOpportunity" ReturnType="Collection(Dev_ClientOpportunitiesModel.spOpportunity_Result)" />
+          <FunctionImport Name="spPosition" ReturnType="Collection(Dev_ClientOpportunitiesModel.spPosition_Result)" />
         </EntityContainer>
-        <EntityType Name="PositionStatus">
-          <Key>
-            <PropertyRef Name="PositionStatusId" />
-          </Key>
-          <Property Name="PositionStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PositionStatusName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Positions" Relationship="ClientOpportunitiesModel.fk_Positions_PositionStatus" FromRole="PositionStatus" ToRole="Position" />
-        </EntityType>
-        <Association Name="fk_Positions_PositionStatus">
-          <End Type="ClientOpportunitiesModel.PositionStatus" Role="PositionStatus" Multiplicity="1" />
-          <End Type="ClientOpportunitiesModel.Position" Role="Position" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PositionStatus">
-              <PropertyRef Name="PositionStatusId" />
-            </Principal>
-            <Dependent Role="Position">
-              <PropertyRef Name="PositionStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="GetACTLeadList_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetAEList_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetPracticeManagerReportData_Result">
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="OpportunityName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ClientContact" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PositionStatusName" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="OpActive" Nullable="false" />
+          <Property Type="String" Name="Skillset" Nullable="true" />
+          <Property Type="Int32" Name="AE" Nullable="true" />
+          <Property Type="Int32" Name="ACT" Nullable="true" />
+          <Property Type="String" Name="UnitName" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="Rate" Nullable="true" />
+          <Property Type="DateTime" Name="LastModified" Nullable="true" />
+          <Property Type="String" Name="ProposedCandidate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpectedStartDate" Nullable="true" />
+          <Property Type="Int32" Name="NumberOfPositions" Nullable="true" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="HireCandidate" Nullable="true" />
+          <Property Type="String" Name="AcceptedCandidate" Nullable="true" />
+          <Property Type="String" Name="RejectedCandidate" Nullable="true" />
+          <Property Type="String" Name="PositionNote" Nullable="true" />
+          <Property Type="Int32" Name="MaxConsultantGradeId" Nullable="true" />
+          <Property Type="Int32" Name="MinConsultantGradeId" Nullable="true" />
+          <Property Type="String" Name="ClientName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ClientSubbusiness" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="SActive" Nullable="true" />
+          <Property Type="String" Name="SoldStatusName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PracticeName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="AEName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ACTName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="MinConsultantGrade" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="MaxConsultantGrade" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="PositionStatusId" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="spGetClients_Result">
           <Property Type="Int32" Name="ClientId" Nullable="false" />
           <Property Type="String" Name="ClientName" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="ClientSubbusiness" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ClientSubbusiness" Nullable="true" MaxLength="200" />
           <Property Type="DateTime" Name="LastModified" Nullable="false" />
           <Property Type="Int32" Name="LastModifiedUserId" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
         </ComplexType>
-        <Association Name="fk_UserBusinessRoles_Users_User1">
-          <End Type="ClientOpportunitiesModel.User" Role="User" Multiplicity="1" />
-          <End Type="ClientOpportunitiesModel.UserBusinessRole" Role="UserBusinessRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="UserBusinessRole">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="spOpportunity_Result">
+          <Property Type="Int32" Name="OpportunityId" Nullable="false" />
+          <Property Type="Int32" Name="ClientId" Nullable="false" />
+          <Property Type="Int32" Name="AccountExecutiveUserId" Nullable="false" />
+          <Property Type="Int32" Name="UnitId" Nullable="false" />
+          <Property Type="Int32" Name="OpportunityOwnerUserId" Nullable="true" />
+          <Property Type="String" Name="OpportunityNotes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spPosition_Result">
+          <Property Type="Int32" Name="PositionId" Nullable="false" />
+          <Property Type="Int32" Name="OpportunityId" Nullable="false" />
+          <Property Type="Int32" Name="UnitPracticeId" Nullable="false" />
+          <Property Type="Int32" Name="MaxConsultantGradeId" Nullable="true" />
+          <Property Type="Int32" Name="MinConsultantGradeId" Nullable="true" />
+          <Property Type="String" Name="PositionName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="NumberOfPositions" Nullable="false" />
+          <Property Type="String" Name="Skillset" Nullable="true" />
+          <Property Type="Int32" Name="Rate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpectedStartDate" Nullable="true" />
+          <Property Type="Int32" Name="Duration" Nullable="true" />
+          <Property Type="String" Name="HireCandidate" Nullable="true" />
+          <Property Type="String" Name="ProposedCandidate" Nullable="true" />
+          <Property Type="String" Name="AcceptedCandidate" Nullable="true" />
+          <Property Type="String" Name="RejectedCandidate" Nullable="true" />
+          <Property Type="String" Name="PositionNote" Nullable="true" />
+          <Property Type="Int32" Name="LastModifiedUserId" Nullable="true" />
+          <Property Type="DateTime" Name="LastModified" Nullable="false" />
+          <Property Type="Boolean" Name="Active" Nullable="false" />
+          <Property Type="Int32" Name="PositionStatusId" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ClientOpportunitiesModelStoreContainer" CdmEntityContainer="ClientOpportunitiesEntities">
+        <EntityContainerMapping StorageEntityContainer="Dev_ClientOpportunitiesModelStoreContainer" CdmEntityContainer="Dev_ClientOpportunitiesEntities">
           <EntitySetMapping Name="BusinessRoles">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.BusinessRole">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.BusinessRole">
               <MappingFragment StoreEntitySet="BusinessRoles">
                 <ScalarProperty Name="BusinessRoleId" ColumnName="BusinessRoleId" />
                 <ScalarProperty Name="BusinessRoleName" ColumnName="BusinessRoleName" />
@@ -1204,7 +1269,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Client">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Client">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
@@ -1216,7 +1281,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DefaultViewRoles">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.DefaultViewRole">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.DefaultViewRole">
               <MappingFragment StoreEntitySet="DefaultViewRoles">
                 <ScalarProperty Name="ViewRoleId" ColumnName="ViewRoleId" />
                 <ScalarProperty Name="ViewName" ColumnName="ViewName" />
@@ -1225,7 +1290,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Grades">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Grade">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Grade">
               <MappingFragment StoreEntitySet="Grades">
                 <ScalarProperty Name="ConsultantGradeId" ColumnName="ConsultantGradeId" />
                 <ScalarProperty Name="ConsultantGradeName" ColumnName="ConsultantGradeName" />
@@ -1234,7 +1299,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Opportunities">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Opportunity">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Opportunity">
               <MappingFragment StoreEntitySet="Opportunities">
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
@@ -1253,7 +1318,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PermissionRoles">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.PermissionRole">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.PermissionRole">
               <MappingFragment StoreEntitySet="PermissionRoles">
                 <ScalarProperty Name="PermissionRoleId" ColumnName="PermissionRoleId" />
                 <ScalarProperty Name="PermissionRoleName" ColumnName="PermissionRoleName" />
@@ -1262,9 +1327,8 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Position">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Position">
               <MappingFragment StoreEntitySet="Positions">
-                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
                 <ScalarProperty Name="PositionId" ColumnName="PositionId" />
                 <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
                 <ScalarProperty Name="UnitPracticeId" ColumnName="UnitPracticeId" />
@@ -1284,11 +1348,21 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
                 <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PositionStatuses">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.PositionStatus">
+              <MappingFragment StoreEntitySet="PositionStatuses">
+                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
+                <ScalarProperty Name="PositionStatusName" ColumnName="PositionStatusName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Practices">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Practice">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Practice">
               <MappingFragment StoreEntitySet="Practices">
                 <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
                 <ScalarProperty Name="PracticeName" ColumnName="PracticeName" />
@@ -1297,7 +1371,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Regions">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Region">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Region">
               <MappingFragment StoreEntitySet="Regions">
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="RegionName" ColumnName="RegionName" />
@@ -1306,7 +1380,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SoldStatuses">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.SoldStatus">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.SoldStatus">
               <MappingFragment StoreEntitySet="SoldStatuses">
                 <ScalarProperty Name="SoldStatusId" ColumnName="SoldStatusId" />
                 <ScalarProperty Name="SoldStatusName" ColumnName="SoldStatusName" />
@@ -1315,7 +1389,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UnitPractices">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.UnitPractice">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.UnitPractice">
               <MappingFragment StoreEntitySet="UnitPractices">
                 <ScalarProperty Name="UnitPracticeId" ColumnName="UnitPracticeId" />
                 <ScalarProperty Name="PracticeId" ColumnName="PracticeId" />
@@ -1325,7 +1399,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Units">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.Unit">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.Unit">
               <MappingFragment StoreEntitySet="Units">
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
@@ -1335,7 +1409,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.User">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ViewRoleId" ColumnName="ViewRoleId" />
@@ -1348,7 +1422,7 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserBusinessRoles">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.UserBusinessRole">
+            <EntityTypeMapping TypeName="Dev_ClientOpportunitiesModel.UserBusinessRole">
               <MappingFragment StoreEntitySet="UserBusinessRoles">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="BusinessRoleId" ColumnName="BusinessRoleId" />
@@ -1358,29 +1432,110 @@ warning 6002: The table/view 'Dev_ClientOpportunities.dbo.UserBusinessRoles' doe
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PositionStatuses">
-            <EntityTypeMapping TypeName="ClientOpportunitiesModel.PositionStatus">
-              <MappingFragment StoreEntitySet="PositionStatuses">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="PositionStatusName" ColumnName="PositionStatusName" />
-                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="MainView" FunctionName="ClientOpportunitiesModel.Store.MainView" />
-          <FunctionImportMapping FunctionImportName="MainView2" FunctionName="ClientOpportunitiesModel.Store.MainView2" />
-          <FunctionImportMapping FunctionImportName="spGetClients" FunctionName="ClientOpportunitiesModel.Store.spGetClients">
+          <FunctionImportMapping FunctionImportName="GetACTLeadList" FunctionName="Dev_ClientOpportunitiesModel.Store.GetACTLeadList">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ClientOpportunitiesModel.spGetClients_Result">
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.GetACTLeadList_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAEList" FunctionName="Dev_ClientOpportunitiesModel.Store.GetAEList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.GetAEList_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPracticeManagerReportData" FunctionName="Dev_ClientOpportunitiesModel.Store.GetPracticeManagerReportData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.GetPracticeManagerReportData_Result">
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="OpportunityName" ColumnName="OpportunityName" />
+                <ScalarProperty Name="ClientContact" ColumnName="ClientContact" />
+                <ScalarProperty Name="PositionStatusName" ColumnName="PositionStatusName" />
+                <ScalarProperty Name="OpActive" ColumnName="OpActive" />
+                <ScalarProperty Name="Skillset" ColumnName="Skillset" />
+                <ScalarProperty Name="AE" ColumnName="AE" />
+                <ScalarProperty Name="ACT" ColumnName="ACT" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="ProposedCandidate" ColumnName="ProposedCandidate" />
+                <ScalarProperty Name="ExpectedStartDate" ColumnName="ExpectedStartDate" />
+                <ScalarProperty Name="NumberOfPositions" ColumnName="NumberOfPositions" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="HireCandidate" ColumnName="HireCandidate" />
+                <ScalarProperty Name="AcceptedCandidate" ColumnName="AcceptedCandidate" />
+                <ScalarProperty Name="RejectedCandidate" ColumnName="RejectedCandidate" />
+                <ScalarProperty Name="PositionNote" ColumnName="PositionNote" />
+                <ScalarProperty Name="MaxConsultantGradeId" ColumnName="MaxConsultantGradeId" />
+                <ScalarProperty Name="MinConsultantGradeId" ColumnName="MinConsultantGradeId" />
+                <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+                <ScalarProperty Name="ClientSubbusiness" ColumnName="ClientSubbusiness" />
+                <ScalarProperty Name="SActive" ColumnName="SActive" />
+                <ScalarProperty Name="SoldStatusName" ColumnName="SoldStatusName" />
+                <ScalarProperty Name="PracticeName" ColumnName="PracticeName" />
+                <ScalarProperty Name="AEName" ColumnName="AEName" />
+                <ScalarProperty Name="ACTName" ColumnName="ACTName" />
+                <ScalarProperty Name="MinConsultantGrade" ColumnName="MinConsultantGrade" />
+                <ScalarProperty Name="MaxConsultantGrade" ColumnName="MaxConsultantGrade" />
+                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MainView" FunctionName="Dev_ClientOpportunitiesModel.Store.MainView" />
+          <FunctionImportMapping FunctionImportName="spGetClients" FunctionName="Dev_ClientOpportunitiesModel.Store.spGetClients">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.spGetClients_Result">
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="ClientName" ColumnName="ClientName" />
                 <ScalarProperty Name="ClientSubbusiness" ColumnName="ClientSubbusiness" />
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spOpportunity" FunctionName="ClientOpportunitiesModel.Store.spOpportunity" />
+          <FunctionImportMapping FunctionImportName="spOpportunity" FunctionName="Dev_ClientOpportunitiesModel.Store.spOpportunity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.spOpportunity_Result">
+                <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AccountExecutiveUserId" ColumnName="AccountExecutiveUserId" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="OpportunityOwnerUserId" ColumnName="OpportunityOwnerUserId" />
+                <ScalarProperty Name="OpportunityNotes" ColumnName="OpportunityNotes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPosition" FunctionName="Dev_ClientOpportunitiesModel.Store.spPosition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Dev_ClientOpportunitiesModel.spPosition_Result">
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="OpportunityId" ColumnName="OpportunityId" />
+                <ScalarProperty Name="UnitPracticeId" ColumnName="UnitPracticeId" />
+                <ScalarProperty Name="MaxConsultantGradeId" ColumnName="MaxConsultantGradeId" />
+                <ScalarProperty Name="MinConsultantGradeId" ColumnName="MinConsultantGradeId" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="NumberOfPositions" ColumnName="NumberOfPositions" />
+                <ScalarProperty Name="Skillset" ColumnName="Skillset" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="ExpectedStartDate" ColumnName="ExpectedStartDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="HireCandidate" ColumnName="HireCandidate" />
+                <ScalarProperty Name="ProposedCandidate" ColumnName="ProposedCandidate" />
+                <ScalarProperty Name="AcceptedCandidate" ColumnName="AcceptedCandidate" />
+                <ScalarProperty Name="RejectedCandidate" ColumnName="RejectedCandidate" />
+                <ScalarProperty Name="PositionNote" ColumnName="PositionNote" />
+                <ScalarProperty Name="LastModifiedUserId" ColumnName="LastModifiedUserId" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PositionStatusId" ColumnName="PositionStatusId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

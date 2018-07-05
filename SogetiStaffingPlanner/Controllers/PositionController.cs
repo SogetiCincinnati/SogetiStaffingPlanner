@@ -12,7 +12,7 @@ namespace SogetiStaffingPlanner.Controllers
 	public class PositionController : Controller
 	{
 
-        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
+        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
 
         public ActionResult Index()
         {
@@ -36,21 +36,21 @@ namespace SogetiStaffingPlanner.Controllers
 				{
 					if (p.Active == true)
 					{
-						positionList.Add(new PositionData
-						{
-							PositionId = p.PositionId,
+                        positionList.Add(new PositionData
+                        {
+                            PositionId = p.PositionId,
 							OpportunityId = p.OpportunityId,
 							UnitPracticeId = p.UnitPracticeId,
-							MaxConsultantGradeId = p.MaxConsultantGradeId,
-							MinConsultantGradeId = p.MinConsultantGradeId,
-							LastModifiedUserId = p.LastModifiedUserId,
+							MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
+							MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int) p.MinConsultantGradeId,
+							LastModifiedUserId = (int)p.LastModifiedUserId,
 							PositionStatusId = p.PositionStatusId,
 							PositionName = p.PositionName,
 							NumberOfPositions = p.NumberOfPositions,
 							Skillset = p.Skillset,
-							Rate = p.Rate,
-							ExpectedStartDate = p.ExpectedStartDate,
-							Duration = p.Duration,
+							Rate = p.Rate == null ? 0 : (int)p.Rate,
+							ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
+							Duration = p.Duration == null ? 0 : (int)p.Duration,
 							HireCandidate = p.HireCandidate,
 							ProposedCandidate = p.ProposedCandidate,
 							AcceptedCandidate = p.AcceptedCandidate,
@@ -74,9 +74,9 @@ namespace SogetiStaffingPlanner.Controllers
 		* Method for adding  the data for the Positions
 		*/
 		[HttpPost]
-		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int maxConsultantGradeId,
-										int minConsultantGradeId, string positionName, int numberOfPositions,
-										  string skillset, int rate, DateTime expectedStartDate, int duration,
+		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int? maxConsultantGradeId,
+										int? minConsultantGradeId, string positionName, int numberOfPositions,
+										  string skillset, int? rate, DateTime? expectedStartDate, int? duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
 										  int lastModifiedUserId, DateTime lastModified, bool active, int positionStatusId)
@@ -124,9 +124,9 @@ namespace SogetiStaffingPlanner.Controllers
 		* Gets the information from the edited Position and saves any changes made to the entity framework
 		*/
 		[HttpPost]
-		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int maxConsultantGradeId, int minConsultantGradeId, 
-										string positionName, int numberOfPositions, string skillset, int rate, DateTime expectedStartDate, 
-										int duration, string hireCandidate, string proposedCandidate, string acceptedCandidate, string rejectedCandidate,
+		public ActionResult EditPosition(int positionId, int opportunityId, int unitPracticeId, int? maxConsultantGradeId, int? minConsultantGradeId, 
+										string positionName, int numberOfPositions, string skillset, int? rate, DateTime? expectedStartDate, 
+										int? duration, string hireCandidate, string proposedCandidate, string acceptedCandidate, string rejectedCandidate,
 										string positionNote, bool active, int positionStatusId)
 		{
 			System.Diagnostics.Debug.WriteLine("Edit Position Called");

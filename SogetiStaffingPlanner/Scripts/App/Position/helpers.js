@@ -45,5 +45,12 @@
         data.positionStatusId = that.positionStatusId;
         data.positionNote = that.positionNote;
         return data;
+    },
+    displayDate: function (date) {
+        let returnDate = date;
+            returnDate = parseInt(returnDate.slice(6));
+            returnDate = new Date(returnDate);
+            returnDate = returnDate.toISOString().slice(0, 10);
+            return returnDate;
     }
 }

@@ -1,5 +1,5 @@
-﻿/* This object contains methods that perform varios AJAX requests to the controller. */
-/* Note that the this context is being passed in to these as the parameter 'that'.  */
+﻿/* that object contains methods that perform varios AJAX requests to the controller. */
+/* Note that the that context is being passed in to these as the parameter 'that'.  */
 
 let requests = {
     fetchPositions: function (that) {
@@ -86,7 +86,44 @@ let requests = {
             }.bind(that)
         });
     },
-    postPosition: function (that, data) {
-        console.log(this);
+    // Add a position
+    postPosition: function (data, that) {
+        $.ajax({
+            type: "POST",
+            url: "AddPosition",
+            dataType: "json",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                //Receives message from backend for you to do what you want with it
+                posHelpers.clearForm(that);
+                requests.fetchPositions(that);
+                console.log('POST request success');
+                alert('Successfully added');
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
+    editPosition: function (data, that) {
+        $.ajax({
+            type: "POST",
+            url: "EditPosition",
+            dataType: "json",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                //Receives message from backend for you to do what you want with it              
+                alert('Successfully updated ' + that.positionName + '.');
+                posHelpers.clearForm(that);
+                requests.fetchPositions(that);
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
     }
 };

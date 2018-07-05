@@ -55,6 +55,7 @@
             this.clientId = null;
             this.active = false;
             this.errors = [];
+            window.scrollTo(0, 0);
         },
         onSubmit: function () {
             /* Check to see if updating preexisting Opportunity, or if adding a new one */
@@ -99,10 +100,15 @@
             this.clearForm();
             requests.editOpportunity(data, this);
         },
+        add: function () {
+            this.addState = true;
+            window.scrollTo(0, 100);
+        },
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */   
         cancel: function () {
             this.errors = {};
             this.addState = false;
+            window.scrollTo(0, 0);
         },
         getClientName: function (clientId) { // pass id and get name back
             for (client in this.clients) {
@@ -163,7 +169,12 @@
             /* Expands the pane */
             this.moreState = true;
             window.scrollTo(0, 100);
-        }
+        },
+        back: function () {
+            this.opportunityDetail = false;
+            this.moreState = false;
+            window.scrollTo(0, 0);
+        },
     },
     created: function () {
         requests.getOpportunityList(this);

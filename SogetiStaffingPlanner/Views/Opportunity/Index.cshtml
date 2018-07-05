@@ -17,7 +17,7 @@
             <h2>Opportunity List</h2>
             <hr />
             <div v-if="addState === false" class="addButton">
-                <button v-on:click="addState = true" class="btn btn-primary">
+                <button v-on:click="add" class="btn btn-primary">
                     <i class="fa fa-pencil"></i> Add Opportunity
                 </button>
                 <div class="form-group"></div>
@@ -178,11 +178,11 @@
 
         <!-- DISPLAY DETAILED INFORMATION ABOUT POSITION -->
         <template v-else>
-            <button class="btn btn-warning" v-on:click="opportunityDetail = false; moreState = false;"><i class="fa fa-caret-left"></i> Back</button>
+            <button class="btn btn-warning" v-on:click="back"><i class="fa fa-caret-left"></i> Back</button>
             <h3>Opportunity Name: {{ this.opportunityDetail.opportunityName }}</h3>
 
             <hr />
-            <h4> <strong>Opportunity Owner: {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h4>
+            <h4> <strong>Opportunity Owner:</strong> {{ getOpportunityName(this.opportunityDetail.opportunityOwnerUserId) }}</h4>
             <h4>Client Name: {{ getClientName(this.opportunityDetail.clientId) }}</h4>
             <h4>Client Contact: {{ this.opportunityDetail.clientContact }}</h4>
             <br />

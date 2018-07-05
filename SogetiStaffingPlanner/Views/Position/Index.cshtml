@@ -5,7 +5,7 @@
         <hr />
 
         <div v-if="addState === false" class="addButton">
-            <button v-on:click="addState = true" class="btn btn-primary">
+            <button v-on:click="add" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Add Position
             </button>
             <div class="form-group"></div>
@@ -230,7 +230,7 @@
     </div>
     <!-- DISPLAY DETAILED INFORMATION ABOUT POSITION -->
     <template v-else>
-        <button class="btn btn-warning" v-on:click="positionDetail = false; moreState = false;">Back</button>
+        <button class="btn btn-warning" v-on:click="back">Back</button>
         <h3>{{this.positionDetail.PositionName}}</h3>
         <hr />
         <h5>Number of Positions: {{ this.positionDetail.NumberOfPositions }}</h5>

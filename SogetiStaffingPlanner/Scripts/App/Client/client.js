@@ -115,6 +115,10 @@
                 }
             });
         },
+        add: function () {
+            this.states.addState = true;
+            window.scrollTo(0, 100);
+        },
         onEdit: function (client) {
             this.errors = {};
             this.states.addState = true;
@@ -131,6 +135,7 @@
             this.states.updateState = false;
             this.errors = {};
             this.formData = [];
+            window.scrollTo(0, 0);
         },
         checkForm: function () { // Check to see if there are errors on submit
             let errorCount = 0;

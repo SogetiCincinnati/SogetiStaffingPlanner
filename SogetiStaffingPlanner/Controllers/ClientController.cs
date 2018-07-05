@@ -85,18 +85,19 @@ namespace SogetiStaffingPlanner.Controllers
 		* Gets edited client information, updates the item in the entity, and saves the changes
 		*/
 		[HttpPost]
-		public ActionResult EditClient(int clientId, string clientName, string clientSubbusiness, bool active)
+		public ActionResult EditClient(int? clientId, string clientName, string clientSubbusiness)
 		{
-			System.Diagnostics.Debug.WriteLine("Edit Client");
-			Client client = db.Clients.Find(clientId);
-			if (client != null)
+			System.Diagnostics.Debug.WriteLine("Edit Client function called.");
+            System.Diagnostics.Debug.WriteLine(clientId);
+            Client client = db.Clients.Find(clientId);
+            if (client != null)
 			{
 				client.ClientName = clientName;
 				client.ClientSubbusiness = clientSubbusiness;
 				//Hardcoding LastModifiedUserId until login/sessions get implemented
 				client.LastModifiedUserId = 1;
 				client.LastModified = DateTime.Now;
-				client.Active = active;
+				client.Active = true;
 
 				db.Entry(client).State = EntityState.Modified;
 				db.SaveChanges();

@@ -44,9 +44,9 @@ namespace SogetiStaffingPlanner.Controllers
                             accountExecutiveUserId = o.AccountExecutiveUserId,
                             unitId = o.UnitId,
                             regionId = o.RegionId,
-                            soldStatusId =(int) o.SoldStatusId,
+                            soldStatusId = o.SoldStatusId == null ? 0: (int) o.SoldStatusId ,
                             opportunityName = o.OpportunityName,
-                            opportunityOwnerUserId = (int)o.OpportunityOwnerUserId,
+                            opportunityOwnerUserId = o.OpportunityOwnerUserId == null ? 0: (int) o.OpportunityOwnerUserId,
                             opportunityNotes = o.OpportunityNotes,
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,
@@ -271,7 +271,7 @@ namespace SogetiStaffingPlanner.Controllers
 		* Adds a new opportunity to the entity framework when called using HttpPost
 		*/
 		[HttpPost]
-		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact)
+		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int? soldStatusId, string opportunityName, int? opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{
             System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
             try

@@ -28,14 +28,14 @@
     },
     watch: {
         opportunityName: function (val) { validate.checkOpportunityName(val, this) },
-        clientContact: function (val) { validate.checkClientContact(val, this) },
-        opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
+      //  clientContact: function (val) { validate.checkClientContact(val, this) },
+      //  opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
         clientId: function (val) { validate.checkClientId(val, this) },
         accountExecutiveUserId: function (val) { validate.checkAccountExecutiveUserId(val, this) },
         unitId: function (val) { validate.checkUnitId(val, this) },
         regionId: function (val) { validate.checkRegionId(val, this) },
-        soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
-        opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
+       // soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
+       // opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
     },
     methods: {
         /* Clear out forms */
@@ -55,6 +55,7 @@
             this.clientId = null;
             this.active = false;
             this.errors = [];
+            window.scrollTo(0, 0);
         },
         onSubmit: function () {
             /* Check to see if updating preexisting Opportunity, or if adding a new one */
@@ -99,10 +100,15 @@
             this.clearForm();
             requests.editOpportunity(data, this);
         },
+        add: function () {
+            this.addState = true;
+            window.scrollTo(0, 100);
+        },
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */   
         cancel: function () {
             this.errors = {};
             this.addState = false;
+            window.scrollTo(0, 0);
         },
         getClientName: function (clientId) { // pass id and get name back
             for (client in this.clients) {
@@ -163,7 +169,12 @@
             /* Expands the pane */
             this.moreState = true;
             window.scrollTo(0, 100);
-        }
+        },
+        back: function () {
+            this.opportunityDetail = false;
+            this.moreState = false;
+            window.scrollTo(0, 0);
+        },
     },
     created: function () {
         requests.getOpportunityList(this);

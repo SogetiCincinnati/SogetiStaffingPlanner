@@ -24,6 +24,16 @@
         } catch (e) { }
 
     },
+    checkDuration: function (val, that) {
+        if (val < 1) {
+            that.errors.duration = 'Duration has to be atleast 1';
+        } else { that.errors.duration = ''; }
+    },
+    checkRate: function (val, that) {
+        if (val < 30) {
+            that.errors.rate = 'Rate cannot be below 30';
+        } else { that.errors.rate = ''; }
+    },
     checkNumberOfPositions: function (val, that) {
         try {
             if (val.length || val) { that.errors.numberOfPositions = ''; }

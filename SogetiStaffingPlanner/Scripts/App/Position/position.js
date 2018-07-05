@@ -47,6 +47,12 @@ let position = new Vue({
         },
         unitPracticeId: function (val) {
             validate.checkUnitPracticeId(val, this);
+        },
+        duration: function (val) {
+            validate.checkDuration(val, this);
+        },
+        rate: function (val) {
+            validate.checkRate(val, this);
         }
     },
     methods: {
@@ -60,10 +66,15 @@ let position = new Vue({
                 }
             } 
         },
+        add: function () {
+            this.addState = true;
+            window.scrollTo(0, 200);
+        },
         cancel: function () {
             this.errors = {};
             this.addState = false;
-            posHelpers.clearForm(this);           
+            posHelpers.clearForm(this);     
+            window.scrollTo(0, 0);
         },
         addPosition: function () {    
             this.errors = {};
@@ -118,6 +129,7 @@ let position = new Vue({
             this.positionStatusId = position.PositionStatusId;           
             /* Set form to drop down */
             this.addState = true;  
+            window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
             this.positionDetail = position;
@@ -126,6 +138,7 @@ let position = new Vue({
                 this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
             }                
             this.moreState = true;
+            window.scrollTo(0, 100);
         },
          getOpportunityName: function (opportunityId) {
             for (opportunity in this.opportunities) {
@@ -133,6 +146,11 @@ let position = new Vue({
                     return (this.opportunities[opportunity].OpportunityName);
                 }
             }
+        },
+        back: function () {
+            this.positionDetail = false;
+            this.moreState = false;
+            window.scrollTo(0, 0);
         },
     },
     created: function () {

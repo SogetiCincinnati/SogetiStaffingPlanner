@@ -28,14 +28,14 @@
     },
     watch: {
         opportunityName: function (val) { validate.checkOpportunityName(val, this) },
-        clientContact: function (val) { validate.checkClientContact(val, this) },
-        opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
+      //  clientContact: function (val) { validate.checkClientContact(val, this) },
+      //  opportunityNotes: function (val) { validate.checkOpportunityNotes(val, this) },
         clientId: function (val) { validate.checkClientId(val, this) },
         accountExecutiveUserId: function (val) { validate.checkAccountExecutiveUserId(val, this) },
         unitId: function (val) { validate.checkUnitId(val, this) },
         regionId: function (val) { validate.checkRegionId(val, this) },
-        soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
-        opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
+       // soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
+       // opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
     },
     methods: {
         /* Clear out forms */

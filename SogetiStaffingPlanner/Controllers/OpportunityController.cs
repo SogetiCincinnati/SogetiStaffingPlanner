@@ -309,7 +309,7 @@ namespace SogetiStaffingPlanner.Controllers
 		* Gets the information from the edited Opportunity and saves any changes made to the entity framework
 		*/
 		[HttpPost]
-		public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int soldStatusId, string opportunityName, int opportunityOwnerUserId, string opportunityNotes, string clientContact, bool active)
+		public ActionResult EditPost(int? id, int clientId, int accountExecutiveUserId, int unitId, int regionId, int? soldStatusId, string opportunityName, int? opportunityOwnerUserId, string opportunityNotes, string clientContact, bool active)
 		{
 			System.Diagnostics.Debug.WriteLine("Opportunity EDIT called.!!!!!!!!!!!!!!!!!!!!!");
             System.Diagnostics.Debug.WriteLine(active);

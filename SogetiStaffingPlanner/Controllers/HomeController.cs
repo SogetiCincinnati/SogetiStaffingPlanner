@@ -84,7 +84,9 @@ namespace SogetiStaffingPlanner.Controllers
                         Duration = mvR.Duration,
                         HireCandidate = mvR.HireCandidate,
                         MinConsultantGrade = mvR.MinConsultantGrade,
+                        */ 
                         PositionStatusName = mvR.PositionStatusName,
+                        /*
                         PositionNote = mvR.PositionNote,
                         RejectedCandidate = mvR.RejectedCandidate,
                         SActive = mvR.SActive,*/

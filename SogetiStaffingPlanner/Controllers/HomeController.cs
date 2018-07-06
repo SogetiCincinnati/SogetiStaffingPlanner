@@ -60,33 +60,42 @@ namespace SogetiStaffingPlanner.Controllers
                     {
                         OpportunityName = mvR.OpportunityName,
                         AEName = mvR.AEName,
-                        ACT = mvR.ACT == null ? 0 : mvR.ACT,
-                        AE = mvR.AE == null ? 0 : mvR.AE,
                         OpActive = mvR.OpActive,
+                        
                         ClientContact = mvR.ClientContact,
+                        
                         ClientName = mvR.ClientName,
+                        
                         ClientSubbusiness = mvR.ClientSubbusiness,
-                        MaxConsultantGrade = mvR.MaxConsultantGrade,
-                        ExpectedStartDate = mvR.ExpectedStartDate,
-                        LastModified = mvR.LastModified == null ? new DateTime(1000, 1, 1):(System.DateTime)mvR.LastModified,
+                        //MaxConsultantGrade = mvR.MaxConsultantGrade,
+                        //ExpectedStartDate = mvR.ExpectedStartDate,
+                        //LastModified = mvR.LastModified,
+                        
                         NumberOfPositions = mvR.NumberOfPositions,
+                        /*
                         PracticeName = mvR.PracticeName,
                         ProposedCandidate = mvR.ProposedCandidate,
-                        Rate = mvR.Rate == null ? 0 : mvR.Rate,
+                        Rate = mvR.Rate,
                         Skillset = mvR.Skillset,
                         AcceptedCandidate = mvR.AcceptedCandidate,
+                        */
                         ACTName = mvR.ACTName,
-                        Duration = mvR.Duration == null ? 0: mvR.Duration,
+                        /*
+                        Duration = mvR.Duration,
                         HireCandidate = mvR.HireCandidate,
                         MinConsultantGrade = mvR.MinConsultantGrade,
                         PositionStatusName = mvR.PositionStatusName,
                         PositionNote = mvR.PositionNote,
                         RejectedCandidate = mvR.RejectedCandidate,
-                        SActive = mvR.SActive,
+                        SActive = mvR.SActive,*/
                         UnitName = mvR.UnitName,
+                        
                         Priority = CalculatePriority(mvR),
+                        
+                        /*
                         ExpectedStartDateString = Convert.ToString(mvR.ExpectedStartDate.Value.Month) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Day) + "/" + Convert.ToString(mvR.ExpectedStartDate.Value.Year),
                         LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year),
+                        */
                         SoldStatusName = mvR.SoldStatusName,
                         PositionName = mvR.PositionName 
                     });

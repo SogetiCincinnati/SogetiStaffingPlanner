@@ -146,13 +146,19 @@
             }
         },
         getSoldStatus: function (soldStatusId) {
+            if (soldStatusId == 'N/A') {
+                return 'N/A';
+            }
             for (soldStatus in this.soldStatuses) {
                 if (this.soldStatuses[soldStatus].SoldStatusId == soldStatusId) {
                     return (this.soldStatuses[soldStatus].SoldStatusName);
                 }
             }
         },
-        getOpportunityName: function (opportunityOwnerUserId) {            
+        getOpportunityName: function (opportunityOwnerUserId) {
+            if (opportunityOwnerUserId == 'N/A') {
+                return 'N/A';
+            }
             for (ACTLead in this.ACTLeads) {
                 if (this.ACTLeads[ACTLead].UserId == opportunityOwnerUserId) {
                     return (this.ACTLeads[ACTLead].FullName);
@@ -160,6 +166,12 @@
             }
         },
         displayDetail: function (opportunity) {
+            /* Set up some N/A values */
+            for (item in opportunity) {
+                if (!opportunity[item]) {
+                    opportunity[item] = 'N/A';
+                }
+            }
             this.opportunityDetail = opportunity;
             /* Produces a human readable string for the details view panel */
             this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.slice(6);

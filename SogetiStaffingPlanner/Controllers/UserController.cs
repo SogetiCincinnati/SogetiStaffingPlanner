@@ -35,8 +35,10 @@ namespace SogetiStaffingPlanner.Controllers
                 if (u.Active == true)
                 {
                     UserData userData = new UserData();
+                    userData.UserId = u.UserId;
                     userData.FullName = u.FullName;
                     userData.ViewRoleId = u.ViewRoleId;
+                    userData.PermissionRoleId = u.PermissionRoleId;
                     userData.LastModifiedUserId = u.LastModifiedUserId;
                     User user = db.Users.Find(u.LastModifiedUserId);
                     userData.LastModifiedUserName = user.FullName;
@@ -49,6 +51,35 @@ namespace SogetiStaffingPlanner.Controllers
             return Json(userList, JsonRequestBehavior.AllowGet);
         }
 
+        /*
+* POST: /Client/EditClient
+* Gets edited client information, updates the item in the entity, and saves the changes
+*/
+        [HttpPost]
+        public ActionResult EditUser(int? userId, string name, int permission, int role)
+        {
+            System.Diagnostics.Debug.WriteLine("Edit User function called.");
+            System.Diagnostics.Debug.WriteLine(userId);
+            System.Diagnostics.Debug.WriteLine(name);
+            System.Diagnostics.Debug.WriteLine(permission);
+            System.Diagnostics.Debug.WriteLine(role);
+            User user = db.Users.Find(userId);
+            if (user != null)
+            {
+                user.FullName = name;
+                user.PermissionRoleId = permission;
+                user.ViewRoleId = role;
+                //Hardcoding LastModifiedUserId until login/sessions get implemented
+                user.LastModifiedUserId = 1;
+                user.LastModified = DateTime.Now;
+                user.Active = true;
+
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json("Client Edited Successfully", JsonRequestBehavior.AllowGet);
+            }
+            return Json("Error Occurred", JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

@@ -11,8 +11,10 @@ namespace SogetiStaffingPlanner.Models
 	*/
 	public class UserData
 	{
-		//Primary Key
-		public string FullName { get; set; }
+        //Primary Key
+        public int UserId { get; set; }
+
+        public string FullName { get; set; }
 
 		//Foreign Keys and their corresponding display values
 		public int LastModifiedUserId { get; set; }

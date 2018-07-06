@@ -1,63 +1,54 @@
 ﻿let validate = {
     /* When a user hits submit, that function will check all the forms. */
     checkForm: function (that) {
-        console.log('validate working');
         that.errors = {};
         /*Checks to see if forms are empty */
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';
-        } if (!that.duration) {
-            //that.errors.duration = 'Duration required';
-        } if (!that.acceptedCandidate) {
-            //that.errors.acceptedCandidate = 'Accepted Candidate required';
-        } if (!that.skillset) {
-            //that.errors.skillset = 'Skillset required';
-        } if (!that.rate) {
-            //that.errors.rate = 'Rate required';
-        } if (!that.expectedStartDate) {
-            //that.errors.expectedStartDate = 'Exepcted Start Date required';
-        } if (!that.hireCandidate) {
-            //that.errors.hireCandidate = 'Hire Candidate required.';
-        } if (!that.proposedCandidate) {
-            //that.errors.proposedCandidate = 'Proposed Candidate required';
-        } if (!that.rejectedCandidate) {
-            //that.errors.rejectedCandidate = 'Rejected Candidate required.';
-        } if (!that.positionNote) {
-            //that.errors.positionNote = 'Position Note required';
-        } if (!that.numberOfPositions) {
-            that.errors.numberOfPositions = 'Number of Positions required';
         } if (!that.positionStatusId) {
             that.errors.positionStatusId = 'Position Status required';
         } if (!that.opportunityId) {
             that.errors.opportunityId = 'Opportunity required';
-        } if (!that.unitPracticeId) {
-            //that.errors.unitPracticeId = 'Unit Practice required';
-        } if (!that.maxConsultantGradeId) {
-            //that.errors.maxConsultantGradeId = 'Max Consultant Grade required';
-        } if (!that.minConsultantGradeId) {
-            //that.errors.minConsultantGradeId = 'Min Consultant Grade required.';
+        } if (!that.numberOfPositions) {
+            that.errors.numberOfPositions = 'Number of Positions required';
         }
-        
+        try {
+            if (that.duration) {
+                if (that.duration < 1 && that.duration !== "") {
+                    that.errors.duration = 'Duration must be 1 or above.';
+                }
+                if (that.duration % 1 != 0) {
+                    that.errors.duration ? that.errors.duration += ' Cannot be a decimal.' : that.errors.duration = 'Cannot be a decimal.';
+                }
+            }   
 
-        //Check for sql-injection
-        
-        //if (!that.positionName === "") {
-        //    that.errors.positionName = 'Invalid charachers input';
-       // }
-        //contains "" or;; tha.eeror.postionNmae = "Invalid charachers input"
-
-
-        /* Looks for duplicate Opportunity Names - if adding NEW, but not if UPDATING */
-        if (!that.updateState) {
-            for (let i = 0; i < that.positions.length; i++) {
-
-                if (that.positionName == that.positions[i].PositionName) {
-                    that.errors.push('Position Name: "' + that.positionName + '" already exists.')
-                    break;
+        } catch (e) { }
+        try {
+            if (that.rate) {
+                if (that.rate < 30) {
+                    that.errors.rate = 'Rate cannot be below 30.';
+                } 
+                if (that.rate % 1 != 0) { // check for decimals
+                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.'; 
                 }
             }
+        } catch (e) { }
+        try {
+            if (that.numberOfPositions) {
+                if (that.numberOfPositions < 1) {
+                    that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
+                }
+                if (that.numberOfPositions % 1 != 0) {
+                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.'; 
+                }
+            }
+
+        } catch (e) { }
+        console.log(Object.keys(that.errors).length);
+        if (Object.keys(that.errors).length == 0) {
+            return true;
         }
-        if (!that.errors.length) { return true; }
+
     },
     checkPositionName: function (val, that) {
         try {
@@ -65,91 +56,39 @@
             else {
                 that.errors.positionName = 'Position Name required';
             }
-            if (!that.updateState) {
-                for (let i = 0; i < that.positions.length; i++) {
-                    if (val == that.positions[i].PositionName) {
-                        that.errors.positionName = '"' + that.positionName + '" already exists.';
-                        break;
-                    }
-                }
+        } catch (e) { }
+
+    },
+    checkDuration: function (val, that) {
+        try {
+            if (val < 1) {
+                that.errors.duration = 'Duration must be 1 or above.';
+            } else { that.errors.duration = ''; }
+            if (val % 1 != 0) {
+                that.errors.duration += ' Cannot be a decimal.'
             }
         } catch (e) { }
 
     },
-    /*
-    checkDuration: function (val, that) {
-        try {
-            if (val.length || val) { that.errors.duration = ''; }
-            else { that.errors.duration = 'Duration required'; }
-        } catch (e) { }
-
-    },*/
-    /*
-    checkAcceptedCandidate: function (val, that) {
-        try {
-            if (val.length) { that.errors.acceptedCandidate = ''; }
-            else { that.errors.acceptedCandidate = 'Accepted Candidate required'; }
-        } catch (e) { }
-
-    },*/
-    /*checkSkillset: function (val, that) {
-        try {
-            if (val.length) { that.errors.skillset = ''; }
-            else { that.errors.skillset = 'Duration required'; }
-        } catch (e) { }
-
-    },*/
-    /*
     checkRate: function (val, that) {
         try {
-            if (val.length || val) { that.errors.rate = ''; }
-            else { that.errors.rate = 'Rate required'; }
-        } catch (e) { }
-
-    },*/
-    /*
-    checkExpectedStartDate: function (val, that) {
-        try {
-            if (val.length) { that.errors.expectedStartDate = ''; }
-            else { that.errors.expectedStartDate = 'Expected Start Date required'; }
-        } catch (e) { }
-
-    },*/
-    /*
-    checkHireCandidate: function (val, that) {
-        try {
-            if (val.length) { that.errors.hireCandidate = ''; }
-            else { that.errors.hireCandidate = 'Hire Candidate required'; }
+            if (val < 30) {
+                that.errors.rate = 'Rate cannot be below 30.';
+            } else { that.errors.rate = ''; }
+            if (val && val % 1 != 0) { // check for decimals
+                that.errors.rate += ' Cannot be a decimal.'
+            }
         } catch (e) { }
 
     },
-    checkProposedCandidate: function (val, that) {
-        try {
-            if (val.length) { that.errors.proposedCandidate = ''; }
-            else { that.errors.proposedCandidate = 'Proposed Candidate required'; }
-        } catch (e) { }
-
-    },*/
-    /*
-    checkRejectedCandidate: function (val, that) {
-        try {
-            if (val.length) { that.errors.rejectedCandidate = ''; }
-            else { that.errors.rejectedCandidate = 'Rejected Candidate required'; }
-        } catch (e) { }
-
-    },*/
-    /*
-    checkPositionNote: function (val, that) {
-        try {
-            if (val.length) { that.errors.positionNote = ''; }
-            else { that.errors.positionNote = 'Position Note required'; }
-        } catch (e) { }
-
-    },*/
     checkNumberOfPositions: function (val, that) {
         try {
-            if (val.length || val) { that.errors.numberOfPositions = ''; }
-            else { that.errors.numberOfPositions = 'Number of Positions required'; }
+            if (val < 1) {
+                that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
+            } else { that.errors.numberOfPositions = ''; }
+            if (val && val % 1 != 0) {
+                that.errors.numberOfPositions += ' Cannot be a decimal.'
+            }
         } catch (e) { }
 
     },
@@ -167,16 +106,5 @@
         if (val) {
             that.errors.unitPracticeId = '';
         }
-    },/*
-    checkMinConsultantGradeId: function (val, that) {
-        if (val) {
-            that.errors.minConsultantGradeId = '';
-        }
-    },*/
-    /*
-    checkMaxConsultantGradeId: function (val, that) {
-        if (val) {
-            that.errors.maxConsultantGradeId = '';
-        }
-    }, */
+    },
 }

@@ -47,28 +47,45 @@ let position = new Vue({
         },
         unitPracticeId: function (val) {
             validate.checkUnitPracticeId(val, this);
+        },
+        duration: function (val) {
+            validate.checkDuration(val, this);
+        },
+        rate: function (val) {
+            validate.checkRate(val, this);
         }
     },
     methods: {
         onSubmit: function () {   
-            if (!this.errors.length) {
+            console.log(this.checkForm());
+            if (this.checkForm() == true) {
                 if (this.updateState) {
+                    console.log('update positions function called');
                     this.updatePosition();
                 }
                 else if (this.addState) {
+                    console.log('add positions function called');
                     this.addPosition();
                 }
             } 
         },
+        add: function () {
+            this.addState = true;
+            this.errors = {};
+            window.scrollTo(0, 200);
+        },
         cancel: function () {
             this.errors = {};
             this.addState = false;
-            posHelpers.clearForm(this);           
+            posHelpers.clearForm(this);     
+            window.scrollTo(0, 0);
         },
         addPosition: function () {    
+            
             this.errors = {};
-            this.checkForm();
+            validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
+            console.log(data);
             /* Code to format the date for the controller to recieve */
             if (this.expectedStartDate) {
                 let parts = this.expectedStartDate.split('-')
@@ -87,7 +104,10 @@ let position = new Vue({
             requests.editPosition(data, this);
         },
         checkForm: function () {
-            validate.checkForm(this);
+            validate.checkDuration(this);
+            validate.checkNumberOfPositions(this);
+            validate.checkRate(this);
+            return validate.checkForm(this);
         },
         onEdit: function (position) {
             this.errors = {};
@@ -118,14 +138,30 @@ let position = new Vue({
             this.positionStatusId = position.PositionStatusId;           
             /* Set form to drop down */
             this.addState = true;  
+            window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
+            /* Set up N/A for some values */
+            for (item in position) {
+                if (!position[item]) {
+                    position[item] = 'N/A';
+                }
+                if (!position['Rate']) {
+                    position['Rate'] = '~';
+                }               
+            }
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
                 this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);
                 this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
-            }                
+            }
+            /* Set up N/A value for missing ExpectedStartDate value */
+            if (this.positionDetail.ExpectedStartDate[1] == 0) {
+                this.positionDetail.ExpectedStartDate = 'N/A';
+            }
+            console.log(this.positionDetail);
             this.moreState = true;
+            window.scrollTo(0, 100);
         },
          getOpportunityName: function (opportunityId) {
             for (opportunity in this.opportunities) {
@@ -133,6 +169,11 @@ let position = new Vue({
                     return (this.opportunities[opportunity].OpportunityName);
                 }
             }
+        },
+        back: function () {
+            this.positionDetail = false;
+            this.moreState = false;
+            window.scrollTo(0, 0);
         },
     },
     created: function () {

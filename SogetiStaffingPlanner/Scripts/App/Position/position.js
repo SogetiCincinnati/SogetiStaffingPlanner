@@ -141,12 +141,25 @@ let position = new Vue({
             window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
-            console.log(position);
+            /* Set up N/A for some values */
+            for (item in position) {
+                if (!position[item]) {
+                    position[item] = 'N/A';
+                }
+                if (!position['Rate']) {
+                    position['Rate'] = '~';
+                }               
+            }
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
                 this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);
                 this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
-            }                
+            }
+            /* Set up N/A value for missing ExpectedStartDate value */
+            if (this.positionDetail.ExpectedStartDate[1] == 0) {
+                this.positionDetail.ExpectedStartDate = 'N/A';
+            }
+            console.log(this.positionDetail);
             this.moreState = true;
             window.scrollTo(0, 100);
         },

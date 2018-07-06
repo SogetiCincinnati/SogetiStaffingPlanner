@@ -15,6 +15,10 @@
         }
     },
     getGradeName: function (gradeId, that) {
+        /* Check if value doesn't exist and return something else if so */
+        if (gradeId == 'N/A') {
+            return 'N/A';
+        };
         for (grade in that.grades) {
             if (that.grades[grade].GradeId == gradeId) {
                 return (that.grades[grade].GradeName);

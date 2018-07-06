@@ -71,6 +71,7 @@ let position = new Vue({
         },
         add: function () {
             this.addState = true;
+            this.errors = {};
             window.scrollTo(0, 200);
         },
         cancel: function () {
@@ -80,6 +81,9 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
+            
+            this.errors = {};
+            validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
             console.log(data);
             /* Code to format the date for the controller to recieve */
@@ -137,6 +141,7 @@ let position = new Vue({
             window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
+            console.log(position);
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
                 this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);

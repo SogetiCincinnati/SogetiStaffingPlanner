@@ -14,7 +14,7 @@
         }
         try {
             if (that.duration) {
-                if (that.duration < 1 || that.duration == "" || typeof that.duration == "string") {
+                if (that.duration < 1 && that.duration !== "") {
                     that.errors.duration = 'Duration must be 1 or above.';
                 }
                 if (that.duration % 1 != 0) {

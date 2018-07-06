@@ -57,11 +57,14 @@ let position = new Vue({
     },
     methods: {
         onSubmit: function () {   
-            if (!this.errors.length) {
+            console.log(this.checkForm());
+            if (this.checkForm() == true) {
                 if (this.updateState) {
+                    console.log('update positions function called');
                     this.updatePosition();
                 }
                 else if (this.addState) {
+                    console.log('add positions function called');
                     this.addPosition();
                 }
             } 
@@ -77,9 +80,8 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
-            this.errors = {};
-            this.checkForm();
             let data = posHelpers.buildJSON(this);
+            console.log(data);
             /* Code to format the date for the controller to recieve */
             if (this.expectedStartDate) {
                 let parts = this.expectedStartDate.split('-')
@@ -98,7 +100,10 @@ let position = new Vue({
             requests.editPosition(data, this);
         },
         checkForm: function () {
-            validate.checkForm(this);
+            validate.checkDuration(this);
+            validate.checkNumberOfPositions(this);
+            validate.checkRate(this);
+            return validate.checkForm(this);
         },
         onEdit: function (position) {
             this.errors = {};

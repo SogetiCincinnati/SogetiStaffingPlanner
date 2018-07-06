@@ -171,6 +171,7 @@
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,6 +181,7 @@
     <Compile Include="Models\Client.cs">
       <DependentUpon>ClientOpportunities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserData.cs" />
     <Compile Include="Models\ClientData.cs" />
     <Compile Include="Models\ClientOpportunities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -294,6 +296,7 @@
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Home\app.js" />
     <Content Include="Scripts\App\Position\validate.js" />
+    <Content Include="Scripts\App\User\user.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -346,6 +349,7 @@
     <Content Include="Views\AccountExecutive\Index.cshtml" />
     <Content Include="Views\Region\Index.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

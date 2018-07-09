@@ -1,4 +1,7 @@
-﻿<div id="User" class="main">
+﻿
+<div id="User" class="main">
+    <script type="text/javascript" src="../../Scripts/App/User/validate.js"></script>
+    <script type="text/javascript" src="../../Scripts/App/User/requests.js"></script>
     <h2>User List</h2>
     <hr />
     <div v-if="states.addState == false" class="addButton">
@@ -6,7 +9,7 @@
             <i class="fa fa-pencil"></i> Add User
         </button>
         <div class="form-group"></div>
-    </div> 
+    </div>
     <template v-else>
         <div class="addButton">
             <div class="form-horizontal">

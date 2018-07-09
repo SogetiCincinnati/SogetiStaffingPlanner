@@ -1,0 +1,59 @@
+﻿<div id="User" class="main">
+    <h2>User List</h2>
+    <hr />
+    <div v-if="states.addState == false" class="addButton">
+        <button v-on:click="add" class="btn btn-primary">
+            <i class="fa fa-pencil"></i> Add User
+        </button>
+        <div class="form-group"></div>
+    </div> 
+    <template v-else>
+        <div class="addButton">
+            <div class="form-horizontal">
+                <label class="col-sm-3" for="clientName">Name: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="formData.name" />
+                    <span class="error">{{ errors.name }}</span>
+                </div>
+                <div class="form-group"></div>
+
+                <label class="col-sm-3"> Permission: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="formData.permission" />
+                    <span class="error">{{ errors.permission }}</span>
+                </div>
+                <div class="form-group"></div>
+                <label class="col-sm-3" for="clientSubbusiness"> Role: </label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" v-model="formData.role" />
+                    <span class="error">{{ errors.role }}</span>
+                </div>
+                <div class="form-group"></div>
+                <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
+                <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
+                <div class="form-group"></div>
+            </div>
+        </div>
+    </template>
+    <template>
+        <div class="scrollBar">
+            <table id="clientView">
+                <tr>
+                    <th>Name</th>
+                    <th>Permission</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                </tr>
+                <tr v-for="user in users">
+                    <td>{{ user.FullName }}</td>
+                    <td>{{ user.PermissionRoleId }}</td>
+                    <td>{{ user.ViewRoleId }}</td>
+                    <td><button class="btn btn-success" v-on:click=""><i class="fa fa-edit"></i></button></td>
+                </tr>
+            </table>
+        </div>
+    </template>
+
+</div>
+
+<script type="text/javascript" src="../../Scripts/App/User/user.js"></script>

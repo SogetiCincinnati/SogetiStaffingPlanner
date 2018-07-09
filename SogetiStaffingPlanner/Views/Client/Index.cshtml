@@ -2,9 +2,11 @@
 @{
     ViewBag.Title = "CreateClient";
 }
+<style>
 
+</style>
 
-<div id="createClient" class="main">
+<div id="Client" class="main">
     <h2>Client List</h2>
     <hr />
     <div v-if="states.addState === false" class="addButton">
@@ -31,11 +33,11 @@
 
                 <div class="form-group"></div>
                 <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
-                    <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
+                <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
                 <div class="form-group"></div>
             </div>
         </div>
-        
+
 
     </template>
 
@@ -47,11 +49,13 @@
                     <th>Client Subbusiness</th>
                     <th>Edit</th>
                 </tr>
-                <tr v-for="client in clients">
-                    <td>{{ client.ClientName }}</td>
-                    <td>{{ client.ClientSubbusiness }}</td>
-                    <td><button class="btn btn-success" v-on:click="onEdit(client)"><i class="fa fa-edit"></i></button></td>
-                </tr>
+                    <tr v-for="(client, index) in clients">
+                        <td v-if="index == selected" class="selected">{{ client.ClientName }}</td>
+                        <td v-else>{{ client.ClientName }} </td>
+                        <td v-if="index == selected" class="selected">{{ client.ClientSubbusiness }}</td>
+                        <td v-else>{{ client.ClientSubbusiness }} </td>
+                        <td><button class="btn btn-success" v-on:click="onEdit(client)"><i class="fa fa-edit"></i></button></td>
+                    </tr>
             </table>
         </div>
     </template>

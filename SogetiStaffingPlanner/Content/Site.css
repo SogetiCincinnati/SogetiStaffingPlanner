@@ -12,6 +12,8 @@ ol, ul {
 
 .scrollBar {
     overflow-x: auto;
+    height: 400px;
+    overflow-y: scroll;
 }
 #app h1 {
     margin-top: -5px;
@@ -71,13 +73,22 @@ ol, ul {
 h2 {
     margin-left: 5%;
 }
+
+
+
+
 /* Table Styles */
 
-table, table th, table td{
+table {
+    height: 200px;
+    overflow-y: scroll;
+}
+table, table th, table td {
     border: 1px solid #BDBDBD;
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;
+
 }
 table th {
     padding: 10px;
@@ -88,6 +99,11 @@ table td {
 }
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}
+
+.selected {
+    color: slateblue; 
+    font-weight: bold;
+}
 
 .navItems li:hover{
     background-color: #FF5722;

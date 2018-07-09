@@ -39,8 +39,8 @@
     },
     methods: {
         add: function () {
-            this.states.addState = true;
             this.errors.name = '';
+            this.states.addState = true;
             window.scrollTo(0, 100);
             console.log(this.formData);
         },

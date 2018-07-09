@@ -37,11 +37,13 @@
         if (isBlank(that.formData.name)) {
             that.errors.name = 'Name required.';
         }
-        for (let i = 0; i < that.users.length; i++) {     
-            if (that.formData.name == that.users[i].FullName) {
-                that.errors.name = 'User already exists.';
+        if (!that.states.updateState) {
+            for (let i = 0; i < that.users.length; i++) {
+                if (that.formData.name == that.users[i].FullName) {
+                    that.errors.name = 'User already exists.';
+                }
             }
-        }
+        }  
         if (!that.formData.name) {
             that.errors.name = 'Name required.';
         } 

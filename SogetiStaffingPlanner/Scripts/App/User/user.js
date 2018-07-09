@@ -111,6 +111,13 @@
                     return this.dropDowns.permissions[i].PermissionRoleName;
                 }
             }
+        },
+        getRoleName: function (viewRoleId) {
+            for (let i = 0; i < this.dropDowns.roles.length; i++) {
+                if (this.dropDowns.roles[i].ViewRoleId == viewRoleId) {
+                    return this.dropDowns.roles[i].ViewName;
+                }
+            }
         }
     },
     created() {

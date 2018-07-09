@@ -55,7 +55,7 @@
                 <tr v-for="user in users">
                     <td>{{ user.FullName }}</td>
                     <td>{{ getPermissionName(user.PermissionRoleId) }}</td>
-                    <td>{{ user.ViewRoleId }}</td>
+                    <td>{{ getRoleName(user.ViewRoleId) }}</td>
                     <td><button class="btn btn-success" v-on:click="edit(user)"><i class="fa fa-edit"></i></button></td>
                 </tr>
             </table>

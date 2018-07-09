@@ -48,5 +48,18 @@
                     console.log(e, "Error adding data! Please try again.");
                 }
             });
+    },
+    getUnitList: function (that) {
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetUnitList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }.bind(that)
+        });
     }
 }

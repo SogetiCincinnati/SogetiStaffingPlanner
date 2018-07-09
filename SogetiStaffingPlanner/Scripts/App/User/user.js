@@ -2,6 +2,10 @@
     el: '#User',
     data: {
         users: '',
+        dropDowns: {
+            roles: '',
+            permissions: ''
+        },
         states: {
             addState: false,
             updateState: false,
@@ -16,6 +20,22 @@
             permission: null,
             role: null,
         }
+    },
+    computed: {
+        computeName() {
+            return this.formData.name;
+        },
+        computePermission() {
+            return this.formData.permission;
+        },
+        computeRole() {
+            return this.formData.role;
+        }
+    },
+    watch: {
+        computeName: function (val) { validate.validateName(val, this); },
+        computePermission: function (val) { validate.validatePermission(val, this); },
+        computeRole: function (val) { validate.validateRole(val, this); }
     },
     methods: {
         add: function () {
@@ -76,5 +96,6 @@
     },
     created() {
         requests.fetchUsers(this);
+        requests.getUnitList(this);
     }
 });

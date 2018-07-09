@@ -23,6 +23,29 @@
             window.scrollTo(0, 100);
         },
         onSubmit: function () {
+            let data = {};
+            data.fullName = this.formData.name;
+            data.active = true;
+            data.lastModifiedUserId = 1;
+            data.viewRoleId = 1;
+            data.permissionRoleId = 1;
+            data.lastModified = new Date();
+            $.ajax({
+                async: false,
+                cache: false,
+                type: "POST",
+                url: "AddUser",
+                dataType: "json",
+                data: JSON.stringify(data),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                   // this.users = data;
+                  //  console.log(this.users);
+                    console.log(response);
+                    console.log("On Submit Called");
+                }.bind(this)
+            });
 
         },
         cancel: function () {

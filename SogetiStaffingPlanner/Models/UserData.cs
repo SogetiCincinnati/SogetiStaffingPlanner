@@ -22,6 +22,6 @@ namespace SogetiStaffingPlanner.Models
 
         //Remaining Client Fields
 		public bool Active { get; set; }
-        public DateTime lastModified { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

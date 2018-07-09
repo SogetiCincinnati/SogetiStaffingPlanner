@@ -114,7 +114,7 @@ namespace SogetiStaffingPlanner.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRoleId()
+        public ActionResult GetRoleList()
         {
             try
             {
@@ -141,7 +141,7 @@ namespace SogetiStaffingPlanner.Controllers
             return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult GetPermissionId()
+        public ActionResult GetPermissionList()
         {
             try
             {

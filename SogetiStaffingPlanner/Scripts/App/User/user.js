@@ -96,6 +96,7 @@
     },
     created() {
         requests.fetchUsers(this);
-        requests.getUnitList(this);
+        requests.getPermissions(this);
+        requests.getRoles(this);
     }
 });

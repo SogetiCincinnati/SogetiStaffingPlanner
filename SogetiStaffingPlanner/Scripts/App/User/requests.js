@@ -49,16 +49,29 @@
                 }
             });
     },
-    getUnitList: function (that) {
+    getPermissions: function (that) {
         $.ajax({
             async: false,
             cache: false,
             type: "GET",
-            url: "GetUnitList",
+            url: "GetPermissionList",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log(data);
+                that.dropDowns.permissions = data;
+            }.bind(that)
+        });
+    },
+    getRoles: function (that) {
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "GetRoleList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                that.dropDowns.roles = data;
             }.bind(that)
         });
     }

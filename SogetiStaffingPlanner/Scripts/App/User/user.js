@@ -98,11 +98,20 @@
             data.permissionRoleId = this.formData.permission;
             data.lastModified = new Date();
             requests.addUser(this, data);
+        },
+        getPermissionName: function (permissionRoleId) {
+            for (let i = 0; i < this.dropDowns.permissions.length; i++) {
+                if (this.dropDowns.permissions[i].PermissionRoleId == permissionRoleId) {
+                    return this.dropDowns.permissions[i].PermissionRoleName;
+                }
+            }
         }
     },
     created() {
-        requests.fetchUsers(this);
-        requests.getPermissions(this);
+
+            requests.fetchUsers(this);
+            requests.getPermissions(this);
         requests.getRoles(this);
-    }
-});
+      
+        }
+    });

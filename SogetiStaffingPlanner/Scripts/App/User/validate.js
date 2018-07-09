@@ -1,11 +1,57 @@
 ﻿let validate = {
     validateName: function (val, that) {
-        console.log(val);
+        try {
+            if (val.length || val) { that.errors.name = ''; }
+            else {
+                function isBlank(str) {
+                    return (!str || /^\s*$/.test(str));
+                }
+                if (isBlank(that.formData.name)) {
+                    that.errors.name = 'Name required.';
+                }
+                that.errors.name = ' Name required';
+            }
+            if (!that.states.updateState) {
+                for (let i = 0; i < that.users.length; i++) {
+                    if (that.formData.name == that.users[i].FullName) {
+                        that.errors.name = 'User already exists.';
+                    }
+                }
+            }         
+        } catch (e) { };
     },
     validatePermission: function (val, that) {
-        console.log(val);
+        if (val) {
+            that.errors.permission = '';
+        }
     },
     validateRole: function (val, that) {
-        console.log(val);
+        if (val) {
+            that.errors.role = '';
+        }
+    },
+    checkForm: function (that) {
+        function isBlank(str) {
+            return (!str || /^\s*$/.test(str));
+        }
+        if (isBlank(that.formData.name)) {
+            that.errors.name = 'Name required.';
+        }
+        if (!that.states.updateState) {
+            for (let i = 0; i < that.users.length; i++) {
+                if (that.formData.name == that.users[i].FullName) {
+                    that.errors.name = 'User already exists.';
+                }
+            }
+        }  
+        if (!that.formData.name) {
+            that.errors.name = 'Name required.';
+        } 
+        if (!that.formData.permission) {
+            that.errors.permission = 'Permission required.';
+        }
+        if (!that.formData.role) {
+            that.errors.role = 'Role required.';
+        }
     }
 }

@@ -39,12 +39,16 @@
     },
     methods: {
         add: function () {
+            this.errors.name = '';
             this.states.addState = true;
             window.scrollTo(0, 100);
+            console.log(this.formData);
         },
-        onSubmit: function () {
+        onSubmit: function () {     
+            validate.checkForm(this);
+            if (this.errors.name || this.errors.permission || this.errors.role) { return; }
             if (this.states.updateState) {
-                console.log('update called.')
+                console.log('update called.')      
                 this.updateUser();
             } else if (this.states.addState) {
                 console.log('add called');
@@ -54,13 +58,20 @@
             }
         },
         cancel: function () {
+            this.errors.name = '';
+            this.errors.permission = '';
+            this.errors.role = '';
             this.states.addState = false;
             this.states.updateState = false;
-            this.formData = {};
+            this.formData.name = '';
+            this.formData.permission = '';
+            this.formData.role = '';
             window.scrollTo(0, 0);
         },
         edit: function (user) {
-            this.formData = {};
+            this.formData.name = '';
+            this.formData.permission = '';
+            this.formData.role = '';
             this.states.addState = true;
             this.states.updateState = true;
             this.formData.userId = user.UserId;
@@ -88,8 +99,9 @@
             data.fullName = this.formData.name;
             data.active = true;
             data.lastModifiedUserId = 1;
-            data.viewRoleId = 1;
-            data.permissionRoleId = 1;
+            data.viewRoleId = this.formData.role;
+            data.permissionRoleId = this.formData.permisson;
+            data.permissionRoleId = this.formData.permission;
             data.lastModified = new Date();
             requests.addUser(this, data);
         },

@@ -13,6 +13,7 @@
         });
     },
     addUser: function (that, data) {
+        console.log(data);
         $.ajax({
             async: false,
             cache: false,

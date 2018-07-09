@@ -1,6 +1,5 @@
 ﻿let validate = {
     validateName: function (val, that) {
-        console.log(that.users);
         try {
             if (val.length || val) { that.errors.name = ''; }
             else {
@@ -9,10 +8,14 @@
         } catch (e) { };
     },
     validatePermission: function (val, that) {
-        console.log(val);
+        if (val) {
+            that.errors.permission = '';
+        }
     },
     validateRole: function (val, that) {
-        console.log(val);
+        if (val) {
+            that.errors.role = '';
+        }
     },
     checkForm: function (that) {
         if (!that.formData.name) {

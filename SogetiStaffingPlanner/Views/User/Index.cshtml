@@ -31,7 +31,7 @@
                 <label class="col-sm-3" for="clientSubbusiness"> Role: </label>
                 <div class="col-sm-4">
                     <select class="form-control" v-model="formData.role">
-                        <option v-for="role in dropDowns.roles" :value="role.RoleId">{{ role.ViewName }}</option>
+                        <option v-for="role in dropDowns.roles" :value="role.ViewRoleId">{{ role.ViewName }}</option>
                     </select>
                    
                     <span class="error">{{ errors.role }}</span>

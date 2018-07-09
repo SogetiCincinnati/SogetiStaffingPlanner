@@ -40,7 +40,9 @@
     methods: {
         add: function () {
             this.states.addState = true;
+            this.errors.name = '';
             window.scrollTo(0, 100);
+            console.log(this.formData);
         },
         onSubmit: function () {     
             validate.checkForm(this);
@@ -61,11 +63,15 @@
             this.errors.role = '';
             this.states.addState = false;
             this.states.updateState = false;
-            this.formData = {};
+            this.formData.name = '';
+            this.formData.permission = '';
+            this.formData.role = '';
             window.scrollTo(0, 0);
         },
         edit: function (user) {
-            this.formData = {};
+            this.formData.name = '';
+            this.formData.permission = '';
+            this.formData.role = '';
             this.states.addState = true;
             this.states.updateState = true;
             this.formData.userId = user.UserId;

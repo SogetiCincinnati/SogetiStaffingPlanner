@@ -42,7 +42,9 @@
             this.states.addState = true;
             window.scrollTo(0, 100);
         },
-        onSubmit: function () {      
+        onSubmit: function () {     
+            validate.checkForm(this);
+            if (this.errors.name || this.errors.permission || this.errors.role) { return; }
             if (this.states.updateState) {
                 console.log('update called.')      
                 this.updateUser();
@@ -54,6 +56,9 @@
             }
         },
         cancel: function () {
+            this.errors.name = '';
+            this.errors.permission = '';
+            this.errors.role = '';
             this.states.addState = false;
             this.states.updateState = false;
             this.formData = {};
@@ -88,11 +93,12 @@
             data.fullName = this.formData.name;
             data.active = true;
             data.lastModifiedUserId = 1;
-            data.viewRoleId = 1;
-            data.permissionRoleId = 1;
+            data.viewRoleId = this.formData.role;
+            data.permissionRoleId = this.formData.permisson;
+            data.permissionRoleId = this.formData.permission;
             data.lastModified = new Date();
             requests.addUser(this, data);
-        }    
+        }
     },
     created() {
         requests.fetchUsers(this);

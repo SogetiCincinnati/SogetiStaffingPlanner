@@ -42,9 +42,9 @@
             this.states.addState = true;
             window.scrollTo(0, 100);
         },
-        onSubmit: function () {      
+        onSubmit: function () {
             if (this.states.updateState) {
-                console.log('update called.')      
+                console.log('update called.')
                 this.updateUser();
             } else if (this.states.addState) {
                 console.log('add called');
@@ -92,11 +92,20 @@
             data.permissionRoleId = 1;
             data.lastModified = new Date();
             requests.addUser(this, data);
-        }    
+        },
+        getPermissionName: function (permissionRoleId) {
+            for (let i = 0; i < this.dropDowns.permissions.length; i++) {
+                if (this.dropDowns.permissions[i].PermissionRoleId == permissionRoleId) {
+                    return this.dropDowns.permissions[i].PermissionRoleName;
+                }
+            }
+        }
     },
     created() {
-        requests.fetchUsers(this);
-        requests.getPermissions(this);
+
+            requests.fetchUsers(this);
+            requests.getPermissions(this);
         requests.getRoles(this);
-    }
-});
+      
+        }
+    });

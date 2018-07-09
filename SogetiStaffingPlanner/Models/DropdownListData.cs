@@ -89,6 +89,9 @@ namespace SogetiStaffingPlanner.Models
          public int ViewRoleId { get; set; }
          public string ViewName { get; set; }
     }
-
-    
+    public class PermissionList
+    {
+        public int PermissionRoleId { get; set; }
+        public string PermissionRoleName { get; set; }
+    }   
 }

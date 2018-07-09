@@ -139,8 +139,33 @@ namespace SogetiStaffingPlanner.Controllers
                 System.Diagnostics.Debug.WriteLine(e.ToString());
             }
             return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult GetPermissionId()
+        {
+            try
+            {
+                List<PermissionRole> role = db.PermissionRoles.ToList();
 
-
+                List<PermissionList> permissions = new List<PermissionList>();
+                foreach (PermissionRole d in role)
+                {
+                    if (d.Active == true)
+                    {
+                        permissions.Add(new PermissionList
+                        {
+                            PermissionRoleId = d.PermissionRoleId,
+                            PermissionRoleName = d.PermissionRoleName
+                        });
+                    }
+                }
+                return Json(permissions, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
         }
     }
 }

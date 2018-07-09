@@ -3,6 +3,8 @@ new Vue({
     el: '#app',
     data: {
         addState: false,
+        displayState: false,
+        displayView: '',
         opportunityName: '',
         unit: '',
         numberOfPositions: '',
@@ -86,6 +88,11 @@ new Vue({
                 this.buttonText = 'Add New';
             }
         },
+        displayDetails: function (data) {
+            console.log(data);
+            this.displayState = true;
+            this.displayView = data;
+        },
         submitNew: function () {
             this.newForm = false;
             var data = {};
@@ -131,10 +138,8 @@ new Vue({
             url: "Home/GetMainData",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
-            success: function (data) {
-                console.log(data);
+            success: function (data) {             
                 this.posts = data;
-                console.log(this.posts);
             }.bind(this), error: function (e) {
                 console.log('error');
                 console.log(e);

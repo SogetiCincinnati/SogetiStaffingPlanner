@@ -30,30 +30,12 @@
             data.viewRoleId = 1;
             data.permissionRoleId = 1;
             data.lastModified = new Date();
-            $.ajax({
-                async: false,
-                cache: false,
-                type: "POST",
-                url: "AddUser",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json;charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                   // this.users = data;
-                  //  console.log(this.users);
-                    console.log(response);
-                    console.log("On Submit Called");
-                }.bind(this)
-            });
-
             if (this.states.updateState) {
-                console.log('update called.')
-                
+                console.log('update called.')      
                 this.updateUser();
             } else if (this.states.addState) {
                 console.log('add called');
-                this.addUser();
+                this.addUser(data);
             } else {
                 console.log('Something unexpected happened.');
             }
@@ -104,8 +86,35 @@
                 }
             });
         },
-        addUser: function () {
-
+        addUser: function (data) {
+            $.ajax({
+                async: false,
+                cache: false,
+                type: "POST",
+                url: "AddUser",
+                dataType: "json",
+                data: JSON.stringify(data),
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    $.ajax({
+                        async: false,
+                        cache: false,
+                        type: "GET",
+                        url: "GetUsers",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            alert("User added!");
+                            this.formData = {};
+                            this.users = data;
+                            this.states.addState = false;
+                        }.bind(this)
+                    });
+                    console.log(response);
+                    console.log("On Submit Called");
+                }.bind(this)
+            });
         }
         
     },

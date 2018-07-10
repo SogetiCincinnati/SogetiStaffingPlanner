@@ -38,7 +38,6 @@ namespace SogetiStaffingPlanner.Models
         public string MinConsultantGrade { get; set; }
         public string MaxConsultantGrade { get; set; }
         public string Priority { get; set; }
-        public string LastModifiedString { get; set; }
         public string ExpectedStartDateString { get; set; }
     }
 }

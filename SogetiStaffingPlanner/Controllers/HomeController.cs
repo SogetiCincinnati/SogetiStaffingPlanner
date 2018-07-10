@@ -61,43 +61,33 @@ namespace SogetiStaffingPlanner.Controllers
                         OpportunityName = mvR.OpportunityName,
                         AEName = mvR.AEName,
                         OpActive = mvR.OpActive,
-                        
                         ClientContact = mvR.ClientContact,
-                        
+                        ACT = mvR.ACT,
+                        AE = mvR.AE,
                         ClientName = mvR.ClientName,
-                        
                         ClientSubbusiness = mvR.ClientSubbusiness,
                         MaxConsultantGrade = mvR.MaxConsultantGrade,
+                        MaxConsultantGradeId = mvR.MaxConsultantGradeId,
                         ExpectedStartDate = mvR.ExpectedStartDate,
-                        LastModified = mvR.LastModified,
-                        
                         NumberOfPositions = mvR.NumberOfPositions,
-                        
                         PracticeName = mvR.PracticeName,
                         ProposedCandidate = mvR.ProposedCandidate,
                         Rate = mvR.Rate,
                         Skillset = mvR.Skillset,
                         AcceptedCandidate = mvR.AcceptedCandidate,
-                        
                         ACTName = mvR.ACTName,
-                        
                         Duration = mvR.Duration,
                         HireCandidate = mvR.HireCandidate,
                         MinConsultantGrade = mvR.MinConsultantGrade,
-                        
+                        MinConsultantGradeId = mvR.MinConsultantGradeId,
                         PositionStatusName = mvR.PositionStatusName,
-                        
-                        PositionNote = mvR.PositionNote,
+                      //  PositionNote = mvR.PositionNote,
                         RejectedCandidate = mvR.RejectedCandidate,
                         SActive = mvR.SActive,
                         UnitName = mvR.UnitName,
-                        
-                        Priority = CalculatePriority(mvR),
-                        
-                        
+                        Priority = CalculatePriority(mvR),                    
                         ExpectedStartDateString =mvR.ExpectedStartDateString,
-                      //  LastModifiedString = Convert.ToString(mvR.LastModified.Value.Month) + "/" + Convert.ToString(mvR.LastModified.Value.Day) + "/" + Convert.ToString(mvR.LastModified.Value.Year),
-                        
+                        LastModified = mvR.LastModified,
                         SoldStatusName = mvR.SoldStatusName,
                         PositionName = mvR.PositionName 
                     });

@@ -18,7 +18,7 @@ namespace SogetiStaffingPlanner.Models
     public partial class ClientOpportunitiesEntities : DbContext
     {
         public ClientOpportunitiesEntities()
-            : base("name=Dev_ClientOpportunitiesEntities")
+            : base("name=ClientOpportunitiesEntities")
         {
         }
     

@@ -12,6 +12,13 @@ new Vue({
             console.log(data);
             this.displayState = true;
             this.displayView = data;
+        },
+        displayDate: function (date) {
+            let returnDate = date;
+            returnDate = parseInt(returnDate.slice(6));
+            returnDate = new Date(returnDate);
+            returnDate = returnDate.toISOString().slice(0, 10);
+            return returnDate;
         }
     },
     created: function () {

@@ -211,18 +211,24 @@
                         <th>Details</th>
                         <!--<th>Delete</th>-->
                     </tr>
-                    <tr v-for="position in positions">
-                        <td>{{ position.PositionName }}</td>
-                        <td>{{ getOpportunityName(position.OpportunityId) }}</td>
-                        <td>{{ position.NumberOfPositions }}</td>
-                        <td>{{ position.Duration }} months</td>
-                        <td>{{ position.AcceptedCandidate }}</td>
-                        <td>{{ position.Skillset }}</td>
-                        <td>${{ position.Rate }}</td>
+                    <tr v-for="(position, index) in positions">
+                        <td v-if="index == selected" class="selected"> {{ position.PositionName }}</td>
+                        <td v-else>{{ position.PositionName }}</td>
+                        <td v-if="index == selected" class="selected"> {{ getOpportunityName(position.OpportunityId) }}</td>
+                        <td v-else>{{ getOpportunityName(position.OpportunityId) }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.NumberOfPositions }}</td>
+                        <td v-else>{{ position.NumberOfPositions }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.Duration }}</td>
+                        <td v-else>{{ position.Duration }} months</td>
+                        <td v-if="index == selected" class="selected">{{ position.AcceptedCandidate }}</td>
+                        <td v-else>{{ position.AcceptedCandidate }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.Skillset }}</td>
+                        <td v-else>{{ position.Skillset }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.Rate }}</td>
+                        <td v-else>${{ position.Rate }}</td>
                         <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
                         <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
                         <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
-
                     </tr>
                 </table>
             </div>

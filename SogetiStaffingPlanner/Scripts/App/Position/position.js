@@ -67,7 +67,7 @@ let position = new Vue({
                 else if (this.addState) {
                     console.log('add positions function called');
                     this.addPosition();
-                    this.scrollDown();
+                    
                 }
             } 
         },
@@ -83,7 +83,6 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
-            this.selected = this.positions.length; // it will highlight this row
             this.errors = {};
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
@@ -100,6 +99,8 @@ let position = new Vue({
             data.lastModified = new Date().toISOString();
             /* Submit the data */
             requests.postPosition(data, this);
+            this.findSelected();
+            this.scrollDown();
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
@@ -178,8 +179,11 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
-            let container = document.querySelector(".scrollBar");
-            setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
+            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+            let scrollDistance = this.selected * (container.scrollHeight / this.positions.length); // calculate how far to scroll down
+            setTimeout(function () { // wait for the table to update, then scroll to the entry
+                container.scrollTo(0, scrollDistance);
+            }, 100);
         },
     },
     created: function () {

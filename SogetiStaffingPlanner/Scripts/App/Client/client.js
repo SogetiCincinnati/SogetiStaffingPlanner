@@ -51,7 +51,6 @@
                 if (this.states.updateState) {
                     console.log('called update client');
                     this.updateClient();
-                    setTimeout(this.findSelected(), 1000);
                 }
                 else if (this.states.addState) {
                     console.log('called add client');
@@ -91,7 +90,8 @@
 
                             data.sort(compare);
                             this.clients = data;
-
+                            this.findSelected();
+                            this.scrollDown();
                         }.bind(this)
                     });
                 }.bind(this),
@@ -110,7 +110,7 @@
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    
+                    console.log(this.formData);
                     this.states.addState = false;
                     $.ajax({
                         async: false,

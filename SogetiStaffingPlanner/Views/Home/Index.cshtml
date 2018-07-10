@@ -6,10 +6,30 @@
         <h2>Practice Manager View</h2>
         <hr />
         <div v-if="displayState === true" class="addButton">
-            <h1>Display Area</h1>
-            <p>{{displayView.OpportunityName}}</p>
-            <p>{{displayView.AEName}}</p>
-            <button v-on:click="displayState = false">Back</button>
+            <p>OpportunityName : {{displayView.OpportunityName}}</p>
+            <p>Position Name : {{displayView.PositionName}}</p>
+            <p>Number of positions : {{displayView.NumberOfPositions}}</p>
+            <p>Status : {{displayView.PositionStatusName}}</p>
+            <p>Unit : {{displayView.UnitName}}</p>
+            <p>Priority : {{displayView.Priority}}</p>
+            <p>Sold : {{displayView.SoldStatusName}}</p>
+            <p> Client : {{displayView.ClientName}}</p>
+            <p>SkillSet : {{displayView.Skillset}}</p>
+            <p> Expected Start Date : {{displayView.ExpectedStartDate}}</p>
+            <p>Min Consultant Grade : {{displayView.MinConsultantGrade}}</p>
+            <p>Max Consultant Grade : {{displayView.MaxConsultantGrade}}</p>
+            <p>Rate : {{displayView.Rate}}</p>
+            <p>Duration : {{displayView.Duration}}</p>
+            <p>Date : {{displayView.Date}}</p>
+            <p> Client Contact : {{displayView.ClientContact}}</p>
+            <p>Hire Candidate : {{displayView.HireCandidate}}</p>
+            <p>Proposed Candidate : {{displayView.ProposedCandidate}}</p>
+            <p>Rejected Candidate : {{displayView.RejectedCandidate}}</p>
+            <p>Accepted Candidate : {{displayView.AcceptedCandidate}}</p>
+            <p>AE : {{displayView.AEName}}</p>
+            <p>ACT : {{displayView.ACTName}}</p>
+            <p>LastModified : {{displayView.LastModified}}</p>
+            <button class="btn btn-warning" v-on:click="displayState = false">Back</button>
             <div class="form-group"></div>
         </div>
         <!--

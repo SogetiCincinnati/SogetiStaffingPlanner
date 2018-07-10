@@ -49,6 +49,9 @@
       
         for (let i = 0; i < that.users.length; i++) {     
             if (that.formData.name == that.users[i].FullName) {
+                if (that.formData.name == that.formData.prevName) {
+                    return;
+                }
                 that.errors.name = 'User already exists.';
             }
         }

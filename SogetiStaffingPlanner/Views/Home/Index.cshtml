@@ -6,6 +6,14 @@
         <h2>Practice Manager View</h2>
         <hr />
         <div v-if="displayState === true" class="addButton">
+            <p>OpportunityName : {{displayView.OpportunityName}}</p>
+            <p>Position Name : {{displayView.PositionName}}</p>
+            <p>Number of positions : {{displayView.NumberOfPositions}}</p>
+            <p>Status : {{displayView.PositionStatusName}}</p>
+            <p>Unit : {{displayView.UnitName}}</p>
+            <p>Priority : {{displayView.Priority}}</p>
+            <p>Sold : {{displayView.SoldStatusName}}</p>
+            <p> Client : {{displayView.ClientName}}</p>
             <p>SkillSet : {{displayView.Skillset}}</p>
             <p> Expected Start Date : {{displayView.ExpectedStartDate}}</p>
             <p>Min Consultant Grade : {{displayView.MinConsultantGrade}}</p>

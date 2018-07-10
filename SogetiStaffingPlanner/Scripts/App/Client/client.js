@@ -51,11 +51,11 @@
                 if (this.states.updateState) {
                     console.log('called update client');
                     this.updateClient();
+                    setTimeout(this.findSelected(), 1000);
                 }
                 else if (this.states.addState) {
                     console.log('called add client');
                     this.addClient();
-                    this.scrollDown();
 
                 }
             } 
@@ -91,12 +91,7 @@
 
                             data.sort(compare);
                             this.clients = data;
-                            for (client in this.clients) { // Highlights the updated row
-                                if (this.clients[client].ClientName == this.formData.clientName &&
-                                    this.clients[client].ClientSubbusiness == this.formData.clientSubbusiness) {
-                                    this.selected = client;
-                                }
-                            }
+
                         }.bind(this)
                     });
                 }.bind(this),
@@ -106,7 +101,6 @@
             });
         },
         addClient: function () {
-            this.selected = this.clients.length; // it will highlight this row
             $.ajax({
                 type: "POST",
                 url: "AddClient",
@@ -116,7 +110,7 @@
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    this.formData = {};
+                    
                     this.states.addState = false;
                     $.ajax({
                         async: false,
@@ -136,6 +130,8 @@
 
                             data.sort(compare);
                             this.clients = data;
+                            this.findSelected();
+                            this.scrollDown();
                         }.bind(this)
                     });
                 }.bind(this),
@@ -148,8 +144,6 @@
             this.formData = {};
             this.states.addState = true;
             window.scrollTo(0, 100);
-          
-            
         },
         onEdit: function (client) {
             this.errors = {};
@@ -159,7 +153,6 @@
             this.formData.clientName = client.ClientName;
             this.formData.clientSubbusiness = client.ClientSubbusiness;
             this.formData.active = true;
-            console.log(this.formData);
             window.scrollTo(0, 100);
         },
         cancel: function () {
@@ -189,9 +182,21 @@
             return errorCount;
         },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
-            let container = document.querySelector(".scrollBar");
-            setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
-        }          
+            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+            let scrollDistance =  this.selected * (container.scrollHeight / this.clients.length); // calculate how far to scroll down
+            setTimeout(function () { // wait for the table to update, then scroll to the entry
+                container.scrollTo(0, scrollDistance);
+            }, 100);
+        },
+        findSelected: function () {
+            for (client in this.clients) { // Highlights the updated row
+                if (this.clients[client].ClientName == this.formData.clientName &&
+                    this.clients[client].ClientSubbusiness == this.formData.clientSubbusiness) {
+                    this.selected = client;
+                    break;
+                }
+            }
+        }
     },
     created: function () {
         $.ajax({
@@ -212,7 +217,6 @@
 
                 data.sort(compare);
                 this.clients = data;
-                console.log(this.clients);
             }.bind(this)
         });
     }

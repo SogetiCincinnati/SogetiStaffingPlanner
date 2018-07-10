@@ -37,7 +37,6 @@
         }
     },
     checkForm: function (that) {
-        console.log('hii');
         if (that.states.updateState) {
             console.log('updated');
         }

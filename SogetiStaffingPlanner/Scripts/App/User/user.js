@@ -31,6 +31,17 @@
         },
         computeRole() {
             return this.formData.role;
+        },
+        isDisabled() {
+            let count = 0;
+            if (this.errors.name) { count += 1 };
+            if (this.errors.role) { count += 1 };
+            if (this.errors.permission) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     watch: {
@@ -43,7 +54,6 @@
             this.errors.name = '';
             this.states.addState = true;
             window.scrollTo(0, 100);
-            console.log(this.formData);
         },
         onSubmit: function () {     
             validate.checkForm(this);
@@ -59,6 +69,7 @@
         },
         cancel: function () {
             this.errors.name = '';
+            this.formData.prevName = '';
             this.errors.permission = '';
             this.errors.role = '';
             this.states.addState = false;
@@ -123,10 +134,8 @@
         }
     },
     created() {
-
-            requests.fetchUsers(this);
-            requests.getPermissions(this);
-        requests.getRoles(this);
-      
+        requests.fetchUsers(this);
+        requests.getPermissions(this);
+        requests.getRoles(this);     
         }
     });

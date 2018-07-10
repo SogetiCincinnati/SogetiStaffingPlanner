@@ -11,7 +11,7 @@ namespace SogetiStaffingPlanner.Controllers
     public class UserController : Controller
     {
 
-        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
+        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
         // GET: User
         public ActionResult Index()
         {

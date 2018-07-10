@@ -15,9 +15,9 @@ namespace SogetiStaffingPlanner.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Dev_ClientOpportunitiesEntities : DbContext
+    public partial class ClientOpportunitiesEntities : DbContext
     {
-        public Dev_ClientOpportunitiesEntities()
+        public ClientOpportunitiesEntities()
             : base("name=Dev_ClientOpportunitiesEntities")
         {
         }

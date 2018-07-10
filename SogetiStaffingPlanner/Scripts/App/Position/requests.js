@@ -99,7 +99,6 @@ let requests = {
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
                 console.log('POST request success');
-                alert('Successfully added');
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -115,10 +114,17 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
+                for (position in that.positions) { // Highlights the updated row
+                    
+                    if (that.positions[position].PositionName == that.positionName &&
+                        that.positions[position].OpportunityId == that.opportunityId) {
+                        that.selected = position;
+                    }
+                }
                 //Receives message from backend for you to do what you want with it              
-                alert('Successfully updated ' + that.positionName + '.');
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
+
             }.bind(that),
             error: function (e) {
                 console.log(e);

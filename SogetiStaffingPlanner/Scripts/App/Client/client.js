@@ -1,7 +1,10 @@
-﻿new Vue({
-    el: '#createClient',
+﻿var content = new Vue({
+    el: '#Client',
     data: {
         clients: [],
+        selected: null,
+        items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        nextNum: 10,
         formData: {
             clientName: '',
             clientSubbusiness: '',
@@ -52,10 +55,13 @@
                 else if (this.states.addState) {
                     console.log('called add client');
                     this.addClient();
+                    this.scrollDown();
+
                 }
             } 
         },
         updateClient: function () {
+
             $.ajax({
                 type: "POST",
                 url: "EditClient",
@@ -65,7 +71,6 @@
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    alert('Client Name: "' + this.formData.clientName + '" and Client Subbusiness: "' + this.formData.clientSubbusiness + '" successfully edited.');
                     this.states.addState = false;
                     this.states.updateState = false;
                     $.ajax({
@@ -76,7 +81,22 @@
                         contentType: "application/json;charset=utf-8",
                         dataType: "json",
                         success: function (data) {
+                            function compare(a, b) {
+                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                                    return -1;
+                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                                    return 1;
+                                return 0;
+                            }
+
+                            data.sort(compare);
                             this.clients = data;
+                            for (client in this.clients) { // Highlights the updated row
+                                if (this.clients[client].ClientName == this.formData.clientName &&
+                                    this.clients[client].ClientSubbusiness == this.formData.clientSubbusiness) {
+                                    this.selected = client;
+                                }
+                            }
                         }.bind(this)
                     });
                 }.bind(this),
@@ -86,6 +106,7 @@
             });
         },
         addClient: function () {
+            this.selected = this.clients.length; // it will highlight this row
             $.ajax({
                 type: "POST",
                 url: "AddClient",
@@ -95,7 +116,6 @@
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    alert('Client Name: "' + this.formData.clientName + '" and Client Subbusiness: "' + this.formData.clientSubbusiness + '" successfully added.');
                     this.formData = {};
                     this.states.addState = false;
                     $.ajax({
@@ -106,6 +126,15 @@
                         contentType: "application/json;charset=utf-8",
                         dataType: "json",
                         success: function (data) {
+                            function compare(a, b) {
+                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                                    return -1;
+                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                                    return 1;
+                                return 0;
+                            }
+
+                            data.sort(compare);
                             this.clients = data;
                         }.bind(this)
                     });
@@ -116,8 +145,11 @@
             });
         },
         add: function () {
+            this.formData = {};
             this.states.addState = true;
             window.scrollTo(0, 100);
+          
+            
         },
         onEdit: function (client) {
             this.errors = {};
@@ -145,8 +177,6 @@
                 errorCount++;
             } else { this.errors.clientName = ''; }
 
-
-
             if (!this.states.updateState) {
                 for (let i = 0; i < this.clients.length; i++) {
                     if (this.formData.clientName == this.clients[i].ClientName) {
@@ -156,15 +186,12 @@
                     }
                 }
             } else { }
-
-
-
-
-
             return errorCount;
-        }
-
-           
+        },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            let container = document.querySelector(".scrollBar");
+            setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
+        }          
     },
     created: function () {
         $.ajax({
@@ -175,8 +202,17 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log(this.clients);
+                function compare(a, b) {
+                    if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                        return -1;
+                    if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                        return 1;
+                    return 0;
+                }
+
+                data.sort(compare);
                 this.clients = data;
+                console.log(this.clients);
             }.bind(this)
         });
     }

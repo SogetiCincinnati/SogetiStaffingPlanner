@@ -31,6 +31,7 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
+        selected: null, // Index of entry being selected to be highlighted
     },
     watch: {
         positionName: function (val) {
@@ -66,6 +67,7 @@ let position = new Vue({
                 else if (this.addState) {
                     console.log('add positions function called');
                     this.addPosition();
+                    this.scrollDown();
                 }
             } 
         },
@@ -81,7 +83,7 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
-            
+            this.selected = this.positions.length; // it will highlight this row
             this.errors = {};
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
@@ -174,6 +176,10 @@ let position = new Vue({
             this.positionDetail = false;
             this.moreState = false;
             window.scrollTo(0, 0);
+        },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            let container = document.querySelector(".scrollBar");
+            setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
         },
     },
     created: function () {

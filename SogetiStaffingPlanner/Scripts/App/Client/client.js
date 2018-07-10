@@ -81,6 +81,15 @@
                         contentType: "application/json;charset=utf-8",
                         dataType: "json",
                         success: function (data) {
+                            function compare(a, b) {
+                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                                    return -1;
+                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                                    return 1;
+                                return 0;
+                            }
+
+                            data.sort(compare);
                             this.clients = data;
                             for (client in this.clients) { // Highlights the updated row
                                 if (this.clients[client].ClientName == this.formData.clientName &&
@@ -117,6 +126,15 @@
                         contentType: "application/json;charset=utf-8",
                         dataType: "json",
                         success: function (data) {
+                            function compare(a, b) {
+                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                                    return -1;
+                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                                    return 1;
+                                return 0;
+                            }
+
+                            data.sort(compare);
                             this.clients = data;
                         }.bind(this)
                     });
@@ -159,8 +177,6 @@
                 errorCount++;
             } else { this.errors.clientName = ''; }
 
-
-
             if (!this.states.updateState) {
                 for (let i = 0; i < this.clients.length; i++) {
                     if (this.formData.clientName == this.clients[i].ClientName) {
@@ -170,19 +186,12 @@
                     }
                 }
             } else { }
-
-
-
-
-
             return errorCount;
         },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
             let container = document.querySelector(".scrollBar");
             setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
-        }
-
-           
+        }          
     },
     created: function () {
         $.ajax({
@@ -193,9 +202,17 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log(this.clients);
+                function compare(a, b) {
+                    if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                        return -1;
+                    if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                        return 1;
+                    return 0;
+                }
+
+                data.sort(compare);
                 this.clients = data;
-                
+                console.log(this.clients);
             }.bind(this)
         });
     }

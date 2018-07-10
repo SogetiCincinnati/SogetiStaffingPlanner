@@ -17,7 +17,13 @@
                         that.errors.name = 'User already exists.';
                     }
                 }
-            }         
+            } else {
+                for (let i = 0; i < that.users.length; i++) {
+                    if (that.formData.name == that.users[i].FullName && that.formData.prevName != that.users[i].FullName) {
+                        that.errors.name = 'User already exists.';
+                    }
+                }
+            }      
         } catch (e) { };
     },
     validatePermission: function (val, that) {
@@ -31,19 +37,22 @@
         }
     },
     checkForm: function (that) {
+        console.log('hii');
+        if (that.states.updateState) {
+            console.log('updated');
+        }
         function isBlank(str) {
             return (!str || /^\s*$/.test(str));
         }
         if (isBlank(that.formData.name)) {
             that.errors.name = 'Name required.';
         }
-        if (!that.states.updateState) {
-            for (let i = 0; i < that.users.length; i++) {
-                if (that.formData.name == that.users[i].FullName) {
-                    that.errors.name = 'User already exists.';
-                }
+      
+        for (let i = 0; i < that.users.length; i++) {     
+            if (that.formData.name == that.users[i].FullName) {
+                that.errors.name = 'User already exists.';
             }
-        }  
+        }
         if (!that.formData.name) {
             that.errors.name = 'Name required.';
         } 

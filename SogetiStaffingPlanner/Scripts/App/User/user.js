@@ -12,8 +12,9 @@
         },
         formData: {
             name: '',
+            prevName: '',
             permission: '',
-            role: '',
+            role: ''
         },
         errors: {
             name: null,
@@ -47,8 +48,7 @@
         onSubmit: function () {     
             validate.checkForm(this);
             if (this.errors.name || this.errors.permission || this.errors.role) { return; }
-            if (this.states.updateState) {
-                console.log('update called.')      
+            if (this.states.updateState) {  
                 this.updateUser();
             } else if (this.states.addState) {
                 console.log('add called');
@@ -76,12 +76,14 @@
             this.states.updateState = true;
             this.formData.userId = user.UserId;
             this.formData.name = user.FullName;
+            this.formData.prevName = user.FullName;
             this.formData.permission = user.PermissionRoleId;
             this.formData.role = user.ViewRoleId;
-            console.log(this.formData);
+           
             window.scrollTo(0, 100);
         },
         updateUser: function () {
+            
             let data = {};
             data.name = this.formData.name;
             data.permission = this.formData.permission;

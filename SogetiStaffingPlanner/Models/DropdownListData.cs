@@ -83,4 +83,15 @@ namespace SogetiStaffingPlanner.Models
 		public int UserId { get; set; }
 		public string UserFullName { get; set; }
 	}
+
+    //Used for storing Viewrole data for sending the dropdown list for Users for dropdowns on the front end
+    public class RoleList {
+         public int ViewRoleId { get; set; }
+         public string ViewName { get; set; }
+    }
+    public class PermissionList
+    {
+        public int PermissionRoleId { get; set; }
+        public string PermissionRoleName { get; set; }
+    }   
 }

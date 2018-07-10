@@ -296,7 +296,9 @@
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Home\app.js" />
     <Content Include="Scripts\App\Position\validate.js" />
+    <Content Include="Scripts\App\User\requests.js" />
     <Content Include="Scripts\App\User\user.js" />
+    <Content Include="Scripts\App\User\validate.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

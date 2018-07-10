@@ -113,5 +113,59 @@ namespace SogetiStaffingPlanner.Controllers
             return Json("Error Occurred", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetRoleList()
+        {
+            try
+            {
+                List<DefaultViewRole> role = db.DefaultViewRoles.ToList();
+
+                List<RoleList> roleList = new List<RoleList>();
+                foreach(DefaultViewRole d in role)
+                {
+                    if(d.Active == true)
+                    {
+                        roleList.Add(new RoleList
+                        {
+                            ViewRoleId = d.ViewRoleId,
+                            ViewName = d.ViewName
+                        });
+                    }
+                }
+                return Json(roleList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult GetPermissionList()
+        {
+            try
+            {
+                List<PermissionRole> role = db.PermissionRoles.ToList();
+
+                List<PermissionList> permissions = new List<PermissionList>();
+                foreach (PermissionRole d in role)
+                {
+                    if (d.Active == true)
+                    {
+                        permissions.Add(new PermissionList
+                        {
+                            PermissionRoleId = d.PermissionRoleId,
+                            PermissionRoleName = d.PermissionRoleName
+                        });
+                    }
+                }
+                return Json(permissions, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.ToString());
+            }
+            return Json("An Error Occurred", JsonRequestBehavior.AllowGet);
+        }
     }
 }

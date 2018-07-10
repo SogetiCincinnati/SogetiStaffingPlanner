@@ -1,4 +1,7 @@
-﻿<div id="User" class="main">
+﻿
+<div id="User" class="main">
+    <script type="text/javascript" src="../../Scripts/App/User/validate.js"></script>
+    <script type="text/javascript" src="../../Scripts/App/User/requests.js"></script>
     <h2>User List</h2>
     <hr />
     <div v-if="states.addState == false" class="addButton">
@@ -6,7 +9,7 @@
             <i class="fa fa-pencil"></i> Add User
         </button>
         <div class="form-group"></div>
-    </div> 
+    </div>
     <template v-else>
         <div class="addButton">
             <div class="form-horizontal">
@@ -19,17 +22,27 @@
 
                 <label class="col-sm-3"> Permission: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.permission" />
+                    <select class="form-control" v-model="formData.permission">
+                        <option v-for="permission in dropDowns.permissions" :value="permission.PermissionRoleId">{{ permission.PermissionRoleName }}</option>
+                    </select>
                     <span class="error">{{ errors.permission }}</span>
                 </div>
                 <div class="form-group"></div>
                 <label class="col-sm-3" for="clientSubbusiness"> Role: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.role" />
+                    <select class="form-control" v-model="formData.role">
+                        <option v-for="role in dropDowns.roles" :value="role.ViewRoleId">{{ role.ViewName }}</option>
+                    </select>
+                   
                     <span class="error">{{ errors.role }}</span>
                 </div>
                 <div class="form-group"></div>
-                <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
+                <button class="btn btn-primary" 
+                        v-on:click="onSubmit"
+                        :disabled="isDisabled"
+                >
+                <i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}
+                </button>
                 <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
                 <div class="form-group"></div>
             </div>
@@ -46,8 +59,8 @@
                 </tr>
                 <tr v-for="user in users">
                     <td>{{ user.FullName }}</td>
-                    <td>{{ user.PermissionRoleId }}</td>
-                    <td>{{ user.ViewRoleId }}</td>
+                    <td>{{ getPermissionName(user.PermissionRoleId) }}</td>
+                    <td>{{ getRoleName(user.ViewRoleId) }}</td>
                     <td><button class="btn btn-success" v-on:click="edit(user)"><i class="fa fa-edit"></i></button></td>
                 </tr>
             </table>

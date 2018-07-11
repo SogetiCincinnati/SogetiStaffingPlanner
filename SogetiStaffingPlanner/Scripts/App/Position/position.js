@@ -82,8 +82,8 @@ let position = new Vue({
         }
     },
     methods: {
-        onSubmit: function () {  
-            console.log('form check', this.checkErrors());
+        onSubmit: function () {
+            this.checkForm();
             if (!this.checkErrors()) {
                 if (this.updateState) {
                     console.log('update positions function called!');

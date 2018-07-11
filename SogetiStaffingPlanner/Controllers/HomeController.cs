@@ -11,7 +11,7 @@ namespace SogetiStaffingPlanner.Controllers
 	public class HomeController : Controller
 	{
 
-        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
+        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
 		public ActionResult Index()
 		{

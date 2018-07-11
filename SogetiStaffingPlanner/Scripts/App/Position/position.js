@@ -43,7 +43,6 @@ let position = new Vue({
     },
     computed: {
         isDisabled() {
-            console.log(this.errors);
             let count = 0;
             if (this.errors.positionName) { count += 1 };
             if (this.errors.positionStatusId) { count += 1 };
@@ -83,19 +82,41 @@ let position = new Vue({
         }
     },
     methods: {
-        onSubmit: function () {   
-            console.log(this.checkForm());
-            if (this.checkForm() == true) {
+        onSubmit: function () {  
+            console.log('form check', this.checkErrors());
+            if (!this.checkErrors()) {
                 if (this.updateState) {
-                    console.log('update positions function called');
+                    console.log('update positions function called!');
                     this.updatePosition();
                 }
                 else if (this.addState) {
                     console.log('add positions function called');
-                    this.addPosition();
-                    
+                    this.addPosition();                   
                 }
+                this.errors.positionName = null;
+                this.errors.positionStatusId = null;
+                this.errors.opportunityId = null;
+                this.errors.unitPracticeId = null;
+                this.errors.numberOfPositions = null;
+                this.errors.duration = null;
+                this.errors.rate = null;
             } 
+        },
+        checkErrors: function () {
+           
+            let count = 0;
+            if (this.errors.positionName) { count += 1 };
+            if (this.errors.positionStatusId) { count += 1 };
+            if (this.errors.opportunityId) { count += 1 };
+            if (this.errors.unitPracticeId) { count += 1 };
+            if (this.errors.numberOfPositions) { count += 1 };
+            if (this.errors.duration) { count += 1 };
+            if (this.errors.rate) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
         },
         add: function () {
             this.addState = true;
@@ -243,5 +264,6 @@ let position = new Vue({
         requests.getUnitList(this);
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
+        console.log(this.errors.positionName);
     }
 })

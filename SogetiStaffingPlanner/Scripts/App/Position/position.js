@@ -151,7 +151,6 @@ let position = new Vue({
             this.errors.rate = null;
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
-            console.log(data);
             /* Code to format the date for the controller to recieve */
             if (this.expectedStartDate) {
                 let parts = this.expectedStartDate.split('-')
@@ -164,8 +163,6 @@ let position = new Vue({
             data.lastModified = new Date().toISOString();
             /* Submit the data */
             requests.postPosition(data, this);
-            this.findSelected();
-            this.scrollDown();
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
@@ -248,6 +245,16 @@ let position = new Vue({
             this.positionDetail = false;
             this.moreState = false;
             window.scrollTo(0, 0);
+        },
+        findSelected: function () {
+            for (p in this.positions) { // Highlights the updated row
+                if (this.positions[p].PositionName == this.positionName
+                    ) {
+                    console.log('found');
+                    this.selected = p;
+                    break;
+                }
+            }
         },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
             let container = document.querySelector(".scrollBar"); // looks for table scrollbar

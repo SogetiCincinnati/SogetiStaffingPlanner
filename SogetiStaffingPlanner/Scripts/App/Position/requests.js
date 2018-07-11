@@ -96,9 +96,12 @@ let requests = {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
-                posHelpers.clearForm(that);
+                
                 requests.fetchPositions(that);
                 console.log('POST request success');
+                that.findSelected();
+                that.scrollDown();
+                posHelpers.clearForm(that);
             }.bind(that),
             error: function (e) {
                 console.log(e);

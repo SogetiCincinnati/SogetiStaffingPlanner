@@ -24,7 +24,28 @@
         opportunityOwnerUserId: null,
         lastModifiedUserId: null,
         active: false,
-        errors: {}
+        errors: {
+            opportunityName: null,
+            clientId: null,
+            accountExecutiveUserId: null,
+            unitId: null,
+            regionId: null
+        }
+    },
+    computed: {
+        isDisabled() {
+            let count = 0;
+            if (this.errors.opportunityName) { count += 1 };
+            if (this.errors.clientId) { count += 1 };
+            if (this.errors.accountExecutiveUserId) { count += 1 };
+            if (this.errors.unitId) { count += 1 };
+            if (this.errors.regionId) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
     watch: {
         opportunityName: function (val) { validate.checkOpportunityName(val, this) },
@@ -54,7 +75,12 @@
             this.opportunityOwnerUserId = null;
             this.clientId = null;
             this.active = false;
-            this.errors = [];
+
+            this.errors.opportunityName = null;
+            this.errors.clientId = null;
+            this.errors.accountExecutiveUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
             window.scrollTo(0, 0);
         },
         onSubmit: function () {
@@ -106,7 +132,11 @@
         },
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */   
         cancel: function () {
-            this.errors = {};
+            this.errors.opportunityName = null;
+            this.errors.clientId = null;
+            this.errors.accountExecutiveUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
             this.addState = false;
             window.scrollTo(0, 0);
         },
@@ -197,5 +227,6 @@
         requests.getACTLeadList(this);
         requests.getUnitList(this);
         requests.getClientList(this);
+        
     }
 });

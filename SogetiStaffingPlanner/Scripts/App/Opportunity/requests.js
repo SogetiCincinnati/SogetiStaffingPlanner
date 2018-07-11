@@ -98,6 +98,7 @@ let requests = {
         });
     },
     getClientList: function (that) {
+        
         // GET CLIENT LIST
         $.ajax({
             async: false,
@@ -108,6 +109,7 @@ let requests = {
             dataType: "json",
             success: function (data) {
                 that.clients = data;
+               
             }.bind(that)
         });
     },

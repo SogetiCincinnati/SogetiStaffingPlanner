@@ -135,7 +135,7 @@
 
                         <div class="form-group"></div>
                         <div class="col-sm-6">
-                            <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ updateState ? 'Update' : 'Add'}}</button>
+                            <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ updateState ? 'Update' : 'Add'}}</button>
                             <button class="btn btn-danger" v-on:click="clearForm"><i class="fa fa-times"></i> Cancel</button>
                         </div>
 
@@ -160,7 +160,7 @@
                         </tr>
                         <tr v-for="opportunity in opportunities">
                             <td>{{ opportunity.opportunityName }}</td>
-                            <td>{{ getClientName(opportunity.clientId) }}</td>
+                            <td>{{getClientName(opportunity.clientId)}}</td>
                             <td>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
                             <td>{{ getUnitName(opportunity.unitId) }}</td>
                             <td>{{ opportunity.clientContact }}</td>

@@ -41,7 +41,11 @@
         } catch (e) { }
     },
     checkForm: function (that) {
-        that.errors = {};
+        that.errors.opportunityName = null;
+        that.errors.clientId = null;
+        that.errors.accountExecutiveUserId = null;
+        that.errors.unitId = null;
+        that.errors.regionId = null;
 
         /*Checks to see if forms are empty */
         if (!that.opportunityName) {
@@ -69,4 +73,3 @@
         if (!that.errors.length) { return true; }
     }
 }
-console.log('working');

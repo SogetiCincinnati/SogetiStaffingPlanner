@@ -12,7 +12,7 @@ namespace SogetiStaffingPlanner.Controllers
 	public class PositionController : Controller
 	{
 
-        Dev_ClientOpportunitiesEntities db = new Dev_ClientOpportunitiesEntities();
+        ClientOpportunitiesEntities db = new ClientOpportunitiesEntities();
 
         public ActionResult Index()
         {

@@ -2,6 +2,7 @@
     el: '#User',
     data: {
         users: '',
+        selected: null, // highlights edited or added entries
         dropDowns: {
             roles: '',
             permissions: ''
@@ -129,6 +130,21 @@
             for (let i = 0; i < this.dropDowns.roles.length; i++) {
                 if (this.dropDowns.roles[i].ViewRoleId == viewRoleId) {
                     return this.dropDowns.roles[i].ViewName;
+                }
+            }
+        },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+            let scrollDistance = this.selected * (container.scrollHeight / this.users.length); // calculate how far to scroll down
+            setTimeout(function () { // wait for the table to update, then scroll to the entry
+                container.scrollTo(0, scrollDistance);
+            }, 100);
+        },
+        findSelected: function () {
+            for (user in this.users) { // Highlights the updated row
+                if (this.users[user].FullName == this.formData.name) {
+                    this.selected = user;
+                    break;
                 }
             }
         }

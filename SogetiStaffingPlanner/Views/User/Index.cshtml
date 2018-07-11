@@ -57,10 +57,13 @@
                     <th>Role</th>
                     <th>Edit</th>
                 </tr>
-                <tr v-for="user in users">
-                    <td>{{ user.FullName }}</td>
-                    <td>{{ getPermissionName(user.PermissionRoleId) }}</td>
-                    <td>{{ getRoleName(user.ViewRoleId) }}</td>
+                <tr v-for="(user, index) in users">
+                    <td v-if="index == selected" class="selected"> {{ user.FullName }} </td>
+                    <td v-else>{{ user.FullName }}</td>
+                    <td v-if="index == selected" class="selected"> {{ getPermissionName(user.PermissionRoleId) }} </td>
+                    <td v-else>{{ getPermissionName(user.PermissionRoleId) }}</td>
+                    <td v-if="index == selected" class="selected"> {{ getRoleName(user.ViewRoleId) }} </td>
+                    <td v-else>{{ getRoleName(user.ViewRoleId) }}</td>
                     <td><button class="btn btn-success" v-on:click="edit(user)"><i class="fa fa-edit"></i></button></td>
                 </tr>
             </table>

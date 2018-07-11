@@ -25,6 +25,8 @@
             dataType: "json",
             success: function (response) {
                 requests.fetchUsers(that);
+                that.findSelected();
+                that.scrollDown();
                 that.formData = {};
                 that.states.addState = false;
             }.bind(that)
@@ -44,6 +46,9 @@
                     that.states.addState = false;
                     that.states.updateState = false;
                     requests.fetchUsers(that);
+                    that.findSelected();
+                    that.scrollDown();
+                    that.formData = {};
                 }.bind(that),
                 error: function (e) {
                     console.log(e, "Error adding data! Please try again.");

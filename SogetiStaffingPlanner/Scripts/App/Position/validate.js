@@ -1,7 +1,13 @@
 ﻿let validate = {
     /* When a user hits submit, that function will check all the forms. */
     checkForm: function (that) {
-        that.errors = {};
+        that.errors.positionName = null;
+        that.errors.positionStatusId = null;
+        that.errors.opportunityId = null;
+        that.errors.unitPracticeId = null;
+        that.errors.numberOfPositions = null;
+        that.errors.duration = null;
+        that.errors.rate = null;
         /*Checks to see if forms are empty */
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';

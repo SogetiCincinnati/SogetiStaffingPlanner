@@ -30,8 +30,34 @@ let position = new Vue({
         users: '',
         positionStatuses: '',
         grades: '',
-        errors: {}, // builds all the errors
+        errors: {
+            positionName: null,
+            positionStatusId: null,
+            opportunityId: null,
+            unitPracticeId: null,
+            numberOfPositions: null,
+            duration: null,
+            rate: null
+        }, // builds all the errors
         selected: null, // Index of entry being selected to be highlighted
+    },
+    computed: {
+        isDisabled() {
+            console.log(this.errors);
+            let count = 0;
+            if (this.errors.positionName) { count += 1 };
+            if (this.errors.positionStatusId) { count += 1 };
+            if (this.errors.opportunityId) { count += 1 };
+            if (this.errors.unitPracticeId) { count += 1 };
+            if (this.errors.numberOfPositions) { count += 1 };
+            if (this.errors.duration) { count += 1 };
+            if (this.errors.rate) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
     watch: {
         positionName: function (val) {
@@ -73,17 +99,35 @@ let position = new Vue({
         },
         add: function () {
             this.addState = true;
-            this.errors = {};
+            this.errors.positionName = null;
+            this.errors.positionStatusId = null;
+            this.errors.opportunityId = null;
+            this.errors.unitPracticeId = null;
+            this.errors.numberOfPositions = null;
+            this.errors.duration = null;
+            this.errors.rate = null;
             window.scrollTo(0, 200);
         },
         cancel: function () {
-            this.errors = {};
+            this.errors.positionName = null;
+            this.errors.positionStatusId = null;
+            this.errors.opportunityId = null;
+            this.errors.unitPracticeId = null;
+            this.errors.numberOfPositions = null;
+            this.errors.duration = null;
+            this.errors.rate = null;;
             this.addState = false;
             posHelpers.clearForm(this);     
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
-            this.errors = {};
+            this.errors.positionName = null;
+            this.errors.positionStatusId = null;
+            this.errors.opportunityId = null;
+            this.errors.unitPracticeId = null;
+            this.errors.numberOfPositions = null;
+            this.errors.duration = null;
+            this.errors.rate = null;
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
             console.log(data);
@@ -113,7 +157,13 @@ let position = new Vue({
             return validate.checkForm(this);
         },
         onEdit: function (position) {
-            this.errors = {};
+            this.errors.positionName = null;
+            this.errors.positionStatusId = null;
+            this.errors.opportunityId = null;
+            this.errors.unitPracticeId = null;
+            this.errors.numberOfPositions = null;
+            this.errors.duration = null;
+            this.errors.rate = null;
             /* Specify that status is being updated */
             this.updateState = true;
             /* Populate form with selected values */

@@ -158,13 +158,19 @@
                             <th>Details</th>
                             <!--<th>Delete</th>-->
                         </tr>
-                        <tr v-for="opportunity in opportunities">
-                            <td>{{ opportunity.opportunityName }}</td>
-                            <td>{{getClientName(opportunity.clientId)}}</td>
-                            <td>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
-                            <td>{{ getUnitName(opportunity.unitId) }}</td>
-                            <td>{{ opportunity.clientContact }}</td>
-                            <td>{{ getRegionName(opportunity.regionId) }}</td>
+                        <tr v-for="(opportunity, index) in opportunities">
+                            <td v-if="index == selected" class="selected">{{ opportunity.opportunityName }}</td>
+                            <td v-else>{{ opportunity.opportunityName }}</td>
+                            <td v-if="index == selected" class="selected">{{ getClientName(opportunity.clientId) }}</td>
+                            <td v-else>{{ getClientName(opportunity.clientId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                            <td v-else>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ getUnitName(opportunity.unitId) }}</td>
+                            <td v-else>{{ getUnitName(opportunity.unitId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ opportunity.clientContact }}</td>
+                            <td v-else>{{ opportunity.clientContact }}</td>
+                            <td v-if="index == selected" class="selected">{{ getRegionName(opportunity.regionId) }}</td>
+                            <td v-else>{{ getRegionName(opportunity.regionId) }}</td>
                             <td><button class="btn btn-success" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
                             <td><button class="btn btn-warning" v-on:click="displayDetail(opportunity)"><i class="fa fa-plus"></i></button></td>
                             <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->

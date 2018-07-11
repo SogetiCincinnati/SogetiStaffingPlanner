@@ -30,7 +30,8 @@
             accountExecutiveUserId: null,
             unitId: null,
             regionId: null
-        }
+        },
+        selected: null, // finds the active entry that has been added or edited
     },
     computed: {
         isDisabled() {
@@ -122,8 +123,6 @@
         },
         updateOpportunity: function () {
             let data = helpers.buildJSON(this);
-            alert(this.opportunityName + ' updated!');
-            this.clearForm();
             requests.editOpportunity(data, this);
         },
         add: function () {
@@ -217,6 +216,31 @@
             this.moreState = false;
             window.scrollTo(0, 0);
         },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            console.log('opportunity length =\t' + this.opportunities.length);
+            console.log('this.selected =\t' + this.selected);
+            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+            let scrollDistance = this.selected * (container.scrollHeight / this.opportunities.length); // calculate how far to scroll down
+            console.log('table length = ' + container.scrollHeight);
+            console.log('scroll Distance = ' + scrollDistance);
+            setTimeout(function () { // wait for the table to update, then scroll to the entry
+                container.scrollTo(0, scrollDistance);
+            }, 100);
+        },
+        findSelected: function () {
+            for (o in this.opportunities) { // Highlights the updated row
+                console.log(this.opportunities[o].opportunityName);
+                console.log(this.opportunityName);
+                if (this.opportunities[o].opportunityName == this.opportunityName) {
+                   // console.log(this.opportunities[o].OpportunityName);
+                   // console.log(this.opportunityName);
+                    console.log('found at ' + o);
+                    this.selected = o;
+                    break;
+                }
+            }
+        },
+
     },
     created: function () {
         requests.getOpportunityList(this);

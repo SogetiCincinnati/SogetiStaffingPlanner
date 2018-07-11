@@ -2,6 +2,7 @@
 The 'that' context of that file is being passed to these functions as the parameter, 'that' 
 */
 let requests = {
+
     getRegionList: function (that) {
         $.ajax({ // Region List
             async: false,
@@ -109,7 +110,6 @@ let requests = {
             dataType: "json",
             success: function (data) {
                 that.clients = data;
-               
             }.bind(that)
         });
     },
@@ -124,7 +124,6 @@ let requests = {
             dataType: "json",
             success: function (data) {
                 that.opportunities = data;
-
             }.bind(that)
         });
     },
@@ -136,13 +135,14 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                // alert("Added " + that.opportunityName + "!");
                 that.opportunities.push(data);
-                that.clearForm();
                 /* that code will update the table.  It needs to be in it's own function */
                 requests.getOpportunityList(that);
                 requests.getClientList(that);
                 requests.getUnitList(that);
+                that.findSelected();
+                that.scrollDown();
+                that.clearForm();
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -158,10 +158,11 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                alert("Added " + that.opportunityName + "!");
                 that.opportunities.push(data);
-                that.clearForm();
                 requests.getOpportunityList(that);
+                that.findSelected();
+                that.scrollDown();
+                that.clearForm();
             }.bind(that),
             error: function (e) {
                 console.log(e);

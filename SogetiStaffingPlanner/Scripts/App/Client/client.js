@@ -24,10 +24,22 @@
         },
         computeClientSubbusiness() {
             return this.formData.clientSubbusiness;
+        },
+        isDisabled() {
+            console.log('working');
+            let count = 0;
+            if (this.errors.clientName) { count += 1 };
+            if (this.errors.clientSubbusiness) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     watch: {
         computeClientName: function (val) {
+
             try {
                 if (val || val.length) { this.errors.clientName = ''; }
                 else { this.errors.clientName = 'Client name required'; }
@@ -110,7 +122,6 @@
                 success: function (res) {
                     //Receives message from backend for you to do what you want with it
                     console.log('POST request success');
-                    console.log(this.formData);
                     this.states.addState = false;
                     $.ajax({
                         async: false,
@@ -146,7 +157,8 @@
             window.scrollTo(0, 100);
         },
         onEdit: function (client) {
-            this.errors = {};
+            this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
             this.states.addState = true;
             this.states.updateState = true;
             this.formData.clientId = client.ClientId;
@@ -158,14 +170,20 @@
         cancel: function () {
             this.states.addState = false;
             this.states.updateState = false;
-            this.errors = {};
+            this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
             this.formData = [];
             window.scrollTo(0, 0);
         },
         checkForm: function () { // Check to see if there are errors on submit
+            
             let errorCount = 0;
-
-            if (!this.formData.clientName.length || !this.formData.clientName) {
+            try {
+                let input = this.formData.clientName.trim();
+            } catch {
+                this.errors.clientName = 'Client Name required';
+            }
+            if (!this.formData.clientName) {
                 this.errors.clientName = 'Client Name required';
                 errorCount++;
             } else { this.errors.clientName = ''; }

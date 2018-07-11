@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group"></div>
-                <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
+                <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
                 <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
                 <div class="form-group"></div>
             </div>

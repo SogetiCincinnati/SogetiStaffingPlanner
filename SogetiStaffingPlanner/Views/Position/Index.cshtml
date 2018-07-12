@@ -185,7 +185,11 @@
                     <!--/////////////FORM SUBMISSION AND CANCEL BUTTONS/////////////////-->
                     <div class="form-group"></div>
                     <div class="col-sm-6">
-                        <button v-on:click="onSubmit" class="btn btn-primary"><i class="fa fa-pencil"></i> Submit</button>
+                        <button v-on:click="onSubmit"
+                                class="btn btn-primary"
+                                :disabled="errors.numberOfPositions || errors.opportunityId || errors.positionName || errors.positionStatusId">
+                            <i class="fa fa-pencil"></i> Submit
+                        </button>
                         <button v-on:click="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
                     </div>
 

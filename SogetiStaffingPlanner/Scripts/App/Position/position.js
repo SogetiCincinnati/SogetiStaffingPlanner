@@ -31,13 +31,13 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {
-            positionName: null,
-            positionStatusId: null,
-            opportunityId: null,
-            unitPracticeId: null,
-            numberOfPositions: null,
-            duration: null,
-            rate: null
+            positionName: '',
+            positionStatusId: '',
+            opportunityId: '',
+            unitPracticeId: '',
+            numberOfPositions: '',
+            duration: '',
+            rate: ''
         }, // builds all the errors
         selected: null, // Index of entry being selected to be highlighted
     },
@@ -83,6 +83,7 @@ let position = new Vue({
     },
     methods: {
         onSubmit: function () {
+            
             this.checkForm();
             if (!this.checkErrors()) {
                 if (this.updateState) {
@@ -93,17 +94,12 @@ let position = new Vue({
                     console.log('add positions function called');
                     this.addPosition();                   
                 }
-                this.errors.positionName = null;
-                this.errors.positionStatusId = null;
-                this.errors.opportunityId = null;
-                this.errors.unitPracticeId = null;
-                this.errors.numberOfPositions = null;
-                this.errors.duration = null;
-                this.errors.rate = null;
+                validate.clearErrors(this);
+                
             } 
+            console.log('Submit called', this.errors);
         },
         checkErrors: function () {
-           
             let count = 0;
             if (this.errors.positionName) { count += 1 };
             if (this.errors.positionStatusId) { count += 1 };
@@ -120,35 +116,17 @@ let position = new Vue({
         },
         add: function () {
             this.addState = true;
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+            validate.clearErrors(this);
             window.scrollTo(0, 200);
         },
         cancel: function () {
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;;
+            
             this.addState = false;
             posHelpers.clearForm(this);     
             window.scrollTo(0, 0);
         },
         addPosition: function () {    
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+            validate.clearErrors(this);
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
             /* Code to format the date for the controller to recieve */
@@ -175,13 +153,7 @@ let position = new Vue({
             return validate.checkForm(this);
         },
         onEdit: function (position) {
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+            validate.clearErrors(this);
             /* Specify that status is being updated */
             this.updateState = true;
             /* Populate form with selected values */
@@ -272,5 +244,9 @@ let position = new Vue({
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
         console.log(this.errors.positionName);
+    },
+    updated: function () {
+        console.log(this);
     }
 })
+Vue.config.devtools = true;

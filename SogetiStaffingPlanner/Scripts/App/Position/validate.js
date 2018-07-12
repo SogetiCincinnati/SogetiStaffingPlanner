@@ -1,6 +1,7 @@
 ﻿let validate = {
     /* When a user hits submit, that function will check all the forms. */
     checkForm: function (that) {
+        console.log('Checking errors');
         that.errors.positionName = null;
         that.errors.positionStatusId = null;
         that.errors.opportunityId = null;
@@ -9,8 +10,11 @@
         that.errors.duration = null;
         that.errors.rate = null;
         /*Checks to see if forms are empty */
+        console.log(that.positionName);
+        console.log(!that.positionName);
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';
+            console.log('error triggerd.');
         } if (!that.positionStatusId) {
             that.errors.positionStatusId = 'Position Status required';
         } if (!that.opportunityId) {
@@ -50,8 +54,9 @@
             }
 
         } catch (e) { }
-        console.log(Object.keys(that.errors).length);
+        
         if (Object.keys(that.errors).length == 0) {
+            console.log('No errors');
             return true;
         }
 
@@ -113,4 +118,14 @@
             that.errors.unitPracticeId = '';
         }
     },
+    clearErrors: function (that) {
+        console.log('Clearing errors!');
+        that.errors.positionName = null;
+        that.errors.positionStatusId = null;
+        that.errors.opportunityId = null;
+        that.errors.unitPracticeId = null;
+        that.errors.numberOfPositions = null;
+        that.errors.duration = null;
+        that.errors.rate = null;
+    }
 }

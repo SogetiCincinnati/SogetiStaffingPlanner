@@ -143,6 +143,7 @@ let requests = {
                 that.findSelected();
                 that.scrollDown();
                 that.clearForm();
+                requests.updateMessage(that.opporunityName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -163,11 +164,24 @@ let requests = {
                 that.findSelected();
                 that.scrollDown();
                 that.clearForm();
+                requests.addMessage(data.opportunityName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e);
                 console.log(e, "Error adding data! Please try again.");
             }
         });
+    },
+    addMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Added ${message}!`;
+    },
+    updateMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Updated ${message}!`;
     }
 }

@@ -2,6 +2,7 @@
     el: '#opportunity',
     data: {
         opportunities: '',
+        message: '',
         clients: '',
         units: '',
         regions: '',

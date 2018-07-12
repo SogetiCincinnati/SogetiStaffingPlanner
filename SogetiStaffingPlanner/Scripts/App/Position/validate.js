@@ -1,13 +1,7 @@
 ﻿let validate = {
     /* When a user hits submit, that function will check all the forms. */
     checkForm: function (that) {
-        that.errors.positionName = null;
-        that.errors.positionStatusId = null;
-        that.errors.opportunityId = null;
-        that.errors.unitPracticeId = null;
-        that.errors.numberOfPositions = null;
-        that.errors.duration = null;
-        that.errors.rate = null;
+        that.errors = {};
         /*Checks to see if forms are empty */
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';
@@ -26,16 +20,16 @@
                 if (that.duration % 1 != 0) {
                     that.errors.duration ? that.errors.duration += ' Cannot be a decimal.' : that.errors.duration = 'Cannot be a decimal.';
                 }
-            }   
+            }
 
         } catch (e) { }
         try {
             if (that.rate) {
                 if (that.rate < 30) {
                     that.errors.rate = 'Rate cannot be below 30.';
-                } 
+                }
                 if (that.rate % 1 != 0) { // check for decimals
-                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.'; 
+                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.';
                 }
             }
         } catch (e) { }
@@ -45,7 +39,7 @@
                     that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
                 }
                 if (that.numberOfPositions % 1 != 0) {
-                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.'; 
+                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.';
                 }
             }
 

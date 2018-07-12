@@ -3,6 +3,7 @@ let position = new Vue({
     el: '#app',
     data: {
         positions: '',
+        message: '',
         positionDetail: null,
         title: 'Positions',
         addState: false,

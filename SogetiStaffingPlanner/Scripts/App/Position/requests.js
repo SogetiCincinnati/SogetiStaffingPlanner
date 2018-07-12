@@ -124,9 +124,11 @@ let requests = {
                         that.selected = position;
                     }
                 }
-                //Receives message from backend for you to do what you want with it              
+                //Receives message from backend for you to do what you want with it    
+                //requests.updateMessage(that.positionName, this);
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
+                that.findSelected();
 
             }.bind(that),
             error: function (e) {
@@ -134,5 +136,17 @@ let requests = {
                 console.log(e, "Error adding data! Please try again.");
             }
         });
+    },
+    addMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Added ${message}!`;
+    },
+    updateMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Updated ${message}!`;
     }
 };

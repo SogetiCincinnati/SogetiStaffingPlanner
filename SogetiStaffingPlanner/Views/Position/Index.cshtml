@@ -1,6 +1,13 @@
 ﻿
 <div id="app" class="main">
     <div v-if="moreState === false">
+        <template>
+            <div class="flash-message">
+                <transition name="fade">
+                    <p v-if="message">{{ message }}</p>
+                </transition>
+            </div>
+        </template>
         <h2>Position List</h2>
         <hr />
 

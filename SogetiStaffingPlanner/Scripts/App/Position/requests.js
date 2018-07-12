@@ -96,7 +96,7 @@ let requests = {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
-                
+
                 requests.fetchPositions(that);
                 console.log('POST request success');
                 that.findSelected();
@@ -118,7 +118,7 @@ let requests = {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 for (position in that.positions) { // Highlights the updated row
-                    
+
                     if (that.positions[position].PositionName == that.positionName &&
                         that.positions[position].OpportunityId == that.opportunityId) {
                         that.selected = position;

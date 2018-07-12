@@ -27,6 +27,7 @@
                 requests.fetchUsers(that);
                 that.findSelected();
                 that.scrollDown();
+                requests.addMessage(that.formData.name, this);
                 that.formData = {};
                 that.states.addState = false;
             }.bind(that)
@@ -48,6 +49,7 @@
                     requests.fetchUsers(that);
                     that.findSelected();
                     that.scrollDown();
+                    requests.updateMessage(data.name, this);
                     that.formData = {};
                 }.bind(that),
                 error: function (e) {
@@ -80,5 +82,17 @@
                 that.dropDowns.roles = data;
             }.bind(that)
         });
+    },
+    addMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Added ${message}!`;
+    },
+    updateMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Updated ${message}!`;
     }
 }

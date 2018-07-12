@@ -2,6 +2,7 @@
     el: '#User',
     data: {
         users: '',
+        message: '',
         selected: null, // highlights edited or added entries
         dropDowns: {
             roles: '',

@@ -99,6 +99,7 @@ let requests = {
 
                 requests.fetchPositions(that);
                 console.log('POST request success');
+                requests.addMessage(data.positionName, this);
                 that.findSelected();
                 that.scrollDown();
                 posHelpers.clearForm(that);
@@ -125,10 +126,11 @@ let requests = {
                     }
                 }
                 //Receives message from backend for you to do what you want with it   
+                requests.updateMessage(that.positionName, this);
                 that.findSelected();
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
-                that.findSelected();
+               
 
             }.bind(that),
             error: function (e) {

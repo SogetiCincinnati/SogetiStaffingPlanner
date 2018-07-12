@@ -195,6 +195,16 @@ let position = new Vue({
                 container.scrollTo(0, scrollDistance);
             }, 100);
         },
+        checkErrorObject: function (obj) {
+            let count = 0;
+            $.each(obj, function (index, value) {
+                if (value) {
+                    count += 1;
+                }
+                console.log(count);
+                return count;
+            });
+        }
     },
     created: function () {
         requests.fetchPositions(this);
@@ -204,4 +214,5 @@ let position = new Vue({
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
     }
-})
+});
+Vue.config.devtools = true;

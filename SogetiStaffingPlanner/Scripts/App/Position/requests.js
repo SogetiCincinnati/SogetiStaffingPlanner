@@ -98,7 +98,7 @@ let requests = {
                 //Receives message from backend for you to do what you want with it
                 
                 requests.fetchPositions(that);
-                validate.clearErrors(that);
+                
                 console.log('POST request success');
                 that.findSelected();
                 that.scrollDown();
@@ -126,7 +126,7 @@ let requests = {
                     }
                 }
                 //Receives message from backend for you to do what you want with it   
-                validate.clearErrors(that);
+               
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
 

@@ -1,20 +1,10 @@
 ﻿let validate = {
     /* When a user hits submit, that function will check all the forms. */
     checkForm: function (that) {
-        console.log('Checking errors');
-        that.errors.positionName = null;
-        that.errors.positionStatusId = null;
-        that.errors.opportunityId = null;
-        that.errors.unitPracticeId = null;
-        that.errors.numberOfPositions = null;
-        that.errors.duration = null;
-        that.errors.rate = null;
+        that.errors = {};
         /*Checks to see if forms are empty */
-        console.log(that.positionName);
-        console.log(!that.positionName);
         if (!that.positionName) {
             that.errors.positionName = 'Position Name required';
-            console.log('error triggerd.');
         } if (!that.positionStatusId) {
             that.errors.positionStatusId = 'Position Status required';
         } if (!that.opportunityId) {
@@ -30,16 +20,16 @@
                 if (that.duration % 1 != 0) {
                     that.errors.duration ? that.errors.duration += ' Cannot be a decimal.' : that.errors.duration = 'Cannot be a decimal.';
                 }
-            }   
+            }
 
         } catch (e) { }
         try {
             if (that.rate) {
                 if (that.rate < 30) {
                     that.errors.rate = 'Rate cannot be below 30.';
-                } 
+                }
                 if (that.rate % 1 != 0) { // check for decimals
-                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.'; 
+                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.';
                 }
             }
         } catch (e) { }
@@ -49,14 +39,13 @@
                     that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
                 }
                 if (that.numberOfPositions % 1 != 0) {
-                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.'; 
+                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.';
                 }
             }
 
         } catch (e) { }
-        
+        console.log(Object.keys(that.errors).length);
         if (Object.keys(that.errors).length == 0) {
-            console.log('No errors');
             return true;
         }
 
@@ -118,14 +107,4 @@
             that.errors.unitPracticeId = '';
         }
     },
-    clearErrors: function (that) {
-        console.log('Clearing errors!');
-        that.errors.positionName = null;
-        that.errors.positionStatusId = null;
-        that.errors.opportunityId = null;
-        that.errors.unitPracticeId = null;
-        that.errors.numberOfPositions = null;
-        that.errors.duration = null;
-        that.errors.rate = null;
-    }
 }

@@ -1,46 +1,51 @@
 ﻿
-@{
-    ViewBag.Title = "CreateClient";
-}
-<style>
-
-</style>
 
 <div id="Client" class="main">
-    <h2>Client List</h2>
+
+     <h2>Client List</h2>
+    
     <hr />
-    <div v-if="states.addState === false" class="addButton">
-        <button v-on:click="add" class="btn btn-primary">
-            <i class="fa fa-pencil"></i> Add Client
-        </button>
-        <div class="form-group"></div>
-    </div>
-    <template v-else>
-        <div class="addButton">
-            <div class="form-horizontal">
-                <label class="col-sm-3" for="clientName">Client Name: </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientName" />
-                    <span class="error">{{ errors.clientName }}</span>
-                </div>
-                <div class="form-group"></div>
+    <div class="row addButton">
 
-                <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" />
-                    <span class="error">{{ errors.clientSubbusiness }}</span>
-                </div>
 
-                <div class="form-group"></div>
-                <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
-                <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
-                <div class="form-group"></div>
-            </div>
+        <div v-if="states.addState === false" class="col-md-2 ">
+            <button v-on:click="add" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Add Client
+            </button>
+            <div class="form-group"></div>
         </div>
+        <template v-else>
+            <br />
+            <div class="addButton">
+                <div class="form-horizontal">
+                    <label class="col-sm-3" for="clientName">Client Name: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="formData.clientName" />
+                        <span class="error">{{ errors.clientName }}</span>
+                    </div>
+                    <div class="form-group"></div>
 
+                    <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="formData.clientSubbusiness" />
+                        <span class="error">{{ errors.clientSubbusiness }}</span>
+                    </div>
 
-    </template>
+                    <div class="form-group"></div>
+                    <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
+                    <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
+                    <div class="form-group"></div>
+                </div>
+            </div>
+        </template>
+        <template>
+            <input class="addButton" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Active" data-off="Inactive">
+        </template>
 
+            <div class="form-group"></div>
+       
+    </div>
+    
     <template>
         <div class="scrollBar">
             <table id="clientView">
@@ -49,13 +54,13 @@
                     <th>Client Subbusiness</th>
                     <th>Edit</th>
                 </tr>
-                    <tr v-for="(client, index) in clients">
-                        <td v-if="index == selected" class="selected">{{ client.ClientName }}</td>
-                        <td v-else>{{ client.ClientName }} </td>
-                        <td v-if="index == selected" class="selected">{{ client.ClientSubbusiness }}</td>
-                        <td v-else>{{ client.ClientSubbusiness }} </td>
-                        <td><button class="btn btn-success" v-on:click="onEdit(client)"><i class="fa fa-edit"></i></button></td>
-                    </tr>
+                <tr v-for="(client, index) in clients">
+                    <td v-if="index == selected" class="selected">{{ client.ClientName }}</td>
+                    <td v-else>{{ client.ClientName }} </td>
+                    <td v-if="index == selected" class="selected">{{ client.ClientSubbusiness }}</td>
+                    <td v-else>{{ client.ClientSubbusiness }} </td>
+                    <td><button class="btn btn-success" v-on:click="onEdit(client)"><i class="fa fa-edit"></i></button></td>
+                </tr>
             </table>
         </div>
     </template>

@@ -30,33 +30,8 @@ let position = new Vue({
         users: '',
         positionStatuses: '',
         grades: '',
-        errors: {
-            positionName: null,
-            positionStatusId: null,
-            opportunityId: null,
-            unitPracticeId: null,
-            numberOfPositions: null,
-            duration: null,
-            rate: null
-        }, // builds all the errors
+        errors: {}, // builds all the errors
         selected: null, // Index of entry being selected to be highlighted
-    },
-    computed: {
-        isDisabled() {
-            let count = 0;
-            if (this.errors.positionName) { count += 1 };
-            if (this.errors.positionStatusId) { count += 1 };
-            if (this.errors.opportunityId) { count += 1 };
-            if (this.errors.unitPracticeId) { count += 1 };
-            if (this.errors.numberOfPositions) { count += 1 };
-            if (this.errors.duration) { count += 1 };
-            if (this.errors.rate) { count += 1 };
-            if (count > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
     },
     watch: {
         positionName: function (val) {
@@ -83,86 +58,49 @@ let position = new Vue({
     },
     methods: {
         onSubmit: function () {
-            this.checkForm();
-            if (!this.checkErrors()) {
+            console.log(this.checkForm());
+            if (this.checkForm() == true) {
                 if (this.updateState) {
-                    console.log('update positions function called!');
+                    console.log('update positions function called');
                     this.updatePosition();
                 }
                 else if (this.addState) {
                     console.log('add positions function called');
-                    this.addPosition();                   
+                    this.addPosition();
+
                 }
-                this.errors.positionName = null;
-                this.errors.positionStatusId = null;
-                this.errors.opportunityId = null;
-                this.errors.unitPracticeId = null;
-                this.errors.numberOfPositions = null;
-                this.errors.duration = null;
-                this.errors.rate = null;
-            } 
-        },
-        checkErrors: function () {
-           
-            let count = 0;
-            if (this.errors.positionName) { count += 1 };
-            if (this.errors.positionStatusId) { count += 1 };
-            if (this.errors.opportunityId) { count += 1 };
-            if (this.errors.unitPracticeId) { count += 1 };
-            if (this.errors.numberOfPositions) { count += 1 };
-            if (this.errors.duration) { count += 1 };
-            if (this.errors.rate) { count += 1 };
-            if (count > 0) {
-                return true;
-            } else {
-                return false;
             }
         },
         add: function () {
             this.addState = true;
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+            this.errors = {};
             window.scrollTo(0, 200);
         },
         cancel: function () {
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;;
+            this.errors = {};
             this.addState = false;
-            posHelpers.clearForm(this);     
+            posHelpers.clearForm(this);
             window.scrollTo(0, 0);
         },
-        addPosition: function () {    
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+        addPosition: function () {
+            this.errors = {};
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
+            console.log(data);
             /* Code to format the date for the controller to recieve */
             if (this.expectedStartDate) {
                 let parts = this.expectedStartDate.split('-')
                 let date = new Date(parts);
                 date = date.toISOString();
-                data.expectedStartDate = date;   
+                data.expectedStartDate = date;
             }
-              
-            /* Set last modified date to present time, as this is initial creation of position */        
+
+            /* Set last modified date to present time, as this is initial creation of position */
             data.lastModified = new Date().toISOString();
             /* Submit the data */
             requests.postPosition(data, this);
+            this.findSelected();
+            this.scrollDown();
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
@@ -175,13 +113,7 @@ let position = new Vue({
             return validate.checkForm(this);
         },
         onEdit: function (position) {
-            this.errors.positionName = null;
-            this.errors.positionStatusId = null;
-            this.errors.opportunityId = null;
-            this.errors.unitPracticeId = null;
-            this.errors.numberOfPositions = null;
-            this.errors.duration = null;
-            this.errors.rate = null;
+            this.errors = {};
             /* Specify that status is being updated */
             this.updateState = true;
             /* Populate form with selected values */
@@ -203,12 +135,12 @@ let position = new Vue({
             this.positionNote = position.PositionNote;
             this.numberOfPositions = position.NumberOfPositions;
             this.maxConsultantGradeId = position.MaxConsultantGradeId;
-            this.minConsultantGradeId = position.MinConsultantGradeId;   
-            this.opportunityId = position.OpportunityId;        
+            this.minConsultantGradeId = position.MinConsultantGradeId;
+            this.opportunityId = position.OpportunityId;
             this.unitPracticeId = position.UnitPracticeId;
-            this.positionStatusId = position.PositionStatusId;           
+            this.positionStatusId = position.PositionStatusId;
             /* Set form to drop down */
-            this.addState = true;  
+            this.addState = true;
             window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
@@ -219,12 +151,12 @@ let position = new Vue({
                 }
                 if (!position['Rate']) {
                     position['Rate'] = '~';
-                }               
+                }
             }
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
                 this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);
-                this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
+                this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);
             }
             /* Set up N/A value for missing ExpectedStartDate value */
             if (this.positionDetail.ExpectedStartDate[1] == 0) {
@@ -234,7 +166,7 @@ let position = new Vue({
             this.moreState = true;
             window.scrollTo(0, 100);
         },
-         getOpportunityName: function (opportunityId) {
+        getOpportunityName: function (opportunityId) {
             for (opportunity in this.opportunities) {
                 if (this.opportunities[opportunity].OpportunityId == opportunityId) {
                     return (this.opportunities[opportunity].OpportunityName);
@@ -249,7 +181,7 @@ let position = new Vue({
         findSelected: function () {
             for (p in this.positions) { // Highlights the updated row
                 if (this.positions[p].PositionName == this.positionName
-                    ) {
+                ) {
                     console.log('found');
                     this.selected = p;
                     break;
@@ -271,6 +203,5 @@ let position = new Vue({
         requests.getUnitList(this);
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
-        console.log(this.errors.positionName);
     }
 })

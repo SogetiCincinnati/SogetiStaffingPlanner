@@ -25,8 +25,8 @@
         } catch (e) { }
         try {
             if (that.rate) {
-                if (that.rate < 30) {
-                    that.errors.rate = 'Rate cannot be below 30.';
+                if (that.rate < 0) {
+                    that.errors.rate = 'Rate cannot be below 0.';
                 }
                 if (that.rate % 1 != 0) { // check for decimals
                     that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.';

@@ -32,6 +32,25 @@ ol, ul {
     padding-left: 30px;
 }
 
+/* flash message styles */
+.flash-message {
+    color: #ef4527;
+    font-weight: bold;
+    font-size: 18px;
+    width: 400px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+
+
 .navBar {
     display: flex;
     background-color: #ef4527;

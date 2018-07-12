@@ -5,6 +5,7 @@
         selected: null,
         items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         nextNum: 10,
+        message: '',
         formData: {
             clientName: '',
             clientSubbusiness: '',
@@ -72,84 +73,10 @@
             } 
         },
         updateClient: function () {
-
-            $.ajax({
-                type: "POST",
-                url: "EditClient",
-                dataType: "json",
-                data: JSON.stringify(this.formData),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    //Receives message from backend for you to do what you want with it
-                    console.log('POST request success');
-                    this.states.addState = false;
-                    this.states.updateState = false;
-                    $.ajax({
-                        async: false,
-                        cache: false,
-                        type: "GET",
-                        url: "GetClients",
-                        contentType: "application/json;charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            function compare(a, b) {
-                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
-                                    return -1;
-                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
-                                    return 1;
-                                return 0;
-                            }
-
-                            data.sort(compare);
-                            this.clients = data;
-                            this.findSelected();
-                            this.scrollDown();
-                        }.bind(this)
-                    });
-                }.bind(this),
-                error: function (e) {
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            requests.editClient(this);
         },
         addClient: function () {
-            $.ajax({
-                type: "POST",
-                url: "AddClient",
-                dataType: "json",
-                data: JSON.stringify(this.formData),
-                contentType: "application/json; charset=utf-8",
-                success: function (res) {
-                    //Receives message from backend for you to do what you want with it
-                    console.log('POST request success');
-                    this.states.addState = false;
-                    $.ajax({
-                        async: false,
-                        cache: false,
-                        type: "GET",
-                        url: "GetClients",
-                        contentType: "application/json;charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            function compare(a, b) {
-                                if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
-                                    return -1;
-                                if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
-                                    return 1;
-                                return 0;
-                            }
-
-                            data.sort(compare);
-                            this.clients = data;
-                            this.findSelected();
-                            this.scrollDown();
-                        }.bind(this)
-                    });
-                }.bind(this),
-                error: function (e) {
-                    console.log(e, "Error adding data! Please try again.");
-                }
-            });
+            requests.addClient(this);
         },
         add: function () {
             this.formData = {};
@@ -175,8 +102,7 @@
             this.formData = [];
             window.scrollTo(0, 0);
         },
-        checkForm: function () { // Check to see if there are errors on submit
-            
+        checkForm: function () { // Check to see if there are errors on submit      
             let errorCount = 0;
             try {
                 let input = this.formData.clientName.trim();
@@ -200,11 +126,16 @@
             return errorCount;
         },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
-            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
-            let scrollDistance =  this.selected * (container.scrollHeight / this.clients.length); // calculate how far to scroll down
-            setTimeout(function () { // wait for the table to update, then scroll to the entry
-                container.scrollTo(0, scrollDistance);
-            }, 100);
+            try {
+                let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+                let scrollDistance = this.selected * (container.scrollHeight / this.clients.length); // calculate how far to scroll down
+                setTimeout(function () { // wait for the table to update, then scroll to the entrys
+                    container.scrollTo(0, scrollDistance);
+                }, 100);
+            } catch (e) {
+
+            }
+           
         },
         findSelected: function () {
             for (client in this.clients) { // Highlights the updated row
@@ -217,25 +148,6 @@
         }
     },
     created: function () {
-        $.ajax({
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "GetClients",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                function compare(a, b) {
-                    if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
-                        return -1;
-                    if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
-                        return 1;
-                    return 0;
-                }
-
-                data.sort(compare);
-                this.clients = data;
-            }.bind(this)
-        });
+       requests.fetchClients(this);
     }
 });

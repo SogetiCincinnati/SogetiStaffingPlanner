@@ -95,13 +95,13 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
+                that.findSelected();
+                that.scrollDown();
                 //Receives message from backend for you to do what you want with it
-
                 requests.fetchPositions(that);
                 console.log('POST request success');
                 requests.addMessage(data.positionName, this);
-                that.findSelected();
-                that.scrollDown();
+                
                 posHelpers.clearForm(that);
             }.bind(that),
             error: function (e) {

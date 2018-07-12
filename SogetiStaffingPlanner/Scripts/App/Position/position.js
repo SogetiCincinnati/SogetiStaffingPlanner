@@ -5,6 +5,7 @@ let position = new Vue({
         positions: '',
         message: '',
         positionDetail: null,
+        prevPosition: '',
         title: 'Positions',
         addState: false,
         moreState: false,
@@ -116,9 +117,11 @@ let position = new Vue({
         onEdit: function (position) {
             this.errors = {};
             /* Specify that status is being updated */
+            
             this.updateState = true;
             /* Populate form with selected values */
             this.positionName = position.PositionName;
+            this.prevPosition = this.positionName;
             this.positionId = position.PositionId;
             this.duration = position.Duration;
             this.acceptedCandidate = position.AcceptedCandidate;
@@ -180,8 +183,9 @@ let position = new Vue({
             window.scrollTo(0, 0);
         },
         findSelected: function () {
+            console.log('findSelected');
             for (p in this.positions) { // Highlights the updated row
-                if (this.positions[p].PositionName == this.positionName
+                if (this.positions[p].PositionName == this.prevPosition
                 ) {
                     console.log('found');
                     this.selected = p;

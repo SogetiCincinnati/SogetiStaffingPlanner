@@ -124,8 +124,8 @@ let requests = {
                         that.selected = position;
                     }
                 }
-                //Receives message from backend for you to do what you want with it    
-                //requests.updateMessage(that.positionName, this);
+                //Receives message from backend for you to do what you want with it   
+                that.findSelected();
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
                 that.findSelected();

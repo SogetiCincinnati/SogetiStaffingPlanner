@@ -61,8 +61,8 @@
     },
     checkDuration: function (val, that) {
         try {
-            if (val < 1) {
-                that.errors.duration = 'Duration must be 1 or above.';
+            if (val < 0) {
+                that.errors.duration = 'Duration must be positive.';
             } else { that.errors.duration = null; }
             if (val % 1 != 0) {
                 that.errors.duration += ' Cannot be a decimal.'
@@ -72,8 +72,8 @@
     },
     checkRate: function (val, that) {
         try {
-            if (val < 30) {
-                that.errors.rate = 'Rate cannot be below 30.';
+            if (val < 0) {
+                that.errors.rate = 'Rate cannot be below 0.';
             } else { that.errors.rate = null; }
             if (val && val % 1 != 0) { // check for decimals
                 that.errors.rate += ' Cannot be a decimal.'

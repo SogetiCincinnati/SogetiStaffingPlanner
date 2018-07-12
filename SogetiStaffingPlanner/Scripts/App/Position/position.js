@@ -178,6 +178,16 @@ let position = new Vue({
             this.moreState = false;
             window.scrollTo(0, 0);
         },
+        findSelected: function () {
+            for (p in this.positions) { // Highlights the updated row
+                if (this.positions[p].PositionName == this.positionName
+                ) {
+                    console.log('found');
+                    this.selected = p;
+                    break;
+                }
+            }
+        },
         scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
             let container = document.querySelector(".scrollBar"); // looks for table scrollbar
             let scrollDistance = this.selected * (container.scrollHeight / this.positions.length); // calculate how far to scroll down

@@ -15,6 +15,7 @@ new Vue({
         },
         displayDate: function (date) {
             try {
+                console.log('displayDate fired');
                 let returnDate = date;
                 returnDate = parseInt(returnDate.slice(6));
                 returnDate = new Date(returnDate);

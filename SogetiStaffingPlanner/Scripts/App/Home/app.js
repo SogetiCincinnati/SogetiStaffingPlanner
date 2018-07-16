@@ -14,11 +14,17 @@ new Vue({
             this.displayView = data;
         },
         displayDate: function (date) {
-            let returnDate = date;
-            returnDate = parseInt(returnDate.slice(6));
-            returnDate = new Date(returnDate);
-            returnDate = returnDate.toISOString().slice(0, 10);
-            return returnDate;
+            try {
+                let returnDate = date;
+                returnDate = parseInt(returnDate.slice(6));
+                returnDate = new Date(returnDate);
+                returnDate = returnDate.toISOString().slice(0, 10);
+                return returnDate;
+            }
+            catch (e) {
+
+            }
+            
         }
     },
     created: function () {
@@ -29,7 +35,8 @@ new Vue({
             url: "Home/GetMainData",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
-            success: function (data) {             
+            success: function (data) {
+                console.log(data);
                 this.posts = data;
             }.bind(this), error: function (e) {
                 console.log('error');

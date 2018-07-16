@@ -41,7 +41,7 @@ namespace SogetiStaffingPlanner.Controllers
 			return "Low";
 		}
 
-		/*
+        /*
          * Method for getting the data for the main view
          */
         [HttpGet]
@@ -50,57 +50,156 @@ namespace SogetiStaffingPlanner.Controllers
             //get the results
             try
             {
-                List<PracticeManagerData> results = db.Database.SqlQuery<PracticeManagerData>("GetPracticeManagerReportData").ToList<PracticeManagerData>();
-                var returner = new List<PracticeManagerData> { };
-                //map it to a json object
-				//TODO: Correct SQL stored procedure to include Active attribute, and only display active.
-                foreach (PracticeManagerData mvR in results)
+                var returnJSON = new List<PracticeManagerData> { };
+
+                List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
+                List<OpportunityData> opportunityList = new List<OpportunityData> { };
+                List<Position> positions = db.Positions.ToList<Position>();
+                List<PositionData> positionList = new List<PositionData> { };
+                List<Client> clients = db.Clients.ToList<Client>();
+                List<ClientData> clientList = new List<ClientData> { };
+                List<Unit> units = db.Units.ToList<Unit>();
+                List<SoldStatus> statuses = db.SoldStatuses.ToList<SoldStatus>();
+
+
+                PracticeManagerData oppJSON = new PracticeManagerData();
+                PracticeManagerData positionJSON = new PracticeManagerData();
+                PracticeManagerData clientJSON = new PracticeManagerData();
+                PracticeManagerData unitJSON = new PracticeManagerData();
+                PracticeManagerData soldStatusJSON = new PracticeManagerData();
+
+                bool match = new bool();
+
+                //Get Opps
+                foreach (Opportunity o in opportunities)
                 {
-                    returner.Add(new PracticeManagerData
+                    System.Diagnostics.Debug.WriteLine("OPPORTUNITY LOOP ............................");
+                    if (o.Active == true)
                     {
-                        OpportunityName = mvR.OpportunityName,
-                        AEName = mvR.AEName,
-                        OpActive = mvR.OpActive,
-                        ClientContact = mvR.ClientContact,
-                        ACT = mvR.ACT,
-                        AE = mvR.AE,
-                        ClientName = mvR.ClientName,
-                        ClientSubbusiness = mvR.ClientSubbusiness,
-                        MaxConsultantGrade = mvR.MaxConsultantGrade,
-                        MaxConsultantGradeId = mvR.MaxConsultantGradeId,
-                        ExpectedStartDate = mvR.ExpectedStartDate,
-                        NumberOfPositions = mvR.NumberOfPositions,
-                        PracticeName = mvR.PracticeName,
-                        ProposedCandidate = mvR.ProposedCandidate,
-                        Rate = mvR.Rate,
-                        Skillset = mvR.Skillset,
-                        AcceptedCandidate = mvR.AcceptedCandidate,
-                        ACTName = mvR.ACTName,
-                        Duration = mvR.Duration,
-                        HireCandidate = mvR.HireCandidate,
-                        MinConsultantGrade = mvR.MinConsultantGrade,
-                        MinConsultantGradeId = mvR.MinConsultantGradeId,
-                        PositionStatusName = mvR.PositionStatusName,
-                      //  PositionNote = mvR.PositionNote,
-                        RejectedCandidate = mvR.RejectedCandidate,
-                        SActive = mvR.SActive,
-                        UnitName = mvR.UnitName,
-                        Priority = CalculatePriority(mvR),                    
-                        ExpectedStartDateString =mvR.ExpectedStartDateString,
-                        LastModified = mvR.LastModified,
-                        SoldStatusName = mvR.SoldStatusName,
-                        PositionName = mvR.PositionName 
-                    });
+                        oppJSON.OpportunityName = o.OpportunityName;
+                        oppJSON.AE = o.AccountExecutiveUserId;
+                        oppJSON.ACT = o.OpportunityOwnerUserId;
+                    }
+                    foreach (Position p in positions)
+                    {                         
+                        if (o.OpportunityId == p.OpportunityId)
+                        {
+                            match = true;
+                           
+                            positionList.Add(new PositionData
+                            {
+                                PositionName = p.PositionName,
+                                Skillset = p.Skillset,
+                                Rate = p.Rate == null ? 0 : (int)p.Rate,
+                                LastModified = p.LastModified,
+                                ProposedCandidate = p.ProposedCandidate,
+                                ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
+                                NumberOfPositions = p.NumberOfPositions,
+                                Duration = p.Duration == null ? 0 : (int)p.Duration,
+                                HireCandidate = p.HireCandidate,
+                                AcceptedCandidate = p.AcceptedCandidate,
+                                RejectedCandidate = p.RejectedCandidate,
+                                MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
+                                MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int)p.MinConsultantGradeId,
+                                PositionNote = p.PositionNote
+                            });
+                        }
+                        else
+                        {
+                            
+                        }
+                        
+                    }
+                    //Loop through clients
+                    foreach (Client c in clients)
+                    {
+                        if (o.ClientId == c.ClientId)
+                        {
+                            clientJSON.ClientName = c.ClientName;
+                            clientJSON.ClientSubbusiness = c.ClientSubbusiness;
+                        }
+                    }
+                    //Loop through units
+                    foreach (Unit u in units)
+                    {
+                        if (o.UnitId == u.UnitId)
+                        {
+                            unitJSON.UnitName = u.UnitName;
+                        }
+                    }
+                    //Loop through sold statuses
+                    foreach (SoldStatus s in statuses)
+                    {
+                        if (o.SoldStatusId == 1)
+                        {
+                            soldStatusJSON.SoldStatusName = "Yes";
+                        } else
+                        {
+                            soldStatusJSON.SoldStatusName = "No";
+                        }
+                    }
+                    // Check to see if the Opportunity has an associated position.
+                    if (match == true)
+                    {
+                        returnJSON.Add(new PracticeManagerData
+                        {
+                            OpportunityName = oppJSON.OpportunityName,
+                            AE = oppJSON.AE,
+                            ACT = oppJSON.ACT,
+                            Positions = positionList,
+                            ClientName = clientJSON.ClientName,
+                            ClientSubbusiness = clientJSON.ClientSubbusiness,
+                            UnitName = unitJSON.UnitName,
+                            SoldStatusName = soldStatusJSON.SoldStatusName,
+                            SActive = soldStatusJSON.SActive
+                        });
+                    } else
+                    {
+                        returnJSON.Add(new PracticeManagerData
+                        {
+                            OpportunityName = oppJSON.OpportunityName,
+                            AE = oppJSON.AE,
+                            ACT = oppJSON.ACT,
+                            Positions = null,
+                            ClientName = clientJSON.ClientName,
+                            ClientSubbusiness = clientJSON.ClientSubbusiness,
+                            UnitName = unitJSON.UnitName,
+                            SoldStatusName = soldStatusJSON.SoldStatusName,
+                            SActive = soldStatusJSON.SActive
+                        });
+                    }
+                    match = false;
                 }
-                return Json(returner, JsonRequestBehavior.AllowGet);
-            }
-            
+                
+             
+            return Json(returnJSON, JsonRequestBehavior.AllowGet);
+            }     
             catch(Exception e)
             {
                 Console.WriteLine("An error occured {0}", e);
-                return null;
+                return Json("Unable to get from database", JsonRequestBehavior.AllowGet);
             }
             
         }
     }
 }
+/*
+OpportunityName = o.OpportunityName,
+ClientContact = o.ClientContact,
+AE = o.AccountExecutiveUserId,
+ACT = o.OpportunityOwnerUserId,
+PositionName = p.PositionName,
+Skillset = p.Skillset,
+Rate = p.Rate == null ? 0 : (int) p.Rate,
+LastModified = p.LastModified,
+ProposedCandidate = p.ProposedCandidate,
+ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
+NumberOfPositions = p.NumberOfPositions,
+Duration = p.Duration == null ? 0 : (int)p.Duration,
+HireCandidate = p.HireCandidate,
+AcceptedCandidate = p.AcceptedCandidate,
+RejectedCandidate = p.RejectedCandidate,
+MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
+MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int)p.MinConsultantGradeId,
+PositionNote = p.PositionNote
+*/

@@ -5,10 +5,7 @@
      <h2>Client List</h2>
     
     <hr />
-    <div class="row addButton">
-
-
-        <div v-if="states.addState === false" class="col-md-2 ">
+        <div v-if="states.addState === false" class="addButton">
             <button v-on:click="add" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Add Client
             </button>
@@ -38,13 +35,9 @@
                 </div>
             </div>
         </template>
-        <template>
-            <input class="addButton" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Active" data-off="Inactive">
-        </template>
 
             <div class="form-group"></div>
-       
-    </div>
+ 
     
     <template>
         <div class="scrollBar">

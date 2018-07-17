@@ -272,5 +272,6 @@ let position = new Vue({
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
         console.log(this.errors.positionName);
+
     }
 })

@@ -4,8 +4,7 @@
     <script type="text/javascript" src="../../Scripts/App/User/requests.js"></script>
     <h2>User List</h2>
     <hr />
-    <div class="row addButton">
-        <div v-if="states.addState == false" class="col-md-2">
+        <div v-if="states.addState == false" class="addButton">
             <button v-on:click="add" class="btn btn-primary">
                 <i class="fa fa-pencil"></i> Add User
             </button>
@@ -48,11 +47,9 @@
                 </div>
             </div>
         </template>
-        <template>
-            <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Active" data-off="Inactive">
-        </template>
+
         <div class="form-group"></div>
-    </div> <!-- div row addbutton-->
+
 <template>
     <div class="scrollBar">
         <table id="clientView">

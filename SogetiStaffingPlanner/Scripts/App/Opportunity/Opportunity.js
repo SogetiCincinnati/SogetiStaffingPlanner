@@ -2,6 +2,8 @@
     el: '#opportunity',
     data: {
         opportunities: '',
+        opportunitiesActive: [],
+        opportunitiesInactive: [],
         clients: '',
         units: '',
         regions: '',
@@ -31,6 +33,7 @@
             unitId: null,
             regionId: null
         },
+        allState: false, // initially only show active stuff
         selected: null, // finds the active entry that has been added or edited
     },
     computed: {
@@ -56,8 +59,7 @@
         accountExecutiveUserId: function (val) { validate.checkAccountExecutiveUserId(val, this) },
         unitId: function (val) { validate.checkUnitId(val, this) },
         regionId: function (val) { validate.checkRegionId(val, this) },
-       // soldStatusId: function (val) { validate.checkSoldStatusId(val, this) },
-       // opportunityOwnerUserId: function (val) { validate.checkOpportunityOwnerUserId(val, this) },
+
     },
     methods: {
         /* Clear out forms */
@@ -232,8 +234,6 @@
                 console.log(this.opportunities[o].opportunityName);
                 console.log(this.opportunityName);
                 if (this.opportunities[o].opportunityName == this.opportunityName) {
-                   // console.log(this.opportunities[o].OpportunityName);
-                   // console.log(this.opportunityName);
                     console.log('found at ' + o);
                     this.selected = o;
                     break;
@@ -251,6 +251,12 @@
         requests.getACTLeadList(this);
         requests.getUnitList(this);
         requests.getClientList(this);
-        
+        for (o in this.opportunities) {
+            if (this.opportunities[o].active) {
+                this.opportunitiesActive.push(this.opportunities[o]); // add active data to list
+            } else {
+                this.opportunitiesInactive.push(this.opportunities[o]); // add inactive data to list
+            }
+        }
     }
 });

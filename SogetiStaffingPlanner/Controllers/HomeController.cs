@@ -22,22 +22,16 @@ namespace SogetiStaffingPlanner.Controllers
          * Function that calculates the priority of an oppurtunity
          * Currently only using OpportunityStatus and the number of people to calculate it
         */
-		private String CalculatePriority(PracticeManagerData result)
+		private String CalculatePriority(int NumberOfPositions)
 		{
-			if (result.PositionStatusName != null)
-			{
-				if (result.PositionStatusName == "Need Candidates" && result.NumberOfPositions != null)
-				{
-					if (result.NumberOfPositions == 1)
+					if (NumberOfPositions == 1)
 					{
 						return ("Medium");
 					}
-					if (result.NumberOfPositions >= 2)
+					if (NumberOfPositions >= 2)
 					{
 						return "High";
-					}
-				}
-			}
+					}		
 			return "Low";
 		}
 
@@ -102,10 +96,100 @@ namespace SogetiStaffingPlanner.Controllers
                 PracticeManagerData unitJSON = new PracticeManagerData();
                 PracticeManagerData soldStatusJSON = new PracticeManagerData();
 
-                bool match = new bool();
+                //bool match = new bool();
 
-                //Get Opps
-                foreach (Opportunity o in opportunities)
+                foreach (Position p in positions)
+                {
+                    foreach (Opportunity o in opportunities)
+                    {
+                        if (o.OpportunityId == p.OpportunityId)
+                        {
+                            oppJSON.OpportunityName = o.OpportunityName;
+                            oppJSON.OpportunityName = o.OpportunityName;
+                            oppJSON.ClientContact = o.ClientContact;
+                            oppJSON.AE = o.AccountExecutiveUserId;
+                            oppJSON.ACT = o.OpportunityOwnerUserId;
+                            foreach (Client c in clients)
+                            {
+                                if (o.ClientId == c.ClientId)
+                                {
+                                    clientJSON.ClientName = c.ClientName;
+                                    clientJSON.ClientSubbusiness = c.ClientSubbusiness;
+                                }
+                            }
+                            //Loop through units
+                            foreach (Unit u in units)
+                            {
+                                if (o.UnitId == u.UnitId)
+                                {
+                                    unitJSON.UnitName = u.UnitName;
+                                }
+                            }
+                            //Loop through sold statuses
+                            foreach (SoldStatus s in statuses)
+                            {
+
+                                if (o.SoldStatusId == 1)
+                                {
+                                    soldStatusJSON.SoldStatusName = "Yes";
+                                }
+                                else
+                                {
+                                    soldStatusJSON.SoldStatusName = "No";
+                                }
+                            }
+                        }
+                        
+                    }
+                    returnJSON.Add(new PracticeManagerData
+                    {
+                        PositionName = p.PositionName,
+                        OpportunityName = oppJSON.OpportunityName,
+                        Skillset = p.Skillset,
+                        Rate = p.Rate == null ? 0 : (int)p.Rate,
+                        LastModified = p.LastModified,
+                        ProposedCandidate = p.ProposedCandidate,
+                        ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
+                        NumberOfPositions = p.NumberOfPositions,
+                        Duration = p.Duration == null ? 0 : (int)p.Duration,
+                        HireCandidate = p.HireCandidate,
+                        AcceptedCandidate = p.AcceptedCandidate,
+                        RejectedCandidate = p.RejectedCandidate,
+                        MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
+                        MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int)p.MinConsultantGradeId,
+                        PositionNote = p.PositionNote,
+                        ClientName = clientJSON.ClientName,
+                        ClientSubbusiness = clientJSON.ClientSubbusiness,
+                        ClientContact = oppJSON.ClientContact,
+                        UnitName = unitJSON.UnitName,
+                        SoldStatusName = soldStatusJSON.SoldStatusName,
+                        SActive = soldStatusJSON.SActive,
+                        PositionStatusId =  p.PositionStatusId,
+                        AE = oppJSON.AE,
+                        ACT = oppJSON.ACT,
+                        Priority = this.CalculatePriority(p.NumberOfPositions)
+                    });
+                }
+                
+                
+             
+            return Json(returnJSON, JsonRequestBehavior.AllowGet);
+            }     
+            catch(Exception e)
+            {
+                Console.WriteLine("An error occured {0}", e);
+                return Json("Unable to get from database", JsonRequestBehavior.AllowGet);
+            }
+            
+        }
+        
+    }
+}
+
+
+
+
+/* foreach (Opportunity o in opportunities)
                 {
                     System.Diagnostics.Debug.WriteLine("OPPORTUNITY LOOP ............................");
                     if (o.Active == true)
@@ -207,17 +291,4 @@ namespace SogetiStaffingPlanner.Controllers
                     }
                     match = false;
                 }
-                
-             
-            return Json(returnJSON, JsonRequestBehavior.AllowGet);
-            }     
-            catch(Exception e)
-            {
-                Console.WriteLine("An error occured {0}", e);
-                return Json("Unable to get from database", JsonRequestBehavior.AllowGet);
-            }
-            
-        }
-        
-    }
-}
+*/

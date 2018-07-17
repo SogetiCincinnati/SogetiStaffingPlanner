@@ -32,6 +32,49 @@ new Vue({
                     return this.users[i].UserFullName;
                 }
             }
+        },
+        displayStatusName: function (id) {
+            switch (id) {
+                case 1:
+                    return "Initiate";
+                    break;
+                case 2:
+                    return "In-Progress";
+                    break;
+                case 3:
+                    return "Need Candidates";
+                    break;
+                case 4:
+                    return "Closed";
+                    break;
+            }
+        },
+        displayGrade: function (id) {
+            console.log('Display Grade');
+            console.log(id);
+            switch (id) {
+                case 1:
+                    return "A1";
+                    break;
+                case 2:
+                    return "A2";
+                    break;
+                case 3:
+                    return "A";
+                    break;
+                case 4:
+                    return "B";
+                    break;
+                case 5:
+                    return "C";
+                    break;
+                case 6:
+                    return "Non-EC";
+                    break;
+                case 7:
+                    return "Any";
+                    break;
+            }
         }
     },
     created: function () {

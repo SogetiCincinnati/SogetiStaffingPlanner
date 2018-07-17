@@ -111,6 +111,7 @@ let requests = {
         });
     },
     editPosition: function (data, that) {
+        console.log('SUBMITTING UPDATE', data);
         $.ajax({
             type: "POST",
             url: "EditPosition",

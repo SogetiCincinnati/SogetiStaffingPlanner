@@ -51,6 +51,9 @@ namespace SogetiStaffingPlanner.Controllers
             try
             {
                 var returnJSON = new List<PracticeManagerData> { };
+                var ACTList = new List<UserData> { };
+                var AEList = new List<UserData> { };
+
 
                 List<Opportunity> opportunities = db.Opportunities.ToList<Opportunity>();
                 List<OpportunityData> opportunityList = new List<OpportunityData> { };
@@ -60,8 +63,39 @@ namespace SogetiStaffingPlanner.Controllers
                 List<ClientData> clientList = new List<ClientData> { };
                 List<Unit> units = db.Units.ToList<Unit>();
                 List<SoldStatus> statuses = db.SoldStatuses.ToList<SoldStatus>();
+                List<User> users = db.Users.ToList<User>();
+                List < UserData > userList = new List<UserData> { };
+                List<UserBusinessRole> userBusinessRoles = db.UserBusinessRoles.ToList<UserBusinessRole>();
+                
+                
+                foreach (UserBusinessRole ubr in userBusinessRoles)
+                {
+                    foreach (User us in users)
+                    {
+                       if (ubr.UserId == us.UserId)
+                        {
+                            if (ubr.BusinessRoleId == 3)
+                            {
+                                ACTList.Add(new UserData
+                                {
+                                    FullName = us.FullName,
+                                    UserId = us.UserId
 
-
+                                });
+                            }
+                            else if (ubr.BusinessRoleId == 2)
+                            {
+                                AEList.Add(new UserData
+                                {
+                                    FullName = us.FullName,
+                                    UserId = us.UserId
+                                });
+                            }
+                        }
+                        
+                    }
+                }
+      
                 PracticeManagerData oppJSON = new PracticeManagerData();
                 PracticeManagerData positionJSON = new PracticeManagerData();
                 PracticeManagerData clientJSON = new PracticeManagerData();
@@ -80,6 +114,8 @@ namespace SogetiStaffingPlanner.Controllers
                         oppJSON.AE = o.AccountExecutiveUserId;
                         oppJSON.ACT = o.OpportunityOwnerUserId;
                     }
+             
+             
                     foreach (Position p in positions)
                     {                         
                         if (o.OpportunityId == p.OpportunityId)
@@ -130,6 +166,7 @@ namespace SogetiStaffingPlanner.Controllers
                     //Loop through sold statuses
                     foreach (SoldStatus s in statuses)
                     {
+     
                         if (o.SoldStatusId == 1)
                         {
                             soldStatusJSON.SoldStatusName = "Yes";
@@ -181,25 +218,6 @@ namespace SogetiStaffingPlanner.Controllers
             }
             
         }
+        
     }
 }
-/*
-OpportunityName = o.OpportunityName,
-ClientContact = o.ClientContact,
-AE = o.AccountExecutiveUserId,
-ACT = o.OpportunityOwnerUserId,
-PositionName = p.PositionName,
-Skillset = p.Skillset,
-Rate = p.Rate == null ? 0 : (int) p.Rate,
-LastModified = p.LastModified,
-ProposedCandidate = p.ProposedCandidate,
-ExpectedStartDate = p.ExpectedStartDate == null ? new DateTime(1000, 1, 1) : (System.DateTime)p.ExpectedStartDate,
-NumberOfPositions = p.NumberOfPositions,
-Duration = p.Duration == null ? 0 : (int)p.Duration,
-HireCandidate = p.HireCandidate,
-AcceptedCandidate = p.AcceptedCandidate,
-RejectedCandidate = p.RejectedCandidate,
-MaxConsultantGradeId = p.MaxConsultantGradeId == null ? 0 : (int)p.MaxConsultantGradeId,
-MinConsultantGradeId = p.MinConsultantGradeId == null ? 0 : (int)p.MinConsultantGradeId,
-PositionNote = p.PositionNote
-*/

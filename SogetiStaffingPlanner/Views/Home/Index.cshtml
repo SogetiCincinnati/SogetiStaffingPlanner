@@ -20,8 +20,8 @@
                     <p> Client Contact : {{displayView.ClientContact}}</p>
                     <p>Priority : {{displayView.Priority}}</p>
                     <p>Sold : {{displayView.SoldStatusName}}</p>
-                    <p>AE : {{displayView.AEName}}</p>
-                    <p>ACT : {{displayView.ACTName}}</p>
+                    <p>AE : {{displayUser(displayView.AE)}}</p>
+                    <p>ACT : {{displayUser(displayView.ACT)}}</p>
                     <p><b>Skillset</b> : {{displayView.Skillset}}</p>
                     <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
                     <br />
@@ -238,8 +238,8 @@
                             <td> {{ post.SoldStatusName }}</td>
                             <td> {{ post.PositionStatusName }}</td>
                             <td> {{ post.ClientSubbusiness }}</td>
-                            <td> {{ post.AEName }}</td>
-                            <td> {{ post.ACTName }}</td>
+                            <td> {{ displayUser(post.AE) }}</td>
+                            <td> {{ displayUser(post.ACT) }}</td>
                             <td><button class="btn btn-warning" v-on:click="displayDetails(post)"><i class="fa fa-plus"></i></button></td>
                         </tr>
                     </table>

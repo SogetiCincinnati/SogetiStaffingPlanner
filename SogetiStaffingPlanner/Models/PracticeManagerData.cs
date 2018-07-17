@@ -8,6 +8,8 @@ namespace SogetiStaffingPlanner.Models
     public partial class PracticeManagerData
     {
         public string OpportunityName { get; set; }
+        public string AEName { get; set; }
+        public string ACTName { get; set; }
         public string ClientContact { get; set; }
         public string PositionStatusName { get; set; }
         public bool OpActive { get; set; }
@@ -32,12 +34,11 @@ namespace SogetiStaffingPlanner.Models
         public Nullable<bool> SActive { get; set; }
         public string SoldStatusName { get; set; }
         public string PracticeName { get; set; }
-        public string AEName { get; set; }
-        public string ACTName { get; set; }
         public string PositionName { get; set; }
         public string MinConsultantGrade { get; set; }
         public string MaxConsultantGrade { get; set; }
         public string Priority { get; set; }
         public string ExpectedStartDateString { get; set; }
+        public List<PositionData> Positions { get; internal set; }
     }
 }

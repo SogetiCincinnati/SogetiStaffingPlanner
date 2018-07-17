@@ -64,6 +64,7 @@ let position = new Vue({
             if (this.checkForm() == true) {
                 if (this.updateState) {
                     console.log('update positions function called');
+                    console.log(this.maxConsultantGradeId);
                     this.updatePosition();
                 }
                 else if (this.addState) {

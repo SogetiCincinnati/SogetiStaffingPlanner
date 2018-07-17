@@ -136,9 +136,9 @@ namespace SogetiStaffingPlanner.Controllers
 				position.PositionId = positionId;
 				position.OpportunityId = opportunityId;
 				position.UnitPracticeId = unitPracticeId;
-				position.MaxConsultantGradeId = maxConsultantGradeId;
-				position.MinConsultantGradeId = minConsultantGradeId;
-				position.PositionName = positionName;
+				position.MaxConsultantGradeId = maxConsultantGradeId == 0 ? position.MaxConsultantGradeId = null : position.MaxConsultantGradeId = maxConsultantGradeId;
+				position.MinConsultantGradeId = minConsultantGradeId == 0 ? position.MinConsultantGradeId = null : position.MinConsultantGradeId = minConsultantGradeId;
+                position.PositionName = positionName;
 				position.NumberOfPositions = numberOfPositions;
 				position.Skillset = skillset;
 				position.Rate = rate;

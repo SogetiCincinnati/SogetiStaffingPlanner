@@ -44,7 +44,6 @@ namespace SogetiStaffingPlanner.Controllers
                     userData.LastModifiedUserName = user.FullName;
                     userData.LastModified = u.LastModified;
                     userData.Active = u.Active;
-
                     userList.Add(userData);
                 }
             }

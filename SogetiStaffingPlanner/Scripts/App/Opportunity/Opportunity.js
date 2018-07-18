@@ -118,6 +118,9 @@
             this.addState = true;
             window.scrollTo(0, 100);
         },
+        detailData: function (item) {
+            this.message = item;
+        },
         addOpportunity: function () {
             let data = helpers.buildJSON(this);
             requests.addOpportunity(data, this);
@@ -142,7 +145,7 @@
         },
         getClientName: function (clientId) { // pass id and get name back
             for (client in this.clients) {
-                if (this.clients[client].ClientId === clientId) {
+                if (this.clients[client].clientId === clientId) {
                     return(this.clients[clientId].ClientName);
                 }
             }

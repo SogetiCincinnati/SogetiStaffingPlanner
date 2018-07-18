@@ -36,6 +36,14 @@
             that.errors.role = '';
         }
     },
+    displayData: function (item) {
+        if (item.length > 15) {
+            return item.slice(0, 20) + "...";
+        } else {
+            return item;
+        }
+    },
+   
     checkForm: function (that) {
         if (that.states.updateState) {
             console.log('updated');

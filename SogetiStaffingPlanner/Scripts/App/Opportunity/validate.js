@@ -40,6 +40,14 @@
             else { that.errors.regionId = 'Region required'; }
         } catch (e) { }
     },
+    displayData: function (item) {
+        if (item.length > 15) {
+            return item.slice(0, 20) + "...";
+        }
+        else {
+            return item;
+        }
+    },
     checkForm: function (that) {
         that.errors.opportunityName = null;
         that.errors.clientId = null;

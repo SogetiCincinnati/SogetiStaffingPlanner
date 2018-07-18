@@ -141,6 +141,9 @@
                 container.scrollTo(0, scrollDistance);
             }, 100);
         },
+        detailData: function (item) {
+            this.message = item;
+        },
         findSelected: function () {
             for (user in this.users) { // Highlights the updated row
                 if (this.users[user].FullName == this.formData.name) {

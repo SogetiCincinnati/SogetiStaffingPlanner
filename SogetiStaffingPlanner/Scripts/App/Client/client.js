@@ -137,6 +137,17 @@
             }
            
         },
+        detailData: function (item) {
+            this.message = item;
+        },
+        displayData: function (item) {
+            if (item.length > 15) {
+                return item.slice(0, 20) + "...";
+            }
+            else {
+                return item;
+            }
+        },
         findSelected: function () {
             for (client in this.clients) { // Highlights the updated row
                 if (this.clients[client].ClientName == this.formData.clientName &&

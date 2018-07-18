@@ -11,7 +11,7 @@
     <script type="text/javascript" src="../../Scripts/App/Opportunity/requests.js"></script>
     <script type="text/javascript" src="../../Scripts/App/Opportunity/names.js"></script>
     <script type="text/javascript" src="../../Scripts/App/Opportunity/helpers.js"></script>
-    <script type="text/javascript" src="../../Scripts/App/Opportunity/validate.js"></script>
+ 
     <div id="opportunity" class="main">
         <div v-if="moreState === false">
             <template>
@@ -166,8 +166,8 @@
                             <!--<th>Delete</th>-->
                         </tr>
                         <tr v-for="(opportunity, index) in opportunities">
-                            <td v-if="index == selected" class="selected">{{ opportunity.opportunityName }}</td>
-                            <td v-else>{{ opportunity.opportunityName }}</td>
+                            <td v-if="index == selected" class="selected">{{opportunity.opportunityName}}</td>
+                            <td v-else>{{ validate.displayData(opportunity.opportunityName) }}</td>
                             <td v-if="index == selected" class="selected">{{ getClientName(opportunity.clientId) }}</td>
                             <td v-else>{{ getClientName(opportunity.clientId) }}</td>
                             <td v-if="index == selected" class="selected">{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
@@ -217,6 +217,7 @@
     </div>
 </body>
 </html>
+<script type="text/javascript" src="../../Scripts/App/opportunity/validate.js"></script>
 <script type="text/javascript" src="../../Scripts/App/opportunity/opportunity.js"></script>
 
 @section Scripts {

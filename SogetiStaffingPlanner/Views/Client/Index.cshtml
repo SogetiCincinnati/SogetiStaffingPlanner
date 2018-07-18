@@ -58,7 +58,7 @@
                 </tr>
                 <tr v-for="(client, index) in clients">
                     <td v-if="index == selected" class="selected">{{ client.ClientName }}</td>
-                    <td v-else>{{ client.ClientName }} </td>
+                    <td v-else>{{ displayData(client.ClientName) }} </td>
                     <td v-if="index == selected" class="selected">{{ client.ClientSubbusiness }}</td>
                     <td v-else>{{ client.ClientSubbusiness }} </td>
                     <td><button class="btn btn-success" v-on:click="onEdit(client)"><i class="fa fa-edit"></i></button></td>

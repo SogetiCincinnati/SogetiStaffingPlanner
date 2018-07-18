@@ -40,5 +40,6 @@ namespace SogetiStaffingPlanner.Models
         public string Priority { get; set; }
         public string ExpectedStartDateString { get; set; }
         public List<PositionData> Positions { get; internal set; }
+        public int PositionStatusId { get; internal set; }
     }
 }

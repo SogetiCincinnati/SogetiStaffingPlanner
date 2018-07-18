@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
-                    <p>Status : {{displayView.PositionStatusName}}</p>
+                    <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
                     <p> Client Contact : {{displayView.ClientContact}}</p>
                     <p>Priority : {{displayView.Priority}}</p>
                     <p>Sold : {{displayView.SoldStatusName}}</p>
@@ -50,8 +50,8 @@
                             <th>Rate</th>
                         </tr>
                         <tr>
-                            <td>{{displayView.MinConsultantGrade}}</td>
-                            <td>{{displayView.MaxConsultantGrade}}</td>
+                            <td>{{displayGrade(displayView.MinConsultantGradeId)}}</td>
+                            <td>{{displayGrade(displayView.MaxConsultantGradeId)}}</td>
                             <td>{{displayView.Duration}}</td>
                             <td>{{displayView.Rate}}</td>
                         </tr>
@@ -236,7 +236,7 @@
                             <td> {{ post.PositionName }}</td>
                             <td> {{ post.Priority }}</td>
                             <td> {{ post.SoldStatusName }}</td>
-                            <td> {{ post.PositionStatusName }}</td>
+                            <td> {{ displayStatusName(post.PositionStatusId) }}</td>
                             <td> {{ post.ClientSubbusiness }}</td>
                             <td> {{ displayUser(post.AE) }}</td>
                             <td> {{ displayUser(post.ACT) }}</td>

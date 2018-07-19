@@ -286,6 +286,8 @@
     </Content>
     <Content Include="Scripts\App\Client\client.js" />
     <Content Include="Scripts\App\Client\requests.js" />
+    <Content Include="Scripts\App\Home\requests.js" />
+    <Content Include="Scripts\App\Home\validate.js" />
     <Content Include="Scripts\App\Opportunity\helpers.js" />
     <Content Include="Scripts\App\Opportunity\names.js" />
     <Content Include="Scripts\App\Position\requests.js" />

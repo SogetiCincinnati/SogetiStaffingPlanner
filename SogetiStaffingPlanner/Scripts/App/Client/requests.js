@@ -9,6 +9,7 @@
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+  
                 function compare(a, b) {
                     if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
                         return -1;
@@ -21,10 +22,12 @@
                 that.clients = data;
                 that.findSelected();
                 that.scrollDown();
+               
             }.bind(that)
         });
     },
     editClient: function (that) {
+        console.log(that.formData);
         console.log('editing')
         $.ajax({
             type: "POST",
@@ -38,7 +41,7 @@
                 that.states.addState = false;
                 that.states.updateState = false;
                 requests.fetchClients(that);
-                requests.updateMessage(that.formData.clientName, this);
+                requests.updateMessage(that.formData.clientName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
@@ -57,7 +60,7 @@
                 console.log('POST request success');
                 that.states.addState = false;
                 requests.fetchClients(that);
-                requests.addMessage(that.formData.clientName, this);
+                requests.addMessage(that.formData.clientName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");

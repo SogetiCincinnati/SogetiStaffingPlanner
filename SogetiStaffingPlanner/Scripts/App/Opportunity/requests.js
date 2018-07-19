@@ -109,7 +109,9 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                
                 that.clients = data;
+                console.log(that.clients);
             }.bind(that)
         });
     },
@@ -124,6 +126,7 @@ let requests = {
             dataType: "json",
             success: function (data) {
                 that.opportunities = data;
+                console.log('opportunities', that.opportunities);
             }.bind(that)
         });
     },

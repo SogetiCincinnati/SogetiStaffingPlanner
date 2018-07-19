@@ -141,10 +141,12 @@
             window.scrollTo(0, 0);
         },
         getClientName: function (clientId) { // pass id and get name back
-            for (client in this.clients) {
-                if (this.clients[client].ClientId === clientId) {
-                    return(this.clients[clientId].ClientName);
+            
+            for (i in this.clients) {
+                if (clientId == this.clients[i].ClientId) {
+                    return this.clients[i].ClientName;
                 }
+            
             }
         },
         getAEName: function (AEId) { // pass ID and get name back

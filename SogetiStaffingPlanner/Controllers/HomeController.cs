@@ -144,6 +144,7 @@ namespace SogetiStaffingPlanner.Controllers
                     returnJSON.Add(new PracticeManagerData
                     {
                         PositionName = p.PositionName,
+                        PositionId = p.PositionId,
                         OpportunityName = oppJSON.OpportunityName,
                         Skillset = p.Skillset,
                         Rate = p.Rate == null ? 0 : (int)p.Rate,

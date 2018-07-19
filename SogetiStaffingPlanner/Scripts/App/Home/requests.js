@@ -1,6 +1,63 @@
 ﻿// requests for practice manager view
 
 let requests = {
+    fetchClients: function (that) {
+        console.log('fetching');
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Client/GetClients",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                function compare(a, b) {
+                    if (a.ClientName.toUpperCase() < b.ClientName.toUpperCase())
+                        return -1;
+                    if (a.ClientName.toUpperCase() > b.ClientName.toUpperCase())
+                        return 1;
+                    return 0;
+                }
+
+                data.sort(compare);
+                that.clients = data;
+                that.findSelected();
+                that.scrollDown();
+
+            }.bind(that)
+        });
+    },
+    fetchPositions: function (that) {
+        $.ajax({ // get positions
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Position/GetPosition",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                that.positions = data;
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    },
+    getOpportunityList: function (that) {
+        // GET OPPORTUNITY LIST
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Opportunity/GetOpportunities",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                that.opportunities = data;
+            }.bind(that)
+        });
+    },
     getPositionStatusList: function (that) {
         $.ajax({ // Get Position Status List 
             async: false,
@@ -83,12 +140,12 @@ let requests = {
                 that.clients = data;
                 //that.findSelected();
                 //that.scrollDown();
-                console.log(that.clients);
+              
             }.bind(that)
         });
     },
     editClient: function (that) {
-        console.log('editing')
+        
         $.ajax({
             type: "POST",
             url: "Client/EditClient",
@@ -98,8 +155,8 @@ let requests = {
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
                 console.log('POST request success');
-                that.states.addState = false;
-                that.states.updateState = false;
+                that.addState = false;
+                that.state.updateState = false;
                 requests.fetchClients(that);
                 requests.updateMessage(that.formData.clientName, that);
             }.bind(that),
@@ -202,7 +259,7 @@ let requests = {
                                     dataType: "json",
                                     success: function (data) {
                                         that.opportunities = data;
-                                        console.log(data[data.length - 1].opportunityId);
+                                        
                                         let posObj = {
                                             opportunityId: data[data.length - 1].opportunityId,
                                             unitPracticeId: 4,
@@ -226,8 +283,7 @@ let requests = {
                                             data: JSON.stringify(posObj),
                                             contentType: "application/json; charset=utf-8",
                                             success: function (res) {
-                                                console.log(res);
-                                                console.log('Everything worked.');
+                                             
                                             }.bind(that),
                                             error: function (e) {
                                                 console.log(e);
@@ -251,8 +307,33 @@ let requests = {
             }
         });
     },
-    editRow: function (post, that) {
-
+    editRow: function (that) {
+        let clientData = {};
+        console.log('EDIT DATA', that.editObjs.clientEdit);
+        
+        clientObj = {
+            clientName: that.formData.clientName,
+            clientSubbusiness: that.formData.clientSubbusiness,
+            active: that.editObjs.clientEdit.Active, // FIX THIS!!!
+            clientId: that.editObjs.clientEdit.ClientId // FIX THIS!!!
+        }
+        console.log(clientObj);
+        $.ajax({
+            type: "POST",
+            url: "Client/EditClient",
+            dataType: "json",
+            data: JSON.stringify(clientObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                console.log(res)
+                that.addState = false;
+                that.state.updateState = false;
+          
+            }.bind(that),
+            error: function (e) {
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
     },
     addMessage: function (message, that) {
         setTimeout(function () {

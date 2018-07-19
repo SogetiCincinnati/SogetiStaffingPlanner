@@ -27,6 +27,7 @@
         });
     },
     editClient: function (that) {
+        console.log(that.formData);
         console.log('editing')
         $.ajax({
             type: "POST",

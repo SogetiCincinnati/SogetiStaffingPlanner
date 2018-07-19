@@ -6,13 +6,76 @@ new Vue({
         displayState: false,
         displayView: '',
         posts: [],
-        users: []
+        users: [],
+        clients: [],
+        aes: [],
+        regions: [],
+        units: [],
+        positionStatuses: [],
+        submitObjs: {
+            opportunityObj: null
+        },
+        formData: {
+            accountExecutiveUserId: null,
+            regionId: null,
+            opportunityName: null,
+            unitId: null,
+            numberOfPositions: null,
+            positionName: null,
+            soldStatus: null,
+            positionStatusId: null,
+            clientName: null,
+            clientSubbusiness: null,
+            AE: null,
+            ACT: null,
+            clientContact: null,
+            minConsultantGrade: null,
+            maxConsultantGrade: null,
+            rate: null,
+            acceptedCandidate: null,
+            hiredCandidate: null,
+            rejectedCanddidate: null,
+            proposedCandidate: null,
+            duration: null,
+            skillset: null,
+            expectedStartDate: null
+        },
+        state: {
+            lastClientId: null,
+            lastOppId: null,
+            updateState: false
+        },
+        errors: {
+
+        }
     },
     methods: {
+        add: function () {
+            this.addState = true;
+            this.errors = {};
+            window.scrollTo(0, 200);
+        },
+        cancel: function () {
+            this.errors = {};
+            this.addState = false;
+            window.scrollTo(0, 0);
+        },
+        onSubmit: function () {
+            let clientObj = {
+                clientName: this.formData.clientName,
+                clientSubbusiness: this.formData.clientSubbusiness
+            }
+            requests.addRow(clientObj, this);
+        },
+        onEdit: function (post) {
+            this.addState = true;
+            this.state.updateState = true;
+        },
         displayDetails: function (data) {
             console.log(data);
             this.displayState = true;
             this.displayView = data;
+            window.scrollTo(0, 0);
         },
         displayDate: function (date) {
             try {
@@ -108,5 +171,10 @@ new Vue({
                 console.log(e);
             }
         });
+        this.state.lastClientId = requests.fetchClients(this);
+        requests.getAEList(this);
+        requests.getRegionList(this);
+        requests.getUnitList(this);
+        requests.getPositionStatusList(this);
     }
 });

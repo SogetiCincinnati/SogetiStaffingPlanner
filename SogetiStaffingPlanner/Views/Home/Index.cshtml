@@ -14,7 +14,7 @@
                 <div>
                     <div class="form-horizontal">
                         <!-- ROW ONE BEGIN-->
-                        <h3 class="formHeader">Add Client</h3>
+                        <h3 class="formHeader">{{state.updateState ? 'Edit Client' : 'Add Client'}}</h3>
                         <div class="form-group"></div>
                         <div class="col-sm-6">
                             <label class="col-sm-4" for="">Client Name: </label>
@@ -30,7 +30,7 @@
                                 <span class="error">{{ errors.clientSubbusiness }}</span>
                             </div>
                         </div>
-                        <h3>Add Opportunity</h3>
+                        <h3>{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
                         <div class="form-group"></div>
                         <div class="col-sm-6">
                             <label class="col-sm-4" for="">Opportunity Name: </label>
@@ -86,7 +86,7 @@
                                 </template>
                             </div>
                         </div>
-                        <h3>Add Position</h3>
+                        <h3>{{state.updateState ? 'Edit Position' : 'Add Position' }}</h3>
                         <div class="form-group"></div>
                         <div class="col-sm-6">
                             <label class="col-sm-4" for="">Position Name: </label>
@@ -290,6 +290,7 @@
 
     </div>
 </div>
+<script type="text/javascript" src="../../Scripts/App/Home/validate.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Home/requests.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Home/app.js"></script>
 

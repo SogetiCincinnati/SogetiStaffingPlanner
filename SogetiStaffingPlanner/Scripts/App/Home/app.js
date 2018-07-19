@@ -18,7 +18,9 @@ new Vue({
             opportunityObj: null
         },
         editObjs: {
-            clientEdit: null
+            clientEdit: null,
+            opportunityEdit: null,
+            positionEdit: null
         },
         formData: {
             accountExecutiveUserId: null,
@@ -44,7 +46,8 @@ new Vue({
             proposedCandidate: null,
             duration: null,
             skillset: null,
-            expectedStartDate: null
+            expectedStartDate: null,
+            positionNote: null
         },
         state: {
             lastClientId: null,
@@ -61,9 +64,41 @@ new Vue({
             this.errors = {};
             window.scrollTo(0, 200);
         },
+        clearForm: function () {
+            this.formData = {
+                accountExecutiveUserId: null,
+                regionId: null,
+                opportunityName: null,
+                opportunityNotes: null,
+                unitId: null,
+                numberOfPositions: null,
+                positionName: null,
+                soldStatus: null,
+                positionStatusId: null,
+                clientName: null,
+                clientSubbusiness: null,
+                AE: null,
+                ACT: null,
+                clientContact: null,
+                minConsultantGrade: null,
+                maxConsultantGrade: null,
+                rate: null,
+                acceptedCandidate: null,
+                hiredCandidate: null,
+                rejectedCanddidate: null,
+                proposedCandidate: null,
+                duration: null,
+                skillset: null,
+                expectedStartDate: null,
+                positionNote: null
+            }
+        },
         cancel: function () {
             this.errors = {};
             this.addState = false;
+            this.state.updateState = false;
+            //CLEAR FORM
+            this.clearForm();
             window.scrollTo(0, 0);
         },
         onSubmit: function () {
@@ -75,15 +110,14 @@ new Vue({
             requests.addRow(clientObj, this);
         },
         onEdit: function (post) {
+            // Populate edit tables.
             this.addState = true;
             this.state.updateState = true;
             this.formData.accountExecutiveUserId = post.AE;
             this.formData.regionId = 1;
             this.formData.opportunityName = post.OpportunityName;
-           // unitId: null,
             this.formData.numberOfPositions = post.NumberOfPositions;
             this.formData.positionName = post.PositionName;
-            //soldStatus: null,
             this.formData.positionStatusId = post.PositionStatusId;
             this.formData.positionNote = post.PositionNote;
             this.formData.clientName = post.ClientName;
@@ -104,15 +138,24 @@ new Vue({
                     oppToFetchId = this.opportunities[i].positionId;
                 }
             }
-
+            //Set the data of the item being edited before changes made.
             for (let i = 0; i < this.clients.length; i++) {
-                if (this.formData.clientName == this.clients[i].ClientName) {
-                    
+                if (this.formData.clientName == this.clients[i].ClientName) {                 
                     this.editObjs.clientEdit = this.clients[i];
                 }
             }
-        
-           
+            //Get extra opp properties
+            for (let i = 0; i < this.opportunities.length; i++) {
+                if (this.opportunities[i].opportunityName == this.formData.opportunityName) {
+                    this.editObjs.opportunityEdit = this.opportunities[i];
+                }
+            }
+            //Get position data for editing
+            for (let i = 0; i < this.positions.length; i++) {
+                if (this.positions[i].PositionId === post.PositionId) {
+                    this.editObjs.positionEdit = this.positions[i];
+                }
+            }
 
         },
         displayDetails: function (data) {
@@ -182,21 +225,7 @@ new Vue({
         }
     },
     created: function () {
-        $.ajax({
-            async: false,
-            cache: false,
-            type: "GET",
-            url: "Home/GetMainData",
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                console.log('Posts', data);
-                this.posts = data;
-            }.bind(this), error: function (e) {
-                console.log('error');
-                console.log(e);
-            }
-        });
+        requests.getMainData(this);
         $.ajax({
             async: false,
             cache: false,
@@ -205,7 +234,6 @@ new Vue({
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log('Users', data);
                 this.users = data;
             }.bind(this), error: function (e) {
                 console.log('error');

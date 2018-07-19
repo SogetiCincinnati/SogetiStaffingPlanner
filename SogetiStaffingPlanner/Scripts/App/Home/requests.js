@@ -1,6 +1,23 @@
 ﻿// requests for practice manager view
 
 let requests = {
+    getMainData: function (that) {
+        $.ajax({
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Home/GetMainData",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log('Posts', data);
+                that.posts = data;
+            }.bind(that), error: function (e) {
+                console.log('error');
+                console.log(e);
+            }
+        });
+    },
     fetchClients: function (that) {
         console.log('fetching');
         $.ajax({
@@ -283,7 +300,8 @@ let requests = {
                                             data: JSON.stringify(posObj),
                                             contentType: "application/json; charset=utf-8",
                                             success: function (res) {
-                                             
+                                                requests.getMainData(that);
+                                                that.clearForm();
                                             }.bind(that),
                                             error: function (e) {
                                                 console.log(e);
@@ -311,7 +329,7 @@ let requests = {
         let clientData = {};
         console.log('EDIT DATA', that.editObjs.clientEdit);
         
-        clientObj = {
+        let clientObj = {
             clientName: that.formData.clientName,
             clientSubbusiness: that.formData.clientSubbusiness,
             active: that.editObjs.clientEdit.Active, // FIX THIS!!!
@@ -325,10 +343,67 @@ let requests = {
             data: JSON.stringify(clientObj),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                console.log(res)
-                that.addState = false;
-                that.state.updateState = false;
-          
+                ///////// EDIT OPPORTUNITY ///////////////////
+                let oppObj = {
+                    id: that.editObjs.opportunityEdit.opportunityId,
+                    clientId: that.editObjs.opportunityEdit.clientId,
+                    accountExecutiveUserId: that.formData.accountExecutiveUserId,
+                    unitId: that.formData.unitId,
+                    regionId: that.formData.regionId,
+                    opportunityName: that.formData.opportunityName,
+                    opportunityNotes: that.formData.opportunityNotes,
+                    clientContact: that.formData.clientContact,
+                    active: true
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Opportunity/EditPost",
+                    dataType: "json",
+                    data: JSON.stringify(oppObj),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (res) {
+                     //////EDIT POSITION///////////////
+                        posObj = {
+                            positionId: that.editObjs.positionEdit.PositionId,
+                            opportunityId: that.editObjs.positionEdit.OpportunityId,
+                            unitPracticeId: that.editObjs.positionEdit.UnitPracticeId,
+                            positionName: that.formData.positionName,
+                            numberOfPositions: that.formData.numberOfPositions,
+                            skillset: that.editObjs.positionEdit.Skillset,
+                            rate: that.editObjs.positionEdit.Rate,
+                            hireCandidate: that.formData.hiredCandidate,
+                            proposedCandidate: that.formData.proposedCandidate,
+                            hireCandidate: that.formData.hiredCandidate,
+                            rejectedCandidate: that.formData.rejectedCandidate,
+                            positionNote: that.formData.positionNote,
+                            active: that.editObjs.positionEdit.Active,
+                            positionStatusId: that.formData.positionStatusId
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: "Position/EditPosition",
+                            dataType: "json",
+                            data: JSON.stringify(posObj),
+                            contentType: "application/json; charset=utf-8",
+                            success: function (res) {
+                                //// SUCCESS CASE ////////
+                                that.addState = false;
+                                that.state.updateState = false;
+                                requests.getMainData(that);
+                                that.clearForm();
+                            }.bind(that),
+                            error: function (e) {
+                                console.log(e);
+                                console.log(e, "Error adding data! Please try again.");
+                            }
+                        });
+                    }.bind(that),
+                    error: function (e) {
+                        console.log(e);
+                        console.log(e, "Error adding data! Please try again.");
+                    }
+                });
+               
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");

@@ -57,6 +57,16 @@
             this.states.addState = true;
             window.scrollTo(0, 100);
         },
+        validateDisplay: function (item) {
+            if (item.length > 15) {
+                return item.slice(0, 20) + "...";
+            } else {
+                return item;
+            }
+        },
+        detailData: function (item) {
+            this.message = item;
+        },
         onSubmit: function () {     
             validate.checkForm(this);
             if (this.errors.name || this.errors.permission || this.errors.role) { return; }

@@ -65,7 +65,7 @@
                 </tr>
                 <tr v-for="(user, index) in users">
                     <td v-if="index == selected" class="selected"> {{ user.FullName }} </td>
-                    <td v-on:click="detailData(user.FullName) " v-else>{{ validate.displayData(user.FullName) }}</td>
+                    <td v-on:click="detailData(user.FullName)" v-else>{{ validateDisplay(user.FullName) }}</td>
                     <td v-if="index == selected" class="selected"> {{ getPermissionName(user.PermissionRoleId) }} </td>
                     <td v-else>{{ getPermissionName(user.PermissionRoleId) }}</td>
                     <td v-if="index == selected" class="selected"> {{ getRoleName(user.ViewRoleId) }} </td>
@@ -77,6 +77,5 @@
     </template>
 
 </div>
-
 
 <script type="text/javascript" src="../../Scripts/App/User/user.js"></script>

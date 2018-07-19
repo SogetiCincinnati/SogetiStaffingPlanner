@@ -118,9 +118,6 @@
             this.addState = true;
             window.scrollTo(0, 100);
         },
-        detailData: function (item) {
-            this.message = item;
-        },
         addOpportunity: function () {
             let data = helpers.buildJSON(this);
             requests.addOpportunity(data, this);
@@ -144,10 +141,12 @@
             window.scrollTo(0, 0);
         },
         getClientName: function (clientId) { // pass id and get name back
-            for (client in this.clients) {
-                if (this.clients[client].clientId === clientId) {
-                    return(this.clients[clientId].ClientName);
+            
+            for (i in this.clients) {
+                if (clientId == this.clients[i].ClientId) {
+                    return this.clients[i].ClientName;
                 }
+            
             }
         },
         getAEName: function (AEId) { // pass ID and get name back

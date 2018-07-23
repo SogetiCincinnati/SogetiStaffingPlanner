@@ -107,7 +107,7 @@ new Vue({
                 return;
             }
  
-            requests.addRow(clientObj, this);
+            requests.addRow(this.formData, this);
         },
         onEdit: function (post) {
             // Populate edit tables.

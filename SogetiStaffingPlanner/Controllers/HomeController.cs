@@ -105,8 +105,9 @@ namespace SogetiStaffingPlanner.Controllers
                         if (o.OpportunityId == p.OpportunityId)
                         {
                             oppJSON.OpportunityName = o.OpportunityName;
-                            oppJSON.OpportunityName = o.OpportunityName;
+                            oppJSON.OpportunityId = o.OpportunityId;
                             oppJSON.ClientContact = o.ClientContact;
+                            oppJSON.ClientId = o.ClientId;
                             oppJSON.AE = o.AccountExecutiveUserId;
                             oppJSON.ACT = o.OpportunityOwnerUserId;
                             foreach (Client c in clients)
@@ -162,13 +163,15 @@ namespace SogetiStaffingPlanner.Controllers
                         ClientName = clientJSON.ClientName,
                         ClientSubbusiness = clientJSON.ClientSubbusiness,
                         ClientContact = oppJSON.ClientContact,
+                        ClientId = oppJSON.ClientId,
                         UnitName = unitJSON.UnitName,
                         SoldStatusName = soldStatusJSON.SoldStatusName,
                         SActive = soldStatusJSON.SActive,
-                        PositionStatusId =  p.PositionStatusId,
+                        PositionStatusId = p.PositionStatusId,
                         AE = oppJSON.AE,
                         ACT = oppJSON.ACT,
-                        Priority = this.CalculatePriority(p.NumberOfPositions)
+                        Priority = this.CalculatePriority(p.NumberOfPositions),
+                        OpportunityId = oppJSON.OpportunityId
                     });
                 }
                 

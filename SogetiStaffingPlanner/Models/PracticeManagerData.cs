@@ -42,5 +42,7 @@ namespace SogetiStaffingPlanner.Models
         public List<PositionData> Positions { get; internal set; }
         public int PositionStatusId { get; internal set; }
         public int PositionId { get; internal set; }
+        public int OpportunityId { get; internal set; }
+        public int ClientId { get; internal set; }
     }
 }

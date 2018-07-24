@@ -107,59 +107,63 @@ new Vue({
                 return;
             }
  
-            requests.addRow(this.formData, this);
+            requests.addRow(clientObj, this);
+            requests.getAEList(this);
+            requests.getRegionList(this);
+            requests.getUnitList(this);
+            requests.getPositionStatusList(this);
+            requests.getOpportunityList(this);
+            requests.fetchPositions(this);
+            requests.fetchClients(this);
         },
         onEdit: function (post) {
+            console.log('EDIT', post);
+            console.log('EDIT OBJS', this.editObjs);
             // Populate edit tables.
             this.addState = true;
             this.state.updateState = true;
-            this.formData.accountExecutiveUserId = post.AE;
-            this.formData.regionId = 1;
-            this.formData.opportunityName = post.OpportunityName;
-            this.formData.numberOfPositions = post.NumberOfPositions;
-            this.formData.positionName = post.PositionName;
-            this.formData.positionStatusId = post.PositionStatusId;
-            this.formData.positionNote = post.PositionNote;
+            this.displayState = false;
+
+            //Populate client section of edit form
             this.formData.clientName = post.ClientName;
             this.formData.clientSubbusiness = post.ClientSubbusiness;
-            this.formData.clientContact = post.ClientContact;
-            this.formData.rate = post.Rate;
-            this.formData.acceptedCandidate = post.AcceptedCandidate;
-            this.formData.hiredCandidate = post.HireCandidate;
-            this.formData.rejectedCandidate = post.RejectedCandidate;
-            this.formData.proposedCandidate = post.ProposedCandidate;
-            this.formData.duration = post.Duration;
-            let oppToFetchId = null;
-
-            for (let i = 0; i < this.opportunities.length; i++) {
-                if (post.OpportunityName == this.opportunities[i].opportunityName) {
-                    this.formData.unitId = this.opportunities[i].unitId;
-                    this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
-                    oppToFetchId = this.opportunities[i].positionId;
-                }
-            }
-            //Set the data of the item being edited before changes made.
             for (let i = 0; i < this.clients.length; i++) {
-                if (this.formData.clientName == this.clients[i].ClientName) {                 
+                if (post.ClientId == this.clients[i].ClientId) {
+                    console.log('CLIENT MATCH');
                     this.editObjs.clientEdit = this.clients[i];
                 }
             }
-            //Get extra opp properties
+            //Populate opportunity section of edit form
+            this.formData.opportunityName = post.OpportunityName;
+            this.formData.accountExecutiveUserId = post.AE;
+            this.formData.clientContact = post.ClientContact;
+            console.log(post.OpportunityId);
             for (let i = 0; i < this.opportunities.length; i++) {
-                if (this.opportunities[i].opportunityName == this.formData.opportunityName) {
+                if (post.OpportunityId == this.opportunities[i].opportunityId) {
+                    this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
+                    this.formData.regionId = this.opportunities[i].regionId;
+                    this.formData.unitId = this.opportunities[i].unitId;
                     this.editObjs.opportunityEdit = this.opportunities[i];
                 }
             }
-            //Get position data for editing
+            //Populate position section of edit form
+            this.formData.positionName = post.PositionName;
+            this.formData.hiredCandidate = post.HireCandidate;
+            this.formData.acceptedCandidate = post.AcceptedCandidate;
+            this.formData.rejectedCandidate = post.RejectedCandidate;
+            this.formData.proposedCandidate = post.ProposedCandidate;
             for (let i = 0; i < this.positions.length; i++) {
-                if (this.positions[i].PositionId === post.PositionId) {
+                if (this.positions[i].PositionId == post.PositionId) {
+                    this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
+                    this.formData.positionStatusId = this.positions[i].PositionStatusId;
+                    this.formData.positionNote = this.positions[i].PositionNote;
                     this.editObjs.positionEdit = this.positions[i];
-                }
+                    }
             }
-
         },
         displayDetails: function (data) {
             this.displayState = true;
+            this.state.updateState = false;
             this.displayView = data;
             window.scrollTo(0, 0);
         },
@@ -250,3 +254,4 @@ new Vue({
         requests.fetchClients(this);
     }
 });
+Vue.config.devtools = true;

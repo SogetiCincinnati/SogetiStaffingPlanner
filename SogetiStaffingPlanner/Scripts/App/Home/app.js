@@ -127,6 +127,12 @@ new Vue({
             //Populate client section of edit form
             this.formData.clientName = post.ClientName;
             this.formData.clientSubbusiness = post.ClientSubbusiness;
+            for (let i = 0; i < this.clients.length; i++) {
+                if (post.ClientId == this.clients[i].ClientId) {
+                    console.log('CLIENT MATCH');
+                    this.editObjs.clientEdit = this.clients[i];
+                }
+            }
             //Populate opportunity section of edit form
             this.formData.opportunityName = post.OpportunityName;
             this.formData.accountExecutiveUserId = post.AE;
@@ -137,6 +143,7 @@ new Vue({
                     this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
                     this.formData.regionId = this.opportunities[i].regionId;
                     this.formData.unitId = this.opportunities[i].unitId;
+                    this.editObjs.opportunityEdit = this.opportunities[i];
                 }
             }
             //Populate position section of edit form
@@ -150,6 +157,7 @@ new Vue({
                     this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
                     this.formData.positionStatusId = this.positions[i].PositionStatusId;
                     this.formData.positionNote = this.positions[i].PositionNote;
+                    this.editObjs.positionEdit = this.positions[i];
                     }
             }
         },

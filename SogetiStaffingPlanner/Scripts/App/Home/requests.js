@@ -327,7 +327,7 @@ let requests = {
     },
     editRow: function (that) {
         let clientData = {};
-        console.log('EDIT DATA', that.editObjs.clientEdit);
+        
         
         let clientObj = {
             clientName: that.formData.clientName,
@@ -371,7 +371,7 @@ let requests = {
                             numberOfPositions: that.formData.numberOfPositions,
                             skillset: that.editObjs.positionEdit.Skillset,
                             rate: that.editObjs.positionEdit.Rate,
-                            hireCandidate: that.formData.hiredCandidate,
+                            acceptedCandidate: that.formData.acceptedCandidate,
                             proposedCandidate: that.formData.proposedCandidate,
                             hireCandidate: that.formData.hiredCandidate,
                             rejectedCandidate: that.formData.rejectedCandidate,
@@ -390,6 +390,13 @@ let requests = {
                                 that.addState = false;
                                 that.state.updateState = false;
                                 requests.getMainData(that);
+                                requests.getAEList(this);
+                                requests.getRegionList(this);
+                                requests.getUnitList(this);
+                                requests.getPositionStatusList(this);
+                                requests.getOpportunityList(this);
+                                requests.fetchPositions(this);
+                                requests.fetchClients(this);
                                 that.clearForm();
                             }.bind(that),
                             error: function (e) {

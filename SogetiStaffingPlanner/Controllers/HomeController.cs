@@ -107,6 +107,7 @@ namespace SogetiStaffingPlanner.Controllers
                             oppJSON.OpportunityName = o.OpportunityName;
                             oppJSON.OpportunityId = o.OpportunityId;
                             oppJSON.ClientContact = o.ClientContact;
+                            oppJSON.ClientId = o.ClientId;
                             oppJSON.AE = o.AccountExecutiveUserId;
                             oppJSON.ACT = o.OpportunityOwnerUserId;
                             foreach (Client c in clients)
@@ -162,6 +163,7 @@ namespace SogetiStaffingPlanner.Controllers
                         ClientName = clientJSON.ClientName,
                         ClientSubbusiness = clientJSON.ClientSubbusiness,
                         ClientContact = oppJSON.ClientContact,
+                        ClientId = oppJSON.ClientId,
                         UnitName = unitJSON.UnitName,
                         SoldStatusName = soldStatusJSON.SoldStatusName,
                         SActive = soldStatusJSON.SActive,

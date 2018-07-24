@@ -110,9 +110,11 @@ new Vue({
             requests.addRow(clientObj, this);
         },
         onEdit: function (post) {
+            console.log('EDIT', post);
             // Populate edit tables.
             this.addState = true;
             this.state.updateState = true;
+            this.displayState = false;
             this.formData.accountExecutiveUserId = post.AE;
             this.formData.regionId = 1;
             this.formData.opportunityName = post.OpportunityName;
@@ -160,6 +162,7 @@ new Vue({
         },
         displayDetails: function (data) {
             this.displayState = true;
+            this.state.updateState = false;
             this.displayView = data;
             window.scrollTo(0, 0);
         },
@@ -250,3 +253,4 @@ new Vue({
         requests.fetchClients(this);
     }
 });
+Vue.config.devtools = true;

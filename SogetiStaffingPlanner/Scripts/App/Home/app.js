@@ -108,9 +108,18 @@ new Vue({
             }
  
             requests.addRow(clientObj, this);
+            requests.getAEList(this);
+            requests.getRegionList(this);
+            requests.getUnitList(this);
+            requests.getPositionStatusList(this);
+            requests.getOpportunityList(this);
+            requests.fetchPositions(this);
+            requests.fetchClients(this);
         },
         onEdit: function (post) {
+       
             console.log('EDIT', post);
+            console.log('EDIT OBJS', this.editObjs);
             // Populate edit tables.
             this.addState = true;
             this.state.updateState = true;
@@ -133,13 +142,15 @@ new Vue({
             this.formData.duration = post.Duration;
             let oppToFetchId = null;
 
+            //Gather data specific to opportunity.
             for (let i = 0; i < this.opportunities.length; i++) {
-                if (post.OpportunityName == this.opportunities[i].opportunityName) {
+                if (post.OpportunityId == this.opportunities[i].opportunityId) {
                     this.formData.unitId = this.opportunities[i].unitId;
                     this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
-                    oppToFetchId = this.opportunities[i].positionId;
+                    oppToFetchId = this.opportunities[i].opportunityId;
                 }
             }
+            console.log('MY POST', post);
             //Set the data of the item being edited before changes made.
             for (let i = 0; i < this.clients.length; i++) {
                 if (this.formData.clientName == this.clients[i].ClientName) {                 

@@ -105,7 +105,7 @@ namespace SogetiStaffingPlanner.Controllers
                         if (o.OpportunityId == p.OpportunityId)
                         {
                             oppJSON.OpportunityName = o.OpportunityName;
-                            oppJSON.OpportunityName = o.OpportunityName;
+                            oppJSON.OpportunityId = o.OpportunityId;
                             oppJSON.ClientContact = o.ClientContact;
                             oppJSON.AE = o.AccountExecutiveUserId;
                             oppJSON.ACT = o.OpportunityOwnerUserId;
@@ -165,10 +165,11 @@ namespace SogetiStaffingPlanner.Controllers
                         UnitName = unitJSON.UnitName,
                         SoldStatusName = soldStatusJSON.SoldStatusName,
                         SActive = soldStatusJSON.SActive,
-                        PositionStatusId =  p.PositionStatusId,
+                        PositionStatusId = p.PositionStatusId,
                         AE = oppJSON.AE,
                         ACT = oppJSON.ACT,
-                        Priority = this.CalculatePriority(p.NumberOfPositions)
+                        Priority = this.CalculatePriority(p.NumberOfPositions),
+                        OpportunityId = oppJSON.OpportunityId
                     });
                 }
                 

@@ -117,6 +117,7 @@ new Vue({
             requests.fetchClients(this);
         },
         onEdit: function (post) {
+            window.scrollTo(0, 200);
             console.log('EDIT', post);
             console.log('EDIT OBJS', this.editObjs);
             // Populate edit tables.

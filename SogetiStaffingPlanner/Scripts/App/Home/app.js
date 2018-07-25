@@ -52,7 +52,8 @@ new Vue({
         state: {
             lastClientId: null,
             lastOppId: null,
-            updateState: false
+            updateState: false,
+            clientQuickAdd: false
         },
         errors: {
 
@@ -117,6 +118,7 @@ new Vue({
             requests.fetchClients(this);
         },
         onEdit: function (post) {
+            window.scrollTo(0, 200);
             console.log('EDIT', post);
             console.log('EDIT OBJS', this.editObjs);
             // Populate edit tables.
@@ -226,6 +228,15 @@ new Vue({
                     return "Any";
                     break;
             }
+        },
+        onClientQuickAdd: function () {
+            this.state.clientQuickAdd = true;
+        },
+        onClientCancel: function () {
+            this.state.clientQuickAdd = false;
+        },
+        onClientSubmit: function () {
+            alert('Submit working!');
         }
     },
     created: function () {

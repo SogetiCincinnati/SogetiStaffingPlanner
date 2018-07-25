@@ -45,6 +45,27 @@ let requests = {
             }.bind(that)
         });
     },
+    quickAddClient: function (quickClient, that) {
+        $.ajax({
+            type: "POST",
+            url: "Client/AddClient",
+            dataType: "json",
+            data: JSON.stringify(quickClient),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                //Receives message from backend for you to do what you want with it
+                console.log('POST request success');
+                requests.fetchClients(that);
+                requests.addMessage(that.formData.clientName, that);
+                that.state.clientQuickAdd = false;
+                that.formData.clientName = quickClient.clientName;
+                that.formData.clientSubbusiness = quickClient.clientSubbusiness;
+            }.bind(that),
+            error: function (e) {
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
     fetchPositions: function (that) {
         $.ajax({ // get positions
             async: false,
@@ -283,7 +304,7 @@ let requests = {
                                             positionName: that.formData.positionName,
                                             numberOfPositions: that.formData.numberOfPositions,
                                             skillset: that.formData.skillset,
-                                            hireCandidate: that.formData.hireCandidate,
+                                            hireCandidate: that.formData.hiredCandidate,
                                             proposedCandidate: that.formData.proposedCandidate,
                                             rejectedCandidate: that.formData.rejectedCandidate,
                                             acceptedCandidate: that.formData.acceptedCandidate,
@@ -293,6 +314,7 @@ let requests = {
                                             active: true,
                                             positionStatusId: that.formData.positionStatusId
                                         };
+                                        console.log('POSITION OBJECT', posObj);
                                         $.ajax({
                                             type: "POST",
                                             url: "Position/AddPosition",

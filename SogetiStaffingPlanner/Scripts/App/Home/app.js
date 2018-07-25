@@ -107,7 +107,16 @@ new Vue({
                 requests.editRow(this);
                 return;
             }
- 
+            let clientObj = {
+                clientName: this.formData.clientName,
+                clientSubbusiness: this.formData.clientSubbusiness,
+                unitId: this.formData.unitId,
+                regionId: this.formData.regionId,
+                opportunityName: this.formData.opportunityName,
+                opportunityNotes: this.formData.opportunityNotes,
+                clientContact: this.formData.clientContact,
+                active: true
+             };
             requests.addRow(clientObj, this);
             requests.getAEList(this);
             requests.getRegionList(this);
@@ -236,7 +245,11 @@ new Vue({
             this.state.clientQuickAdd = false;
         },
         onClientSubmit: function () {
-            alert('Submit working!');
+            let quickClient = {
+                clientName: this.formData.clientName,
+                clientSubbusiness: this.formData.clientSubbusiness
+            };
+            requests.quickAddClient(quickClient, this);        
         }
     },
     created: function () {

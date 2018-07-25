@@ -15,7 +15,7 @@
                     <div class="form-horizontal">
                         <!-- ROW ONE BEGIN-->
                         <h3 class="formHeader">{{state.updateState ? 'Edit Client' : 'Add Client'}}</h3>
-                        <template>
+                        <template v-if="state.clientQuickAdd">
                             <div class="form-group"></div>
                             <div class="col-sm-6">
                                 <label class="col-sm-4" for="">Client Name: </label>
@@ -31,38 +31,37 @@
                                     <span class="error">{{ errors.clientSubbusiness }}</span>
                                 </div>
                             </div>
-                            <!--<button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
-                            <button class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>-->
+                            <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
+                            <button class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
                         </template>
-                        <!--<template v-else>
+                        <template v-else>
+                            <div class="form-group"></div>
+                            <div class="col-sm-6">
+                                <label class="col-sm-4">Client Name: </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" v-model="formData.clientName">
+                                        <option v-for="client in clients" :value="client.ClientName">{{ client.ClientName }}</option>
+                                    </select>
+                                    <template v-if="errors.clientName">
+                                        <span class="error">{{ errors.clientName }}</span>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="col-sm-4">Client Subbusiness: </label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" v-model="formData.clientSubbusiness">
+                                        <option v-for="client in clients" :value="client.ClientSubbusiness">{{ client.ClientSubbusiness }}</option>
+                                    </select>
 
-                          <div class="form-group"></div>
-                          <div class="col-sm-6">
-                              <label class="col-sm-4">Client Name: </label>
-                              <div class="col-sm-8">
-                                  <select class="form-control" v-model="formData.clientName">
-                                      <option v-for="client in clients" :value="client.ClientName">{{ client.ClientName }}</option>
-                                  </select>
-                                  <template v-if="errors.clientName">
-                                      <span class="error">{{ errors.clientName }}</span>
-                                  </template>
-                              </div>
-                          </div>
-                          <div class="col-sm-6">
-                              <label class="col-sm-4">Client Subbusiness: </label>
-                              <div class="col-sm-8">
-                                  <select class="form-control" v-model="formData.clientSubbusiness">
-                                      <option v-for="client in clients" :value="client.ClientSubbusiness">{{ client.ClientSubbusiness }}</option>
-                                  </select>
-
-                                  <template v-if="errors.clientSubbusiness">
-                                      <span class="error">{{ errors.clientSubbusiness }}</span>
-                                  </template>
-                              </div>
-                          </div>
-                          <br />
-                          <!--<button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>-->
-                        <!--</template>-->
+                                    <template v-if="errors.clientSubbusiness">
+                                        <span class="error">{{ errors.clientSubbusiness }}</span>
+                                    </template>
+                                </div>
+                            </div>
+                            <br />
+                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                        </template>
                         <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
                         <hr />
                         <h3>{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>

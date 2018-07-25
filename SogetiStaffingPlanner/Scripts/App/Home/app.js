@@ -240,9 +240,7 @@ new Vue({
                 clientName: this.formData.clientName,
                 clientSubbusiness: this.formData.clientSubbusiness
             };
-            requests.quickAddClient(quickClient, this);
-            
-            
+            requests.quickAddClient(quickClient, this);        
         }
     },
     created: function () {

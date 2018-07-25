@@ -14,6 +14,13 @@
     <script type="text/javascript" src="../../Scripts/App/Opportunity/validate.js"></script>
     <div id="opportunity" class="main">
         <div v-if="moreState === false">
+            <template>
+                <div class="flash-message">
+                    <transition name="fade">
+                        <p v-if="message">{{ message }}</p>
+                    </transition>
+                </div>
+            </template>
             <h2>Opportunity List</h2>
             <hr />
             <div v-if="addState === false" class="addButton">
@@ -117,25 +124,25 @@
                             </div>
                         </div>
                         <!--<template v-if="updateState">
-                            <div class="col-sm-6">
-                                <label class="col-sm-4">Active: </label>
-                                <div class="col-sm-8">
-                                    <button class="btn btn-default" v-on:click="active = !active">
-                                        <div v-if="active">
-                                            <i class="fa fa-thumbs-up"> Active</i>
-                                        </div>
-                                        <template v-else>
-                                            <i class="fa fa-thumbs-down"> Inactive</i>
-                                        </template>
-                                    </button>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4">Active: </label>
+                        <div class="col-sm-8">
+                            <button class="btn btn-default" v-on:click="active = !active">
+                                <div v-if="active">
+                                    <i class="fa fa-thumbs-up"> Active</i>
                                 </div>
+                                <template v-else>
+                                    <i class="fa fa-thumbs-down"> Inactive</i>
+                                </template>
+                            </button>
+                        </div>
 
-                            </div>
-                        </template>-->
+                    </div>
+                </template>-->
 
                         <div class="form-group"></div>
                         <div class="col-sm-6">
-                            <button class="btn btn-primary" v-on:click="onSubmit"><i class="fa fa-pencil"></i> {{ updateState ? 'Update' : 'Add'}}</button>
+                            <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ updateState ? 'Update' : 'Add'}}</button>
                             <button class="btn btn-danger" v-on:click="clearForm"><i class="fa fa-times"></i> Cancel</button>
                         </div>
 
@@ -158,13 +165,19 @@
                             <th>Details</th>
                             <!--<th>Delete</th>-->
                         </tr>
-                        <tr v-for="opportunity in opportunities">
-                            <td>{{ opportunity.opportunityName }}</td>
-                            <td>{{ getClientName(opportunity.clientId) }}</td>
-                            <td>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
-                            <td>{{ getUnitName(opportunity.unitId) }}</td>
-                            <td>{{ opportunity.clientContact }}</td>
-                            <td>{{ getRegionName(opportunity.regionId) }}</td>
+                        <tr v-for="(opportunity, index) in opportunities">
+                            <td v-if="index == selected" class="selected">{{ opportunity.opportunityName }}</td>
+                            <td v-else>{{ opportunity.opportunityName }}</td>
+                            <td v-if="index == selected" class="selected">{{ getClientName(opportunity.clientId) }}</td>
+                            <td v-else>{{ getClientName(opportunity.clientId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                            <td v-else>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ getUnitName(opportunity.unitId) }}</td>
+                            <td v-else>{{ getUnitName(opportunity.unitId) }}</td>
+                            <td v-if="index == selected" class="selected">{{ opportunity.clientContact }}</td>
+                            <td v-else>{{ opportunity.clientContact }}</td>
+                            <td v-if="index == selected" class="selected">{{ getRegionName(opportunity.regionId) }}</td>
+                            <td v-else>{{ getRegionName(opportunity.regionId) }}</td>
                             <td><button class="btn btn-success" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
                             <td><button class="btn btn-warning" v-on:click="displayDetail(opportunity)"><i class="fa fa-plus"></i></button></td>
                             <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->

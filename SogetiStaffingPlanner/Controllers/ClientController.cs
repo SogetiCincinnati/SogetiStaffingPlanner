@@ -27,7 +27,7 @@ namespace SogetiStaffingPlanner.Controllers
 		{
 			System.Diagnostics.Debug.WriteLine("Get Client List");
 
-			List<Client> clients = db.Database.SqlQuery<Client>("spGetClients").ToList<Client>();
+			List<Client> clients = db.Clients.ToList<Client>();
 			List<ClientData> clientList = new List<ClientData> { };
 
 			foreach (Client c in clients)

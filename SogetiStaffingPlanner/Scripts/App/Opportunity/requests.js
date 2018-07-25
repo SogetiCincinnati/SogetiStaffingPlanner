@@ -2,6 +2,7 @@
 The 'that' context of that file is being passed to these functions as the parameter, 'that' 
 */
 let requests = {
+
     getRegionList: function (that) {
         $.ajax({ // Region List
             async: false,
@@ -98,6 +99,7 @@ let requests = {
         });
     },
     getClientList: function (that) {
+        
         // GET CLIENT LIST
         $.ajax({
             async: false,
@@ -107,7 +109,9 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                
                 that.clients = data;
+                console.log(that.clients);
             }.bind(that)
         });
     },
@@ -122,7 +126,7 @@ let requests = {
             dataType: "json",
             success: function (data) {
                 that.opportunities = data;
-
+                console.log('opportunities', that.opportunities);
             }.bind(that)
         });
     },
@@ -134,13 +138,15 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                // alert("Added " + that.opportunityName + "!");
                 that.opportunities.push(data);
-                that.clearForm();
                 /* that code will update the table.  It needs to be in it's own function */
                 requests.getOpportunityList(that);
                 requests.getClientList(that);
                 requests.getUnitList(that);
+                that.findSelected();
+                that.scrollDown();
+                that.clearForm();
+                requests.updateMessage(that.opporunityName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -156,15 +162,29 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                alert("Added " + that.opportunityName + "!");
                 that.opportunities.push(data);
-                that.clearForm();
                 requests.getOpportunityList(that);
+                that.findSelected();
+                that.scrollDown();
+                that.clearForm();
+                requests.addMessage(data.opportunityName, that);
             }.bind(that),
             error: function (e) {
                 console.log(e);
                 console.log(e, "Error adding data! Please try again.");
             }
         });
+    },
+    addMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Added ${message}!`;
+    },
+    updateMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Updated ${message}!`;
     }
 }

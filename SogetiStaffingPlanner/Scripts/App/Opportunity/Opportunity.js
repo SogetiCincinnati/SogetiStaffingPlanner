@@ -2,6 +2,7 @@
     el: '#opportunity',
     data: {
         opportunities: '',
+        message: '',
         clients: '',
         units: '',
         regions: '',
@@ -24,7 +25,29 @@
         opportunityOwnerUserId: null,
         lastModifiedUserId: null,
         active: false,
-        errors: {}
+        errors: {
+            opportunityName: null,
+            clientId: null,
+            accountExecutiveUserId: null,
+            unitId: null,
+            regionId: null
+        },
+        selected: null, // finds the active entry that has been added or edited
+    },
+    computed: {
+        isDisabled() {
+            let count = 0;
+            if (this.errors.opportunityName) { count += 1 };
+            if (this.errors.clientId) { count += 1 };
+            if (this.errors.accountExecutiveUserId) { count += 1 };
+            if (this.errors.unitId) { count += 1 };
+            if (this.errors.regionId) { count += 1 };
+            if (count > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     },
     watch: {
         opportunityName: function (val) { validate.checkOpportunityName(val, this) },
@@ -54,7 +77,12 @@
             this.opportunityOwnerUserId = null;
             this.clientId = null;
             this.active = false;
-            this.errors = [];
+
+            this.errors.opportunityName = null;
+            this.errors.clientId = null;
+            this.errors.accountExecutiveUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
             window.scrollTo(0, 0);
         },
         onSubmit: function () {
@@ -96,8 +124,6 @@
         },
         updateOpportunity: function () {
             let data = helpers.buildJSON(this);
-            alert(this.opportunityName + ' updated!');
-            this.clearForm();
             requests.editOpportunity(data, this);
         },
         add: function () {
@@ -106,15 +132,21 @@
         },
         /* This function will return an object based on the current data state on the Vue instance, which can then be seralized to JSON data */   
         cancel: function () {
-            this.errors = {};
+            this.errors.opportunityName = null;
+            this.errors.clientId = null;
+            this.errors.accountExecutiveUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
             this.addState = false;
             window.scrollTo(0, 0);
         },
         getClientName: function (clientId) { // pass id and get name back
-            for (client in this.clients) {
-                if (this.clients[client].ClientId === clientId) {
-                    return(this.clients[clientId].ClientName);
+            
+            for (i in this.clients) {
+                if (clientId == this.clients[i].ClientId) {
+                    return this.clients[i].ClientName;
                 }
+            
             }
         },
         getAEName: function (AEId) { // pass ID and get name back
@@ -187,6 +219,31 @@
             this.moreState = false;
             window.scrollTo(0, 0);
         },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            console.log('opportunity length =\t' + this.opportunities.length);
+            console.log('this.selected =\t' + this.selected);
+            let container = document.querySelector(".scrollBar"); // looks for table scrollbar
+            let scrollDistance = this.selected * (container.scrollHeight / this.opportunities.length); // calculate how far to scroll down
+            console.log('table length = ' + container.scrollHeight);
+            console.log('scroll Distance = ' + scrollDistance);
+            setTimeout(function () { // wait for the table to update, then scroll to the entry
+                container.scrollTo(0, scrollDistance);
+            }, 100);
+        },
+        findSelected: function () {
+            for (o in this.opportunities) { // Highlights the updated row
+                console.log(this.opportunities[o].opportunityName);
+                console.log(this.opportunityName);
+                if (this.opportunities[o].opportunityName == this.opportunityName) {
+                   // console.log(this.opportunities[o].OpportunityName);
+                   // console.log(this.opportunityName);
+                    console.log('found at ' + o);
+                    this.selected = o;
+                    break;
+                }
+            }
+        },
+
     },
     created: function () {
         requests.getOpportunityList(this);
@@ -197,5 +254,6 @@
         requests.getACTLeadList(this);
         requests.getUnitList(this);
         requests.getClientList(this);
+        
     }
 });

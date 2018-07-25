@@ -3,7 +3,9 @@ let position = new Vue({
     el: '#app',
     data: {
         positions: '',
+        message: '',
         positionDetail: null,
+        prevPosition: '',
         title: 'Positions',
         addState: false,
         moreState: false,
@@ -31,6 +33,7 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
+        selected: null, // Index of entry being selected to be highlighted
     },
     watch: {
         positionName: function (val) {
@@ -56,18 +59,20 @@ let position = new Vue({
         }
     },
     methods: {
-        onSubmit: function () {   
+        onSubmit: function () {
             console.log(this.checkForm());
             if (this.checkForm() == true) {
                 if (this.updateState) {
                     console.log('update positions function called');
+                    console.log(this.maxConsultantGradeId);
                     this.updatePosition();
                 }
                 else if (this.addState) {
                     console.log('add positions function called');
                     this.addPosition();
+
                 }
-            } 
+            }
         },
         add: function () {
             this.addState = true;
@@ -77,27 +82,30 @@ let position = new Vue({
         cancel: function () {
             this.errors = {};
             this.addState = false;
-            posHelpers.clearForm(this);     
+            posHelpers.clearForm(this);
             window.scrollTo(0, 0);
         },
-        addPosition: function () {    
-            
+        addPosition: function () {
             this.errors = {};
             validate.checkForm(this);
             let data = posHelpers.buildJSON(this);
+            this.selected = this.positions.length
             console.log(data);
             /* Code to format the date for the controller to recieve */
             if (this.expectedStartDate) {
                 let parts = this.expectedStartDate.split('-')
                 let date = new Date(parts);
                 date = date.toISOString();
-                data.expectedStartDate = date;   
+                data.expectedStartDate = date;
             }
-              
-            /* Set last modified date to present time, as this is initial creation of position */        
+
+            /* Set last modified date to present time, as this is initial creation of position */
             data.lastModified = new Date().toISOString();
             /* Submit the data */
             requests.postPosition(data, this);
+            console.log('here here');
+            this.findSelected();
+            this.scrollDown();
         },
         updatePosition: function () {
             let data = posHelpers.buildJSON(this);
@@ -112,9 +120,11 @@ let position = new Vue({
         onEdit: function (position) {
             this.errors = {};
             /* Specify that status is being updated */
+            
             this.updateState = true;
             /* Populate form with selected values */
             this.positionName = position.PositionName;
+            this.prevPosition = this.positionName;
             this.positionId = position.PositionId;
             this.duration = position.Duration;
             this.acceptedCandidate = position.AcceptedCandidate;
@@ -132,12 +142,12 @@ let position = new Vue({
             this.positionNote = position.PositionNote;
             this.numberOfPositions = position.NumberOfPositions;
             this.maxConsultantGradeId = position.MaxConsultantGradeId;
-            this.minConsultantGradeId = position.MinConsultantGradeId;   
-            this.opportunityId = position.OpportunityId;        
+            this.minConsultantGradeId = position.MinConsultantGradeId;
+            this.opportunityId = position.OpportunityId;
             this.unitPracticeId = position.UnitPracticeId;
-            this.positionStatusId = position.PositionStatusId;           
+            this.positionStatusId = position.PositionStatusId;
             /* Set form to drop down */
-            this.addState = true;  
+            this.addState = true;
             window.scrollTo(0, 200);
         },
         displayDetail: function (position) {
@@ -148,12 +158,12 @@ let position = new Vue({
                 }
                 if (!position['Rate']) {
                     position['Rate'] = '~';
-                }               
+                }
             }
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
                 this.positionDetail.ExpectedStartDate = posHelpers.displayDate(this.positionDetail.ExpectedStartDate);
-                this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);  
+                this.positionDetail.LastModified = posHelpers.displayDate(this.positionDetail.LastModified);
             }
             /* Set up N/A value for missing ExpectedStartDate value */
             if (this.positionDetail.ExpectedStartDate[1] == 0) {
@@ -163,7 +173,7 @@ let position = new Vue({
             this.moreState = true;
             window.scrollTo(0, 100);
         },
-         getOpportunityName: function (opportunityId) {
+        getOpportunityName: function (opportunityId) {
             for (opportunity in this.opportunities) {
                 if (this.opportunities[opportunity].OpportunityId == opportunityId) {
                     return (this.opportunities[opportunity].OpportunityName);
@@ -175,6 +185,31 @@ let position = new Vue({
             this.moreState = false;
             window.scrollTo(0, 0);
         },
+        findSelected: function () {
+            console.log('findSelected');
+            for (p in this.positions) { // Highlights the updated row
+                if (this.positions[p].PositionName == this.prevPosition
+                ) {
+                    console.log('found');
+                    this.selected = p;
+                    break;
+                }
+            }
+        },
+        scrollDown: function () {    // Add a 1 second delay so the table can update before scrolling down
+            let container = document.querySelector(".scrollBar");
+            setTimeout(function () { container.scrollTop = container.scrollHeight; }, 1000);
+        },
+        checkErrorObject: function (obj) {
+            let count = 0;
+            $.each(obj, function (index, value) {
+                if (value) {
+                    count += 1;
+                }
+                console.log(count);
+                return count;
+            });
+        }
     },
     created: function () {
         requests.fetchPositions(this);
@@ -184,4 +219,5 @@ let position = new Vue({
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
     }
-})
+});
+Vue.config.devtools = true;

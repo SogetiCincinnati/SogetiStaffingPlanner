@@ -20,16 +20,16 @@
                 if (that.duration % 1 != 0) {
                     that.errors.duration ? that.errors.duration += ' Cannot be a decimal.' : that.errors.duration = 'Cannot be a decimal.';
                 }
-            }   
+            }
 
         } catch (e) { }
         try {
             if (that.rate) {
-                if (that.rate < 30) {
-                    that.errors.rate = 'Rate cannot be below 30.';
-                } 
+                if (that.rate < 0) {
+                    that.errors.rate = 'Rate cannot be below 0.';
+                }
                 if (that.rate % 1 != 0) { // check for decimals
-                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.'; 
+                    that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.';
                 }
             }
         } catch (e) { }
@@ -39,7 +39,7 @@
                     that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
                 }
                 if (that.numberOfPositions % 1 != 0) {
-                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.'; 
+                    that.errors.numberOfPositions ? that.errors.numberOfPositions += ' Cannot be a decimal.' : that.errors.numberOfPositions = 'Cannot be a decimal.';
                 }
             }
 
@@ -52,7 +52,7 @@
     },
     checkPositionName: function (val, that) {
         try {
-            if (val.length || val) { that.errors.positionName = ''; }
+            if (val.length || val) { that.errors.positionName = null; }
             else {
                 that.errors.positionName = 'Position Name required';
             }
@@ -61,9 +61,9 @@
     },
     checkDuration: function (val, that) {
         try {
-            if (val < 1) {
-                that.errors.duration = 'Duration must be 1 or above.';
-            } else { that.errors.duration = ''; }
+            if (val < 0) {
+                that.errors.duration = 'Duration must be positive.';
+            } else { that.errors.duration = null; }
             if (val % 1 != 0) {
                 that.errors.duration += ' Cannot be a decimal.'
             }
@@ -72,9 +72,9 @@
     },
     checkRate: function (val, that) {
         try {
-            if (val < 30) {
-                that.errors.rate = 'Rate cannot be below 30.';
-            } else { that.errors.rate = ''; }
+            if (val < 0) {
+                that.errors.rate = 'Rate cannot be below 0.';
+            } else { that.errors.rate = null; }
             if (val && val % 1 != 0) { // check for decimals
                 that.errors.rate += ' Cannot be a decimal.'
             }
@@ -85,26 +85,25 @@
         try {
             if (val < 1) {
                 that.errors.numberOfPositions = 'Number of Positions must be greater than 1.';
-            } else { that.errors.numberOfPositions = ''; }
+            } else { that.errors.numberOfPositions = null; }
             if (val && val % 1 != 0) {
                 that.errors.numberOfPositions += ' Cannot be a decimal.'
             }
         } catch (e) { }
-
     },
     checkPositionStatusId: function (val, that) {
         if (val) {
-            that.errors.positionStatusId = '';
+            that.errors.positionStatusId = null;
         }
     },
     checkOpportunityId: function (val, that) {
         if (val) {
-            that.errors.opportunityId = '';
+            that.errors.opportunityId = null;
         }
     },
     checkUnitPracticeId: function (val, that) {
         if (val) {
-            that.errors.unitPracticeId = '';
+            that.errors.unitPracticeId = null;
         }
     },
 }

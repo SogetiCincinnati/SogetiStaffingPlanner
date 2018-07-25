@@ -3,142 +3,266 @@ new Vue({
     el: '#app',
     data: {
         addState: false,
-        opportunityName: '',
-        unit: '',
-        numberOfPositions: '',
-        positionName: '',
-        priority: '',
-        sold: '',
-        status: '',
-        client: '',
-        ae: '',
-        actLead: '',
-        skillset: '',
-        minConsultantGrade: '',
-        maxConsultantGrade: '',
-        rate: '',
-        date: '',
-        duration: '',
-        hireCandidate: '',
-        proposed: '',
-        rejected: '',
-        accepted: '',
-        notes: '',
-        posts: []
+        displayState: false,
+        displayView: '',
+        posts: [],
+        users: [],
+        clients: [],
+        aes: [],
+        regions: [],
+        units: [],
+        positionStatuses: [],
+        opportunities: [],
+        positions: [],
+        submitObjs: {
+            opportunityObj: null
+        },
+        editObjs: {
+            clientEdit: null,
+            opportunityEdit: null,
+            positionEdit: null
+        },
+        formData: {
+            accountExecutiveUserId: null,
+            regionId: null,
+            opportunityName: null,
+            opportunityNotes: null,
+            unitId: null,
+            numberOfPositions: null,
+            positionName: null,
+            soldStatus: null,
+            positionStatusId: null,
+            clientName: null,
+            clientSubbusiness: null,
+            AE: null,
+            ACT: null,
+            clientContact: null,
+            minConsultantGrade: null,
+            maxConsultantGrade: null,
+            rate: null,
+            acceptedCandidate: null,
+            hiredCandidate: null,
+            rejectedCanddidate: null,
+            proposedCandidate: null,
+            duration: null,
+            skillset: null,
+            expectedStartDate: null,
+            positionNote: null
+        },
+        state: {
+            lastClientId: null,
+            lastOppId: null,
+            updateState: false,
+            clientQuickAdd: false
+        },
+        errors: {
+
+        }
     },
     methods: {
-        getDate: function () {
-            console.log(this.date)
+        add: function () {
+            this.addState = true;
+            this.errors = {};
+            window.scrollTo(0, 200);
         },
-        onSubmit: function() {
-            let data = {};
-            data.opportunityName = this.opportunityName;
-            data.unit = this.unit;
-            data.numberOfPositions = this.numberOfPositions;
-            data.positionName = this.positionName;
-            data.priority = this.priority;
-            data.sold = this.sold;
-            data.status = this.status;
-            data.client = this.client;
-            data.ae = this.ae;
-            data.actLead = this.actLead;
-            data.skillset = this.skillset;
-            data.minConsultantGrade = this.minConsultantGrade;
-            data.maxConsultantGrade = this.maxConsultantGrade;
-            data.rate = this.rate;
-            data.date = this.date;
-            data.duration = this.duration;
-            data.hireCandidate = this.hireCandidate;
-            data.proposed = this.proposed;
-            data.rejected = this.rejected;
-            data.accepted = this.accepted;
-            data.notes = this.notes;
-
-            console.log(data);
-            this.opportunityName = '';
-            this.unit = '';
-            this.numberOfPositions = '';
-            this.positionName = '';
-            this.priority = '';
-            this.sold = '';
-            this.status = '';
-            this.client = '';
-            this.ae = '';
-            this.actLead = '';
-            this.skillset = '';
-            this.minConsultantGrade = '';
-            this.maxConsultantGrade = '';
-            this.rate = '';
-            this.date = '';
-            this.duration = '';
-            this.hireCandidate = '';
-            this.proposed = '';
-            this.rejected = '';
-            this.accepted = '';
-            this.notes = '';
-           
-        },
-        displayAdd: function () {
-            this.newForm = !this.newForm;
-            if (this.newForm === true) {
-                this.buttonText = 'Collapse';
-            } else {
-                this.buttonText = 'Add New';
+        clearForm: function () {
+            this.formData = {
+                accountExecutiveUserId: null,
+                regionId: null,
+                opportunityName: null,
+                opportunityNotes: null,
+                unitId: null,
+                numberOfPositions: null,
+                positionName: null,
+                soldStatus: null,
+                positionStatusId: null,
+                clientName: null,
+                clientSubbusiness: null,
+                AE: null,
+                ACT: null,
+                clientContact: null,
+                minConsultantGrade: null,
+                maxConsultantGrade: null,
+                rate: null,
+                acceptedCandidate: null,
+                hiredCandidate: null,
+                rejectedCanddidate: null,
+                proposedCandidate: null,
+                duration: null,
+                skillset: null,
+                expectedStartDate: null,
+                positionNote: null
             }
         },
-        submitNew: function () {
-            this.newForm = false;
-            var data = {};
-            data.positionId = this.newPosition.PositionId;
-            data.opportunityId = this.newPosition.OpportunityId;
-            data.unitPracticeId = this.newPosition.UnitPracticeId;
-            data.maxConsultantGradeId = this.newPosition.MaxConsultantGradeId;
-            data.minConsultantGradeId = this.newPosition.MinConsultantGradeId;
-            data.positionName = this.newPosition.PositionName;
-            data.numberOfPositions = this.newPosition.NumberOfPositions;
-            data.skillset = this.newPosition.Skillset;
-            data.rate = this.newPosition.Rate;
-            data.expectedStartDate = this.newPosition.ExpectedStartDate;
-            data.duration = this.newPosition.Duration;
-            data.proposedCandidate = this.newPosition.ProposedCandidate;
-            data.rejectedCandidate = this.newPosition.RejectedCandidate;
-            data.acceptedCandidate = this.newPosition.AcceptedCandidate;
-            data.positionNote = this.newPosition.PositionName;
+        cancel: function () {
+            this.errors = {};
+            this.addState = false;
+            this.state.updateState = false;
+            //CLEAR FORM
+            this.clearForm();
+            window.scrollTo(0, 0);
+        },
+        onSubmit: function () {
+            if (this.state.updateState == true) {
+                requests.editRow(this);
+                return;
+            }
+ 
+            requests.addRow(clientObj, this);
+            requests.getAEList(this);
+            requests.getRegionList(this);
+            requests.getUnitList(this);
+            requests.getPositionStatusList(this);
+            requests.getOpportunityList(this);
+            requests.fetchPositions(this);
+            requests.fetchClients(this);
+        },
+        onEdit: function (post) {
+            window.scrollTo(0, 200);
+            console.log('EDIT', post);
+            console.log('EDIT OBJS', this.editObjs);
+            // Populate edit tables.
+            this.addState = true;
+            this.state.updateState = true;
+            this.displayState = false;
 
-            console.log(data);
-
-            $.ajax({
-                type: "POST",
-                url: "Home/AddPosition",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    //Receives message from backend for you to do what you want with it
-                    alert(data);
-                },
-                error: function (e) {
-                    console.log(e, "Error adding data! Please try again.");
+            //Populate client section of edit form
+            this.formData.clientName = post.ClientName;
+            this.formData.clientSubbusiness = post.ClientSubbusiness;
+            for (let i = 0; i < this.clients.length; i++) {
+                if (post.ClientId == this.clients[i].ClientId) {
+                    console.log('CLIENT MATCH');
+                    this.editObjs.clientEdit = this.clients[i];
                 }
-            });
+            }
+            //Populate opportunity section of edit form
+            this.formData.opportunityName = post.OpportunityName;
+            this.formData.accountExecutiveUserId = post.AE;
+            this.formData.clientContact = post.ClientContact;
+            console.log(post.OpportunityId);
+            for (let i = 0; i < this.opportunities.length; i++) {
+                if (post.OpportunityId == this.opportunities[i].opportunityId) {
+                    this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
+                    this.formData.regionId = this.opportunities[i].regionId;
+                    this.formData.unitId = this.opportunities[i].unitId;
+                    this.editObjs.opportunityEdit = this.opportunities[i];
+                }
+            }
+            //Populate position section of edit form
+            this.formData.positionName = post.PositionName;
+            this.formData.hiredCandidate = post.HireCandidate;
+            this.formData.acceptedCandidate = post.AcceptedCandidate;
+            this.formData.rejectedCandidate = post.RejectedCandidate;
+            this.formData.proposedCandidate = post.ProposedCandidate;
+            for (let i = 0; i < this.positions.length; i++) {
+                if (this.positions[i].PositionId == post.PositionId) {
+                    this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
+                    this.formData.positionStatusId = this.positions[i].PositionStatusId;
+                    this.formData.positionNote = this.positions[i].PositionNote;
+                    this.editObjs.positionEdit = this.positions[i];
+                    }
+            }
+        },
+        displayDetails: function (data) {
+            this.displayState = true;
+            this.state.updateState = false;
+            this.displayView = data;
+            window.scrollTo(0, 0);
+        },
+        displayDate: function (date) {
+            try {
+                let returnDate = date;
+                returnDate = parseInt(returnDate.slice(6));
+                returnDate = new Date(returnDate);
+                returnDate = returnDate.toISOString().slice(0, 10);
+                return returnDate;
+            }
+            catch (e) {
+
+            }       
+        },
+        displayUser: function (id) {
+            for (let i = 0; i < this.users.length; i++) {
+                if (this.users[i].UserId == id) {
+                    return this.users[i].UserFullName;
+                }
+            }
+        },
+        displayStatusName: function (id) {
+            switch (id) {
+                case 1:
+                    return "Initiate";
+                    break;
+                case 2:
+                    return "In-Progress";
+                    break;
+                case 3:
+                    return "Need Candidates";
+                    break;
+                case 4:
+                    return "Closed";
+                    break;
+            }
+        },
+        displayGrade: function (id) {
+            switch (id) {
+                case 1:
+                    return "A1";
+                    break;
+                case 2:
+                    return "A2";
+                    break;
+                case 3:
+                    return "A";
+                    break;
+                case 4:
+                    return "B";
+                    break;
+                case 5:
+                    return "C";
+                    break;
+                case 6:
+                    return "Non-EC";
+                    break;
+                case 7:
+                    return "Any";
+                    break;
+            }
+        },
+        onClientQuickAdd: function () {
+            this.state.clientQuickAdd = true;
+        },
+        onClientCancel: function () {
+            this.state.clientQuickAdd = false;
+        },
+        onClientSubmit: function () {
+            alert('Submit working!');
         }
     },
     created: function () {
+        requests.getMainData(this);
         $.ajax({
             async: false,
             cache: false,
             type: "GET",
-            url: "Home/GetMainData",
+            url: "Client/GetUserList",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log(data);
-                this.posts = data;
-                console.log(this.posts);
+                this.users = data;
             }.bind(this), error: function (e) {
                 console.log('error');
                 console.log(e);
             }
         });
+        this.state.lastClientId = requests.fetchClients(this);
+        requests.getAEList(this);
+        requests.getRegionList(this);
+        requests.getUnitList(this);
+        requests.getPositionStatusList(this);
+        requests.getOpportunityList(this);
+        requests.fetchPositions(this);
+        requests.fetchClients(this);
     }
 });
+Vue.config.devtools = true;

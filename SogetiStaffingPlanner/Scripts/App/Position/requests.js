@@ -95,11 +95,14 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
+                that.findSelected();
+                that.scrollDown();
                 //Receives message from backend for you to do what you want with it
-                posHelpers.clearForm(that);
                 requests.fetchPositions(that);
                 console.log('POST request success');
-                alert('Successfully added');
+                requests.addMessage(data.positionName, this);
+                
+                posHelpers.clearForm(that);
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -108,6 +111,7 @@ let requests = {
         });
     },
     editPosition: function (data, that) {
+        console.log('SUBMITTING UPDATE', data);
         $.ajax({
             type: "POST",
             url: "EditPosition",
@@ -115,15 +119,37 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
-                //Receives message from backend for you to do what you want with it              
-                alert('Successfully updated ' + that.positionName + '.');
+                for (position in that.positions) { // Highlights the updated row
+
+                    if (that.positions[position].PositionName == that.positionName &&
+                        that.positions[position].OpportunityId == that.opportunityId) {
+                        that.selected = position;
+                    }
+                }
+                //Receives message from backend for you to do what you want with it   
+                requests.updateMessage(that.positionName, this);
+                that.findSelected();
                 posHelpers.clearForm(that);
                 requests.fetchPositions(that);
+               
+
             }.bind(that),
             error: function (e) {
                 console.log(e);
                 console.log(e, "Error adding data! Please try again.");
             }
         });
+    },
+    addMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Added ${message}!`;
+    },
+    updateMessage: function (message, that) {
+        setTimeout(function () {
+            that.message = '';
+        }, 6000);
+        that.message = `Updated ${message}!`;
     }
 };

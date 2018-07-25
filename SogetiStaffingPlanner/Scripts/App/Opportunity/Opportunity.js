@@ -32,6 +32,13 @@
             unitId: null,
             regionId: null
         },
+        state: {
+            clientQuickAdd: false
+        },
+        formData: {
+            clientName: null,
+            clientSubbusiness:null
+        },
         selected: null, // finds the active entry that has been added or edited
     },
     computed: {
@@ -243,7 +250,19 @@
                 }
             }
         },
-
+        onClientQuickAdd: function () {
+            this.state.clientQuickAdd = true;
+        },
+        onClientCancel: function () {
+            this.state.clientQuickAdd = false;
+        },
+        onClientSubmit: function () {
+            let quickClient = {
+                clientName: this.formData.clientName,
+                clientSubbusiness: this.formData.clientSubbusiness
+            };
+            requests.quickAddClient(quickClient, this);
+        }
     },
     created: function () {
         requests.getOpportunityList(this);

@@ -175,6 +175,33 @@ let requests = {
             }
         });
     },
+    quickAddClient: function (quickClient, that) {
+        $.ajax({
+            type: "POST",
+            url: "../Client/AddClient",
+            dataType: "json",
+            data: JSON.stringify(quickClient),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                //Receives message from backend for you to do what you want with it
+                console.log('POST request success');
+                requests.addMessage('new client ' + that.formData.clientName, that);
+                that.state.clientQuickAdd = false;
+                requests.getClientList(this);
+                console.log('CLIENTS', that.clients);
+                for (let i = 0; i < that.clients.length; i++) {
+                    if (quickClient.clientName == that.clients[i].ClientName) {
+                        console.log('MATCH', that.clients[i]);
+                        that.clientId = that.clients[i].ClientId;
+                        console.log(that.clientId);
+                    } 
+                }
+            }.bind(that),
+            error: function (e) {
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
     addMessage: function (message, that) {
         setTimeout(function () {
             that.message = '';

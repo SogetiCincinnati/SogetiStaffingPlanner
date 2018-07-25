@@ -283,7 +283,7 @@ let requests = {
                                             positionName: that.formData.positionName,
                                             numberOfPositions: that.formData.numberOfPositions,
                                             skillset: that.formData.skillset,
-                                            hireCandidate: that.formData.hireCandidate,
+                                            hireCandidate: that.formData.hiredCandidate,
                                             proposedCandidate: that.formData.proposedCandidate,
                                             rejectedCandidate: that.formData.rejectedCandidate,
                                             acceptedCandidate: that.formData.acceptedCandidate,
@@ -293,6 +293,7 @@ let requests = {
                                             active: true,
                                             positionStatusId: that.formData.positionStatusId
                                         };
+                                        console.log('POSITION OBJECT', posObj);
                                         $.ajax({
                                             type: "POST",
                                             url: "Position/AddPosition",

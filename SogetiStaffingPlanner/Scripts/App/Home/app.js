@@ -52,7 +52,8 @@ new Vue({
         state: {
             lastClientId: null,
             lastOppId: null,
-            updateState: false
+            updateState: false,
+            clientQuickAdd: false
         },
         errors: {
 
@@ -227,6 +228,15 @@ new Vue({
                     return "Any";
                     break;
             }
+        },
+        onClientQuickAdd: function () {
+            this.state.clientQuickAdd = true;
+        },
+        onClientCancel: function () {
+            this.state.clientQuickAdd = false;
+        },
+        onClientSubmit: function () {
+            alert('Submit working!');
         }
     },
     created: function () {

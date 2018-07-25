@@ -245,7 +245,11 @@ new Vue({
             this.state.clientQuickAdd = false;
         },
         onClientSubmit: function () {
-            alert('Submit working!');
+            let quickClient = {
+                clientName: this.formData.clientName,
+                clientSubbusiness: this.formData.clientSubbusiness
+            };
+            requests.quickAddClient(quickClient, this);        
         }
     },
     created: function () {

@@ -242,13 +242,6 @@ let requests = {
         });
     },
     addRow: function (client, that) {
-        $.ajax({
-            type: "POST",
-            url: "Client/AddClient",
-            dataType: "json",
-            data: JSON.stringify(client),
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
                 //Receives message from backend for you to do what you want with it
                 that.addState = false;
                 requests.addMessage(that.formData.clientName, that);
@@ -341,11 +334,6 @@ let requests = {
                         });
                     }
                 });
-            }.bind(that),
-            error: function (e) {
-                console.log(e, "Error adding data! Please try again.");
-            }
-        });
     },
     editRow: function (that) {
         let clientData = {};

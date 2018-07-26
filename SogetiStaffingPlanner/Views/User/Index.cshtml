@@ -11,21 +11,21 @@
     </template>
     <h2>User List</h2>
     <hr />
-    <div v-if="states.addState == false" class="addButton">
-        <button v-on:click="add" class="btn btn-primary">
-            <i class="fa fa-pencil"></i> Add User
-        </button>
-        <div class="form-group"></div>
-    </div>
-    <template v-else>
-        <div class="addButton">
-            <div class="form-horizontal">
-                <label class="col-sm-3" for="clientName">Name: </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.name" />
-                    <span class="error">{{ errors.name }}</span>
-                </div>
-                <div class="form-group"></div>
+        <div v-if="states.addState == false" class="addButton">
+            <button v-on:click="add" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Add User
+            </button>
+            <div class="form-group"></div>
+        </div>
+        <template v-else>
+            <div class="addButton">
+                <div class="form-horizontal">
+                    <label class="col-sm-3" for="clientName">Name: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="formData.name" />
+                        <span class="error">{{ errors.name }}</span>
+                    </div>
+                    <div class="form-group"></div>
 
                 <label class="col-sm-3"> Permission: </label>
                 <div class="col-sm-4">

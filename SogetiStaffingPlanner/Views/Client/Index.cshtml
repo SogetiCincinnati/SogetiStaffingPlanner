@@ -1,10 +1,6 @@
 ﻿
-@{
-    ViewBag.Title = "CreateClient";
-}
-<style>
 
-</style>
+<div id="Client" class="main">
 
 <div id="Client" class="main">
     <template>
@@ -16,38 +12,40 @@
     </template>
     <h2>Client List</h2>
     <hr />
-    <div v-if="states.addState === false" class="addButton">
-        <button v-on:click="add" class="btn btn-primary">
-            <i class="fa fa-pencil"></i> Add Client
-        </button>
-        <div class="form-group"></div>
-    </div>
-    <template v-else>
-        <div class="addButton">
-            <div class="form-horizontal">
-                <label class="col-sm-3" for="clientName">Client Name: </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientName" />
-                    <span class="error">{{ errors.clientName }}</span>
-                </div>
-                <div class="form-group"></div>
-
-                <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" />
-                    <span class="error">{{ errors.clientSubbusiness }}</span>
-                </div>
-
-                <div class="form-group"></div>
-                <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
-                <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
-                <div class="form-group"></div>
-            </div>
+        <div v-if="states.addState === false" class="addButton">
+            <button v-on:click="add" class="btn btn-primary">
+                <i class="fa fa-pencil"></i> Add Client
+            </button>
+            <div class="form-group"></div>
         </div>
+        <template v-else>
+            <br />
+            <div class="addButton">
+                <div class="form-horizontal">
+                    <label class="col-sm-3" for="clientName">Client Name: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="formData.clientName" />
+                        <span class="error">{{ errors.clientName }}</span>
+                    </div>
+                    <div class="form-group"></div>
 
+                    <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" type="text" v-model="formData.clientSubbusiness" />
+                        <span class="error">{{ errors.clientSubbusiness }}</span>
+                    </div>
 
-    </template>
+                    <div class="form-group"></div>
+                    <button class="btn btn-primary" v-on:click="onSubmit" :disabled="isDisabled"><i class="fa fa-pencil"></i> {{ states.updateState ? 'Update' : 'Add' }}</button>
+                    <button class="btn btn-danger" v-on:click="cancel"><i class="fa fa-times"></i> Cancel</button>
+                    <div class="form-group"></div>
+                </div>
+            </div>
+        </template>
 
+            <div class="form-group"></div>
+ 
+    
     <template>
         <div class="scrollBar">
             <table id="clientView">

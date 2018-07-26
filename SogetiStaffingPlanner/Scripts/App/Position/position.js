@@ -218,6 +218,8 @@ let position = new Vue({
         requests.getUnitList(this);
         requests.getPositionStatusList(this);
         requests.getGradeList(this);
+        console.log(this.errors.positionName);
+
     }
 });
 Vue.config.devtools = true;

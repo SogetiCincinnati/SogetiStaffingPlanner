@@ -34,8 +34,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<PositionData> positionList = new List<PositionData> { };
 				foreach (Position p in positions)
 				{
-					if (p.Active == true)
-					{
+
                         positionList.Add(new PositionData
                         {
                             PositionId = p.PositionId,
@@ -59,7 +58,7 @@ namespace SogetiStaffingPlanner.Controllers
 							LastModified = p.LastModified,
 							Active = p.Active
 						});
-					}
+					
 				}
 				return Json(positionList, JsonRequestBehavior.AllowGet);
 			}

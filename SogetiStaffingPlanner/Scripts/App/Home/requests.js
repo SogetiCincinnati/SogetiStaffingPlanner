@@ -45,6 +45,27 @@ let requests = {
             }.bind(that)
         });
     },
+    quickAddClient: function (quickClient, that) {
+        $.ajax({
+            type: "POST",
+            url: "Client/AddClient",
+            dataType: "json",
+            data: JSON.stringify(quickClient),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                //Receives message from backend for you to do what you want with it
+                console.log('POST request success');
+                requests.fetchClients(that);
+                requests.addMessage(that.formData.clientName, that);
+                that.state.clientQuickAdd = false;
+                that.formData.clientName = quickClient.clientName;
+                that.formData.clientSubbusiness = quickClient.clientSubbusiness;
+            }.bind(that),
+            error: function (e) {
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
     fetchPositions: function (that) {
         $.ajax({ // get positions
             async: false,
@@ -221,13 +242,6 @@ let requests = {
         });
     },
     addRow: function (client, that) {
-        $.ajax({
-            type: "POST",
-            url: "Client/AddClient",
-            dataType: "json",
-            data: JSON.stringify(client),
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
                 //Receives message from backend for you to do what you want with it
                 that.addState = false;
                 requests.addMessage(that.formData.clientName, that);
@@ -320,11 +334,6 @@ let requests = {
                         });
                     }
                 });
-            }.bind(that),
-            error: function (e) {
-                console.log(e, "Error adding data! Please try again.");
-            }
-        });
     },
     editRow: function (that) {
         let clientData = {};

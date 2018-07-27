@@ -143,8 +143,14 @@ th {
 }
 td {
     font-size: 10px;
-    overflow-y: auto;
+    //overflow-y: auto;
     width: 80px;
+}
+td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .main{

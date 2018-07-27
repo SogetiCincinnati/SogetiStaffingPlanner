@@ -34,6 +34,7 @@ new Vue({
             positionStatusId: null,
             clientName: null,
             clientSubbusiness: null,
+            clientId: null,
             AE: null,
             ACT: null,
             clientContact: null,
@@ -138,6 +139,7 @@ new Vue({
             //Populate client section of edit form
             this.formData.clientName = post.ClientName;
             this.formData.clientSubbusiness = post.ClientSubbusiness;
+            this.formData.clientId = post.ClientId;
             for (let i = 0; i < this.clients.length; i++) {
                 if (post.ClientId == this.clients[i].ClientId) {
                     console.log('CLIENT MATCH');
@@ -249,7 +251,7 @@ new Vue({
                 clientName: this.formData.clientName,
                 clientSubbusiness: this.formData.clientSubbusiness
             };
-            requests.quickAddClient(quickClient, this);        
+            requests.quickAddClient(quickClient, this, this.formData.clientId);        
         }
     },
     created: function () {

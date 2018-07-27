@@ -45,7 +45,7 @@ let requests = {
             }.bind(that)
         });
     },
-    quickAddClient: function (quickClient, that) {
+    quickAddClient: function (quickClient, that, id) {
         $.ajax({
             type: "POST",
             url: "Client/AddClient",
@@ -60,6 +60,17 @@ let requests = {
                 that.state.clientQuickAdd = false;
                 that.formData.clientName = quickClient.clientName;
                 that.formData.clientSubbusiness = quickClient.clientSubbusiness;
+                function findRecentClient(data) {
+                    let max = 0;
+                    jQuery.map(data, function (obj) {
+                        if (obj.ClientId > max)
+                            max = obj.ClientId;
+                    });
+                    return max;
+                }
+                that.state.lastClientId = findRecentClient(that.clients);
+                that.formData.clientId = that.state.lastClientId;
+                
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
@@ -176,6 +187,7 @@ let requests = {
 
                 data.sort(compare);
                 that.clients = data;
+
                 //that.findSelected();
                 //that.scrollDown();
               
@@ -242,6 +254,7 @@ let requests = {
         });
     },
     addRow: function (client, that) {
+                console.log('CLIENT HERE', client);
                 //Receives message from backend for you to do what you want with it
                 that.addState = false;
                 requests.addMessage(that.formData.clientName, that);
@@ -253,19 +266,8 @@ let requests = {
                     contentType: "application/json;charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        console.log('return', data);
-                        that.clients = data;
-                        function findRecentClient(data) {
-                            let max = 0;
-                            jQuery.map(data, function (obj) {
-                                if (obj.ClientId > max)
-                                    max = obj.ClientId;
-                            });
-                            return max;
-                        }
-                        that.state.lastClientId = findRecentClient(data);
                         let oppObj = {
-                            clientId: that.state.lastClientId,
+                            clientId: that.formData.clientId,
                             accountExecutiveUserId: that.formData.accountExecutiveUserId,
                             unitId: that.formData.unitId,
                             regionId: that.formData.regionId,

@@ -85,9 +85,10 @@ let requests = {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 requests.getOpportunityList(that);
-                that.clearForm();
                 that.state.opportunityQuickAdd = false;
                 requests.getOpportunityList(that);
+                console.log('OPPS!!!!!!!!!', that.opportunities);
+                that.formData.opportunityId = that.opportunities[that.opportunities.length - 1].opportunityId;
             }.bind(that),
             error: function (e) {
                 console.log(e);

@@ -197,19 +197,19 @@
                         </tr>
                         <tr v-for="(opportunity, index) in opportunities">
                             <td v-if="index == selected" class="selected">{{ opportunity.opportunityName }}</td>
-                            <td v-else>{{ opportunity.opportunityName }}</td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ opportunity.opportunityName }}</td>
                             <td v-if="index == selected" class="selected">{{ getClientName(opportunity.clientId) }}</td>
-                            <td v-else>{{ getClientName(opportunity.clientId) }}</td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ getClientName(opportunity.clientId) }}</td>
                             <td v-if="index == selected" class="selected">{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
-                            <td v-else>{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ getAEName(opportunity.accountExecutiveUserId) }}</td>
                             <td v-if="index == selected" class="selected">{{ getUnitName(opportunity.unitId) }}</td>
-                            <td v-else>{{ getUnitName(opportunity.unitId) }}</td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ getUnitName(opportunity.unitId) }}</td>
                             <td v-if="index == selected" class="selected">{{ opportunity.clientContact }}</td>
-                            <td v-else>{{ opportunity.clientContact }}</td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ opportunity.clientContact }}</td>
                             <td v-if="index == selected" class="selected">{{ getRegionName(opportunity.regionId) }}</td>
-                            <td v-else>{{ getRegionName(opportunity.regionId) }}</td>
-                            <td><button class="btn btn-success" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
-                            <td><button class="btn btn-warning" v-on:click="displayDetail(opportunity)"><i class="fa fa-plus"></i></button></td>
+                            <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ getRegionName(opportunity.regionId) }}</td>
+                            <td v-bind:class="{'inactivePosition' : !opportunity.active}" ><button class="btn btn-success" v-bind:class="{'inactivePosition' : !opportunity.active}" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
+                            <td v-bind:class="{'inactivePosition' : !opportunity.active}" ><button class="btn btn-warning" v-bind:class="{'inactivePosition' : !opportunity.active}" v-on:click="displayDetail(opportunity)"><i class="fa fa-plus"></i></button></td>
                             <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
                         </tr>
                     </table>
@@ -243,6 +243,11 @@
             <h3>Notes:</h3>
             <p>{{this.opportunityDetail.opportunityNotes}}</p>
             <h5><em>Last Modified By: {{ getLastModifiedUserName(this.opportunityDetail.lastModifiedUserId) }} on {{this.opportunityDetail.lastModified}}</em></h5>
+            <button class="btn"
+                    v-bind:class="{'btn-info': !opportunityDetail.active, 'btn-warning': opportunityDetail.active}"
+                    v-on:click="toggleActive">
+                {{opportunityDetail.active ? 'Make Inactive' : 'Make Active'}}
+            </button>
         </template>
     </div>
 </body>

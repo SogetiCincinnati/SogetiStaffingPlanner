@@ -237,8 +237,8 @@
                         <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.Skillset }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Rate }}</td>
                         <td v-else v-bind:class="{'inactivePosition' : !position.Active}">${{ position.Rate }}</td>
-                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
-                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-success" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-warning" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
                         <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
                     </tr>
                 </table>

@@ -48,13 +48,15 @@ new Vue({
             duration: null,
             skillset: null,
             expectedStartDate: null,
-            positionNote: null
+            positionNote: null,
+            opportunityId: null
         },
         state: {
             lastClientId: null,
             lastOppId: null,
             updateState: false,
-            clientQuickAdd: false
+            clientQuickAdd: false,
+            opportunityQuickAdd: false
         },
         errors: {
 
@@ -146,8 +148,16 @@ new Vue({
                     this.editObjs.clientEdit = this.clients[i];
                 }
             }
+            for (let i = 0; i < this.positions.length; i++) {
+   
+                if (post.PositionId == this.positions[i].PositionId) {
+                    this.editObjs.positionEdit = this.positions[i];
+                }
+                
+            }
             //Populate opportunity section of edit form
             this.formData.opportunityName = post.OpportunityName;
+            this.formData.opportunityId = post.OpportunityId;
             this.formData.accountExecutiveUserId = post.AE;
             this.formData.clientContact = post.ClientContact;
             console.log(post.OpportunityId);
@@ -252,6 +262,24 @@ new Vue({
                 clientSubbusiness: this.formData.clientSubbusiness
             };
             requests.quickAddClient(quickClient, this, this.formData.clientId);        
+        },
+        onOpportunityQuickAdd: function () {
+            this.state.opportunityQuickAdd = true;
+        },
+        onOpportunitySubmit: function () {
+            let quickOpportunity = {
+                clientId: this.formData.clientId,
+                accountExecutiveUserId: this.formData.accountExecutiveUserId,
+                unitId: this.formData.unitId,
+                opportunityName: this.formData.opportunityName,
+                clientContact: this.formData.clientContact,
+                opportunityNote: this.formData.opportunityNote,
+                regionId: this.formData.regionId
+            }
+            requests.quickAddOpportunity(quickOpportunity, this);
+        },
+        onOpportunityCancel: function () {
+            this.state.opportunityQuickAdd = false;
         }
     },
     created: function () {

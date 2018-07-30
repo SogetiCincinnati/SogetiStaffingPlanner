@@ -35,8 +35,7 @@ namespace SogetiStaffingPlanner.Controllers
                 List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
-					if (o.Active == true)
-                    {
+					
                         opportunityList.Add(new OpportunityData
                         {
                             opportunityId = o.OpportunityId,
@@ -53,7 +52,7 @@ namespace SogetiStaffingPlanner.Controllers
                             lastModified = o.LastModified,
                             active = o.Active,
                         });
-                    }
+                    
                 }
                 return Json(opportunityList, JsonRequestBehavior.AllowGet);
             }

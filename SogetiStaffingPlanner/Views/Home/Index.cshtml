@@ -222,7 +222,21 @@
                                 <button v-on:click="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
                             </div>
                         </div>
+
+
+                        <div class="col-sm-6">
+                            <label class="col-sm-4" for="">Rate:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="number" name="quantity" min="30" max="1000" v-model="formData.rate" />
+                                <template v-if="errors.rate">
+                                    <span class="error">{{ errors.rate }}</span>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="col-sm-6"></div>
                     </div>
+                  
+                   
                 </div>
                 <div class="form-group"></div>
                 <br />

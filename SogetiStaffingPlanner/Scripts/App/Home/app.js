@@ -28,6 +28,7 @@ new Vue({
             opportunityName: null,
             opportunityNotes: null,
             unitId: null,
+            rate: null,
             numberOfPositions: null,
             positionName: null,
             soldStatus: null,
@@ -180,6 +181,7 @@ new Vue({
                     this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
                     this.formData.positionStatusId = this.positions[i].PositionStatusId;
                     this.formData.positionNote = this.positions[i].PositionNote;
+                    this.formData.rate = this.positions[i].Rate;
                     this.editObjs.positionEdit = this.positions[i];
                     }
             }

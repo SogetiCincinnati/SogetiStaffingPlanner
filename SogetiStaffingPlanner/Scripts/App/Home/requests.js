@@ -411,7 +411,8 @@ let requests = {
                     lastModifiedUserId: 1,
                     lastModified: new Date(),
                     active: true,
-                    positionStatusId: that.formData.positionStatusId
+                    positionStatusId: that.formData.positionStatusId,
+                    rate: that.formData.rate
                 }
                 $.ajax({
                     type: "POST",
@@ -472,7 +473,7 @@ let requests = {
                     positionName: that.formData.positionName,
                     numberOfPositions: that.formData.numberOfPositions,
                     skillset: that.editObjs.positionEdit.Skillset,
-                    rate: that.editObjs.positionEdit.Rate,
+                    rate: that.formData.rate,
                     hireCandidate: that.formData.hiredCandidate,
                     proposedCandidate: that.formData.proposedCandidate,
                     acceptedCandidate: that.formData.acceptedCandidate,

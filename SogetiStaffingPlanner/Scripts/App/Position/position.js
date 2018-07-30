@@ -33,7 +33,8 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
-        selected: null, // Index of entry being selected to be highlighted
+        selected: null // Index of entry being selected to be highlighted,
+   
     },
     watch: {
         positionName: function (val) {
@@ -159,6 +160,9 @@ let position = new Vue({
                 if (!position['Rate']) {
                     position['Rate'] = '~';
                 }
+                if (position.Active == 'N/A') {
+                    position.Active = false;
+                }
             }
             this.positionDetail = position;
             if (this.positionDetail.ExpectedStartDate.length > 10) {
@@ -209,6 +213,15 @@ let position = new Vue({
                 console.log(count);
                 return count;
             });
+        },
+        toggleActive: function () {
+            let foundPosition = null;
+            for (let i = 0; i < this.positions.length; i++) {
+                if (this.positions[i].PositionId == this.positionDetail.PositionId) {
+                    foundPosition = this.positions[i];
+                }
+            }
+            requests.toggleActive(foundPosition, this);
         }
     },
     created: function () {

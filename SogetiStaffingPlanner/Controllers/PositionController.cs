@@ -34,8 +34,7 @@ namespace SogetiStaffingPlanner.Controllers
 				List<PositionData> positionList = new List<PositionData> { };
 				foreach (Position p in positions)
 				{
-					if (p.Active == true)
-					{
+					
                         positionList.Add(new PositionData
                         {
                             PositionId = p.PositionId,
@@ -59,7 +58,7 @@ namespace SogetiStaffingPlanner.Controllers
 							LastModified = p.LastModified,
 							Active = p.Active
 						});
-					}
+					
 				}
 				return Json(positionList, JsonRequestBehavior.AllowGet);
 			}
@@ -76,7 +75,7 @@ namespace SogetiStaffingPlanner.Controllers
 		[HttpPost]
 		public ActionResult AddPosition(int opportunityId, int unitPracticeId, int? maxConsultantGradeId,
 										int? minConsultantGradeId, string positionName, int numberOfPositions,
-										  string skillset, int? rate, DateTime? expectedStartDate, int? duration,
+										  string skillset, int rate, DateTime? expectedStartDate, int? duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
 										  int lastModifiedUserId, DateTime lastModified, bool active, int positionStatusId)

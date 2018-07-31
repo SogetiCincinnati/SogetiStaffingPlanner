@@ -1,4 +1,7 @@
 
+Vue.use(window.vuelidate.default)
+const { required, minLength } = window.validators;
+
 new Vue({
     el: '#app',
     data: {
@@ -61,9 +64,58 @@ new Vue({
         },
         errors: {
 
+        },
+        errorCount: null,
+        message: null,
+        validations: {
+            formData: {
+                positionName: {
+                    required
+                }
+            }
         }
     },
+    //Code sends data to validation code.
+    watch: {
+        'formData.positionName': function (newVal, oldVal) {
+            validate.checkPositionName(newVal, oldVal, this);
+        },
+        'formData.numberOfPositions': function (newVal, oldVal) {
+            validate.checkNumberOfPositions(newVal, oldVal, this);
+        },
+        'formData.proposedCandidate': function (newVal, oldVal) {
+            validate.checkProposedCandidate(newVal, oldVal, this);
+        },
+        'formData.acceptedCandidate': function (newVal, oldVal) {
+            validate.checkAcceptedCandidate(newVal, oldVal, this);
+        },
+        'formData.rejectedCandidate': function (newVal, oldVal) {
+            validate.checkRejectedCandidate(newVal, oldVal, this);
+        },
+        'formData.hiredCandidate': function (newVal, oldVal) {
+            validate.checkHiredCandidate(newVal, oldVal, this);
+        },
+        'formData.positionStatusId': function (newVal, oldVal) {
+            validate.checkPositionStatusId(newVal, oldVal, this);
+        },
+        'formData.positionNote': function (newVal, oldVal) {
+            validate.checkPositionNote(newVal, oldVal, this);
+        },
+        'formData.rate': function (newVal, oldVal) {
+            validate.checkRate(newVal, oldVal, this);
+        },
+        'formData.clientId': function (newVal, oldVal) {
+            validate.checkClientId(newVal, oldVal, this);
+        },
+        'formData.opportunityId': function (newVal, oldVal) {
+            validate.checkOpportunityId(newVal, oldVal, this);
+        }
+
+    },
     methods: {
+        checkPositionName(val) {
+            validate.checkPositionName(this);
+        },
         add: function () {
             this.addState = true;
             this.errors = {};
@@ -107,6 +159,7 @@ new Vue({
             window.scrollTo(0, 0);
         },
         onSubmit: function () {
+            validate.checkSubmission(this);
             if (this.state.updateState == true) {
                 requests.editRow(this);
                 return;
@@ -308,6 +361,10 @@ new Vue({
         requests.getOpportunityList(this);
         requests.fetchPositions(this);
         requests.fetchClients(this);
+    },
+    updated: function () {
+        console.log(this.errorCount);
+        validate.checkErrors(this);
     }
 });
 Vue.config.devtools = true;

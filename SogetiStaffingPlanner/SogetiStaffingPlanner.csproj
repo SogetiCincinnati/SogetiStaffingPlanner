@@ -331,6 +331,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Scripts\vuelidate\dist\validators.min.js" />
+    <Content Include="Scripts\vuelidate\dist\vuelidate.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

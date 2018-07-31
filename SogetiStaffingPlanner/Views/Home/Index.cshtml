@@ -3,6 +3,13 @@
 
 <div id="appContainer">
     <div id="app" class='main'>
+        <template>
+            <div class="flash-message">
+                <transition name="fade">
+                    <p v-if="message">{{ message }}</p>
+                </transition>
+            </div>
+        </template>
         <div v-if="displayState === false">
             <div v-if="addState === false" class="addButton">
                 <button v-on:click="add" class="btn btn-primary">
@@ -44,7 +51,7 @@
                                             {{ client.ClientName }}: {{ client.ClientSubbusiness }}
                                         </option>
                                     </select>
-                                    <span class="error">{{ errors.clientId }}</span>
+                                    <span class="error">{{ errors.clientDropdown }}</span>
 
                                 </div>
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
@@ -125,8 +132,8 @@
                                     <select class="form-control" v-model="formData.opportunityId">
                                         <option v-for="opportunity in opportunities" :value="opportunity.opportunityId">{{ opportunity.opportunityName }}</option>
                                     </select>
-                                    <template v-if="errors.opportunityId">
-                                        <span class="error">{{ errors.opportunityId }}</span>
+                                    <template v-if="errors.opportunityDropdown">
+                                        <span class="error">{{ errors.opportunityDropdown }}</span>
                                     </template>
                                 </div>
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd">Quick Add</button>
@@ -143,7 +150,9 @@
                             <label class="col-sm-4" for="">Position Name: </label>
                             <div class="col-sm-8">
                                 <input class="form-control" type="text" v-model="formData.positionName" maxlength="200" />
-                                <span class="error">{{ errors.opportunityName }}</span>
+                                <template v-if="errors.positionName">
+                                    <span class="error">{{ errors.positionName }}</span>
+                                </template>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -216,6 +225,7 @@
                             <div class="form-group"></div>
                             <div class="col-sm-6">
                                 <button v-on:click="onSubmit"
+                                        :disabled="errorCount > 0"
                                         class="btn btn-primary">
                                     <i class="fa fa-pencil"></i> Submit
                                 </button>
@@ -235,8 +245,8 @@
                         </div>
                         <div class="col-sm-6"></div>
                     </div>
-                  
-                   
+
+
                 </div>
                 <div class="form-group"></div>
                 <br />
@@ -351,10 +361,12 @@
 
             </template>
         </div>
-
+       
 
     </div>
 </div>
+<script src="../../Scripts/vuelidate/dist/vuelidate.min.js"></script>
+<script src="../../Scripts/vuelidate/dist/validators.min.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Home/validate.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Home/requests.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Home/app.js"></script>

@@ -1,6 +1,4 @@
 
-Vue.use(window.vuelidate.default)
-const { required, minLength } = window.validators;
 
 new Vue({
     el: '#app',

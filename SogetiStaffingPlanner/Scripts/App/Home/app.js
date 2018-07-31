@@ -47,7 +47,7 @@ new Vue({
             rate: null,
             acceptedCandidate: null,
             hiredCandidate: null,
-            rejectedCanddidate: null,
+            rejectedCandidate: null,
             proposedCandidate: null,
             duration: null,
             skillset: null,
@@ -66,6 +66,8 @@ new Vue({
 
         },
         errorCount: null,
+        quickClientErr: 0,
+        quickOppErr: 0,
         message: null,
         validations: {
             formData: {
@@ -109,7 +111,32 @@ new Vue({
         },
         'formData.opportunityId': function (newVal, oldVal) {
             validate.checkOpportunityId(newVal, oldVal, this);
-        }
+        },
+        'formData.clientName': function (newVal, oldVal) {
+            validate.checkClientName(newVal, oldVal, this);
+        },
+        'formData.clientSubbusiness': function (newVal, oldVal) {
+            validate.checkClientSubbusiness(newVal, oldVal, this);
+        },
+        'formData.opportunityName': function (newVal, oldVal) {
+            validate.checkOpportunityName(newVal, oldVal, this);
+        },
+        'formData.accountExecutiveUserId': function (newVal, oldVal) {
+            validate.checkAccountExecutiveUserId(newVal, oldVal, this);
+        },
+        'formData.unitId': function (newVal, oldVal) {
+            validate.checkUnitId(newVal, oldVal, this);
+        },
+        'formData.regionId': function (newVal, oldVal) {
+            validate.checkRegionId(newVal, oldVal, this);
+        },
+        'formData.clientContact': function (newVal, oldVal) {
+            validate.checkClientContact(newVal, oldVal, this);
+        },
+        'formData.opportunityNotes': function (newVal, oldVal) {
+            validate.checkOpportunityNotes(newVal, oldVal, this);
+        },
+
 
     },
     methods: {
@@ -142,7 +169,7 @@ new Vue({
                 rate: null,
                 acceptedCandidate: null,
                 hiredCandidate: null,
-                rejectedCanddidate: null,
+                rejectedCandidate: null,
                 proposedCandidate: null,
                 duration: null,
                 skillset: null,
@@ -154,6 +181,9 @@ new Vue({
             this.errors = {};
             this.addState = false;
             this.state.updateState = false;
+            this.state.clientQuickAdd = false;
+            this.state.opportunityQuickAdd = false;
+            this.message = null;
             //CLEAR FORM
             this.clearForm();
             window.scrollTo(0, 0);
@@ -184,6 +214,7 @@ new Vue({
             requests.fetchClients(this);
         },
         onEdit: function (post) {
+            this.formData.errors = null;
             window.scrollTo(0, 200);
             console.log('EDIT', post);
             console.log('EDIT OBJS', this.editObjs);
@@ -307,11 +338,20 @@ new Vue({
         },
         onClientQuickAdd: function () {
             this.state.clientQuickAdd = true;
+            this.formData.clientName = null;
+            this.formData.clientSubbusiness = null;
         },
         onClientCancel: function () {
             this.state.clientQuickAdd = false;
+            this.quickClientErr = 0;
+            this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
+            this.formData.clientId = null;
         },
         onClientSubmit: function () {
+            if (!validate.checkClientSubmit(this)) {
+                return;
+            }
             let quickClient = {
                 clientName: this.formData.clientName,
                 clientSubbusiness: this.formData.clientSubbusiness
@@ -322,6 +362,10 @@ new Vue({
             this.state.opportunityQuickAdd = true;
         },
         onOpportunitySubmit: function () {
+            if (validate.checkOpportunitySubmit(this)) {
+                console.log('fail');
+                return;
+            }
             let quickOpportunity = {
                 clientId: this.formData.clientId,
                 accountExecutiveUserId: this.formData.accountExecutiveUserId,
@@ -335,6 +379,12 @@ new Vue({
         },
         onOpportunityCancel: function () {
             this.state.opportunityQuickAdd = false;
+            this.errors.opportunityName = null
+            this.errors.accountExectuvieUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
+            this.errors.opportunityNote = null;
+            this.errors.clientContact = null;
         }
     },
     created: function () {
@@ -363,8 +413,11 @@ new Vue({
         requests.fetchClients(this);
     },
     updated: function () {
-        console.log(this.errorCount);
+        console.log(this.quickClientErr);
         validate.checkErrors(this);
+        validate.checkClientErrs(this);
+        validate.checkOppErrs(this);
+        console.log('UNIT ID', this.formData.unitId);
     }
 });
 Vue.config.devtools = true;

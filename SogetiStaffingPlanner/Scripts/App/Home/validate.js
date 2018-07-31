@@ -175,11 +175,143 @@
             that.errors.rate = null;
         }
     },
+    checkClientName(newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.clientName = 'Client name is required';
+            that.quickClientErr++;
+        } else {
+            that.errors.clientName = null;
+            this.checkClientErrs(that);
+        }
+    },
+    checkClientSubbusiness(newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.clientSubbusiness = 'Client name is required';
+            that.quickClientErr++;
+        } else {
+            that.errors.clientSubbusiness = null;
+            this.checkClientErrs(that);
+        }
+    },
+    checkClientSubmit(that) {
+        if (!that.formData.clientName) {
+            that.errors.clientName = 'Client name is required';
+            that.quickClientErr++;
+        } else {
+            that.errors.clientName = null;
+            this.checkClientErrs(that);
+        }
+        if (!that.formData.clientSubbusiness) {
+            that.errors.clientSubbusiness = 'Client name is required';
+            that.quickClientErr++;
+        } else {
+            that.errors.clientSubbusiness = null;
+            this.checkClientErrs(that);
+        }
+        if (that.quickClientErr === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+    checkOpportunityName: function (newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.opportunityName = 'Opportunity Name is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.opportunityName = null;
+        }
+    },
+    checkAccountExecutiveUserId: function (newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.accountExecutiveUserId = 'Opportunity Name is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.accountExecutiveUserId = null;
+        }
+    },
+    checkRegionId: function (newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.regionnId = 'Region is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.regionId = null;
+        }
+    },
+    checkUnitId: function (newVal, oldVal, that) {
+        console.log(newVal);
+        if (!newVal) {
+            that.errors.unitId = 'Unit is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.unitId = null;
+        }
+    },
+    checkClientContact: function (newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.clientContact = 'Client contact is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.clientContact = null;
+        }
+    },
+    checkOpportunityNotes: function (newVal, oldVal, that) {
+        if (!newVal) {
+            that.errors.opportunityNote = 'Opportunity Note is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.opportunityNote = null;
+        }
+    },
+    checkOpportunitySubmit: function (that) {
+        console.log('NAME', that.formData.opportunityName);
+        if (!that.formData.opportunityName) {
+            that.errors.opportunityName = 'Opportunity Name is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.opportunityName = null;
+        }
+        if (!that.formData.accountExecutiveUserId) {
+            that.errors.accountExecutiveUserId = 'Account Executive is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.accountExecutiveUserId = null;
+        }
+        if (!that.formData.regionId) {
+            that.errors.regionId = 'Region is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.regionId = null;
+        }
+        if (!that.formData.unitId) {
+            that.errors.unitId = 'Unit is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.unitId = null;
+        }
+        if (!that.formData.clientContact) {
+            that.errors.clientContact = 'Client contact is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.clientContact = null;
+        }
+        if (!that.formData.opportunityNotes) {
+            that.errors.opportunityNote = 'Opportunity Note is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.opportunityNote = null;
+            console.log(that.formData.opportunityNotes);
+        }
 
 
 
-
-
+        if (that.quickOppErr > 0) {
+            that.message = 'Please provide required information'
+            return false;
+        } else {
+            return true;
+        }
+    },
     //Code to check errors object
     checkErrors: function (that) {
         let result = 0;
@@ -189,5 +321,22 @@
             }
         }
         that.errorCount = result;
+    },
+    checkClientErrs: function (that) {
+        if (that.formData.clientName && that.formData.clientSubbusiness) {
+            that.quickClientErr = 0;
+        }
+    },
+    checkOppErrs: function (that) {
+        let result = 0;
+        for (item in that.errors) {
+            if (that.errors[item]) {
+                result++;
+            }
+        }
+        that.quickOppErr = result;
+        if (result === 0) {
+            that.message = null;
+        }
     }
 }

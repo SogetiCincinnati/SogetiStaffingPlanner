@@ -37,8 +37,11 @@
                                     <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
                                     <span class="error">{{ errors.clientSubbusiness }}</span>
                                 </div>
+
+
                             </div>
-                            <button class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
+                            <div class="form-group"></div>
+                            <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
                             <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
                         </template>
                         <template v-else>
@@ -57,7 +60,7 @@
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
                             </div>
                             <div class="col-sm-6">
-
+                                
                             </div>
                             <br />
                             <div class="form-group"></div>
@@ -117,12 +120,12 @@
                                 <label class="col-sm-4" for="">Opportunity Note:</label>
                                 <div class="col-sm-8">
                                     <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
-                                    <template v-if="errors.positionNote">
+                                    <template v-if="errors.opportunityNote">
                                         <span class="error">{{ errors.opportunityNote }}</span>
                                     </template>
                                 </div>
                             </div>
-                            <button class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
+                            <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
                             <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
                         </template>
                         <template v-else>

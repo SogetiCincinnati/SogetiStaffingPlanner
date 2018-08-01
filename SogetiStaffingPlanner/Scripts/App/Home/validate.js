@@ -1,6 +1,6 @@
 ﻿let validate = {
     checkPositionName: function (newVal, oldVal, that) {
-        console.log(newVal);
+ 
         if (newVal.length < 1) {
             that.errors.positionName = 'Position name required';
             that.errorCount++;
@@ -25,7 +25,7 @@
         }
     },
     checkProposedCandidate: function (newVal, oldVal, that) {
-        console.log('work');
+
         if (newVal.length < 1) {
             that.errors.proposedCandidate = 'Proposed Candidate required';
             that.errorCount++;
@@ -50,7 +50,7 @@
         }
     },
     checkPositionStatusId: function (newVal, oldVal, that) {
-        console.log(newVal);
+  
         if (!newVal) {
             that.errors.positionStatusId = 'Position status required';
             that.errorCount++;
@@ -83,7 +83,7 @@
         }
     },
     checkOpportunityId: function (newVal, oldVal, that) {
-        console.log(newVal);
+  
         if (!newVal) {
             that.errors.opportunityDropdown = 'Opportunity is required';
             that.errorCount++;
@@ -239,7 +239,7 @@
         }
     },
     checkUnitId: function (newVal, oldVal, that) {
-        console.log(newVal);
+        
         if (!newVal) {
             that.errors.unitId = 'Unit is required';
             that.quickOppErr++;
@@ -264,7 +264,7 @@
         }
     },*/
     checkOpportunitySubmit: function (that) {
-        console.log('NAME', that.formData.opportunityName);
+        
         if (!that.formData.opportunityName) {
             that.errors.opportunityName = 'Opportunity Name is required';
             that.quickOppErr++;

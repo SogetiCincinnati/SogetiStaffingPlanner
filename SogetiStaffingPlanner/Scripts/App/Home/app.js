@@ -55,8 +55,12 @@ new Vue({
         },
         filters: {
             displayFilters: false,
-            positionStatusFilter: [],
-            posStatusApp: false
+            positionStatusFilter: [1, 2, 3],
+            priorityFilter: ['High', 'Medium', 'Low'],
+            unitFilter: [1, 2, 3],
+            posStatusApp: false,
+            priorityApp: false,
+            priorities: ['High', 'Medium', 'Low']
         },
         state: {
             lastClientId: null,
@@ -386,10 +390,11 @@ new Vue({
             this.filters.displayFilters = !this.filters.displayFilters;
         },
         applyPosFilter: function () {
-            //Apply the position status filter
-            this.filters.posStatusApp = true;
             requests.getMainData(this);
-        }
+        },
+        applyPriorityFilter: function () {
+            requests.getMainData(this);
+        },
     },
     created: function () {
         requests.getMainData(this);

@@ -10,23 +10,40 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                if (that.filters.posStatusApp) {
-                    let result = [];
+                let result = [];
+                let filterPosResult = [];
                     for (post in data) {
                         console.log(data[post]);
                         for (let i = 0; i < that.filters.positionStatusFilter.length; i++) {
-                            console.log('FILTER ITEM', that.filters.positionStatusFilter[i]);
-                            console.log('STATUS ID', data[post].PositionStatusId);
                             if (that.filters.positionStatusFilter[i] == data[post].PositionStatusId) {
-                                result.push(data[post]);
+                                filterPosResult.push(data[post]);
                             }
                         }
                     }
-
-                    return that.posts = result;
-                } else {
-                    return that.posts = data;
+                let filterPriorityResult = [];
+                for (post in filterPosResult) {
+                    for (let i = 0; i < that.filters.priorityFilter.length; i++) {
+                        
+                        if (that.filters.priorityFilter[i] == filterPosResult[post].Priority) {
+                            filterPriorityResult.push(filterPosResult[post]);
+                            
+                        }
+                    }
                 }
+                let unitFilterResult = [];
+                for (post in filterPriorityResult) {
+                    for (let i = 0; i < that.filters.unitFilter.length; i++) {
+                        console.log(that.filters.unitFilter[i]);
+                        console.log(filterPriorityResult[post].UnitId)
+                        if (that.filters.unitFilter[i] == filterPriorityResult[post].UnitId) {
+                            unitFilterResult.push(filterPriorityResult[post]);
+                        }
+                    }
+                }
+
+
+                that.posts = unitFilterResult;
+        
                 
             }.bind(that), error: function (e) {
                 console.log('error');

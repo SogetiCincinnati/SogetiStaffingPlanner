@@ -76,7 +76,7 @@
     },
     checkClientId: function (newVal, oldVal, that) {
         if (!newVal) {
-            that.errors.clientDropdown = 'Client is required';
+            that.errors.clientDropdown = '*Client is required';
             that.errorCount++;
         } else {
             that.errors.clientDropdown = null;
@@ -85,7 +85,7 @@
     checkOpportunityId: function (newVal, oldVal, that) {
   
         if (!newVal) {
-            that.errors.opportunityDropdown = 'Opportunity is required';
+            that.errors.opportunityDropdown = '*Opportunity is required';
             that.errorCount++;
         } else {
             that.errors.opportunityDropdown = null;

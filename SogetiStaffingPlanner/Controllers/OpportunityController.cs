@@ -46,7 +46,7 @@ namespace SogetiStaffingPlanner.Controllers
                             soldStatusId = o.SoldStatusId == null ? 0: (int) o.SoldStatusId ,
                             opportunityName = o.OpportunityName,
                             opportunityOwnerUserId = o.OpportunityOwnerUserId == null ? 0: (int) o.OpportunityOwnerUserId,
-                            opportunityNotes = o.OpportunityNotes,
+                            opportunityNotes = o.OpportunityNotes == null ? "" : o.OpportunityNotes,
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,
                             lastModified = o.LastModified,

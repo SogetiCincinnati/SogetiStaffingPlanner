@@ -133,9 +133,9 @@ new Vue({
         'formData.clientContact': function (newVal, oldVal) {
             validate.checkClientContact(newVal, oldVal, this);
         },
-        'formData.opportunityNotes': function (newVal, oldVal) {
+        /*'formData.opportunityNotes': function (newVal, oldVal) {
             validate.checkOpportunityNotes(newVal, oldVal, this);
-        },
+        },*/
 
 
     },
@@ -245,7 +245,6 @@ new Vue({
             this.formData.opportunityId = post.OpportunityId;
             this.formData.accountExecutiveUserId = post.AE;
             this.formData.clientContact = post.ClientContact;
-            console.log(post.OpportunityId);
             for (let i = 0; i < this.opportunities.length; i++) {
                 if (post.OpportunityId == this.opportunities[i].opportunityId) {
                     this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;

@@ -52,7 +52,7 @@
     checkPositionStatusId: function (newVal, oldVal, that) {
         console.log(newVal);
         if (!newVal) {
-            that.errors.positonStatusId = 'Position status required';
+            that.errors.positionStatusId = 'Position status required';
             that.errorCount++;
         } else {
             that.errors.positionStatusId = null;
@@ -232,7 +232,7 @@
     },
     checkRegionId: function (newVal, oldVal, that) {
         if (!newVal) {
-            that.errors.regionnId = 'Region is required';
+            that.errors.regionId = 'Region is required';
             that.quickOppErr++;
         } else {
             that.errors.regionId = null;
@@ -255,14 +255,14 @@
             that.errors.clientContact = null;
         }
     },
-    checkOpportunityNotes: function (newVal, oldVal, that) {
+    /*checkOpportunityNotes: function (newVal, oldVal, that) {
         if (!newVal) {
             that.errors.opportunityNote = 'Opportunity Note is required';
             that.quickOppErr++;
         } else {
             that.errors.opportunityNote = null;
         }
-    },
+    },*/
     checkOpportunitySubmit: function (that) {
         console.log('NAME', that.formData.opportunityName);
         if (!that.formData.opportunityName) {
@@ -295,21 +295,27 @@
         } else {
             that.errors.clientContact = null;
         }
-        if (!that.formData.opportunityNotes) {
+        /*if (!that.formData.opportunityNotes) {
             that.errors.opportunityNote = 'Opportunity Note is required';
             that.quickOppErr++;
         } else {
             that.errors.opportunityNote = null;
             console.log(that.formData.opportunityNotes);
+        }*/
+        if (!that.formData.clientId) {
+            that.errors.clientDropdown = 'Client is required';
+            that.quickOppErr++;
+        } else {
+            that.errors.clientDropdown = null;
         }
 
 
 
         if (that.quickOppErr > 0) {
             that.message = 'Please provide required information'
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     },
     //Code to check errors object

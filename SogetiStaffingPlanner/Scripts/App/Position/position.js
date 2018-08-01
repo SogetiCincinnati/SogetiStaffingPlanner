@@ -119,11 +119,13 @@ let position = new Vue({
             return validate.checkForm(this);
         },
         onEdit: function (position) {
+            console.log('EDIT POSTION', position);
             this.errors = {};
             /* Specify that status is being updated */
             
             this.updateState = true;
             /* Populate form with selected values */
+            this.active = position.Active;
             this.positionName = position.PositionName;
             this.prevPosition = this.positionName;
             this.positionId = position.PositionId;

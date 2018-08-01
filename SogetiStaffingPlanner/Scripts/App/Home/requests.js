@@ -12,18 +12,16 @@ let requests = {
             success: function (data) {
                 let result = [];
                 let filterPosResult = [];
-                    for (post in data) {
-                        console.log(data[post]);
-                        for (let i = 0; i < that.filters.positionStatusFilter.length; i++) {
-                            if (that.filters.positionStatusFilter[i] == data[post].PositionStatusId) {
-                                filterPosResult.push(data[post]);
-                            }
+                for (post in data) {
+                    for (let i = 0; i < that.filters.positionStatusFilter.length; i++) {
+                        if (that.filters.positionStatusFilter[i] == data[post].PositionStatusId) {
+                            filterPosResult.push(data[post]);
                         }
                     }
+                }
                 let filterPriorityResult = [];
                 for (post in filterPosResult) {
-                    for (let i = 0; i < that.filters.priorityFilter.length; i++) {
-                        
+                    for (let i = 0; i < that.filters.priorityFilter.length; i++) {                      
                         if (that.filters.priorityFilter[i] == filterPosResult[post].Priority) {
                             filterPriorityResult.push(filterPosResult[post]);
                             
@@ -33,18 +31,12 @@ let requests = {
                 let unitFilterResult = [];
                 for (post in filterPriorityResult) {
                     for (let i = 0; i < that.filters.unitFilter.length; i++) {
-                        console.log(that.filters.unitFilter[i]);
-                        console.log(filterPriorityResult[post].UnitId)
                         if (that.filters.unitFilter[i] == filterPriorityResult[post].UnitId) {
                             unitFilterResult.push(filterPriorityResult[post]);
                         }
                     }
                 }
-
-
-                that.posts = unitFilterResult;
-        
-                
+                that.posts = unitFilterResult;          
             }.bind(that), error: function (e) {
                 console.log('error');
                 console.log(e);

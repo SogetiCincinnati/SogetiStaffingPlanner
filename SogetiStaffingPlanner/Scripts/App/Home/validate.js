@@ -1,6 +1,5 @@
 ﻿let validate = {
     checkPositionName: function (newVal, oldVal, that) {
- 
         if (newVal.length < 1) {
             that.errors.positionName = 'Position name required';
             that.errorCount++;
@@ -220,6 +219,13 @@
             that.quickOppErr++;
         } else {
             that.errors.opportunityName = null;
+        }
+        for (opportunity in that.opportunities) {
+            if (newVal === that.opportunities[opportunity].opportunityName) {
+                return that.errors.opportunityName = ' Opportunity already exists';
+            } else {
+                that.errors.opportunityName = null;
+            }
         }
     },
     checkAccountExecutiveUserId: function (newVal, oldVal, that) {

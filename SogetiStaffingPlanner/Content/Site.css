@@ -9,6 +9,9 @@ ol, ul {
 .error {
     color: red;
 }
+#oppError {
+    display: block;
+}
 
 .scrollBar {
     overflow-x: auto;
@@ -41,6 +44,7 @@ ol, ul {
     width: 400px;
     height: 20px;
     border: 1px solid rgba(0, 0, 0, 0);
+    margin-bottom: 10px;
 }
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;

@@ -8,6 +8,7 @@
             <div class="flash-message">
                 <transition name="fade">
                     <p v-if="message">{{ message }}</p>
+                    <div class="form-group"></div>
                 </transition>
             </div>
         </template>
@@ -17,6 +18,7 @@
             </div>
             <template class="col-sm-3">
                 <p id="filterDisplay">Filters: <span class="filter">{{filters.status}}</span></p>
+ 
             </template>
         </div>
        
@@ -91,6 +93,7 @@
                     <div class="form-horizontal">
                         <!-- ROW ONE BEGIN-->
                         <h3 class="formHeader">{{state.updateState ? 'Edit Client' : 'Add Client'}}</h3>
+                        <span class="error">{{ errors.clientDropdown }}</span>
                         <template v-if="state.clientQuickAdd">
                             <div class="form-group"></div>
                             <div class="col-sm-6">
@@ -123,7 +126,7 @@
                                             {{ client.ClientName }}: {{ client.ClientSubbusiness }}
                                         </option>
                                     </select>
-                                    <span class="error">{{ errors.clientDropdown }}</span>
+
 
                                 </div>
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
@@ -133,12 +136,18 @@
                             </div>
                             <br />
                             <div class="form-group"></div>
+
                         </template>
+
                         <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
+
                         <h3>{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
+                        <span id="oppError" class="error">{{ errors.opportunityDropdown }}</span>
+
+
                         <template v-if="state.opportunityQuickAdd">
                             <hr />
-
+                            <div class="row">
                             <div class="form-group"></div>
                             <div class="col-sm-6">
                                 <label class="col-sm-4" for="">Opportunity Name: </label>
@@ -198,7 +207,7 @@
                                 <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
                                 <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
                             </div>
-
+                            </div>
                         </template>
                         <template v-else>
                             <div class="col-sm-6">
@@ -207,9 +216,7 @@
                                     <select class="form-control" v-model="formData.opportunityId">
                                         <option v-for="opportunity in opportunities" :value="opportunity.opportunityId">{{ opportunity.opportunityName }}</option>
                                     </select>
-                                    <template v-if="errors.opportunityDropdown">
-                                        <span class="error">{{ errors.opportunityDropdown }}</span>
-                                    </template>
+
                                 </div>
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd">Quick Add</button>
                             </div>

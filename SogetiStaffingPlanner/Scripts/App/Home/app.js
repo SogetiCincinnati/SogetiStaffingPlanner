@@ -60,7 +60,8 @@ new Vue({
             unitFilter: [1, 2, 3],
             posStatusApp: false,
             priorityApp: false,
-            priorities: ['High', 'Medium', 'Low']
+            priorities: ['High', 'Medium', 'Low'],
+            status: ''
         },
         state: {
             lastClientId: null,
@@ -390,10 +391,25 @@ new Vue({
         },
         applyPosFilter: function () {
             requests.getMainData(this);
+            this.getFilterStatus();
         },
         applyPriorityFilter: function () {
             requests.getMainData(this);
+            this.getFilterStatus();
         },
+        getFilterStatus: function () {
+            console.log('GET FILTER')
+            this.filters.status = "";
+            if (this.filters.positionStatusFilter.length < 4) {
+                this.filters.status += " #Status "
+            }
+            if (this.filters.priorityFilter.length < 3) {
+                this.filters.status += " #Priority ";
+            }
+            if (this.filters.unitFilter.length < 3) {
+                this.filters.status += " #Unit ";
+            }
+        }
     },
     created: function () {
         requests.getMainData(this);
@@ -419,6 +435,7 @@ new Vue({
         requests.getOpportunityList(this);
         requests.fetchPositions(this);
         requests.fetchClients(this);
+        this.getFilterStatus();
     },
     updated: function () {
         console.log(this.quickClientErr);

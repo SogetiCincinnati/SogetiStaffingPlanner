@@ -4,7 +4,6 @@
 <div id="appContainer">
     
     <div id="app" class='main'>
-        <h2>Practice Manager View</h2>
         <template>
             <div class="flash-message">
                 <transition name="fade">
@@ -12,6 +11,16 @@
                 </transition>
             </div>
         </template>
+        <div class="row">
+            <div class="col-sm-9">
+                <h2 id="viewHeader">Practice Manager View</h2>
+            </div>
+            <template class="col-sm-3">
+                <p id="filterDisplay">Filters: <span class="filter">{{filters.status}}</span></p>
+            </template>
+        </div>
+       
+       
         <div v-if="displayState === false">
             <div v-if="addState === false" class="addButton">
                 <button v-on:click="add" class="btn btn-primary">
@@ -19,7 +28,7 @@
                 </button>
                 <!-- ////////////////// FILTERS AREA /////////////////////////////////-->
                 <template>
-                    <button v-on:click="displayFilters" class="btn btn-secondary">
+                    <button v-on:click="displayFilters" class="btn" v-bind:class="{'btn-secondary': !filters.displayFilters, 'btn-warning': filters.displayFilters}">
                         {{filters.displayFilters ? 'Hide Filters' : 'Show Filters'}}
                     </button>
                     <div v-if="filters.displayFilters">
@@ -74,6 +83,7 @@
                         </div>
                     </div>
                 </template>
+
             </div>
 
             <template v-else>
@@ -176,19 +186,19 @@
                                 </div>
                             </div>
                             <!--<div class="col-sm-6">
-                                <label class="col-sm-4" for="">Opportunity Note:</label>
-                                <div class="col-sm-8">
-                                    <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
-                                    <template v-if="errors.opportunityNote">
-                                        <span class="error">{{ errors.opportunityNote }}</span>
-                                    </template>
-                                </div>
-                            </div>-->
+            <label class="col-sm-4" for="">Opportunity Note:</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
+                <template v-if="errors.opportunityNote">
+                    <span class="error">{{ errors.opportunityNote }}</span>
+                </template>
+            </div>
+        </div>-->
                             <div class="col-sm-6">
                                 <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
                                 <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
                             </div>
-              
+
                         </template>
                         <template v-else>
                             <div class="col-sm-6">
@@ -285,6 +295,15 @@
                             </div>
                         </div>
                         <div class="form-group"></div>
+                        <div class="col-sm-6">
+                            <label class="col-sm-4" for="">Rate:</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" type="number" name="quantity" min="30" max="1000" v-model="formData.rate" />
+                                <template v-if="errors.rate">
+                                    <span class="error">{{ errors.rate }}</span>
+                                </template>
+                            </div>
+                        </div>
 
                         <div class="col-sm-6">
                             <div class="form-group"></div>
@@ -299,15 +318,7 @@
                         </div>
 
 
-                        <div class="col-sm-6">
-                            <label class="col-sm-4" for="">Rate:</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" type="number" name="quantity" min="30" max="1000" v-model="formData.rate" />
-                                <template v-if="errors.rate">
-                                    <span class="error">{{ errors.rate }}</span>
-                                </template>
-                            </div>
-                        </div>
+
                         <div class="col-sm-6"></div>
                     </div>
 
@@ -388,6 +399,7 @@
         <div>
             <template>
                 <hr />
+
                 <div class="scrollBar">
                     <table class='clientView'>
                         <tr>

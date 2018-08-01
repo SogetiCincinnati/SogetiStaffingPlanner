@@ -95,6 +95,18 @@ h2 {
 
 /* ------------------------- HOME STYLES ------------------------------- */
 
+#viewHeader {
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+#filterDisplay {
+    margin-top: 20px;
+}
+.filter {
+    color: red;
+    font-weight: 900;
+}
+
 .client_quick_add {
     margin-top: 20px;
     margin-bottom: 20px;

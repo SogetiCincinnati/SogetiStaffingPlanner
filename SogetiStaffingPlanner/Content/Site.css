@@ -13,8 +13,9 @@ ol, ul {
 .scrollBar {
     overflow-x: auto;
     height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
+
 #app h1 {
     margin-top: -5px;
 }
@@ -95,13 +96,27 @@ h2 {
 
 /* ------------------------- HOME STYLES ------------------------------- */
 
+#viewHeader {
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+#filterDisplay {
+    margin-top: 20px;
+}
+.filter {
+    color: red;
+    font-weight: 900;
+}
+
 .client_quick_add {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 /* Table Styles */
-
+.clientView {
+    margin-left: -0px;
+}
 table {
     height: 200px;
     overflow-y: scroll;

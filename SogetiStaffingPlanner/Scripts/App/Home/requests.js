@@ -30,11 +30,19 @@ let requests = {
                         }
                     }
                 }
-                console.log('FILTERED RESULT', filterPriorityResult);
-   
+                let unitFilterResult = [];
+                for (post in filterPriorityResult) {
+                    for (let i = 0; i < that.filters.unitFilter.length; i++) {
+                        console.log(that.filters.unitFilter[i]);
+                        console.log(filterPriorityResult[post].UnitId)
+                        if (that.filters.unitFilter[i] == filterPriorityResult[post].UnitId) {
+                            unitFilterResult.push(filterPriorityResult[post]);
+                        }
+                    }
+                }
 
 
-                that.posts = filterPriorityResult;
+                that.posts = unitFilterResult;
         
                 
             }.bind(that), error: function (e) {

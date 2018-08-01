@@ -57,6 +57,7 @@ new Vue({
             displayFilters: false,
             positionStatusFilter: [1, 2, 3],
             priorityFilter: ['High', 'Medium', 'Low'],
+            unitFilter: [1, 2, 3],
             posStatusApp: false,
             priorityApp: false,
             priorities: ['High', 'Medium', 'Low']
@@ -389,15 +390,11 @@ new Vue({
             this.filters.displayFilters = !this.filters.displayFilters;
         },
         applyPosFilter: function () {
-            //Apply the position status filter
-            this.filters.posStatusApp = true;
             requests.getMainData(this);
         },
         applyPriorityFilter: function () {
-            this.filters.priorityApp = true;
-            console.log(this.filters.priorityFilter);
             requests.getMainData(this);
-        }
+        },
     },
     created: function () {
         requests.getMainData(this);

@@ -78,7 +78,6 @@ let requests = {
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
-                console.log('POST request success');
                 requests.fetchClients(that);
                 requests.addMessage(that.formData.clientName, that);
                 that.state.clientQuickAdd = false;
@@ -112,7 +111,7 @@ let requests = {
                 requests.getOpportunityList(that);
                 that.state.opportunityQuickAdd = false;
                 requests.getOpportunityList(that);
-                console.log('OPPS!!!!!!!!!', that.opportunities);
+               
                 that.formData.opportunityId = that.opportunities[that.opportunities.length - 1].opportunityId;
             }.bind(that),
             error: function (e) {
@@ -447,6 +446,8 @@ let requests = {
                     contentType: "application/json; charset=utf-8",
                     success: function (res) {
                         requests.getMainData(that);
+                        requests.fetchPositions(that);
+                        requests.fetchClients(that);
                         that.clearForm();
                         that.addState = false;
                     }.bind(that),
@@ -516,6 +517,7 @@ let requests = {
                     success: function (res) {
                         requests.fetchPositions(that);
                         requests.getMainData(that);
+                        requests.fetchClients(that);
                     }.bind(that),
                     error: function (e) {
                         console.log(e);

@@ -10,8 +10,24 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
-                console.log('Get main DATA Posts', data);
-                that.posts = data;
+                if (that.filters.posStatusApp) {
+                    let result = [];
+                    for (post in data) {
+                        console.log(data[post]);
+                        for (let i = 0; i < that.filters.positionStatusFilter.length; i++) {
+                            console.log('FILTER ITEM', that.filters.positionStatusFilter[i]);
+                            console.log('STATUS ID', data[post].PositionStatusId);
+                            if (that.filters.positionStatusFilter[i] == data[post].PositionStatusId) {
+                                result.push(data[post]);
+                            }
+                        }
+                    }
+
+                    return that.posts = result;
+                } else {
+                    return that.posts = data;
+                }
+                
             }.bind(that), error: function (e) {
                 console.log('error');
                 console.log(e);

@@ -53,6 +53,11 @@ new Vue({
             positionNote: null,
             opportunityId: null
         },
+        filters: {
+            displayFilters: false,
+            positionStatusFilter: [],
+            posStatusApp: false
+        },
         state: {
             lastClientId: null,
             lastOppId: null,
@@ -66,14 +71,7 @@ new Vue({
         errorCount: null,
         quickClientErr: 0,
         quickOppErr: 0,
-        message: null,
-        validations: {
-            formData: {
-                positionName: {
-                    required
-                }
-            }
-        }
+        message: null
     },
     //Code sends data to validation code.
     watch: {
@@ -383,6 +381,14 @@ new Vue({
             this.errors.regionId = null;
             this.errors.opportunityNote = null;
             this.errors.clientContact = null;
+        },
+        displayFilters: function () {
+            this.filters.displayFilters = !this.filters.displayFilters;
+        },
+        applyPosFilter: function () {
+            //Apply the position status filter
+            this.filters.posStatusApp = true;
+            requests.getMainData(this);
         }
     },
     created: function () {
@@ -415,7 +421,6 @@ new Vue({
         validate.checkErrors(this);
         validate.checkClientErrs(this);
         validate.checkOppErrs(this);
-        console.log('UNIT ID', this.formData.unitId);
     }
 });
 Vue.config.devtools = true;

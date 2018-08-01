@@ -2,7 +2,9 @@
 
 
 <div id="appContainer">
+    
     <div id="app" class='main'>
+        <h2>Practice Manager View</h2>
         <template>
             <div class="flash-message">
                 <transition name="fade">
@@ -15,8 +17,30 @@
                 <button v-on:click="add" class="btn btn-primary">
                     <i class="fa fa-pencil"></i> Add
                 </button>
-                <div class="form-group"></div>
+                <!-- ////////////////// FILTERS AREA /////////////////////////////////-->
+                <template>
+                    <button v-on:click="displayFilters" class="btn btn-secondary">
+                        {{filters.displayFilters ? 'Cancel' : 'Filters'}}
+                    </button>
+                    <div v-if="filters.displayFilters">
+                        <div class="col-sm-10">
+                            <h3>Position Status:</h3>
+                            <ul class="filterContainer">
+                                <li class="filterOption" v-for="positionStatus in positionStatuses">
+                                    <input type="checkbox" :value="positionStatus.PositionStatusId" v-model="filters.positionStatusFilter" id="positionStatus.PositionStatusId"> {{positionStatus.PositionStatusName}}
+                                </li>
+                                <li class="filterOption">
+                                    <button class="filterButton btn btn-sm" v-on:click=" applyPosFilter">
+                                        Apply
+                                    </button>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </template>
             </div>
+
             <template v-else>
                 <div>
                     <div class="form-horizontal">
@@ -60,7 +84,7 @@
                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
                             </div>
                             <div class="col-sm-6">
-                                
+
                             </div>
                             <br />
                             <div class="form-group"></div>
@@ -325,7 +349,6 @@
 
         <div>
             <template>
-                <h2>Practice Manager View</h2>
                 <hr />
                 <div class="scrollBar">
                     <table class='clientView'>
@@ -364,7 +387,7 @@
 
             </template>
         </div>
-       
+
 
     </div>
 </div>

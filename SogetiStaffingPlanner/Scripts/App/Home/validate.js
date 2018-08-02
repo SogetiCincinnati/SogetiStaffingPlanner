@@ -220,13 +220,7 @@
         } else {
             that.errors.opportunityName = null;
         }
-        for (opportunity in that.opportunities) {
-            if (newVal === that.opportunities[opportunity].opportunityName) {
-                return that.errors.opportunityName = ' Opportunity already exists';
-            } else {
-                that.errors.opportunityName = null;
-            }
-        }
+       
     },
     checkAccountExecutiveUserId: function (newVal, oldVal, that) {
         if (!newVal) {
@@ -270,12 +264,24 @@
         }
     },*/
     checkOpportunitySubmit: function (that) {
+        console.log('NAME!!!!!!!!!!!', that.formData.opportunityName);
         
         if (!that.formData.opportunityName) {
             that.errors.opportunityName = 'Opportunity Name is required';
             that.quickOppErr++;
         } else {
-            that.errors.opportunityName = null;
+            for (opportunity in that.opportunities) {
+                console.log(that.opportunities[opportunity].opportunityName);
+                if (that.formData.opportunityName === that.opportunities[opportunity].opportunityName) {
+                    console.log('IHIII');
+                    that.errors.opportunityName = ' Opportunity already exists';
+                    that.quickOppErr++;
+                    that.message = 'Please correct the error!';
+                    alert('Opportunity name already exists.');
+                } else {
+                    that.errors.opportunityName = null;
+                }
+            }
         }
         if (!that.formData.accountExecutiveUserId) {
             that.errors.accountExecutiveUserId = 'Account Executive is required';

@@ -1,7 +1,7 @@
 ﻿// requests for practice manager view
 
 let requests = {
-    getMainData: function (that) {
+    getMainData: function (that, sorter) {
         $.ajax({
             async: false,
             cache: false,
@@ -36,7 +36,14 @@ let requests = {
                         }
                     }
                 }
-                that.posts = unitFilterResult;          
+                
+                that.posts = unitFilterResult;
+                //Sort filtered results if parameter passed in
+                if (sorter) {
+                    sorting.sortData(sorter, that);
+                }
+               
+               
             }.bind(that), error: function (e) {
                 console.log('error');
                 console.log(e);

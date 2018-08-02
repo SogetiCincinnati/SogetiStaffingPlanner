@@ -63,6 +63,15 @@ new Vue({
             priorities: ['High', 'Medium', 'Low'],
             status: ''
         },
+        sorting: {
+            sorter: null,
+            OpportunityName: 0,
+            oppSort: true,
+            oppDir: false,
+            UnitName: 0,
+            unitSort: true,
+            unitDir: false
+        },
         state: {
             lastClientId: null,
             lastOppId: null,
@@ -80,6 +89,7 @@ new Vue({
     },
     //Code sends data to validation code.
     watch: {
+        ////// WATCHERS FOR VALIDATION ////////////
         'formData.positionName': function (newVal, oldVal) {
             validate.checkPositionName(newVal, oldVal, this);
         },
@@ -134,9 +144,15 @@ new Vue({
         'formData.clientContact': function (newVal, oldVal) {
             validate.checkClientContact(newVal, oldVal, this);
         },
-        /*'formData.opportunityNotes': function (newVal, oldVal) {
-            validate.checkOpportunityNotes(newVal, oldVal, this);
-        },*/
+        /// WATCHERS FOR SORTING ////////
+        'sorting.OpportunityName': function (val) {
+            if (val > 0) { this.sorting.oppSort = false };
+            if (val % 2 === 0) { this.sorting.oppDir = true } else { this.sorting.oppDir = false };
+        },
+        'sorting.UnitName': function (val) {
+            if (val > 0) { this.sorting.unitSort = false };
+            if (val % 2 === 0) { this.sorting.unitDir = true } else { this.sorting.unitDir = false };
+        },
 
 
     },
@@ -390,11 +406,11 @@ new Vue({
             this.filters.displayFilters = !this.filters.displayFilters;
         },
         applyPosFilter: function () {
-            requests.getMainData(this);
+            requests.getMainData(this, this.sorting.sorter);
             this.getFilterStatus();
         },
         applyPriorityFilter: function () {
-            requests.getMainData(this);
+            requests.getMainData(this, this.sorting.sorter);
             this.getFilterStatus();
         },
         getFilterStatus: function () {
@@ -408,6 +424,9 @@ new Vue({
             if (this.filters.unitFilter.length < 3) {
                 this.filters.status += " #Unit ";
             }
+        },
+        sortTable: function (value) {
+            sorting.sortData(value, this);
         }
     },
     created: function () {

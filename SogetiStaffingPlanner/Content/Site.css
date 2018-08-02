@@ -14,6 +14,7 @@ ol, ul {
 }
 
 .scrollBar {
+    margin-top: 30px;
     margin-left: 5%;
     overflow-x: auto;
     height: 400px;
@@ -184,6 +185,9 @@ td {
     -moz-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
 }
+#mainContainer {
+    margin-top: 30px;
+}
 
 
 
@@ -248,4 +252,10 @@ footer {
 }
 .fa-caret-down {
     color: orange;
+}
+.sortrow {
+    background-color: #e1f7d9;
+}
+.sortdata {
+    background-color: #edf9e8;
 }

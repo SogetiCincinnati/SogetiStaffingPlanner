@@ -498,7 +498,7 @@ new Vue({
         },
         applyPriorityFilter: function () {
             requests.getMainData(this, this.sorting.sorter);
-            that.sorting.sorter = null;
+            this.sorting.sorter = null;
         },
         getFilterStatus: function () {
             this.filters.status = "";
@@ -514,6 +514,13 @@ new Vue({
         },
         sortTable: function (value) {
             sorting.sortData(value, this);
+        },
+        highlightCol(value) {
+            if (value == this.sorting.sorter) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     created: function () {

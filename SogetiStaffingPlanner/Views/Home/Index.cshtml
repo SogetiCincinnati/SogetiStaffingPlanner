@@ -415,58 +415,57 @@
 
         <div>
             <template>
-                <hr />
+     
 
                 <div id="mainContainer "class="scrollBar">
                     <table class='clientView'>
                         <tr>
-                            <th v-on:click="sortTable('OpportunityName')">
+                            <th v-on:click="sortTable('OpportunityName')" v-bind:class="highlightCol('OpportunityName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.oppDir, 'fa-caret-up' : sorting.oppDir, 'fa-sort' : sorting.oppSort}">
-
                                 </i> Opportunity <br />Name
                             </th>
-                            <th v-on:click="sortTable('UnitName')">
+                            <th v-on:click="sortTable('UnitName')" v-bind:class="highlightCol('UnitName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.unitDir, 'fa-caret-up' : sorting.unitDir, 'fa-sort' : sorting.unitSort}">
                                 </i> Unit
                             </th>
-                            <th v-on:click="sortTable('NumberOfPositions')">
+                            <th v-on:click="sortTable('NumberOfPositions')" v-bind:class="highlightCol('NumberOfPositions') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.numPosDir, 'fa-caret-up' : sorting.numPosDir, 'fa-sort' : sorting.numPosSort}">
                                 </i> Number <br />Of Positions
                             </th>
-                            <th v-on:click="sortTable('PositionName')">
+                            <th v-on:click="sortTable('PositionName')" v-bind:class="highlightCol('PositionName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.posNameDir, 'fa-caret-up' : sorting.posNameDir, 'fa-sort' : sorting.posNameSort}">
                                 </i> Position <br />Name
                             </th>
-                            <th v-on:click="sortTable('Priority')">
+                            <th v-on:click="sortTable('Priority')" v-bind:class="highlightCol('Priority') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.priorityDir, 'fa-caret-up' : sorting.priorityDir, 'fa-sort' : sorting.prioritySort}">
                                 </i> Priority
                             </th>
-                            <th v-on:click="sortTable('SoldStatusName')">
+                            <th v-on:click="sortTable('SoldStatusName')" v-bind:class="highlightCol('SoldStatusName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.soldDir, 'fa-caret-up' : sorting.soldDir, 'fa-sort' : sorting.soldSort}">
                                 </i> Sold
                             </th>
-                            <th v-on:click="sortTable('PositionStatusId')">
+                            <th v-on:click="sortTable('PositionStatusId')" v-bind:class="highlightCol('PositionStatusId') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.statusDir, 'fa-caret-up' : sorting.statusDir, 'fa-sort' : sorting.statusSort}">
                                 </i> Status
                             </th>
-                            <th v-on:click="sortTable('ClientName')">
+                            <th v-on:click="sortTable('ClientName')" v-bind:class="highlightCol('ClientName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.clientNameDir, 'fa-caret-up' : sorting.clientNameDir, 'fa-sort' : sorting.clientNameSort}">
                                 </i> Client <br/>Name
                             </th>
-                            <th v-on:click="sortTable('AE')">
+                            <th v-on:click="sortTable('AE')" v-bind:class="highlightCol('AE') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.AEDir, 'fa-caret-up' : sorting.AEDir, 'fa-sort' : sorting.AESort}">
                                 </i> AE
                             </th>
-                            <th v-on:click="sortTable('ACT')">
+                            <th v-on:click="sortTable('ACT')" v-bind:class="highlightCol('ACT') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.ACTDir, 'fa-caret-up' : sorting.ACTDir, 'fa-sort' : sorting.ACTSort}">
                                 </i> ACT Lead
@@ -476,16 +475,16 @@
                         </tr>
                         <!-- VUE WILL GENERATE EACH ROW BASED ON DATA RECIEVED -->
                         <tr v-for="post in posts">
-                            <td> {{ post.OpportunityName }}</td>
-                            <td> {{ post.UnitName }} </td>
-                            <td> {{ post.NumberOfPositions }} </td>
-                            <td> {{ post.PositionName }}</td>
-                            <td> {{ post.Priority }}</td>
-                            <td> {{ post.SoldStatusName }}</td>
-                            <td> {{ displayStatusName(post.PositionStatusId) }}</td>
-                            <td> {{ post.ClientName }}</td>
-                            <td> {{ displayUser(post.AE) }}</td>
-                            <td> {{ displayUser(post.ACT) }}</td>
+                            <td v-bind:class="highlightCol('OpportunityName') ? 'sortdata' : ''"> {{ post.OpportunityName }}</td>
+                            <td v-bind:class="highlightCol('UnitName') ? 'sortdata' : ''"> {{ post.UnitName }} </td>
+                            <td v-bind:class="highlightCol('NumberOfPositions') ? 'sortdata' : ''"> {{ post.NumberOfPositions }} </td>
+                            <td v-bind:class="highlightCol('PositionName') ? 'sortdata' : ''"> {{ post.PositionName }}</td>
+                            <td v-bind:class="highlightCol('Priority') ? 'sortdata' : ''"> {{ post.Priority }}</td>
+                            <td v-bind:class="highlightCol('SoldStatusName') ? 'sortdata' : ''"> {{ post.SoldStatusName }}</td>
+                            <td v-bind:class="highlightCol('PositionStatusId') ? 'sortdata' : ''"> {{ displayStatusName(post.PositionStatusId) }}</td>
+                            <td v-bind:class="highlightCol('ClientName') ? 'sortdata' : ''"> {{ post.ClientName }}</td>
+                            <td v-bind:class="highlightCol('AE') ? 'sortdata' : ''"> {{ displayUser(post.AE) }}</td>
+                            <td v-bind:class="highlightCol('ACT') ? 'sortdata' : ''"> {{ displayUser(post.ACT) }}</td>
                             <td><button class="btn btn-warning" v-on:click="displayDetails(post)"><i class="fa fa-plus"></i></button></td>
                             <td><button class="btn btn-success" v-on:click="onEdit(post)"><i class="fa fa-edit"></i></button></td>
                         </tr>

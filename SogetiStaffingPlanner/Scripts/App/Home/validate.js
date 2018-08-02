@@ -175,6 +175,7 @@
         }
     },
     checkClientName(newVal, oldVal, that) {
+        console.log(newVal);
         if (!newVal) {
             that.errors.clientName = 'Client name is required';
             that.quickClientErr++;
@@ -184,6 +185,7 @@
         }
     },
     checkClientSubbusiness(newVal, oldVal, that) {
+        console.log(newVal);
         if (!newVal) {
             that.errors.clientSubbusiness = 'Client name is required';
             that.quickClientErr++;
@@ -224,7 +226,7 @@
     },
     checkAccountExecutiveUserId: function (newVal, oldVal, that) {
         if (!newVal) {
-            that.errors.accountExecutiveUserId = 'Opportunity Name is required';
+            that.errors.accountExecutiveUserId = 'Account Exectutive is required';
             that.quickOppErr++;
         } else {
             that.errors.accountExecutiveUserId = null;
@@ -248,7 +250,8 @@
         }
     },
     checkClientContact: function (newVal, oldVal, that) {
-        if (!newVal) {
+      
+        if (!newVal && oldVal.length < 1) {
             that.errors.clientContact = 'Client contact is required';
             that.quickOppErr++;
         } else {

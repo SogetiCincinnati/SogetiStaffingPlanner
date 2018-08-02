@@ -39,9 +39,7 @@ let requests = {
                 
                 that.posts = unitFilterResult;
                 //Sort filtered results if parameter passed in
-                if (sorter) {
-                    sorting.sortData(sorter, that);
-                }
+            
                
                
             }.bind(that), error: function (e) {

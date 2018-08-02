@@ -300,8 +300,7 @@ new Vue({
             this.displayState = false;
 
             //Populate client section of edit form
-            this.formData.clientName = post.ClientName;
-            this.formData.clientSubbusiness = post.ClientSubbusiness;
+          
             this.formData.clientId = post.ClientId;
             for (let i = 0; i < this.clients.length; i++) {
                 if (post.ClientId == this.clients[i].ClientId) {
@@ -315,18 +314,10 @@ new Vue({
                 
             }
             //Populate opportunity section of edit form
-            this.formData.opportunityName = post.OpportunityName;
+            
             this.formData.opportunityId = post.OpportunityId;
-            this.formData.accountExecutiveUserId = post.AE;
-            this.formData.clientContact = post.ClientContact;
-            for (let i = 0; i < this.opportunities.length; i++) {
-                if (post.OpportunityId == this.opportunities[i].opportunityId) {
-                    this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
-                    this.formData.regionId = this.opportunities[i].regionId;
-                    this.formData.unitId = this.opportunities[i].unitId;
-                    this.editObjs.opportunityEdit = this.opportunities[i];
-                }
-            }
+           
+            
             //Populate position section of edit form
             this.formData.positionName = post.PositionName;
             this.formData.hiredCandidate = post.HireCandidate;
@@ -441,15 +432,14 @@ new Vue({
         },
         onClientQuickAdd: function () {
             this.state.clientQuickAdd = true;
-            this.formData.clientName = null;
-            this.formData.clientSubbusiness = null;
+            
         },
         onClientCancel: function () {
             this.state.clientQuickAdd = false;
             this.quickClientErr = 0;
             this.errors.clientName = null;
             this.errors.clientSubbusiness = null;
-            this.formData.clientId = null;
+            
         },
         onClientSubmit: function () {
             if (!validate.checkClientSubmit(this)) {
@@ -463,6 +453,7 @@ new Vue({
         },
         onOpportunityQuickAdd: function () {
             this.state.opportunityQuickAdd = true;
+           
         },
         onOpportunitySubmit: function () {
             if (validate.checkOpportunitySubmit(this)) {
@@ -493,14 +484,18 @@ new Vue({
             this.filters.displayFilters = !this.filters.displayFilters;
         },
         applyPosFilter: function () {
-            requests.getMainData(this, this.sorting.sorter);
+            this.getFilterStatus();
+            requests.getMainData(this);
             this.sorting.sorter = null;
         },
         applyPriorityFilter: function () {
-            requests.getMainData(this, this.sorting.sorter);
+            this.getFilterStatus();
+            requests.getMainData(this);
             this.sorting.sorter = null;
         },
         getFilterStatus: function () {
+            console.log('hello');
+            console.log(this.filters);
             this.filters.status = "";
             if (this.filters.positionStatusFilter.length < 4) {
                 this.filters.status += " #Status "
@@ -550,11 +545,11 @@ new Vue({
         this.getFilterStatus();
     },
     updated: function () {
-        console.log(this.quickClientErr);
+       
         validate.checkErrors(this);
         validate.checkClientErrs(this);
         validate.checkOppErrs(this);
-        console.log(this.sorting.sorter);
+        
     }
 });
 Vue.config.devtools = true;

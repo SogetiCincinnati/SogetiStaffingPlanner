@@ -208,7 +208,7 @@
                             <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ opportunity.clientContact }}</td>
                             <td v-if="index == selected" class="selected">{{ getRegionName(opportunity.regionId) }}</td>
                             <td v-else v-bind:class="{'inactivePosition' : !opportunity.active}">{{ getRegionName(opportunity.regionId) }}</td>
-                            <td v-bind:class="{'inactivePosition' : !opportunity.active}" ><button class="btn btn-success" v-bind:class="{'inactivePosition' : !opportunity.active}" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
+                            <td v-bind:class="{'inactivePosition' : !opportunity.active}" ><button class="btn btn-success" v-bind:class="{'inactivePosition' : !opportunity.active}" :disabled="!opportunity.active" v-on:click="onEdit(opportunity)"><i class="fa fa-edit"></i></button></td>
                             <td v-bind:class="{'inactivePosition' : !opportunity.active}" ><button class="btn btn-warning" v-bind:class="{'inactivePosition' : !opportunity.active}" v-on:click="displayDetail(opportunity)"><i class="fa fa-plus"></i></button></td>
                             <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
                         </tr>

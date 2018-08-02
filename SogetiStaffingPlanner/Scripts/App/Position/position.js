@@ -33,8 +33,12 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
-        selected: null // Index of entry being selected to be highlighted,
-   
+        selected: null, // Index of entry being selected to be highlighted,
+        sorting: {
+            PositionName: 0,
+            posSort: true,
+            posDir: false
+        }
     },
     watch: {
         positionName: function (val) {
@@ -57,6 +61,10 @@ let position = new Vue({
         },
         rate: function (val) {
             validate.checkRate(val, this);
+        },
+        'sorting.PositionName': function (val) {
+            if (val > 0) { this.sorting.posSort = false };
+            if (val % 2 === 0) { this.sorting.posDir = true } else { this.sorting.posDir = false };
         }
     },
     methods: {
@@ -224,6 +232,9 @@ let position = new Vue({
                 }
             }
             requests.toggleActive(foundPosition, this);
+        },
+        sortTable: function (value) {
+            sorting.sortData(value, this);
         }
     },
     created: function () {

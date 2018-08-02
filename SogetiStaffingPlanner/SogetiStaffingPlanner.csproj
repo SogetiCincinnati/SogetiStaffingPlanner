@@ -298,6 +298,7 @@
     <Content Include="Scripts\App\Position\names.js" />
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Home\app.js" />
+    <Content Include="Scripts\App\Position\sorting.js" />
     <Content Include="Scripts\App\Position\validate.js" />
     <Content Include="Scripts\App\User\requests.js" />
     <Content Include="Scripts\App\User\user.js" />

@@ -268,6 +268,9 @@
         },
         toggleActive: function () {
             requests.toggleActive(this);
+        },
+        sortTable: function (name) {
+            console.log(name);
         }
     },
     created: function () {

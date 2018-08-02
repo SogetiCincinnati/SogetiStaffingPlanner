@@ -23,7 +23,8 @@
         that.sorting[data]++;
         console.log(that.sorting[data]);
         console.log(that.posts.sort(compare));
-        that.sorter = data;
+        that.sorting.sorter = data;
     }
+
 }
 

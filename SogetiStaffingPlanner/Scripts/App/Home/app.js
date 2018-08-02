@@ -409,6 +409,36 @@ new Vue({
                     break;
             }
         },
+        displaySort: function (value) {
+                
+            this.sorting.sorter = value;
+            
+            switch (value) {
+                case "OpportunityName":
+                    return "Opportunity Name";
+                case "UnitName":
+                    return "UnitName";
+                case "PositionName":
+                    return "Position Name";
+                case "NumberOfPositions":
+                    return "Number Of Postions";
+                case "Priority":
+                    return "Priority";
+                case "SoldStatusName":
+                    return "Sold Status";
+                case "PositionStatusId":
+                    return "Position Status";
+                case "ClientName":
+                    return "Client";
+                case "AE":
+                    return "Account Executive";
+                case "ACT":
+                    return "Opportunity Owner";
+                default:
+                    return "Not selected"
+            }
+            return value;
+        },
         onClientQuickAdd: function () {
             this.state.clientQuickAdd = true;
             this.formData.clientName = null;
@@ -464,11 +494,11 @@ new Vue({
         },
         applyPosFilter: function () {
             requests.getMainData(this, this.sorting.sorter);
-            this.getFilterStatus();
+            this.sorting.sorter = null;
         },
         applyPriorityFilter: function () {
             requests.getMainData(this, this.sorting.sorter);
-            this.getFilterStatus();
+            this.sorting.sorter = null;
         },
         getFilterStatus: function () {
             this.filters.status = "";
@@ -484,6 +514,13 @@ new Vue({
         },
         sortTable: function (value) {
             sorting.sortData(value, this);
+        },
+        highlightCol(value) {
+            if (value == this.sorting.sorter) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     created: function () {
@@ -517,6 +554,7 @@ new Vue({
         validate.checkErrors(this);
         validate.checkClientErrs(this);
         validate.checkOppErrs(this);
+        console.log(this.sorting.sorter);
     }
 });
 Vue.config.devtools = true;

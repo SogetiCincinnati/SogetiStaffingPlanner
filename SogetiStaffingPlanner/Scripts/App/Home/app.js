@@ -63,6 +63,39 @@ new Vue({
             priorities: ['High', 'Medium', 'Low'],
             status: ''
         },
+        sorting: {
+            sorter: null,
+            OpportunityName: 0,
+            oppSort: true,
+            oppDir: false,
+            UnitName: 0,
+            unitSort: true,
+            unitDir: false,
+            NumberOfPositions: 0,
+            numPosSort: true,
+            numPosDir: false,
+            PositionName: 0,
+            posNameSort: true,
+            posNameDir: false,
+            Priority: 0,
+            prioritySort: true,
+            priorityDir: false,
+            SoldStatusName: 0,
+            soldSort: true,
+            soldDir: false,
+            PositionStatusId: 0,
+            statusSort: true,
+            statusDir: false,
+            ClientName: 0,
+            clientNameSort: true,
+            clientNameDir: false,
+            AE: 0,
+            AESort: true,
+            AEDir: false,
+            ACT: 0,
+            ACTSort: true,
+            ACTDir: false
+        },
         state: {
             lastClientId: null,
             lastOppId: null,
@@ -80,6 +113,7 @@ new Vue({
     },
     //Code sends data to validation code.
     watch: {
+        ////// WATCHERS FOR VALIDATION ////////////
         'formData.positionName': function (newVal, oldVal) {
             validate.checkPositionName(newVal, oldVal, this);
         },
@@ -134,9 +168,48 @@ new Vue({
         'formData.clientContact': function (newVal, oldVal) {
             validate.checkClientContact(newVal, oldVal, this);
         },
-        /*'formData.opportunityNotes': function (newVal, oldVal) {
-            validate.checkOpportunityNotes(newVal, oldVal, this);
-        },*/
+        /// WATCHERS FOR SORTING ////////
+        'sorting.OpportunityName': function (val) {
+            if (val > 0) { this.sorting.oppSort = false };
+            if (val % 2 === 0) { this.sorting.oppDir = true } else { this.sorting.oppDir = false };
+        },
+        'sorting.UnitName': function (val) {
+            if (val > 0) { this.sorting.unitSort = false };
+            if (val % 2 === 0) { this.sorting.unitDir = true } else { this.sorting.unitDir = false };
+        },
+        'sorting.NumberOfPositions': function (val) {
+            if (val > 0) { this.sorting.numPosSort = false };
+            if (val % 2 === 0) { this.sorting.numPosDir = true } else { this.sorting.numPosDir = false };
+        },
+        'sorting.PositionName': function (val) {
+            if (val > 0) { this.sorting.posNameSort = false };
+            if (val % 2 === 0) { this.sorting.posNameDir = true } else { this.sorting.posNameDir = false };
+        },
+        'sorting.Priority': function (val) {
+            if (val > 0) { this.sorting.prioritySort = false };
+            if (val % 2 === 0) { this.sorting.priorityDir = true } else { this.sorting.priorityDir = false };
+        },
+        'sorting.SoldStatusName': function (val) {
+            if (val > 0) { this.sorting.soldSort = false };
+            if (val % 2 === 0) { this.sorting.soldDir = true } else { this.sorting.soldDir = false };
+        },
+        'sorting.PositionStatusId': function (val) {
+            if (val > 0) { this.sorting.statusSort = false };
+            if (val % 2 === 0) { this.sorting.statusDir = true } else { this.sorting.statusDir = false };
+        },
+        'sorting.ClientName': function (val) {
+            if (val > 0) { this.sorting.clientNameSort = false };
+            if (val % 2 === 0) { this.sorting.clientNameDir = true } else { this.sorting.clientNameDir = false };
+        },
+        'sorting.AE': function (val) {
+            if (val > 0) { this.sorting.AESort = false };
+            if (val % 2 === 0) { this.sorting.AEDir = true } else { this.sorting.AEDir = false };
+        },
+        'sorting.ACT': function (val) {
+            if (val > 0) { this.sorting.ACTSort = false };
+            if (val % 2 === 0) { this.sorting.ACTDir = true } else { this.sorting.ACTDir = false };
+        },
+
 
 
     },
@@ -390,11 +463,11 @@ new Vue({
             this.filters.displayFilters = !this.filters.displayFilters;
         },
         applyPosFilter: function () {
-            requests.getMainData(this);
+            requests.getMainData(this, this.sorting.sorter);
             this.getFilterStatus();
         },
         applyPriorityFilter: function () {
-            requests.getMainData(this);
+            requests.getMainData(this, this.sorting.sorter);
             this.getFilterStatus();
         },
         getFilterStatus: function () {
@@ -408,6 +481,9 @@ new Vue({
             if (this.filters.unitFilter.length < 3) {
                 this.filters.status += " #Unit ";
             }
+        },
+        sortTable: function (value) {
+            sorting.sortData(value, this);
         }
     },
     created: function () {

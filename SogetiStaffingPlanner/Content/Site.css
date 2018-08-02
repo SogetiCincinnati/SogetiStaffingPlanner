@@ -239,3 +239,13 @@ footer {
     color: black;
     background-color: white;
 }
+/* /////////////////////////////// SORTING SECTION //////////////////////////////////*/
+.fa-sort {
+    color: #ef4527 !important;
+}
+.fa-caret-up {
+    color: red;
+}
+.fa-caret-down {
+    color: orange;
+}

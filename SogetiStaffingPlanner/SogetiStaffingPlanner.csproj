@@ -287,6 +287,7 @@
     <Content Include="Scripts\App\Client\client.js" />
     <Content Include="Scripts\App\Client\requests.js" />
     <Content Include="Scripts\App\Home\requests.js" />
+    <Content Include="Scripts\App\Home\sorting.js" />
     <Content Include="Scripts\App\Home\validate.js" />
     <Content Include="Scripts\App\Opportunity\helpers.js" />
     <Content Include="Scripts\App\Opportunity\names.js" />
@@ -298,6 +299,7 @@
     <Content Include="Scripts\App\Position\names.js" />
     <Content Include="Scripts\App\Position\position.js" />
     <Content Include="Scripts\App\Home\app.js" />
+    <Content Include="Scripts\App\Position\sorting.js" />
     <Content Include="Scripts\App\Position\validate.js" />
     <Content Include="Scripts\App\User\requests.js" />
     <Content Include="Scripts\App\User\user.js" />

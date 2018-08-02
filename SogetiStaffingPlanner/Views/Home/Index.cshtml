@@ -414,21 +414,53 @@
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.oppDir, 'fa-caret-up' : sorting.oppDir, 'fa-sort' : sorting.oppSort}">
 
-                                </i> Opportunity Name
+                                </i> Opportunity <br />Name
                             </th>
                             <th v-on:click="sortTable('UnitName')">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.unitDir, 'fa-caret-up' : sorting.unitDir, 'fa-sort' : sorting.unitSort}">
-                                    </i> Unit
+                                </i> Unit
                             </th>
-                            <th>Number of Positions</th>
-                            <th>Position Name</th>
-                            <th>Priority</th>
-                            <th>Sold</th>
-                            <th>Status</th>
-                            <th>Client</th>
-                            <th>AE</th>
-                            <th>ACT Lead</th>
+                            <th v-on:click="sortTable('NumberOfPositions')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.numPosDir, 'fa-caret-up' : sorting.numPosDir, 'fa-sort' : sorting.numPosSort}">
+                                </i> Number <br />Of Positions
+                            </th>
+                            <th v-on:click="sortTable('PositionName')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.posNameDir, 'fa-caret-up' : sorting.posNameDir, 'fa-sort' : sorting.posNameSort}">
+                                </i> Position <br />Name
+                            </th>
+                            <th v-on:click="sortTable('Priority')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.priorityDir, 'fa-caret-up' : sorting.priorityDir, 'fa-sort' : sorting.prioritySort}">
+                                </i> Priority
+                            </th>
+                            <th v-on:click="sortTable('SoldStatusName')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.soldDir, 'fa-caret-up' : sorting.soldDir, 'fa-sort' : sorting.soldSort}">
+                                </i> Sold
+                            </th>
+                            <th v-on:click="sortTable('PositionStatusId')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.statusDir, 'fa-caret-up' : sorting.statusDir, 'fa-sort' : sorting.statusSort}">
+                                </i> Status
+                            </th>
+                            <th v-on:click="sortTable('ClientName')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.clientNameDir, 'fa-caret-up' : sorting.clientNameDir, 'fa-sort' : sorting.clientNameSort}">
+                                </i> Client Name
+                            </th>
+                            <th v-on:click="sortTable('AE')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.AEDir, 'fa-caret-up' : sorting.AEDir, 'fa-sort' : sorting.AESort}">
+                                </i> AE
+                            </th>
+                            <th v-on:click="sortTable('ACT')">
+                                <i v-on:click="sortTable" class="fa"
+                                   v-bind:class="{'fa-caret-down' : !sorting.ACTDir, 'fa-caret-up' : sorting.ACTDir, 'fa-sort' : sorting.ACTSort}">
+                                </i> ACT Lead
+                            </th>
                             <th>Details</th>
                             <th>Edit</th>
                         </tr>

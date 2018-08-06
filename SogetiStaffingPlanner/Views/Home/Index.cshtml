@@ -15,7 +15,7 @@
         
        
        
-        <div v-if="displayState === false">
+        <div v-if="">
 
             <div v-if="addState === false" class="addButton">
                 <h4 id="viewHeader">Practice Manager View</h4>
@@ -352,61 +352,62 @@
 
         <div id="detailContainer" class="container">
             <template v-if="displayState === true" class="addButton">
-                <button class="btn btn-warning" v-on:click="displayState = false">Back</button>
-                <br />
-                <br />
-                <br />
-                <h1>{{displayView.OpportunityName}}</h1>
-                <h3>{{displayView.PositionName}}</h3>
-                <h3><i>{{displayView.UnitName}}</i> - {{displayView.ClientName}}</h3>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                        <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
-                        <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
-                        <p> Client Contact : {{displayView.ClientContact}}</p>
-                        <p>Priority : {{displayView.Priority}}</p>
-                        <p>Sold : {{displayView.SoldStatusName}}</p>
-                        <p>AE : {{displayUser(displayView.AE)}}</p>
-                        <p>ACT : {{displayUser(displayView.ACT)}}</p>
-                        <p><b>Skillset</b> : {{displayView.Skillset}}</p>
-                        <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
-                        <br />
-                        <br />
-                        <br />
-                        <p>Last modified on <i>{{displayDate(displayView.LastModified)}}</i></p>
-                    </div>
-                    <div class="col-sm-">
-                        <table>
-                            <tr>
-                                <th>Accepted Candidate</th>
-                                <th>Proposed Candidate</th>
-                                <th>Hire Candidate</th>
-                                <th>Rejected Candidate</th>
-                            </tr>
-                            <tr>
-                                <td>{{displayView.AcceptedCandidate}}</td>
-                                <td>{{displayView.ProposedCandidate}}</td>
-                                <td>{{displayView.HireCandidate}}</td>
-                                <td>{{displayView.RejectedCandidate}}</td>
-                            </tr>
-                            <tr>
-                                <th>Min Consultant Grade</th>
-                                <th>Max Consultant Grade</th>
-                                <th>Duration (Months)</th>
-                                <th>Rate</th>
-                            </tr>
-                            <tr>
-                                <td>{{displayGrade(displayView.MinConsultantGradeId)}}</td>
-                                <td>{{displayGrade(displayView.MaxConsultantGradeId)}}</td>
-                                <td>{{displayView.Duration}}</td>
-                                <td>{{displayView.Rate}}</td>
-                            </tr>
-                        </table>
-                    </div>
-
+                <div class="displayBox">      
+                <button class="btn btn-small btn-warning" v-on:click="displayState = false"><i class="fa fa-window-close"></i></button>
+        
+                <div class="col-sm-3">
+                    <span class="detailLabel">Opportunity Name:</span><h1 class="detailLabel">{{displayView.OpportunityName}}</h1>
+                    <span ckass="detailLabel">Position Name:</span><p class="detailLabel">{{displayView.PositionName}}</p>
+                    <p><span class="detailLabel">Unit: </span>{{displayView.UnitName}} - <span class="detailLabel">Client:</span>{{displayView.ClientName}}</p>
                 </div>
-                <br />
+               <div class="col-sm-3">
+                    <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
+                    <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
+                    <p> Client Contact : {{displayView.ClientContact}}</p>
+               </div>
+               <div class="col-sm-3">
+                   <p>Priority : {{displayView.Priority}}</p>
+                   <p>Sold : {{displayView.SoldStatusName}}</p>
+                   <p>AE : {{displayUser(displayView.AE)}}</p>
+               </div>
+                <div class="col-sm-3">
+                    <p>ACT : {{displayUser(displayView.ACT)}}</p>
+                    <p><b>Skillset</b> : {{displayView.Skillset}}</p>
+                    <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
+                    <p>Last modified on <i>{{displayDate(displayView.LastModified)}}</i></p>
+                </div>
+                <div class="col-sm-12">
+                    <table>
+                        <tr>
+                            <th>Accepted Candidate</th>
+                            <th>Proposed Candidate</th>
+                            <th>Hire Candidate</th>
+                            <th>Rejected Candidate</th>
+                        </tr>
+                        <tr>
+                            <td>{{displayView.AcceptedCandidate}}</td>
+                            <td>{{displayView.ProposedCandidate}}</td>
+                            <td>{{displayView.HireCandidate}}</td>
+                            <td>{{displayView.RejectedCandidate}}</td>
+                        </tr>
+                        <tr>
+                            <th>Min Consultant Grade</th>
+                            <th>Max Consultant Grade</th>
+                            <th>Duration (Months)</th>
+                            <th>Rate</th>
+                        </tr>
+                        <tr>
+                            <td>{{displayGrade(displayView.MinConsultantGradeId)}}</td>
+                            <td>{{displayGrade(displayView.MaxConsultantGradeId)}}</td>
+                            <td>{{displayView.Duration}}</td>
+                            <td>{{displayView.Rate}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+         
+                   </div>
+  
                 <div class="form-group"></div>
 
             </template>

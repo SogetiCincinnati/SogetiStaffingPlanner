@@ -40,6 +40,24 @@ ul.navItems {
     padding-left: 30px;
 }
 
+.homeForm {
+    position: fixed;
+    background-color: #ffd7a0;
+    width: 90%;
+    padding: 10px;
+    margin-left: 40px;
+    margin-top: -40px;
+    color: black;
+}
+.mainForm {
+   margin-top: -150px;
+}
+
+.mainForm label {
+    font-size: 10px;
+    text-align: right;
+}
+
 /* flash message styles */
 .flash-message {
     color: #ef4527;
@@ -63,7 +81,7 @@ ul.navItems {
     color: white;
     position: fixed;
     width: 90%;
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 20px;
 }
 .displayBox p {
@@ -127,7 +145,7 @@ ul.navItems {
     font-size: 12px;
 }
 .addButton {
-    
+    margin-bottom: -30px;
 }
 
 h2 {
@@ -220,6 +238,9 @@ td {
 .main{
     background-color: white;
     position: relative;
+}
+.submain {
+    margin-top: 40px;
 }
 #mainContainer {
     margin-top: 10px;

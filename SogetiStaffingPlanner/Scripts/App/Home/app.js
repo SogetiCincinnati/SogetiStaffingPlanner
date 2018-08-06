@@ -483,11 +483,6 @@ new Vue({
         displayFilters: function () {
             this.filters.displayFilters = !this.filters.displayFilters;
         },
-        applyPosFilter: function () {
-            this.getFilterStatus();
-            requests.getMainData(this);
-            this.sorting.sorter = null;
-        },
         applyPriorityFilter: function () {
             this.getFilterStatus();
             requests.getMainData(this);

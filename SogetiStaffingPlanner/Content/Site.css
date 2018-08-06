@@ -1,5 +1,4 @@
 body {
-    background-color: #deeff5;
     font-family: 'Roboto', sans-serif;
 }
 ol, ul {
@@ -14,8 +13,7 @@ ol, ul {
 }
 
 .scrollBar {
-    margin-top: 30px;
-    margin-left: 5%;
+    margin-top: 15px;
     overflow-x: auto;
     height: 400px;
     overflow-y: auto;
@@ -30,6 +28,10 @@ ol, ul {
 #navContainer {
     display: flex;
     align-items: center;
+
+}
+ul.navItems {
+    margin-left: -15px;
 }
 
 #logoContainer {
@@ -61,23 +63,25 @@ ol, ul {
 .navBar {
     display: flex;
     background-color: #ef4527;
-    height: 70px;
+    height: 30px;
     left: 0;
     top: 0;
     width: 100%;
-    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+    position: fixed;
+    top: 0;
+    z-index: 100;
 }
 
 .navBar a {
-    font-size: 20px;
+    font-size: 12px;
     text-decoration: none;
     color: white;
 }
 .navLogo {
     top: 15px;
     left: 15px;
+    width: 90px;
+    margin-left: -15px;
 }
 
 .navTitle {
@@ -93,7 +97,7 @@ ol, ul {
     font-size: 12px;
 }
 .addButton {
-    margin-left: 5%;
+    
 }
 
 h2 {
@@ -103,8 +107,15 @@ h2 {
 /* ------------------------- HOME STYLES ------------------------------- */
 
 #viewHeader {
-    margin-top: 0px;
-    margin-bottom: 30px;
+    text-align: center;
+    margin-top: 40px;
+    color: white;
+    background-color: #ef4527;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding: 20px;
 }
 #filterDisplay {
     margin-top: 20px;
@@ -126,6 +137,7 @@ h2 {
 table {
     height: 200px;
     overflow-y: scroll;
+    width: 100%;
 }
 table, table th, table td {
     border: 1px solid #BDBDBD;
@@ -156,6 +168,7 @@ tr:nth-child(even) {background-color: #EEEEEE;}
 .navItems li:hover{
     background-color: #FF5722;
     cursor: pointer;
+    height: 33px;
 }
 
 th {
@@ -176,17 +189,11 @@ td {
 
 .main{
     background-color: white;
-    width: 95%;
-    margin: 0 auto;
     position: relative;
-    top: 20px;
-    padding: 30px;
-    -webkit-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
 }
 #mainContainer {
-    margin-top: 30px;
+    margin-top: 10px;
+    background-color: white;
 }
 
 
@@ -233,6 +240,18 @@ footer {
     padding: 10px;
     background-color: #ef4527;
 }
+.filtersContainer {
+    background-color: #ef4527;
+    padding: 1px 10px 10px 10px;
+    margin-top: 65px;
+    margin-left: 10px;
+    width: 80%;
+    position: fixed;
+    top: 18%;
+}
+.filterHeader {
+    color: white;
+}
 .filterButton {
     background-color: transparent;
     border: 1px solid white;
@@ -242,6 +261,18 @@ footer {
 .filterButton:hover {
     color: black;
     background-color: white;
+}
+.filterHouse {
+    position: fixed;
+    left: 80%;
+    top: 12%;
+    font-size: 12px;
+}
+.filterButtons {
+    width: 100%;
+    background-color: white;
+    padding-bottom: 10px;
+    font-size: 9px;
 }
 /* /////////////////////////////// SORTING SECTION //////////////////////////////////*/
 .fa-sort {

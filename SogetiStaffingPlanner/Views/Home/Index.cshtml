@@ -16,70 +16,53 @@
        
        
         <div v-if="displayState === false">
-            
-            <div v-if="addState === false" class="addButton">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div v-if="displayState === false">
-                            <h2 id="viewHeader">Practice Manager View</h2>
-                        </div>
-                        <div v-else>
-                            <h2 id="viewHeader">&nbsp;</h2>
-                        </div>
 
-                    </div>
-                    <template class="col-sm-3">
-                        <div class="col-sm-3">
-                            <p class="filterDisplay">Filters: <span class="filter">{{filters.status}}</span></p>
-                            <p>Sorting by: <span class="filter">{{displaySort(sorting.sorter)}}</span></p>
-                        </div>
-                    </template>
-                </div>
-                <button v-on:click="add" class="btn btn-primary">
-                    <i class="fa fa-pencil"></i> Add
-                </button>
-                <!-- ////////////////// FILTERS AREA /////////////////////////////////-->
-                <template>
-                    <button v-on:click="displayFilters" class="btn" v-bind:class="{'btn-secondary': !filters.displayFilters, 'btn-warning': filters.displayFilters}">
-                        {{filters.displayFilters ? 'Hide Filters' : 'Show Filters'}}
+            <div v-if="addState === false" class="addButton">
+                <h4 id="viewHeader">Practice Manager View</h4>
+                <div class="col-sm-3 filterButtons">
+
+                    <button v-on:click="add" class="btn btn-primary btn-sm">
+                        <i class="fa fa-pencil"></i> Add
                     </button>
-                    <div v-if="filters.displayFilters">
-                        <div class="form-group"></div>
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h4>Position Status:</h4>
+                    <!-- ////////////////// FILTERS AREA /////////////////////////////////-->
+                    <template>
+                        <button v-on:click="displayFilters" class="btn btn-sm" v-bind:class="{'btn-secondary': !filters.displayFilters, 'btn-warning': filters.displayFilters}">
+                            {{filters.displayFilters ? 'Hide Filters' : 'Show Filters'}}
+                        </button>
+                    </template>
+
+                </div>
+                <div v-if="filters.displayFilters" class="filtersContainer">
+                    <div class="form-group"></div>
+                    <div class="row">
+
+                        <div class="col-sm-9">
+                            <template>
+                                <h4 class="filterHeader">Position Status:</h4>
                                 <ul class="filterContainer">
                                     <li class="filterOption" v-for="positionStatus in positionStatuses">
                                         <input type="checkbox" :value="positionStatus.PositionStatusId" v-model="filters.positionStatusFilter" id="positionStatus.PositionStatusId"> {{positionStatus.PositionStatusName}}
                                     </li>
-                                    <li class="filterOption">
-                                        <button class="filterButton btn btn-sm" v-on:click=" applyPosFilter">
-                                            Apply
-                                        </button>
-                                    </li>
                                 </ul>
-
-                            </div>
+                            </template>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h4>Priority:</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <template>
+                                <h4 class="filterHeader">Priority:</h4>
                                 <ul class="filterContainer">
                                     <li class="filterOption" v-for="priority in filters.priorities">
                                         <input type="checkbox" :value="priority" v-model="filters.priorityFilter" id="priority"> {{priority}}
                                     </li>
-                                    <li class="filterOption">
-                                        <button class="filterButton btn btn-sm" v-on:click=" applyPriorityFilter">
-                                            Apply
-                                        </button>
-                                    </li>
                                 </ul>
-
-                            </div>
+                            </template>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-10">
-                                <h4>Unit:</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <template>
+                                <h4 class="filterHeader">Unit:</h4>
                                 <ul class="filterContainer">
                                     <li class="filterOption" v-for="unit in units">
                                         <input type="checkbox" :value="unit.UnitId" v-model="filters.unitFilter" id="unit.UnitId"> {{unit.UnitName}}
@@ -90,15 +73,22 @@
                                         </button>
                                     </li>
                                 </ul>
-
-                            </div>
+                            </template>
                         </div>
                     </div>
-                </template>
+
+                </div>
+
 
             </div>
-
-            <template v-else>
+            <template class="col-sm-3">
+                <div class="col-sm-3 filterHouse">
+                    <p class="filterDisplay">Filters: <span class="filter">{{filters.status}}</span></p>
+                    <p>Sorting by: <span class="filter">{{displaySort(sorting.sorter)}}</span></p>
+                </div>
+            </template>
+            <div v-if="addState === true">
+                <template>
                 <div>
                     <div class="form-horizontal">
                         <!-- ROW ONE BEGIN-->
@@ -106,32 +96,32 @@
                         <span class="error">{{ errors.clientDropdown }}</span>
                         <template v-if="state.clientQuickAdd">
                             <div id="clientQuickAdd">
-                            <div class="form-group"></div>
-                            <div class="col-sm-6">
-                                <label class="col-sm-4" for="">Client Name: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.clientName" maxlength="200" />
-                                    <span class="error">{{ errors.clientName }}</span>
+                                <div class="form-group"></div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-4" for="">Client Name: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.clientName" maxlength="200" />
+                                        <span class="error">{{ errors.clientName }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="col-sm-4" for="">Client Subbusiness: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
-                                    <span class="error">{{ errors.clientSubbusiness }}</span>
-                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-4" for="">Client Subbusiness: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
+                                        <span class="error">{{ errors.clientSubbusiness }}</span>
+                                    </div>
 
 
-                            </div>
-                            <div class="form-group"></div>
-                            <div class="col-sm-12">
-                                <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
-                                <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
-                                <hr />
-                            </div>
+                                </div>
+                                <div class="form-group"></div>
+                                <div class="col-sm-12">
+                                    <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
+                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
+                                    <hr />
+                                </div>
                             </div>
                         </template>
-                   
+
                         <template v-else>
                             <div class="form-group"></div>
                             <div class="col-sm-6">
@@ -154,7 +144,7 @@
                             <div class="form-group"></div>
 
                         </template>
-                        
+
                         <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
 
 
@@ -211,15 +201,15 @@
                                 </div>
                             </div>
                             <!--<div class="col-sm-6">
-            <label class="col-sm-4" for="">Opportunity Note:</label>
-            <div class="col-sm-8">
-                <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
-                <template v-if="errors.opportunityNote">
-                    <span class="error">{{ errors.opportunityNote }}</span>
-                </template>
-            </div>
+                        <label class="col-sm-4" for="">Opportunity Note:</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
+                            <template v-if="errors.opportunityNote">
+                                <span class="error">{{ errors.opportunityNote }}</span>
+                            </template>
+                        </div>
 
-        </div>-->
+                    </div>-->
 
                             <div class="col-sm-12">
                                 <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
@@ -355,7 +345,8 @@
                 <br />
                 <br />
                 <br />
-            </template>
+                    </template>
+            </div>
 
         </div>
 

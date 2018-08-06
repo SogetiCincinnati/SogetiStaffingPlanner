@@ -487,6 +487,7 @@ new Vue({
             this.getFilterStatus();
             requests.getMainData(this);
             this.sorting.sorter = null;
+            this.filters.displayFilters = !this.filters.displayFilters;
         },
         getFilterStatus: function () {
             console.log('hello');

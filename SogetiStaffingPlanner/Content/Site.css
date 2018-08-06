@@ -58,6 +58,36 @@ ul.navItems {
     opacity: 0;
 }
 
+.displayBox {
+    background-color: #ef4527;
+    color: white;
+    position: fixed;
+    width: 90%;
+    margin-top: 40px;
+    padding: 20px;
+}
+.displayBox p {
+    font-size: 10px;
+}
+.displayBox h1 {
+    font-size: 14px;
+}
+.displayBox h3 {
+    font-size: 12px;
+}
+.displayBox button {
+    display: block;
+    font-size: 12px;
+    padding: 5px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.displayBox td {
+    background-color: #ef4527;
+}
+.detailLabel {
+    display: inline;
+}
 
 
 .navBar {

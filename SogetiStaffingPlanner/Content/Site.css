@@ -46,17 +46,25 @@ ul.navItems {
     width: 90%;
     padding: 10px;
     margin-left: 40px;
-    margin-top: -40px;
+    margin-top: -60px;
     color: black;
 }
 .mainForm {
-   margin-top: -150px;
+    margin-top: -170px;
+  
 }
 
 .mainForm label {
     font-size: 10px;
     text-align: right;
 }
+
+.formTop {
+    border-top: 1px solid white;
+    margin-top: -30px;
+}
+
+
 
 /* flash message styles */
 .flash-message {
@@ -344,4 +352,18 @@ footer {
 /* ///////////////QUICK ADDS ////////////////////*/
 #clientQuickAdd {
    
+}
+.quickOppEdit {
+    display: inline;
+}
+#oppQuickAdd {
+    position: fixed;
+    z-index: 500;
+    background-color: #ef4527;
+    color: white;
+
+    width: 90%;
+    padding: 10px;
+    margin-left: -10px;
+    margin-top: -80px;
 }

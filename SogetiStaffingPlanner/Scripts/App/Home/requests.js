@@ -125,6 +125,40 @@ let requests = {
             }
         });
     },
+    quickEditOpportunity: function (that) {
+        
+        let editObj = {
+            id: that.formData.opportunityId,
+            clientId: that.editObjs.oppQuickEdit.clientId,
+            accountExecutiveUserId: that.editObjs.oppQuickEdit.accountExecutiveUserId,
+            unitId: that.editObjs.oppQuickEdit.unitId,
+            regionId: that.editObjs.oppQuickEdit.regionId,
+            soldStatusId: that.editObjs.oppQuickEdit.soldStatusId,
+            opportunityName: that.editData.opportunityName,
+            opportunityOwnerUserId: that.editObjs.oppQuickEdit.opportunityOwnerUserId,
+            opportunityNotes: that.editObjs.oppQuickEdit.opportunityNotes,
+            clientContact: that.editData.clientContact,
+            active: that.editObjs.oppQuickEdit.active
+        }
+        console.log(editObj);
+        $.ajax({
+            type: "POST",
+            url: "Opportunity/EditPost",
+            dataType: "json",
+            data: JSON.stringify(editObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                that.state.opportunityQuickAdd = false;
+                that.state.opportunityQuickEdit = false;
+                requests.getOpportunityList(that);
+
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
     fetchPositions: function (that) {
         $.ajax({ // get positions
             async: false,

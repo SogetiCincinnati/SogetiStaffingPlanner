@@ -273,6 +273,16 @@ namespace SogetiStaffingPlanner.Controllers
 		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int? soldStatusId, string opportunityName, int? opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{
             System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
+            System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!!", soldStatusId);
+            if (soldStatusId != null)
+            {
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!!", soldStatusId);
+            } else
+            {
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!! NULLL!!!!!!!!!!!!", soldStatusId);
+                soldStatusId = 1;
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!! NULLL!!!!!!!!!!!!", soldStatusId);
+            }
             try
 			{
 
@@ -285,7 +295,7 @@ namespace SogetiStaffingPlanner.Controllers
                     RegionId = regionId,
                     SoldStatusId = soldStatusId,
                     OpportunityName = opportunityName,
-                    OpportunityOwnerUserId = opportunityOwnerUserId,
+                    OpportunityOwnerUserId = opportunityOwnerUserId != null ? opportunityOwnerUserId: 1,
                     OpportunityNotes = opportunityNotes,
                     ClientContact = clientContact,
                     LastModifiedUserId = 1,

@@ -21,7 +21,8 @@ new Vue({
         editObjs: {
             clientEdit: null,
             opportunityEdit: null,
-            positionEdit: null
+            positionEdit: null,
+            oppQuickEdit: null
         },
         formData: {
             accountExecutiveUserId: null,
@@ -52,6 +53,15 @@ new Vue({
             expectedStartDate: null,
             positionNote: null,
             opportunityId: null
+        },
+        editData: {
+            accountExecutiveUserId: null,
+            regionId: null,
+            unitId: null,
+            clientContact: null,
+            opportunityNote: null,
+            opportunityName: null,
+
         },
         filters: {
             displayFilters: false,
@@ -101,7 +111,8 @@ new Vue({
             lastOppId: null,
             updateState: false,
             clientQuickAdd: false,
-            opportunityQuickAdd: false
+            opportunityQuickAdd: false,
+            opportunityQuickEdit: false
         },
         errors: {
 
@@ -453,7 +464,23 @@ new Vue({
         },
         onOpportunityQuickAdd: function () {
             this.state.opportunityQuickAdd = true;
-           
+        },
+        onOpportunityQuickEdit: function () {
+            this.state.opportunityQuickEdit = true;
+            for (let i = 0; i < this.opportunities.length; i++) {
+                if (this.formData.opportunityId === this.opportunities[i].opportunityId) {
+                    this.editObjs.oppQuickEdit = this.opportunities[i];
+                    this.editData.accountExecutiveUserId = this.opportunities[i].accountExecutiveUserId;
+                    this.editData.unitId = this.opportunities[i].unitId;
+                    this.editData.opportunityName = this.opportunities[i].opportunityName;
+                    this.editData.clientContact = this.opportunities[i].clientContact;
+                    this.editData.regionId = this.opportunities[i].regionId;
+                    this.editData.opportunityNote = this.opportunities[i].opportunityNote;
+                }
+            }
+        },
+        onOpportunityQuickEditSubmit: function () {
+            requests.quickEditOpportunity(this);
         },
         onOpportunitySubmit: function () {
             if (validate.checkOpportunitySubmit(this)) {
@@ -473,12 +500,19 @@ new Vue({
         },
         onOpportunityCancel: function () {
             this.state.opportunityQuickAdd = false;
+            this.state.opportunityQuickEdit = false;
             this.errors.opportunityName = null
             this.errors.accountExectuvieUserId = null;
             this.errors.unitId = null;
             this.errors.regionId = null;
             this.errors.opportunityNote = null;
             this.errors.clientContact = null;
+            this.editData.accountExecutiveUserId = null;
+            this.editData.unitId = null;
+            this.editData.opportunityName = null;
+            this.editData.clientContact = null;
+            this.editData.regionId = null;
+            this.editData.opportunityNote = null;
         },
         displayFilters: function () {
             this.filters.displayFilters = !this.filters.displayFilters;
@@ -512,7 +546,28 @@ new Vue({
             } else {
                 return false;
             }
-        }
+        },
+        getRegionName: function (regionId) {
+            for (region in this.regions) {
+                if (this.regions[region].RegionId == regionId) {
+                    return (this.regions[region].RegionName);
+                }
+            }
+        },
+        getUnitName: function (unitId) {
+            for (unit in this.units) {
+                if (this.units[unit].UnitId == unitId) {
+                    return (this.units[unit].UnitName);
+                }
+            }
+        },
+        getAEName: function (AEId) { // pass ID and get name back
+            for (ae in this.aes) {
+                if (this.aes[ae].UserId == AEId) {
+                    return (this.aes[ae].FullName);
+                }
+            }
+        },
     },
     created: function () {
         requests.getMainData(this);

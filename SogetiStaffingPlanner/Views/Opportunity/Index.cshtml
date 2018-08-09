@@ -44,12 +44,13 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-4" for="">Client Subbusiness: </label>
                                 <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.clientSubbusiness"maxlength="200" />
+                                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
                                     <span class="error">{{ errors.clientSubbusiness }}</span>
                                 </div>
                             </div>
-                            <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
                             <button class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
+                            <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
+
                         </template>
                         <template v-else>
                             <div class="form-group"></div>

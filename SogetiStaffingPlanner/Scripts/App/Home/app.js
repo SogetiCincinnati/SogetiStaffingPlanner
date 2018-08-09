@@ -501,6 +501,7 @@ new Vue({
         onOpportunityCancel: function () {
             this.state.opportunityQuickAdd = false;
             this.state.opportunityQuickEdit = false;
+            this.cancel();
             this.errors.opportunityName = null
             this.errors.accountExectuvieUserId = null;
             this.errors.unitId = null;

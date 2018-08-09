@@ -60,8 +60,15 @@ new Vue({
             unitId: null,
             clientContact: null,
             opportunityNote: null,
-            opportunityName: null,
-
+            opportunityName: null
+        },
+        oppDetails: {
+            accountExecutiveUserId: null,
+            regionId: null,
+            unitId: null,
+            clientContact: null,
+            opportunityNote: null,
+            opportunityName: null
         },
         filters: {
             displayFilters: false,
@@ -112,7 +119,8 @@ new Vue({
             updateState: false,
             clientQuickAdd: false,
             opportunityQuickAdd: false,
-            opportunityQuickEdit: false
+            opportunityQuickEdit: false,
+            displayOppState: false
         },
         errors: {
 
@@ -514,6 +522,21 @@ new Vue({
             this.editData.clientContact = null;
             this.editData.regionId = null;
             this.editData.opportunityNote = null;
+        },
+        onOpportunityDetails() {
+            for (let i = 0; i < this.opportunities.length; i++) {
+                if (this.formData.opportunityId === this.opportunities[i].opportunityId) {
+                   
+                    this.oppDetails.accountExecutiveUserId = this.opportunities[i].accountExecutiveUserId;
+                    this.oppDetails.unitId = this.opportunities[i].unitId;
+                    this.oppDetails.opportunityName = this.opportunities[i].opportunityName;
+                    this.oppDetails.clientContact = this.opportunities[i].clientContact;
+                    this.oppDetails.regionId = this.opportunities[i].regionId;
+                    this.oppDetails.opportunityNote = this.opportunities[i].opportunityNote;
+                }
+            }
+            this.state.displayOppState = true;
+            console.log(this.oppDetails);
         },
         displayFilters: function () {
             this.filters.displayFilters = !this.filters.displayFilters;

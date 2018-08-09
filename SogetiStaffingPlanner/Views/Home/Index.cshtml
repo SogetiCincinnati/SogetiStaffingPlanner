@@ -12,12 +12,12 @@
                 </transition>
             </div>
         </template>
-        
-       
-       
+
+
+
         <div v-if="">
 
-            <div  class="addButton">
+            <div class="addButton">
                 <h4 id="viewHeader">Practice Manager View</h4>
                 <div class="col-sm-3 filterButtons">
 
@@ -89,71 +89,71 @@
             </template>
             <div v-if="addState === true">
                 <div>
-                <div>
-                    <div class="form-horizontal homeForm">
-                        <!-- ROW ONE BEGIN-->
-                        <h3>{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
-                        <span class="error">{{ errors.clientDropdown }}</span>
-                        <template v-if="state.clientQuickAdd">
-                            <div id="clientQuickAdd">
+                    <div>
+                        <div class="form-horizontal homeForm">
+                            <!-- ROW ONE BEGIN-->
+                            <h3>{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
+                            <span class="error">{{ errors.clientDropdown }}</span>
+                            <template v-if="state.clientQuickAdd">
+                                <div id="clientQuickAdd">
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Client Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="formData.clientName" maxlength="200" />
+                                            <span class="error">{{ errors.clientName }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Client Subbusiness: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
+                                            <span class="error">{{ errors.clientSubbusiness }}</span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-12">
+                                        <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
+                                        <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
+
+                                    </div>
+                                </div>
+                            </template>
+
+                            <div>
+
                                 <div class="form-group"></div>
                                 <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Client Name: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="formData.clientName" maxlength="200" />
-                                        <span class="error">{{ errors.clientName }}</span>
+                                    <div v-if="!state.opportunityQuickEdit">
+                                        <div v-if="!state.updateState">
+                                            <label class="col-sm-4">Client: </label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" v-model="formData.clientId">
+                                                    <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                                                        {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                                        </div>
+                                        <div v-if="state.opportunityQuickEdit">
+                                            <label class="col-sm-4">Client: </label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" v-model="formData.clientId">
+                                                    <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                                                        {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Client Subbusiness: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
-                                        <span class="error">{{ errors.clientSubbusiness }}</span>
-                                    </div>
 
-
-                                </div>
-                                <div class="form-group"></div>
-                                <div class="col-sm-12">
-                                    <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
-                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
-                                 
-                                </div>
-                            </div>
-                        </template>
-
-                        <div>
-                            
-                            <div class="form-group"></div>
-                            <div class="col-sm-6">
-                                <div v-if="!state.opportunityQuickEdit">
-                                    <div v-if="!state.updateState">
-                                       <label class="col-sm-4">Client: </label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" v-model="formData.clientId">
-                                                <option v-for="client in clients" :value="client.ClientId" class="form-control">
-                                                    {{ client.ClientName }}: {{ client.ClientSubbusiness }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
-                                    </div>
-                                    <div v-if="state.opportunityQuickEdit">
-                                        <label class="col-sm-4">Client: </label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" v-model="formData.clientId">
-                                                <option v-for="client in clients" :value="client.ClientId" class="form-control">
-                                                    {{ client.ClientName }}: {{ client.ClientSubbusiness }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                               
                                     <label class="col-sm-4">Opportunity: </label>
                                     <div class="col-sm-8">
                                         <select class="form-control" v-model="formData.opportunityId">
@@ -164,177 +164,177 @@
                                     <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd">Quick Add</button>
                                     <div v-if="formData.opportunityId" class="quickOppEdit">
                                         <button class=" btn btn-sm btn-info" v-on:click="onOpportunityQuickEdit">Quick Edit</button>
-                                        <button class=" btn btn-sm btn-success" v-on:click="onOpportunityDetails(opportunity)">Details</button>
-                                    </div>                
+                                        <button class=" btn btn-sm btn-success" v-on:click="onOpportunityDetails">Details</button>
+                                    </div>
+                                    <div class="form-group"></div>
+
+                                </div>
+                                <br />
                                 <div class="form-group"></div>
-                                    
+
                             </div>
-                            <br />
-                            <div class="form-group"></div>
 
-                        </div>
-
-                        <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
+                            <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
 
 
-                        <span id="oppError" class="error">{{ errors.opportunityDropdown }}</span>
+                            <span id="oppError" class="error">{{ errors.opportunityDropdown }}</span>
 
 
-                        <template v-if="state.opportunityQuickAdd">
-                            <div id="oppQuickAdd">
-                                <h4>
-                                    Opportunity
-                                </h4>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Client: </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" v-model="formData.clientId">
-                                            <option v-for="client in clients" :value="client.ClientId" class="form-control">
-                                                {{ client.ClientName }}: {{ client.ClientSubbusiness }}
-                                            </option>
-                                        </select>
+                            <template v-if="state.opportunityQuickAdd">
+                                <div id="oppQuickAdd">
+                                    <h4>
+                                        Opportunity
+                                    </h4>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Client: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" v-model="formData.clientId">
+                                                <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                                                    {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
                                     </div>
-                                    <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
-                                </div>
-                                <div class="col-sm-6"></div>
-                                <div class="form-group"></div>
-                                <hr />
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Opportunity Name: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="formData.opportunityName" maxlength="200" />
-                                        <span class="error">{{ errors.opportunityName }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Account Executive: </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" v-model="formData.accountExecutiveUserId">
-                                            <option v-for="ae in aes" :value="ae.UserId">{{ ae.FullName }}</option>
-                                        </select>
-                                        <span class="error">{{ errors.accountExecutiveUserId }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group"></div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Region: </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" v-model="formData.regionId">
-                                            <option v-for="region in regions" :value="region.RegionId">{{ region.RegionName }}</option>
-                                        </select>
-                                        <span class="error">{{ errors.regionId }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Unit: </label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" v-model="formData.unitId">
-                                            <option v-for="unit in units" :value="unit.UnitId">{{ unit.UnitName }}</option>
-                                        </select>
-                                        <span class="error">{{ errors.unitId }}</span>
-                                    </div>
-                                </div>
-                                <div class="form-group"></div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Client Contact: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="formData.clientContact" maxlength="200" />
-                                        <span class="error">{{ errors.clientContact }}</span>
-                                    </div>
-                                </div>
-                                <!--<div class="col-sm-6">
-        <label class="col-sm-4" for="">Opportunity Note:</label>
-        <div class="col-sm-8">
-            <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
-            <template v-if="errors.opportunityNote">
-                <span class="error">{{ errors.opportunityNote }}</span>
-            </template>
-        </div>
-
-    </div>-->
-
-                                <div class="col-sm-12">
-                                    <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
-                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">2Cancel</button>
+                                    <div class="col-sm-6"></div>
+                                    <div class="form-group"></div>
                                     <hr />
-                                </div>
-
-                            </div>
-                        </template>
-
-                        <template v-if="state.opportunityQuickEdit">
-                            <div id="oppQuickAdd">
-                                <h4>
-                                    Opportunity
-                                </h4>
-                                <hr />
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Opportunity Name: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="editData.opportunityName" maxlength="200" />
-                                        <span class="error">{{ errors.opportunityName }}</span>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Opportunity Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="formData.opportunityName" maxlength="200" />
+                                            <span class="error">{{ errors.opportunityName }}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4" for="">Client Contact: </label>
-                                    <div class="col-sm-8">
-                                        <input class="form-control" type="text" v-model="editData.clientContact" maxlength="200" />
-                                        <span class="error">{{ errors.clientContact }}</span>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Account Executive: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" v-model="formData.accountExecutiveUserId">
+                                                <option v-for="ae in aes" :value="ae.UserId">{{ ae.FullName }}</option>
+                                            </select>
+                                            <span class="error">{{ errors.accountExecutiveUserId }}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group"></div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Region: </label>
-                                    <div class="col-sm-8">
-                                        <p>{{getRegionName(editData.regionId)}}</p>
-                                        <span class="error">{{ errors.regionId }}</span>
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Region: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" v-model="formData.regionId">
+                                                <option v-for="region in regions" :value="region.RegionId">{{ region.RegionName }}</option>
+                                            </select>
+                                            <span class="error">{{ errors.regionId }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Unit: </label>
-                                    <div class="col-sm-8">
-                                        <p>{{getUnitName(editData.unitId)}}</p>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Unit: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" v-model="formData.unitId">
+                                                <option v-for="unit in units" :value="unit.UnitId">{{ unit.UnitName }}</option>
+                                            </select>
+                                            <span class="error">{{ errors.unitId }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group"></div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-4">Account Executive: </label>
-                                    <div class="col-sm-8">
-                                        <p>{{getAEName(editData.accountExecutiveUserId)}}</p>
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Client Contact: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="formData.clientContact" maxlength="200" />
+                                            <span class="error">{{ errors.clientContact }}</span>
+                                        </div>
                                     </div>
+                                    <!--<div class="col-sm-6">
+                                    <label class="col-sm-4" for="">Opportunity Note:</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
+                                        <template v-if="errors.opportunityNote">
+                                            <span class="error">{{ errors.opportunityNote }}</span>
+                                        </template>
+                                    </div>
+
+                                </div>-->
+
+                                    <div class="col-sm-12">
+                                        <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
+                                        <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
+                                        <hr />
+                                    </div>
+
                                 </div>
+                            </template>
 
-                                <!--<div class="col-sm-6">
-        <label class="col-sm-4" for="">Opportunity Note:</label>
-        <div class="col-sm-8">
-            <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
-            <template v-if="errors.opportunityNote">
-                <span class="error">{{ errors.opportunityNote }}</span>
-            </template>
-        </div>
-
-    </div>-->
-
-                                <div class="col-sm-12">
-                                    <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunityQuickEditSubmit">Submit</button>
-                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
+                            <template v-if="state.opportunityQuickEdit">
+                                <div id="oppQuickAdd">
+                                    <h4>
+                                        Opportunity
+                                    </h4>
                                     <hr />
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Opportunity Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="editData.opportunityName" maxlength="200" />
+                                            <span class="error">{{ errors.opportunityName }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4" for="">Client Contact: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" type="text" v-model="editData.clientContact" maxlength="200" />
+                                            <span class="error">{{ errors.clientContact }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Region: </label>
+                                        <div class="col-sm-8">
+                                            <p>{{getRegionName(editData.regionId)}}</p>
+                                            <span class="error">{{ errors.regionId }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Unit: </label>
+                                        <div class="col-sm-8">
+                                            <p>{{getUnitName(editData.unitId)}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group"></div>
+                                    <div class="col-sm-6">
+                                        <label class="col-sm-4">Account Executive: </label>
+                                        <div class="col-sm-8">
+                                            <p>{{getAEName(editData.accountExecutiveUserId)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="col-sm-6">
+                                    <label class="col-sm-4" for="">Opportunity Note:</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" v-model="formData.opportunityNotes"></textarea>
+                                        <template v-if="errors.opportunityNote">
+                                            <span class="error">{{ errors.opportunityNote }}</span>
+                                        </template>
+                                    </div>
+
+                                </div>-->
+
+                                    <div class="col-sm-12">
+                                        <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunityQuickEditSubmit">Submit</button>
+                                        <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
+                                        <hr />
+                                    </div>
+
                                 </div>
+                            </template>
 
-                            </div>
-                        </template>
+                            <!-- ////////////////////////////////BEGIN POSITION SECTION ///////////////////////////////-->
 
-                        <!-- ////////////////////////////////BEGIN POSITION SECTION ///////////////////////////////-->
-                  
-                       
-                        <div class="mainForm">
-                            <div class="form-group"></div>
+
+                            <div class="mainForm">
+                                <div class="form-group"></div>
                                 <div class="col-sm-3">
-   
+
                                     <label class="col-sm-4" for="">Position Name: </label>
                                     <div class="col-sm-8">
                                         <input class="form-control" type="text" v-model="formData.positionName" maxlength="200" />
@@ -374,150 +374,166 @@
                                         </template>
                                     </div>
                                 </div>
-                          
-                            <div class="formTop form-group"></div>
-                            <div class="col-sm-3">
-                                <label class="col-sm-4" for="">Proposed Candidate: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.proposedCandidate" maxlength="200" />
-                                    <span class="error">{{ errors.proposedCandidate }}</span>
+
+                                <div class="formTop form-group"></div>
+                                <div class="col-sm-3">
+                                    <label class="col-sm-4" for="">Proposed Candidate: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.proposedCandidate" maxlength="200" />
+                                        <span class="error">{{ errors.proposedCandidate }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="col-sm-4" for="">Accepted Candidate: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.acceptedCandidate" maxlength="200" />
-                                    <span class="error">{{ errors.acceptedCandidate }}</span>
+                                <div class="col-sm-3">
+                                    <label class="col-sm-4" for="">Accepted Candidate: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.acceptedCandidate" maxlength="200" />
+                                        <span class="error">{{ errors.acceptedCandidate }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Row -->
+                                <!-- Row -->
 
-                            <div class="col-sm-3">
-                                <label class="col-sm-4" for="">Hired Candidate: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.hiredCandidate" maxlength="200" />
-                                    <span class="error">{{ errors.hiredCandidate }}</span>
+                                <div class="col-sm-3">
+                                    <label class="col-sm-4" for="">Hired Candidate: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.hiredCandidate" maxlength="200" />
+                                        <span class="error">{{ errors.hiredCandidate }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <label class="col-sm-4" for="">Rejected Candidate: </label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" type="text" v-model="formData.rejectedCandidate" maxlength="200" />
-                                    <span class="error">{{ errors.rejectedCandidate }}</span>
+                                <div class="col-sm-3">
+                                    <label class="col-sm-4" for="">Rejected Candidate: </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.rejectedCandidate" maxlength="200" />
+                                        <span class="error">{{ errors.rejectedCandidate }}</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group"></div>
+                                <div class="form-group"></div>
 
-                            <div class="col-sm-6">
-                                <label class="col-sm-4" for="">Position Note:</label>
-                                <div class="col-sm-8">
-                                    <textarea v-model="formData.positionNote" class="form-control" maxlength="200"></textarea>
-                                    <template v-if="errors.positionNote">
-                                        <span class="error">{{ errors.positionNote }}</span>
-                                    </template>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-4" for="">Position Note:</label>
+                                    <div class="col-sm-8">
+                                        <textarea v-model="formData.positionNote" class="form-control" maxlength="200"></textarea>
+                                        <template v-if="errors.positionNote">
+                                            <span class="error">{{ errors.positionNote }}</span>
+                                        </template>
+                                    </div>
                                 </div>
+                                <div class="form-group"></div>
+
+                                <div class="form-group"></div>
+                                <div class="form-group"></div>
+                                <div class="col-sm-12">
+                                    <button v-on:click="onSubmit"
+                                            :disabled="errorCount > 0"
+                                            class="btn btn-primary">
+                                        <i class="fa fa-pencil"></i> Submit
+                                    </button>
+                                    <button v-on:click="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
+                                </div>
+
+
+
+                                <div class="col-sm-6"></div>
                             </div>
-                            <div class="form-group"></div>
-
-                            <div class="form-group"></div>
-                            <div class="form-group"></div>
-                            <div class="col-sm-12">
-                                <button v-on:click="onSubmit"
-                                        :disabled="errorCount > 0"
-                                        class="btn btn-primary">
-                                    <i class="fa fa-pencil"></i> Submit
-                                </button>
-                                <button v-on:click="cancel" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
-                            </div>
-
-
-
-                            <div class="col-sm-6"></div>
                         </div>
-                        </div>
 
 
-                </div>
-                <div class="form-group"></div>
-                <br />
-                <br />
-                <br />
                     </div>
+                    <div class="form-group"></div>
+                    <br />
+                    <br />
+                    <br />
+                </div>
             </div>
 
         </div>
 
         <div id="detailContainer" class="container">
             <template v-if="displayState === true" class="addButton">
-                <div class="displayBox">      
-                <button class="btn btn-small btn-warning" v-on:click="displayState = false"><i class="fa fa-window-close"></i></button>
-        
-                <div class="col-sm-3">
-                    <span class="detailLabel">Opportunity Name:</span><h1 class="detailLabel">{{displayView.OpportunityName}}</h1>
-                    <span ckass="detailLabel">Position Name:</span><p class="detailLabel">{{displayView.PositionName}}</p>
-                    <p><span class="detailLabel">Unit: </span>{{displayView.UnitName}} - <span class="detailLabel">Client:</span>{{displayView.ClientName}}</p>
-                </div>
-               <div class="col-sm-3">
-                    <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
-                    <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
-                    <p> Client Contact : {{displayView.ClientContact}}</p>
-               </div>
-               <div class="col-sm-3">
-                   <p>Priority : {{displayView.Priority}}</p>
-                   <p>Sold : {{displayView.SoldStatusName}}</p>
-                   <p>AE : {{displayUser(displayView.AE)}}</p>
-               </div>
-                <div class="col-sm-3">
-                    <p>ACT : {{displayUser(displayView.ACT)}}</p>
-                    <p><b>Skillset</b> : {{displayView.Skillset}}</p>
-                    <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
-                    <p>Last modified on <i>{{displayDate(displayView.LastModified)}}</i></p>
-                </div>
-                <div class="col-sm-12">
-                    <table>
-                        <tr>
-                            <th>Accepted Candidate</th>
-                            <th>Proposed Candidate</th>
-                            <th>Hire Candidate</th>
-                            <th>Rejected Candidate</th>
-                        </tr>
-                        <tr>
-                            <td>{{displayView.AcceptedCandidate}}</td>
-                            <td>{{displayView.ProposedCandidate}}</td>
-                            <td>{{displayView.HireCandidate}}</td>
-                            <td>{{displayView.RejectedCandidate}}</td>
-                        </tr>
-                        <tr>
-                            <th>Min Consultant Grade</th>
-                            <th>Max Consultant Grade</th>
-                            <th>Duration (Months)</th>
-                            <th>Rate</th>
-                        </tr>
-                        <tr>
-                            <td>{{displayGrade(displayView.MinConsultantGradeId)}}</td>
-                            <td>{{displayGrade(displayView.MaxConsultantGradeId)}}</td>
-                            <td>{{displayView.Duration}}</td>
-                            <td>{{displayView.Rate}}</td>
-                        </tr>
-                    </table>
+                <div class="displayBox">
+                    <button class="btn btn-small btn-warning" v-on:click="displayState = false"><i class="fa fa-window-close"></i></button>
+
+                    <div class="col-sm-3">
+                        <span class="detailLabel">Opportunity Name:</span><h1 class="detailLabel">{{displayView.OpportunityName}}</h1>
+                        <span ckass="detailLabel">Position Name:</span><p class="detailLabel">{{displayView.PositionName}}</p>
+                        <p><span class="detailLabel">Unit: </span>{{displayView.UnitName}} - <span class="detailLabel">Client:</span>{{displayView.ClientName}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
+                        <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
+                        <p> Client Contact : {{displayView.ClientContact}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>Priority : {{displayView.Priority}}</p>
+                        <p>Sold : {{displayView.SoldStatusName}}</p>
+                        <p>AE : {{displayUser(displayView.AE)}}</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p>ACT : {{displayUser(displayView.ACT)}}</p>
+                        <p><b>Skillset</b> : {{displayView.Skillset}}</p>
+                        <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
+                        <p>Last modified on <i>{{displayDate(displayView.LastModified)}}</i></p>
+                    </div>
+                    <div class="col-sm-12">
+                        <table>
+                            <tr>
+                                <th>Accepted Candidate</th>
+                                <th>Proposed Candidate</th>
+                                <th>Hire Candidate</th>
+                                <th>Rejected Candidate</th>
+                            </tr>
+                            <tr>
+                                <td>{{displayView.AcceptedCandidate}}</td>
+                                <td>{{displayView.ProposedCandidate}}</td>
+                                <td>{{displayView.HireCandidate}}</td>
+                                <td>{{displayView.RejectedCandidate}}</td>
+                            </tr>
+                            <tr>
+                                <th>Min Consultant Grade</th>
+                                <th>Max Consultant Grade</th>
+                                <th>Duration (Months)</th>
+                                <th>Rate</th>
+                            </tr>
+                            <tr>
+                                <td>{{displayGrade(displayView.MinConsultantGradeId)}}</td>
+                                <td>{{displayGrade(displayView.MaxConsultantGradeId)}}</td>
+                                <td>{{displayView.Duration}}</td>
+                                <td>{{displayView.Rate}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+
                 </div>
 
-         
-                   </div>
-  
                 <div class="form-group"></div>
 
             </template>
         </div>
 
+        <div v-if="state.displayOppState == true">
+        <div class="displayBox oppDisplay">
+            <button class="btn btn-small btn-warning" v-on:click="state.displayOppState = false"><i class="fa fa-window-close"></i></button>
 
+            <div class="col-sm-12">
+                <span class="detailLabel">Opportunity Name:</span><p>{{oppDetails.opportunityName}}</p>
+                <span class="detailLabel">AE:</span><p>{{displayUser(oppDetails.accountExecutiveUserId)}}</p>
+                <span class="detailLabel">Unit: </span><p>{{getUnitName(oppDetails.unitId)}}</p>
+               <span class="detailLabel">Client Contact: </span><p>{{oppDetails.clientContact}}</p>
+                <span class="detailLabel">Region Id: </span><p>{{getRegionName(oppDetails.regionId)}}</p>
+                <span class="detailLabel">Opportunity Note: </span><p>{{oppDetails.opportunityNote}}</p>
+            </div>
+            
+
+
+        </div>
+        </div>
 
         <div>
             <template>
-     
 
-                <div id="mainContainer "class="scrollBar">
+
+                <div id="mainContainer " class="scrollBar">
                     <table class='clientView'>
                         <tr>
                             <th v-on:click="sortTable('OpportunityName')" v-bind:class="highlightCol('OpportunityName') ? 'sortrow' : ''">
@@ -558,7 +574,7 @@
                             <th v-on:click="sortTable('ClientName')" v-bind:class="highlightCol('ClientName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.clientNameDir, 'fa-caret-up' : sorting.clientNameDir, 'fa-sort' : sorting.clientNameSort}">
-                                </i> Client <br/>Name
+                                </i> Client <br />Name
                             </th>
                             <th v-on:click="sortTable('AE')" v-bind:class="highlightCol('AE') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"

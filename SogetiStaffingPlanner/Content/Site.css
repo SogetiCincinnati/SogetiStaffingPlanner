@@ -85,12 +85,19 @@ ul.navItems {
 }
 
 .displayBox {
-    background-color: #ef4527;
-    color: white;
+    background-color: #E0E0E0;
+    color: black;
     position: fixed;
     width: 90%;
     margin-top: 10px;
+    margin-left: -50px;
     padding: 20px;
+    box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+}
+.oppDisplay {
+    width: 50%;
+    margin-left: 500px;
+    margin-top: -100px;
 }
 .displayBox p {
     font-size: 10px;
@@ -109,7 +116,7 @@ ul.navItems {
     margin-bottom: 10px;
 }
 .displayBox td {
-    background-color: #ef4527;
+   
 }
 .detailLabel {
     display: inline;

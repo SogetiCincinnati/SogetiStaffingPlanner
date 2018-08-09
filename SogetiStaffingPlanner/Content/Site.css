@@ -332,6 +332,8 @@ footer {
     border: 1px solid white;
     border-radius: 5px;
     margin-bottom: 5px;
+    display: block;
+    margin-top: 30px;
 }
 .filterButton:hover {
     color: black;

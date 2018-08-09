@@ -88,7 +88,7 @@
                 </div>
             </template>
             <div v-if="addState === true">
-                <template>
+                <div>
                 <div>
                     <div class="form-horizontal homeForm">
                         <!-- ROW ONE BEGIN-->
@@ -117,13 +117,13 @@
                                 <div class="col-sm-12">
                                     <button :disabled="quickClientErr > 0" class="btn btn-sm btn-info" v-on:click="onClientSubmit">Submit</button>
                                     <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onClientCancel">Cancel</button>
-                                    <hr />
+                                 
                                 </div>
                             </div>
                         </template>
 
-                        <template v-else>
-
+                        <div>
+                            
                             <div class="form-group"></div>
                             <div class="col-sm-6">
                                 <div v-if="!state.opportunityQuickEdit">
@@ -151,6 +151,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-6">
                                
                                     <label class="col-sm-4">Opportunity: </label>
@@ -163,6 +164,7 @@
                                     <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd">Quick Add</button>
                                     <div v-if="formData.opportunityId" class="quickOppEdit">
                                         <button class=" btn btn-sm btn-info" v-on:click="onOpportunityQuickEdit">Quick Edit</button>
+                                        <button class=" btn btn-sm btn-success" v-on:click="onOpportunityDetails(opportunity)">Details</button>
                                     </div>                
                                 <div class="form-group"></div>
                                     
@@ -170,7 +172,7 @@
                             <br />
                             <div class="form-group"></div>
 
-                        </template>
+                        </div>
 
                         <!-- ///////////////////// END CLIENT SECTION ///////////////////////////-->
 
@@ -183,6 +185,19 @@
                                 <h4>
                                     Opportunity
                                 </h4>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-4">Client: </label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" v-model="formData.clientId">
+                                            <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                                                {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                                </div>
+                                <div class="col-sm-6"></div>
+                                <div class="form-group"></div>
                                 <hr />
                                 <div class="col-sm-6">
                                     <label class="col-sm-4" for="">Opportunity Name: </label>
@@ -242,7 +257,7 @@
 
                                 <div class="col-sm-12">
                                     <button :disabled="quickOppErr > 0" class="btn btn-sm btn-info" v-on:click="onOpportunitySubmit">Submit</button>
-                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">Cancel</button>
+                                    <button class="client_quick_add btn btn-sm btn-danger" v-on:click="onOpportunityCancel">2Cancel</button>
                                     <hr />
                                 </div>
 
@@ -428,7 +443,7 @@
                 <br />
                 <br />
                 <br />
-                    </template>
+                    </div>
             </div>
 
         </div>

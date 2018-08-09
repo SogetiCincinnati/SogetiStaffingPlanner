@@ -523,7 +523,8 @@ let requests = {
             opportunityNotes: foundOpp.opportunityNotes,
             clientContact: foundOpp.clientContact,
             active: foundOpp.active,
-            soldStatusId: foundOpp.soldStatusId
+            soldStatusId: foundOpp.soldStatusId, 
+            opportunityOwnerUserId: foundOpp.opportunityOwnerUserId
         }
         $.ajax({
             type: "POST",

@@ -15,7 +15,7 @@
 
 
 
-        <div v-if="">
+        <div>
 
             <div class="addButton">
                 <h4 id="viewHeader">Practice Manager View</h4>
@@ -89,7 +89,7 @@
             </template>
             <div v-if="addState === true">
                 <div>
-                    <div>
+                    <template>
                         <div class="form-horizontal homeForm">
                             <!-- ROW ONE BEGIN-->
                             <h3 id="homeFormHeader">{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
@@ -430,7 +430,7 @@
                         </div>
 
 
-                    </div>
+                    </template>
                     <div class="form-group"></div>
                     <br />
                     <br />
@@ -504,6 +504,7 @@
         </div>
 
         <div v-if="state.displayOppState == true">
+        <template>
         <div class="displayBox oppDisplay">
             <button class="btn btn-small btn-warning" v-on:click="state.displayOppState = false"><i class="fa fa-window-close"></i></button>
 
@@ -519,6 +520,7 @@
 
 
         </div>
+        </template>
         </div>
 
         <div>

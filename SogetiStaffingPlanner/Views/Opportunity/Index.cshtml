@@ -24,7 +24,7 @@
             <h2>Opportunity List</h2>
             <hr />
             <div v-if="addState === false" class="addButton">
-                <button v-on:click="add" class="btn btn-primary">
+                <button v-on:click="add" class="btn btn-primary mainAddButton">
                     <i class="fa fa-pencil"></i> Add Opportunity
                 </button>
                 <div class="form-group"></div>
@@ -183,7 +183,7 @@
 
             <template>
                 <div class="scrollBar">
-                    <table>
+                    <table v-if="!addState">
                         <tr>
                             <th>Opportunity Name</th>
                             <th>Client</th>

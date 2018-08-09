@@ -78,7 +78,7 @@ namespace SogetiStaffingPlanner.Controllers
 										  string skillset, int rate, DateTime? expectedStartDate, int? duration,
 										  string hireCandidate, string proposedCandidate, string acceptedCandidate,
 										  string rejectedCandidate, string positionNote,
-										  int lastModifiedUserId, DateTime lastModified, bool active, int positionStatusId)
+										  int lastModifiedUserId, DateTime lastModified, bool? active, int positionStatusId)
 		{
 
 			System.Diagnostics.Debug.WriteLine("Positions Controller: AddPosition function");

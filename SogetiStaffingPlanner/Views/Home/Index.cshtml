@@ -32,52 +32,55 @@
                     </template>
 
                 </div>
-                <div v-if="filters.displayFilters" class="filtersContainer">
-                    <div class="form-group"></div>
-                    <div class="row">
+                <template>
+                    <div v-if="filters.displayFilters" class="filtersContainer">
 
-                        <div class="col-sm-9">
-                            <template>
-                                <h4 class="filterHeader">Position Status:</h4>
-                                <ul class="filterContainer">
-                                    <li class="filterOption" v-for="positionStatus in positionStatuses">
-                                        <input type="checkbox" :value="positionStatus.PositionStatusId" v-model="filters.positionStatusFilter" id="positionStatus.PositionStatusId"> {{positionStatus.PositionStatusName}}
-                                    </li>
-                                </ul>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <template>
-                                <h4 class="filterHeader">Priority:</h4>
-                                <ul class="filterContainer">
-                                    <li class="filterOption" v-for="priority in filters.priorities">
-                                        <input type="checkbox" :value="priority" v-model="filters.priorityFilter" id="priority"> {{priority}}
-                                    </li>
-                                </ul>
-                            </template>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <template>
-                                <h4 class="filterHeader">Unit:</h4>
-                                <ul class="filterContainer">
-                                    <li class="filterOption" v-for="unit in units">
-                                        <input type="checkbox" :value="unit.UnitId" v-model="filters.unitFilter" id="unit.UnitId"> {{unit.UnitName}}
-                                    </li>
-                                    <li class="filterOption">
-                                        <button class="filterButton btn btn-sm" v-on:click=" applyPriorityFilter">
-                                            Apply
-                                        </button>
-                                    </li>
-                                </ul>
-                            </template>
-                        </div>
-                    </div>
+                        <div class="form-group"></div>
+                        <div class="row">
 
-                </div>
+                            <div class="col-sm-9">
+                                <template>
+                                    <h4 class="filterHeader">Position Status:</h4>
+                                    <ul class="filterContainer">
+                                        <li class="filterOption" v-for="positionStatus in positionStatuses">
+                                            <input type="checkbox" :value="positionStatus.PositionStatusId" v-model="filters.positionStatusFilter" id="positionStatus.PositionStatusId"> {{positionStatus.PositionStatusName}}
+                                        </li>
+                                    </ul>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <template>
+                                    <h4 class="filterHeader">Priority:</h4>
+                                    <ul class="filterContainer">
+                                        <li class="filterOption" v-for="priority in filters.priorities">
+                                            <input type="checkbox" :value="priority" v-model="filters.priorityFilter" id="priority"> {{priority}}
+                                        </li>
+                                    </ul>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <template>
+                                    <h4 class="filterHeader">Unit:</h4>
+                                    <ul class="filterContainer">
+                                        <li class="filterOption" v-for="unit in units">
+                                            <input type="checkbox" :value="unit.UnitId" v-model="filters.unitFilter" id="unit.UnitId"> {{unit.UnitName}}
+                                        </li>
+                                        <li class="filterOption">
+                                            <button class="filterButton btn btn-sm" v-on:click=" applyPriorityFilter">
+                                                Apply
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </template>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
 
 
             </div>
@@ -121,6 +124,8 @@
                                     </div>
                                 </div>
                             </template>
+                       
+                          
 
                             <div>
 
@@ -150,6 +155,16 @@
                                             <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
                                         </div>
                                     </div>
+                                   
+
+                                        <div v-if="state.updateState">
+                                            <div class="col-sm-6">
+                                                <p>Client Name: {{editObjs.clientEdit.ClientName}}</p>
+                                                <p>Client Subbusiness: {{editObjs.clientEdit.ClientSubbusiness}}</p>
+                                            </div>
+
+                                        </div>
+                                    
                                 </div>
 
                                 <div class="col-sm-6">

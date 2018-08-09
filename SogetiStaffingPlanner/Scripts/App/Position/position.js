@@ -33,7 +33,12 @@ let position = new Vue({
         positionStatuses: '',
         grades: '',
         errors: {}, // builds all the errors
-        selected: null, // Index of entry being selected to be highlighted
+        selected: null, // Index of entry being selected to be highlighted,
+        sorting: {
+            PositionName: 0,
+            posSort: true,
+            posDir: false
+        }
     },
     watch: {
         positionName: function (val) {
@@ -56,6 +61,10 @@ let position = new Vue({
         },
         rate: function (val) {
             validate.checkRate(val, this);
+        },
+        'sorting.PositionName': function (val) {
+            if (val > 0) { this.sorting.posSort = false };
+            if (val % 2 === 0) { this.sorting.posDir = true } else { this.sorting.posDir = false };
         }
     },
     methods: {
@@ -118,11 +127,13 @@ let position = new Vue({
             return validate.checkForm(this);
         },
         onEdit: function (position) {
+            console.log('EDIT POSTION', position);
             this.errors = {};
             /* Specify that status is being updated */
             
             this.updateState = true;
             /* Populate form with selected values */
+            this.active = position.Active;
             this.positionName = position.PositionName;
             this.prevPosition = this.positionName;
             this.positionId = position.PositionId;
@@ -158,6 +169,9 @@ let position = new Vue({
                 }
                 if (!position['Rate']) {
                     position['Rate'] = '~';
+                }
+                if (position.Active == 'N/A') {
+                    position.Active = false;
                 }
             }
             this.positionDetail = position;
@@ -209,6 +223,18 @@ let position = new Vue({
                 console.log(count);
                 return count;
             });
+        },
+        toggleActive: function () {
+            let foundPosition = null;
+            for (let i = 0; i < this.positions.length; i++) {
+                if (this.positions[i].PositionId == this.positionDetail.PositionId) {
+                    foundPosition = this.positions[i];
+                }
+            }
+            requests.toggleActive(foundPosition, this);
+        },
+        sortTable: function (value) {
+            sorting.sortData(value, this);
         }
     },
     created: function () {

@@ -24,7 +24,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Position Name: </label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="positionName" />
+                            <input class="form-control" type="text" v-model="positionName" maxlength="200"/>
                             <span class="error">{{ errors.positionName }}</span>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Accepted Candidate:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="acceptedCandidate" />
+                            <input class="form-control" type="text" v-model="acceptedCandidate" maxlength="200"/>
                             <template v-if="errors.acceptedCandidate">
                                 <span class="error">{{ errors.acceptedCandidate }}</span>
                             </template>
@@ -52,7 +52,7 @@
 
                         <label class="col-sm-4" for="">Skillset:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="skillset" />
+                            <input class="form-control" type="text" v-model="skillset" maxlength="200"/>
                             <template v-if="errors.skillset">
                                 <span class="error">{{ errors.skillset }}</span>
                             </template>
@@ -83,7 +83,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Hire Candidate:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="hireCandidate" />
+                            <input class="form-control" type="text" v-model="hireCandidate" maxlength="200"/>
                             <template v-if="errors.hireCandidate">
                                 <span class="error">{{ errors.hireCandidate }}</span>
                             </template>
@@ -93,7 +93,7 @@
 
                         <label class="col-sm-4" for="">Proposed Candidate:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="proposedCandidate" />
+                            <input class="form-control" type="text" v-model="proposedCandidate" maxlength="200"/>
                             <template v-if="errors.proposedCandidate">
                                 <span class="error">{{ errors.proposedCandidate }}</span>
                             </template>
@@ -104,7 +104,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Rejected Candidate:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="rejectedCandidate" />
+                            <input class="form-control" type="text" v-model="rejectedCandidate" maxlength="200"/>
                             <template v-if="errors.rejectedCandidate">
                                 <span class="error">{{ errors.rejectedCandidate }}</span>
                             </template>
@@ -113,7 +113,7 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Position Note:</label>
                         <div class="col-sm-8">
-                            <input class="form-control" type="text" v-model="positionNote" />
+                            <input class="form-control" type="text" v-model="positionNote" maxlength="200"/>
                             <template v-if="errors.positionNote">
                                 <span class="error">{{ errors.positionNote }}</span>
                             </template>
@@ -211,8 +211,14 @@
             <div class="scrollBar">
                 <table>
                     <tr>
-                        <th>Position Name</th>
-                        <th>Opportunity Name</th>
+                        <div><th v-on:click="sortTable('PositionName')">
+                            <i  v-on:click="sortTable" class="fa" 
+                               v-bind:class="{'fa-caret-down' : !sorting.posDir, 'fa-caret-up' : sorting.posDir, 'fa-sort' : sorting.posSort}"
+                               >
+                                
+                            </i> 
+                         Position Name</th></div>
+                        <th><i class="fa fa-caret-down"></i> Opportunity Name</th>
                         <th>Number of Positions</th>
                         <th>Duration</th>
                         <th>Accepted Candidate</th>
@@ -223,22 +229,22 @@
                         <!--<th>Delete</th>-->
                     </tr>
                     <tr v-for="(position, index) in positions">
-                        <td v-if="index == selected" class="selected"> {{ position.PositionName }}</td>
-                        <td v-else>{{ position.PositionName }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.PositionName }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.PositionName }}</td>
                         <td v-if="index == selected" class="selected"> {{ getOpportunityName(position.OpportunityId) }}</td>
-                        <td v-else>{{ getOpportunityName(position.OpportunityId) }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ getOpportunityName(position.OpportunityId) }}</td>
                         <td v-if="index == selected" class="selected">{{ position.NumberOfPositions }}</td>
-                        <td v-else>{{ position.NumberOfPositions }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.NumberOfPositions }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Duration }}</td>
-                        <td v-else>{{ position.Duration }} months</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.Duration }} months</td>
                         <td v-if="index == selected" class="selected">{{ position.AcceptedCandidate }}</td>
-                        <td v-else>{{ position.AcceptedCandidate }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.AcceptedCandidate }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Skillset }}</td>
-                        <td v-else>{{ position.Skillset }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.Skillset }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Rate }}</td>
-                        <td v-else>${{ position.Rate }}</td>
-                        <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
-                        <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">${{ position.Rate }}</td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-success" :disabled="!position.Active" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-warning" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
                         <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
                     </tr>
                 </table>
@@ -290,8 +296,16 @@
         <p>{{this.positionDetail.PositionNote}}</p>
         <br />
         <h5><em>Last modified by: {{names.getLastModifiedUserName(this.positionDetail.LastModifiedUserId, this)}} on {{this.positionDetail.LastModified}}</em></h5>
+        <button
+                class="btn"
+                v-bind:class="{'btn-info': !positionDetail.Active, 'btn-warning': positionDetail.Active}"
+                v-on:click="toggleActive"
+        >
+            {{positionDetail.Active ? 'Make Inactive' : 'Make Active'}}
+        </button>
     </template>
 </div>
+<script type="text/javascript" src="../../Scripts/App/Position/sorting.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/requests.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/names.js"></script>

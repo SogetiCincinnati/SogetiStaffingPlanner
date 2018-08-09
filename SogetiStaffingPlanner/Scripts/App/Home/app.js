@@ -1,4 +1,5 @@
 
+
 new Vue({
     el: '#app',
     data: {
@@ -28,12 +29,14 @@ new Vue({
             opportunityName: null,
             opportunityNotes: null,
             unitId: null,
+            rate: null,
             numberOfPositions: null,
             positionName: null,
             soldStatus: null,
             positionStatusId: null,
             clientName: null,
             clientSubbusiness: null,
+            clientId: null,
             AE: null,
             ACT: null,
             clientContact: null,
@@ -42,24 +45,178 @@ new Vue({
             rate: null,
             acceptedCandidate: null,
             hiredCandidate: null,
-            rejectedCanddidate: null,
+            rejectedCandidate: null,
             proposedCandidate: null,
             duration: null,
             skillset: null,
             expectedStartDate: null,
-            positionNote: null
+            positionNote: null,
+            opportunityId: null
+        },
+        filters: {
+            displayFilters: false,
+            positionStatusFilter: [1, 2, 3],
+            priorityFilter: ['High', 'Medium', 'Low'],
+            unitFilter: [1, 2, 3],
+            posStatusApp: false,
+            priorityApp: false,
+            priorities: ['High', 'Medium', 'Low'],
+            status: ''
+        },
+        sorting: {
+            sorter: null,
+            OpportunityName: 0,
+            oppSort: true,
+            oppDir: false,
+            UnitName: 0,
+            unitSort: true,
+            unitDir: false,
+            NumberOfPositions: 0,
+            numPosSort: true,
+            numPosDir: false,
+            PositionName: 0,
+            posNameSort: true,
+            posNameDir: false,
+            Priority: 0,
+            prioritySort: true,
+            priorityDir: false,
+            SoldStatusName: 0,
+            soldSort: true,
+            soldDir: false,
+            PositionStatusId: 0,
+            statusSort: true,
+            statusDir: false,
+            ClientName: 0,
+            clientNameSort: true,
+            clientNameDir: false,
+            AE: 0,
+            AESort: true,
+            AEDir: false,
+            ACT: 0,
+            ACTSort: true,
+            ACTDir: false
         },
         state: {
             lastClientId: null,
             lastOppId: null,
             updateState: false,
-            clientQuickAdd: false
+            clientQuickAdd: false,
+            opportunityQuickAdd: false
         },
         errors: {
 
-        }
+        },
+        errorCount: null,
+        quickClientErr: 0,
+        quickOppErr: 0,
+        message: null
+    },
+    //Code sends data to validation code.
+    watch: {
+        ////// WATCHERS FOR VALIDATION ////////////
+        'formData.positionName': function (newVal, oldVal) {
+            validate.checkPositionName(newVal, oldVal, this);
+        },
+        'formData.numberOfPositions': function (newVal, oldVal) {
+            validate.checkNumberOfPositions(newVal, oldVal, this);
+        },
+        'formData.proposedCandidate': function (newVal, oldVal) {
+            validate.checkProposedCandidate(newVal, oldVal, this);
+        },
+        'formData.acceptedCandidate': function (newVal, oldVal) {
+            validate.checkAcceptedCandidate(newVal, oldVal, this);
+        },
+        'formData.rejectedCandidate': function (newVal, oldVal) {
+            validate.checkRejectedCandidate(newVal, oldVal, this);
+        },
+        'formData.hiredCandidate': function (newVal, oldVal) {
+            validate.checkHiredCandidate(newVal, oldVal, this);
+        },
+        'formData.positionStatusId': function (newVal, oldVal) {
+            validate.checkPositionStatusId(newVal, oldVal, this);
+        },
+        'formData.positionNote': function (newVal, oldVal) {
+            validate.checkPositionNote(newVal, oldVal, this);
+        },
+        'formData.rate': function (newVal, oldVal) {
+            validate.checkRate(newVal, oldVal, this);
+        },
+        'formData.clientId': function (newVal, oldVal) {
+            validate.checkClientId(newVal, oldVal, this);
+        },
+        'formData.opportunityId': function (newVal, oldVal) {
+            validate.checkOpportunityId(newVal, oldVal, this);
+        },
+        'formData.clientName': function (newVal, oldVal) {
+            validate.checkClientName(newVal, oldVal, this);
+        },
+        'formData.clientSubbusiness': function (newVal, oldVal) {
+            validate.checkClientSubbusiness(newVal, oldVal, this);
+        },
+        'formData.opportunityName': function (newVal, oldVal) {
+            validate.checkOpportunityName(newVal, oldVal, this);
+        },
+        'formData.accountExecutiveUserId': function (newVal, oldVal) {
+            validate.checkAccountExecutiveUserId(newVal, oldVal, this);
+        },
+        'formData.unitId': function (newVal, oldVal) {
+            validate.checkUnitId(newVal, oldVal, this);
+        },
+        'formData.regionId': function (newVal, oldVal) {
+            validate.checkRegionId(newVal, oldVal, this);
+        },
+        'formData.clientContact': function (newVal, oldVal) {
+            validate.checkClientContact(newVal, oldVal, this);
+        },
+        /// WATCHERS FOR SORTING ////////
+        'sorting.OpportunityName': function (val) {
+            if (val > 0) { this.sorting.oppSort = false };
+            if (val % 2 === 0) { this.sorting.oppDir = true } else { this.sorting.oppDir = false };
+        },
+        'sorting.UnitName': function (val) {
+            if (val > 0) { this.sorting.unitSort = false };
+            if (val % 2 === 0) { this.sorting.unitDir = true } else { this.sorting.unitDir = false };
+        },
+        'sorting.NumberOfPositions': function (val) {
+            if (val > 0) { this.sorting.numPosSort = false };
+            if (val % 2 === 0) { this.sorting.numPosDir = true } else { this.sorting.numPosDir = false };
+        },
+        'sorting.PositionName': function (val) {
+            if (val > 0) { this.sorting.posNameSort = false };
+            if (val % 2 === 0) { this.sorting.posNameDir = true } else { this.sorting.posNameDir = false };
+        },
+        'sorting.Priority': function (val) {
+            if (val > 0) { this.sorting.prioritySort = false };
+            if (val % 2 === 0) { this.sorting.priorityDir = true } else { this.sorting.priorityDir = false };
+        },
+        'sorting.SoldStatusName': function (val) {
+            if (val > 0) { this.sorting.soldSort = false };
+            if (val % 2 === 0) { this.sorting.soldDir = true } else { this.sorting.soldDir = false };
+        },
+        'sorting.PositionStatusId': function (val) {
+            if (val > 0) { this.sorting.statusSort = false };
+            if (val % 2 === 0) { this.sorting.statusDir = true } else { this.sorting.statusDir = false };
+        },
+        'sorting.ClientName': function (val) {
+            if (val > 0) { this.sorting.clientNameSort = false };
+            if (val % 2 === 0) { this.sorting.clientNameDir = true } else { this.sorting.clientNameDir = false };
+        },
+        'sorting.AE': function (val) {
+            if (val > 0) { this.sorting.AESort = false };
+            if (val % 2 === 0) { this.sorting.AEDir = true } else { this.sorting.AEDir = false };
+        },
+        'sorting.ACT': function (val) {
+            if (val > 0) { this.sorting.ACTSort = false };
+            if (val % 2 === 0) { this.sorting.ACTDir = true } else { this.sorting.ACTDir = false };
+        },
+
+
+
     },
     methods: {
+        checkPositionName(val) {
+            validate.checkPositionName(this);
+        },
         add: function () {
             this.addState = true;
             this.errors = {};
@@ -86,7 +243,7 @@ new Vue({
                 rate: null,
                 acceptedCandidate: null,
                 hiredCandidate: null,
-                rejectedCanddidate: null,
+                rejectedCandidate: null,
                 proposedCandidate: null,
                 duration: null,
                 skillset: null,
@@ -98,11 +255,15 @@ new Vue({
             this.errors = {};
             this.addState = false;
             this.state.updateState = false;
+            this.state.clientQuickAdd = false;
+            this.state.opportunityQuickAdd = false;
+            this.message = null;
             //CLEAR FORM
             this.clearForm();
             window.scrollTo(0, 0);
         },
         onSubmit: function () {
+            validate.checkSubmission(this);
             if (this.state.updateState == true) {
                 requests.editRow(this);
                 return;
@@ -127,6 +288,9 @@ new Vue({
             requests.fetchClients(this);
         },
         onEdit: function (post) {
+    
+            this.errors.clientDropdown = null;
+            this.errors.opportunityDropdown = null;
             window.scrollTo(0, 200);
             console.log('EDIT', post);
             console.log('EDIT OBJS', this.editObjs);
@@ -136,27 +300,24 @@ new Vue({
             this.displayState = false;
 
             //Populate client section of edit form
-            this.formData.clientName = post.ClientName;
-            this.formData.clientSubbusiness = post.ClientSubbusiness;
+          
+            this.formData.clientId = post.ClientId;
             for (let i = 0; i < this.clients.length; i++) {
                 if (post.ClientId == this.clients[i].ClientId) {
-                    console.log('CLIENT MATCH');
                     this.editObjs.clientEdit = this.clients[i];
                 }
             }
-            //Populate opportunity section of edit form
-            this.formData.opportunityName = post.OpportunityName;
-            this.formData.accountExecutiveUserId = post.AE;
-            this.formData.clientContact = post.ClientContact;
-            console.log(post.OpportunityId);
-            for (let i = 0; i < this.opportunities.length; i++) {
-                if (post.OpportunityId == this.opportunities[i].opportunityId) {
-                    this.formData.opportunityNotes = this.opportunities[i].opportunityNotes;
-                    this.formData.regionId = this.opportunities[i].regionId;
-                    this.formData.unitId = this.opportunities[i].unitId;
-                    this.editObjs.opportunityEdit = this.opportunities[i];
+            for (let i = 0; i < this.positions.length; i++) {
+                if (post.PositionId == this.positions[i].PositionId) {
+                    this.editObjs.positionEdit = this.positions[i];
                 }
+                
             }
+            //Populate opportunity section of edit form
+            
+            this.formData.opportunityId = post.OpportunityId;
+           
+            
             //Populate position section of edit form
             this.formData.positionName = post.PositionName;
             this.formData.hiredCandidate = post.HireCandidate;
@@ -168,6 +329,7 @@ new Vue({
                     this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
                     this.formData.positionStatusId = this.positions[i].PositionStatusId;
                     this.formData.positionNote = this.positions[i].PositionNote;
+                    this.formData.rate = this.positions[i].Rate;
                     this.editObjs.positionEdit = this.positions[i];
                     }
             }
@@ -238,18 +400,122 @@ new Vue({
                     break;
             }
         },
+        displaySort: function (value) {
+                
+            this.sorting.sorter = value;
+            
+            switch (value) {
+                case "OpportunityName":
+                    return "Opportunity Name";
+                case "UnitName":
+                    return "UnitName";
+                case "PositionName":
+                    return "Position Name";
+                case "NumberOfPositions":
+                    return "Number Of Postions";
+                case "Priority":
+                    return "Priority";
+                case "SoldStatusName":
+                    return "Sold Status";
+                case "PositionStatusId":
+                    return "Position Status";
+                case "ClientName":
+                    return "Client";
+                case "AE":
+                    return "Account Executive";
+                case "ACT":
+                    return "Opportunity Owner";
+                default:
+                    return "Not selected"
+            }
+            return value;
+        },
         onClientQuickAdd: function () {
             this.state.clientQuickAdd = true;
+            
         },
         onClientCancel: function () {
             this.state.clientQuickAdd = false;
+            this.quickClientErr = 0;
+            this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
+            
         },
         onClientSubmit: function () {
+            if (!validate.checkClientSubmit(this)) {
+                return;
+            }
             let quickClient = {
                 clientName: this.formData.clientName,
                 clientSubbusiness: this.formData.clientSubbusiness
             };
-            requests.quickAddClient(quickClient, this);        
+            requests.quickAddClient(quickClient, this, this.formData.clientId);        
+        },
+        onOpportunityQuickAdd: function () {
+            this.state.opportunityQuickAdd = true;
+           
+        },
+        onOpportunitySubmit: function () {
+            if (validate.checkOpportunitySubmit(this)) {
+                console.log('fail');
+                return;
+            }
+            let quickOpportunity = {
+                clientId: this.formData.clientId,
+                accountExecutiveUserId: this.formData.accountExecutiveUserId,
+                unitId: this.formData.unitId,
+                opportunityName: this.formData.opportunityName,
+                clientContact: this.formData.clientContact,
+                opportunityNote: this.formData.opportunityNote,
+                regionId: this.formData.regionId
+            }
+            requests.quickAddOpportunity(quickOpportunity, this);
+        },
+        onOpportunityCancel: function () {
+            this.state.opportunityQuickAdd = false;
+            this.errors.opportunityName = null
+            this.errors.accountExectuvieUserId = null;
+            this.errors.unitId = null;
+            this.errors.regionId = null;
+            this.errors.opportunityNote = null;
+            this.errors.clientContact = null;
+        },
+        displayFilters: function () {
+            this.filters.displayFilters = !this.filters.displayFilters;
+        },
+        applyPosFilter: function () {
+            this.getFilterStatus();
+            requests.getMainData(this);
+            this.sorting.sorter = null;
+        },
+        applyPriorityFilter: function () {
+            this.getFilterStatus();
+            requests.getMainData(this);
+            this.sorting.sorter = null;
+        },
+        getFilterStatus: function () {
+            console.log('hello');
+            console.log(this.filters);
+            this.filters.status = "";
+            if (this.filters.positionStatusFilter.length < 4) {
+                this.filters.status += " #Status "
+            }
+            if (this.filters.priorityFilter.length < 3) {
+                this.filters.status += " #Priority ";
+            }
+            if (this.filters.unitFilter.length < 3) {
+                this.filters.status += " #Unit ";
+            }
+        },
+        sortTable: function (value) {
+            sorting.sortData(value, this);
+        },
+        highlightCol(value) {
+            if (value == this.sorting.sorter) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     created: function () {
@@ -276,6 +542,14 @@ new Vue({
         requests.getOpportunityList(this);
         requests.fetchPositions(this);
         requests.fetchClients(this);
+        this.getFilterStatus();
+    },
+    updated: function () {
+       
+        validate.checkErrors(this);
+        validate.checkClientErrs(this);
+        validate.checkOppErrs(this);
+        
     }
 });
 Vue.config.devtools = true;

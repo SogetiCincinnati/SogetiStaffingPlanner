@@ -1,6 +1,6 @@
 body {
     background-color: #deeff5;
-    font-family: verdana;
+    font-family: 'Roboto', sans-serif;
 }
 ol, ul {
     margin-top: 0;
@@ -9,12 +9,18 @@ ol, ul {
 .error {
     color: red;
 }
+#oppError {
+    display: block;
+}
 
 .scrollBar {
+    margin-top: 30px;
+    margin-left: 5%;
     overflow-x: auto;
     height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
+
 #app h1 {
     margin-top: -5px;
 }
@@ -40,6 +46,7 @@ ol, ul {
     width: 400px;
     height: 20px;
     border: 1px solid rgba(0, 0, 0, 0);
+    margin-bottom: 10px;
 }
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
@@ -95,17 +102,27 @@ h2 {
 
 /* ------------------------- HOME STYLES ------------------------------- */
 
+#viewHeader {
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+#filterDisplay {
+    margin-top: 20px;
+}
+.filter {
+    color: red;
+    font-weight: 900;
+}
+
 .client_quick_add {
     margin-top: 20px;
-    margin-left: 60px;
     margin-bottom: 20px;
 }
 
-
-
-
 /* Table Styles */
-
+.clientView {
+    margin-left: -0px;
+}
 table {
     height: 200px;
     overflow-y: scroll;
@@ -113,12 +130,16 @@ table {
 table, table th, table td {
     border: 1px solid #BDBDBD;
     text-align: center;
-    margin-left: 5%;
-    margin-right: 5%;
+  
 
 }
 table th {
     padding: 10px;
+}
+
+.inactivePosition {
+    background-color: gray;
+    color: lightgray;
 }
 
 table td {
@@ -138,13 +159,19 @@ tr:nth-child(even) {background-color: #EEEEEE;}
 }
 
 th {
-    font-size: 14px;
+    font-size: 12px;
     white-space: nowrap;
 }
 td {
     font-size: 10px;
-    overflow-y: auto;
+    //overflow-y: auto;
     width: 80px;
+}
+td {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .main{
@@ -157,6 +184,9 @@ td {
     -webkit-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
     box-shadow: 5px 5px 30px 0px rgba(0,0,0,0.75);
+}
+#mainContainer {
+    margin-top: 30px;
 }
 
 
@@ -183,4 +213,53 @@ footer {
 
 .col-sm-6 {
     padding-top: 10px;
+}
+
+/* ------------------------------------ FILTER STYLES ----------------------------- */
+
+.filterOption {
+    list-style: none;
+    display: inline;
+    padding: 20px;
+    color: white;
+    z-index: 1;
+}
+.filterOption input {
+    color: red;
+    z-index: 101;
+}
+.filterContainer {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ef4527;
+}
+.filterButton {
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.filterButton:hover {
+    color: black;
+    background-color: white;
+}
+/* /////////////////////////////// SORTING SECTION //////////////////////////////////*/
+.fa-sort {
+    color: #ef4527 !important;
+}
+.fa-caret-up {
+    color: red;
+}
+.fa-caret-down {
+    color: orange;
+}
+.sortrow {
+    background-color: #e1f7d9;
+}
+.sortdata {
+    background-color: #edf9e8;
+}
+/* ///////////////QUICK ADDS ////////////////////*/
+#clientQuickAdd {
+   
 }

@@ -211,6 +211,9 @@
                     opportunity[item] = 'N/A';
                 }
             }
+            if (opportunity.active == 'N/A') {
+                opportunity.active = false;
+            }
             this.opportunityDetail = opportunity;
             /* Produces a human readable string for the details view panel */
             this.opportunityDetail.lastModified = this.opportunityDetail.lastModified.slice(6);
@@ -262,6 +265,12 @@
                 clientSubbusiness: this.formData.clientSubbusiness
             };
             requests.quickAddClient(quickClient, this);
+        },
+        toggleActive: function () {
+            requests.toggleActive(this);
+        },
+        sortTable: function (name) {
+            console.log(name);
         }
     },
     created: function () {

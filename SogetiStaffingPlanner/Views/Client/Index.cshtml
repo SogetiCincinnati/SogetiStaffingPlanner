@@ -27,14 +27,14 @@
             <div class="form-horizontal">
                 <label class="col-sm-3" for="clientName">Client Name: </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientName" />
+                    <input class="form-control" type="text" v-model="formData.clientName" maxlength="200"/>
                     <span class="error">{{ errors.clientName }}</span>
                 </div>
                 <div class="form-group"></div>
 
                 <label class="col-sm-3" for="clientSubbusiness">Client Subbusiness </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" />
+                    <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
                     <span class="error">{{ errors.clientSubbusiness }}</span>
                 </div>
 

@@ -125,6 +125,9 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                var result = data.sort(function (a, b) {
+                    return b.active - a.active;
+                });
                 that.opportunities = data;
                 console.log('opportunities', that.opportunities);
             }.bind(that)
@@ -213,5 +216,42 @@ let requests = {
             that.message = '';
         }, 6000);
         that.message = `Updated ${message}!`;
+    },
+    toggleActive: function (that) {
+        let oppObj = {};
+        oppObj.id = that.opportunityDetail.opportunityId;
+        oppObj.opportunityName = that.opportunityDetail.opportunityName;
+        oppObj.opportunityNotes = that.opportunityDetail.opportunityNotes;
+        oppObj.clientContact = that.opportunityDetail.clientContact;
+        oppObj.clientId = that.opportunityDetail.clientId;
+        oppObj.accountExecutiveUserId = that.opportunityDetail.accountExecutiveUserId;
+        oppObj.unitId = that.opportunityDetail.unitId;
+        oppObj.regionId = that.opportunityDetail.regionId;
+        oppObj.soldStatusId = that.opportunityDetail.soldStatusId;
+        oppObj.opportunityOwnerUserId = that.opportunityDetail.opportunityOwnerUserId;
+        oppObj.active = !that.opportunityDetail.active;
+        
+        $.ajax({
+            type: "POST",
+            url: "EditPost",
+            dataType: "json",
+            data: JSON.stringify(oppObj),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                /* that code will update the table.  It needs to be in it's own function */
+                requests.getOpportunityList(that);
+                requests.getClientList(that);
+                requests.getUnitList(that);
+                requests.updateMessage(that.opportunityName, that);
+                console.log('UPDATED!');
+                console.log(res);
+                console.log(that.opportunityDetail.active);
+                that.opportunityDetail.active = oppObj.active;
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
     }
 }

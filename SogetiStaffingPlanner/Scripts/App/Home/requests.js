@@ -126,7 +126,7 @@ let requests = {
         });
     },
     quickEditOpportunity: function (that) {
-        
+        console.log(that.editObjs, 'HELLLO');
         let editObj = {
             id: that.formData.opportunityId,
             clientId: that.editObjs.oppQuickEdit.clientId,
@@ -522,7 +522,8 @@ let requests = {
             opportunityName: foundOpp.opportunityName,
             opportunityNotes: foundOpp.opportunityNotes,
             clientContact: foundOpp.clientContact,
-            active: foundOpp.active
+            active: foundOpp.active,
+            soldStatusId: foundOpp.soldStatusId
         }
         $.ajax({
             type: "POST",

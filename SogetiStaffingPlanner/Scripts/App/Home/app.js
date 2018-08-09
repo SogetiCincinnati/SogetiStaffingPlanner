@@ -486,6 +486,7 @@ new Vue({
                     this.editData.opportunityNote = this.opportunities[i].opportunityNote;
                 }
             }
+            console.log('QUICK OBJ', this.editObjs.oppQuickEdit);
         },
         onOpportunityQuickEditSubmit: function () {
             requests.quickEditOpportunity(this);

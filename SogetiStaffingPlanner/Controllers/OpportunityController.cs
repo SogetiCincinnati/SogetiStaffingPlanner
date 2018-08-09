@@ -293,7 +293,7 @@ namespace SogetiStaffingPlanner.Controllers
                     AccountExecutiveUserId = accountExecutiveUserId,
                     UnitId = unitId,
                     RegionId = regionId,
-                    SoldStatusId = soldStatusId,
+                    SoldStatusId = soldStatusId == null ? 1 : soldStatusId,
                     OpportunityName = opportunityName,
                     OpportunityOwnerUserId = opportunityOwnerUserId != null ? opportunityOwnerUserId: 1,
                     OpportunityNotes = opportunityNotes,

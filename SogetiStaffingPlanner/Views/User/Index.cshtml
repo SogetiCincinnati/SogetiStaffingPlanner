@@ -12,7 +12,7 @@
     <h2>User List</h2>
     <hr />
     <div v-if="states.addState == false" class="addButton">
-        <button v-on:click="add" class="btn btn-primary">
+        <button v-on:click="add" class="btn btn-primary mainAddButton">
             <i class="fa fa-pencil"></i> Add User
         </button>
         <div class="form-group"></div>
@@ -55,7 +55,7 @@
         </div>
     </template>
     <template>
-        <div class="scrollBar">
+        <div v-if="!states.addState" class="scrollBar">
             <table id="clientView">
                 <tr>
                     <th>Name</th>

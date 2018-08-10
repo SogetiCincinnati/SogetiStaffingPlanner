@@ -11,7 +11,11 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                var result = data.sort(function (a, b) {
+                    return b.Active - a.Active;
+                });
                 that.positions = data;
+                console.log('POSITIONS!', that.positions);
             }.bind(that),
             error: function (e) {
                 console.log(e);
@@ -133,6 +137,50 @@ let requests = {
                 requests.fetchPositions(that);
                
 
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
+    toggleActive: function (position, that) {
+        let posObject = {
+            acceptedCandidate: position.AcceptedCandidate,
+            duration: position.Duration,
+            expectedStartDate: position.ExpectedStartDate,
+            hireCandidate: position.HireCandidate,
+            lastModified: position.LastModified,
+            maxConsultantGradeId: position.MaxConsultantGradeId,
+            numberOfPositions: position.NumberOfPositions,
+            opportunityId: position.OpportunityId,
+            positionId: position.PositionId,
+            positionName: position.PositionName,
+            positionNote: position.PositionNote,
+            positionStatusId: position.PositionStatusId,
+            proposedCandidate: position.ProposedCandidate,
+            rate: position.Rate,
+            rejectedCandidate: position.RejectedCandidate,
+            skillset: position.Skillset,
+            unitPracticeId: position.UnitPracticeId
+        };
+        if (position.Active) {
+            posObject.active = false;
+        } else {
+            posObject.active = true;
+        }
+        console.log('DETAIL VIEW', that.positionDetail);
+        $.ajax({
+            type: "POST",
+            url: "EditPosition",
+            dataType: "json",
+            data: JSON.stringify(posObject),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                console.log('UPDATED!');
+                requests.fetchPositions(that);
+                that.positionDetail.Active = posObject.active;
+                console.log(that.positionDetail.Active);
             }.bind(that),
             error: function (e) {
                 console.log(e);

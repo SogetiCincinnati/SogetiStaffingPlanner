@@ -110,6 +110,7 @@ namespace SogetiStaffingPlanner.Controllers
                             oppJSON.ClientId = o.ClientId;
                             oppJSON.AE = o.AccountExecutiveUserId;
                             oppJSON.ACT = o.OpportunityOwnerUserId;
+                            oppJSON.UnitId = o.UnitId;
                             foreach (Client c in clients)
                             {
                                 if (o.ClientId == c.ClientId)
@@ -165,6 +166,7 @@ namespace SogetiStaffingPlanner.Controllers
                         ClientContact = oppJSON.ClientContact,
                         ClientId = oppJSON.ClientId,
                         UnitName = unitJSON.UnitName,
+                        UnitId = oppJSON.UnitId,
                         SoldStatusName = soldStatusJSON.SoldStatusName,
                         SActive = soldStatusJSON.SActive,
                         PositionStatusId = p.PositionStatusId,

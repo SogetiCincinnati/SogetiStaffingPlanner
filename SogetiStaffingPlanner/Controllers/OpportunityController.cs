@@ -35,8 +35,7 @@ namespace SogetiStaffingPlanner.Controllers
                 List<OpportunityData> opportunityList = new List<OpportunityData> { };
                 foreach (Opportunity o in opportunities)
                 {
-					if (o.Active == true)
-                    {
+					
                         opportunityList.Add(new OpportunityData
                         {
                             opportunityId = o.OpportunityId,
@@ -47,13 +46,13 @@ namespace SogetiStaffingPlanner.Controllers
                             soldStatusId = o.SoldStatusId == null ? 0: (int) o.SoldStatusId ,
                             opportunityName = o.OpportunityName,
                             opportunityOwnerUserId = o.OpportunityOwnerUserId == null ? 0: (int) o.OpportunityOwnerUserId,
-                            opportunityNotes = o.OpportunityNotes,
+                            opportunityNotes = o.OpportunityNotes == null ? "" : o.OpportunityNotes,
                             clientContact = o.ClientContact,
                             lastModifiedUserId = o.LastModifiedUserId,
                             lastModified = o.LastModified,
                             active = o.Active,
                         });
-                    }
+                    
                 }
                 return Json(opportunityList, JsonRequestBehavior.AllowGet);
             }
@@ -274,6 +273,16 @@ namespace SogetiStaffingPlanner.Controllers
 		public ActionResult AddOpportunity(int clientId, int accountExecutiveUserId, int unitId, int regionId, int? soldStatusId, string opportunityName, int? opportunityOwnerUserId, string opportunityNotes, string clientContact)
 		{
             System.Diagnostics.Debug.WriteLine("Opportunity POST called.");
+            System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!!", soldStatusId);
+            if (soldStatusId != null)
+            {
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!!", soldStatusId);
+            } else
+            {
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!! NULLL!!!!!!!!!!!!", soldStatusId);
+                soldStatusId = 1;
+                System.Diagnostics.Debug.WriteLine("!!!!!!!!!! SOLD STATUS!!!!!!! NULLL!!!!!!!!!!!!", soldStatusId);
+            }
             try
 			{
 
@@ -284,9 +293,9 @@ namespace SogetiStaffingPlanner.Controllers
                     AccountExecutiveUserId = accountExecutiveUserId,
                     UnitId = unitId,
                     RegionId = regionId,
-                    SoldStatusId = soldStatusId,
+                    SoldStatusId = soldStatusId == null ? 1 : soldStatusId,
                     OpportunityName = opportunityName,
-                    OpportunityOwnerUserId = opportunityOwnerUserId,
+                    OpportunityOwnerUserId = opportunityOwnerUserId != null ? opportunityOwnerUserId: 1,
                     OpportunityNotes = opportunityNotes,
                     ClientContact = clientContact,
                     LastModifiedUserId = 1,

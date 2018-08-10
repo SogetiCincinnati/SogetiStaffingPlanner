@@ -32,6 +32,9 @@
                     that.errors.rate ? that.errors.rate += ' Cannot be a decimal.' : that.errors.rate = 'Cannot be a decimal.';
                 }
             }
+            if (!that.rate) {
+                that.errors.rate = 'Rate required';
+            }
         } catch (e) { }
         try {
             if (that.numberOfPositions) {

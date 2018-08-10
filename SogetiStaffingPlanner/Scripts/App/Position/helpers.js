@@ -29,7 +29,7 @@
         data.maxConsultantGradeId = that.maxConsultantGradeId;
         data.minConsultantGradeId = that.minConsultantGradeId;
         data.numberOfPositions = that.numberOfPositions;
-        data.active = true;
+        data.active = that.active;
         data.positionStatusId = that.positionStatusId;
         data.lastModifiedUserId = 1;
         data.lastModified = 1;

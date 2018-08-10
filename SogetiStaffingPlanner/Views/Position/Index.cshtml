@@ -1,5 +1,5 @@
 ﻿
-<div id="app" class="main">
+<div id="app" class="main submain">
     <div v-if="moreState === false">
         <template>
             <div class="flash-message">
@@ -12,14 +12,14 @@
         <hr />
 
         <div v-if="addState === false" class="addButton">
-            <button v-on:click="add" class="btn btn-primary">
+            <button v-on:click="add" class="btn btn-primary mainAddButton">
                 <i class="fa fa-pencil"></i> Add Position
             </button>
             <div class="form-group"></div>
         </div>
         <template v-else>
             <div class="addButton">
-                <div class="form-horizontal">
+                <div class="form-horizontal positionForm">
                     <!-- ROW ONE BEGIN-->
                     <div class="col-sm-6">
                         <label class="col-sm-4" for="">Position Name: </label>
@@ -209,10 +209,16 @@
 
         <template>
             <div class="scrollBar">
-                <table>
+                <table v-if="!addState">
                     <tr>
-                        <th>Position Name</th>
-                        <th>Opportunity Name</th>
+                        <div><th v-on:click="sortTable('PositionName')">
+                            <i  v-on:click="sortTable" class="fa" 
+                               v-bind:class="{'fa-caret-down' : !sorting.posDir, 'fa-caret-up' : sorting.posDir, 'fa-sort' : sorting.posSort}"
+                               >
+                                
+                            </i> 
+                         Position Name</th></div>
+                        <th><i class="fa fa-caret-down"></i> Opportunity Name</th>
                         <th>Number of Positions</th>
                         <th>Duration</th>
                         <th>Accepted Candidate</th>
@@ -223,22 +229,22 @@
                         <!--<th>Delete</th>-->
                     </tr>
                     <tr v-for="(position, index) in positions">
-                        <td v-if="index == selected" class="selected"> {{ position.PositionName }}</td>
-                        <td v-else>{{ position.PositionName }}</td>
+                        <td v-if="index == selected" class="selected">{{ position.PositionName }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.PositionName }}</td>
                         <td v-if="index == selected" class="selected"> {{ getOpportunityName(position.OpportunityId) }}</td>
-                        <td v-else>{{ getOpportunityName(position.OpportunityId) }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ getOpportunityName(position.OpportunityId) }}</td>
                         <td v-if="index == selected" class="selected">{{ position.NumberOfPositions }}</td>
-                        <td v-else>{{ position.NumberOfPositions }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.NumberOfPositions }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Duration }}</td>
-                        <td v-else>{{ position.Duration }} months</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.Duration }} months</td>
                         <td v-if="index == selected" class="selected">{{ position.AcceptedCandidate }}</td>
-                        <td v-else>{{ position.AcceptedCandidate }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.AcceptedCandidate }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Skillset }}</td>
-                        <td v-else>{{ position.Skillset }}</td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">{{ position.Skillset }}</td>
                         <td v-if="index == selected" class="selected">{{ position.Rate }}</td>
-                        <td v-else>${{ position.Rate }}</td>
-                        <td><button class="btn btn-success" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
-                        <td><button class="btn btn-warning" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
+                        <td v-else v-bind:class="{'inactivePosition' : !position.Active}">${{ position.Rate }}</td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-success" :disabled="!position.Active" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="onEdit(position)"><i class="fa fa-edit"></i></button></td>
+                        <td v-bind:class="{'inactivePosition' : !position.Active}"><button class="btn btn-warning" v-bind:class="{'inactivePosition' : !position.Active}" v-on:click="displayDetail(position)"><i class="fa fa-plus"></i></button></td>
                         <!--<td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>-->
                     </tr>
                 </table>
@@ -290,8 +296,16 @@
         <p>{{this.positionDetail.PositionNote}}</p>
         <br />
         <h5><em>Last modified by: {{names.getLastModifiedUserName(this.positionDetail.LastModifiedUserId, this)}} on {{this.positionDetail.LastModified}}</em></h5>
+        <button
+                class="btn"
+                v-bind:class="{'btn-info': !positionDetail.Active, 'btn-warning': positionDetail.Active}"
+                v-on:click="toggleActive"
+        >
+            {{positionDetail.Active ? 'Make Inactive' : 'Make Active'}}
+        </button>
     </template>
 </div>
+<script type="text/javascript" src="../../Scripts/App/Position/sorting.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/requests.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/position.js"></script>
 <script type="text/javascript" src="../../Scripts/App/Position/names.js"></script>

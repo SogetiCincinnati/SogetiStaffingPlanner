@@ -17,7 +17,7 @@
     <h2>Client List</h2>
     <hr />
     <div v-if="states.addState === false" class="addButton">
-        <button v-on:click="add" class="btn btn-primary">
+        <button v-on:click="add" class="btn btn-primary mainAddButton">
             <i class="fa fa-pencil"></i> Add Client
         </button>
         <div class="form-group"></div>
@@ -49,7 +49,7 @@
     </template>
 
     <template>
-        <div class="scrollBar">
+        <div class="scrollBar" v-if="!states.addState">
             <table id="clientView">
                 <tr>
                     <th>Client Name</th>

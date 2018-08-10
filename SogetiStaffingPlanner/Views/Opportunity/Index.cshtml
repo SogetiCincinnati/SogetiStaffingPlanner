@@ -31,7 +31,7 @@
             </div>
             <template v-else>
                 <div class="addButton">
-                    <div class="form-horizontal">
+                    <div class="form-horizontal opportunityForm">
                         <template v-if="state.clientQuickAdd">
                             <div class="form-group"></div>
                             <div class="col-sm-6">
@@ -184,7 +184,7 @@
 
             <template>
                 <div class="scrollBar">
-                    <table v-if="!addState">
+                    <table class="oppTable" v-if="!addState">
                         <tr>
                             <th>Opportunity Name</th>
                             <th>Client</th>

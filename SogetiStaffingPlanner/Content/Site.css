@@ -47,7 +47,7 @@ ul.navItems {
     width: 98%;
     padding: 10px;
     margin-left: 10px;
-    margin-top: -80px;
+    margin-top: -60px;
     color: black;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
 }
@@ -107,6 +107,7 @@ ul.navItems {
     width: 50%;
     margin-left: 500px;
     margin-top: -100px;
+    background-color: rgb(184, 184, 184);
 }
 .displayBox p {
     font-size: 10px;
@@ -210,25 +211,29 @@ table {
     height: 200px;
     overflow-y: scroll;
     width: 100%;
+    
 }
-table, table th, table td {
-    border: 1px solid #BDBDBD;
-    text-align: center;
-  
-
-}
+    table, table th, table td {
+        border: 1px solid #BDBDBD;
+        text-align: center;
+        border-collapse: collapse;
+        padding: -20px;
+    }
 table th {
     padding: 10px;
 }
-
+table td {
+    padding: 5px;
+}
+table .oppTable th td{
+    padding: 10px;
+}
 .inactivePosition {
     background-color: gray;
     color: lightgray;
 }
 
-table td {
-    padding: 5px;
-}
+
 table tr:hover{background-color: #E0E0E0;}
 tr:nth-child(even) {background-color: #EEEEEE;}
 
@@ -265,11 +270,13 @@ td {
 }
 .submain {
     margin-top: 40px;
+    padding: 10px;
 }
 #mainContainer {
     margin-top: 10px;
     background-color: white;
 }
+
 
 
 
@@ -320,7 +327,7 @@ footer {
     padding: 1px 10px 10px 10px;
     margin-top: 65px;
     margin-left: 10px;
-    width: 80%;
+    width: 75%;
     position: fixed;
     top: 18%;
 }
@@ -371,7 +378,7 @@ footer {
 #clientQuickAdd {
     position: fixed;
     z-index: 600;
-    background-color: lightgray;
+    background-color: rgb(184, 184, 184);
     color: black;
     width: 90%;
     padding: 20px;
@@ -398,4 +405,21 @@ footer {
 }
 .formItem input {
     margin: 0;
+}
+.positionForm label {
+    text-align: right;
+    margin-right: -20px;
+}
+
+.positionForm .col-sm-6 {
+    margin-top: -15px;
+}
+.opportunityForm label {
+    text-align: right;
+    margin-right: -20px;
+}
+
+
+.opportunityForm .col-sm-6 {
+    margin-top: -15px;
 }

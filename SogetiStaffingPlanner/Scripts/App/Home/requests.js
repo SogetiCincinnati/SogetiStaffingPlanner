@@ -589,6 +589,38 @@ let requests = {
             }.bind(that)
         });
     },
+    getSoldStatusList: function (that) {
+        $.ajax({ // sold status list
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Opportunity/GetSoldStatusList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                that.soldStatuses = data;
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    },
+    getACTLeadList: function (that) {
+        $.ajax({ // ACT LEAD aka opportunity owner
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Opportunity/GetACTLeadList",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                that.ACTLeads = data;
+            }.bind(that),
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    },
     addMessage: function (message, that) {
         setTimeout(function () {
             that.message = '';

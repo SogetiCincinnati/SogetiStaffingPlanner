@@ -13,7 +13,9 @@ new Vue({
         aes: [],
         regions: [],
         units: [],
+        ACTLeads: [],
         positionStatuses: [],
+        soldStatuses: [],
         opportunities: [],
         positions: [],
         submitObjs: {
@@ -35,6 +37,7 @@ new Vue({
             numberOfPositions: null,
             positionName: null,
             soldStatus: null,
+            soldStatusId: null,
             positionStatusId: null,
             clientName: null,
             clientSubbusiness: null,
@@ -56,7 +59,8 @@ new Vue({
             opportunityId: null,
             duration: null,
             expectedStartDate: null,
-            skillset: null
+            skillset: null,
+            unitPracticeId: null
         },
         editData: {
             accountExecutiveUserId: null,
@@ -623,6 +627,8 @@ new Vue({
         requests.fetchPositions(this);
         requests.fetchClients(this);
         requests.getGradeList(this);
+        requests.getSoldStatusList(this);
+        requests.getACTLeadList(this);
         this.getFilterStatus();
     },
     updated: function () {

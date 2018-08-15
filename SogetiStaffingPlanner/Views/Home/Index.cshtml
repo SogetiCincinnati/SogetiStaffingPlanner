@@ -95,7 +95,7 @@
                     <template>
                         <div class="form-horizontal homeForm">
                             <!-- ROW ONE BEGIN-->
-                            <h3 id="homeFormHeader">{{ state.updateState ? 'Edit Opportunity' : 'Add Opportunity' }}</h3>
+                            <h3 id="homeFormHeader"><em>{{ state.updateState ? 'Edit Staffing Task' : 'Add Staffing Task' }}</em></h3>
                             <span class="error">{{ errors.clientDropdown }}</span>
                             <template v-if="state.clientQuickAdd">
                                 <div id="clientQuickAdd">
@@ -129,19 +129,20 @@
 
                             <div>
 
-                                <div class="form-group"></div>
+                                <div class="topForm_container form-group"></div>
                                 <div class="col-sm-6">
                                     <div v-if="!state.opportunityQuickEdit">
                                         <div v-if="!state.updateState">
                                             <label class="col-sm-4">Client: </label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-8 client_quick_add_container">
                                                 <select class="form-control" v-model="formData.clientId">
                                                     <option v-for="client in clients" :value="client.ClientId" class="form-control">
                                                         {{ client.ClientName }}: {{ client.ClientSubbusiness }}
                                                     </option>
                                                 </select>
+                                                <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd"><i class="fa fa-plus"></i></button>
                                             </div>
-                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                     
                                         </div>
                                         <div v-if="state.opportunityQuickEdit">
                                             <label class="col-sm-4">Client: </label>
@@ -151,8 +152,9 @@
                                                         {{ client.ClientName }}: {{ client.ClientSubbusiness }}
                                                     </option>
                                                 </select>
+                                              
                                             </div>
-                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                                            
                                         </div>
                                     </div>
                                    
@@ -170,13 +172,13 @@
                                 <div class="col-sm-6">
 
                                     <label class="col-sm-4">Opportunity: </label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-8 opportunity_quick_add_container">
                                         <select class="form-control" v-model="formData.opportunityId">
                                             <option v-for="opportunity in opportunities" :value="opportunity.opportunityId">{{ opportunity.opportunityName }}</option>
                                         </select>
-
+                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd"><i class="fa fa-plus"></i></button>
                                     </div>
-                                    <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd">Quick Add</button>
+                                  
                                     <div v-if="formData.opportunityId" class="quickOppEdit">
                                         <button class=" btn btn-sm btn-info" v-on:click="onOpportunityQuickEdit">Quick Edit</button>
                                         <button class=" btn btn-sm btn-success" v-on:click="onOpportunityDetails">Details</button>
@@ -421,8 +423,52 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-6 formItem">
+                                    <label class="col-sm-4" for="">Duration (Months): </label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="number" name="quantity" min="1" max="1825" v-model="formData.duration" />
+                                        <template v-if="errors.duration">
+                                            <span class="error">{{ errors.duration }}</span>
+                                        </template>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6 formItem">
+                                    <label class="col-sm-4" for="">Expected Start Date:</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="date" min="1990-06-15" v-model="formData.expectedStartDate" />
+                                        <template v-if="errors.expectedStartDate">
+                                            <span class="error">{{ errors.expectedStartDate }}</span>
+                                        </template>
+                                    </div>
+                                </div>
+
                                 <div class="form-group"></div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 formItem">
+                                    <label class="col-sm-4">Min Consultant Grade: </label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" v-model="formData.minConsultantGradeId">
+                                            <option v-for="grade in grades" :value="grade.GradeId"> {{ grade.GradeName }}</option>
+                                        </select>
+                                        <template v-if="errors.minConsultantGradeId">
+                                            <span class="error">{{ errors.minConsultantGradeId }}</span>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 formItem">
+                                    <label class="col-sm-4">Max Consultant Grade: </label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" v-model="formData.maxConsultantGradeId">
+                                            <option v-for="grade in grades" :value="grade.GradeId">{{ grade.GradeName }}</option>
+                                        </select>
+                                        <template v-if="errors.maxConsultantGradeId">
+                                            <span class="error">{{ errors.maxConsultantGradeId }}</span>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"></div>
+                                <div class="col-sm-6 formItem">
                                     <label class="col-sm-4" for="">Position Note:</label>
                                     <div class="col-sm-8">
                                         <textarea v-model="formData.positionNote" class="form-control" maxlength="200"></textarea>
@@ -431,6 +477,16 @@
                                         </template>
                                     </div>
                                 </div>
+                                <div class="col-sm-6 formItem">
+                                    <label class="col-sm-4" for="">Skillset:</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" type="text" v-model="formData.skillset" maxlength="200" />
+                                        <template v-if="errors.skillset">
+                                            <span class="error">{{ errors.skillset }}</span>
+                                        </template>
+                                    </div>
+                                </div>
+                               
                                 <div class="col-sm-6">
                                     <button v-on:click="onSubmit"
                                             :disabled="errorCount > 0"

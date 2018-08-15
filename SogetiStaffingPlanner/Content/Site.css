@@ -52,7 +52,13 @@ ul.navItems {
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
 }
 #homeFormHeader {
-    margin-top: 10px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 0px;
+    font-weight: bold;
+}
+.topForm_container {
+    margin-top: -15px;
 }
 .mainForm {
     margin-top: -170px;
@@ -199,8 +205,13 @@ h2 {
 }
 
 .client_quick_add {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-left: 10px;
+}
+.client_quick_add_container {
+    display: flex;
+}
+.client_quick_add_container label {
+    text-align: right;
 }
 
 /* Table Styles */
@@ -417,6 +428,9 @@ footer {
 .opportunityForm label {
     text-align: right;
     margin-right: -20px;
+}
+.opportunity_quick_add_container {
+    display: flex;
 }
 
 

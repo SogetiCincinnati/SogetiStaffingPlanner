@@ -9,6 +9,7 @@ new Vue({
         posts: [],
         users: [],
         clients: [],
+        grades: [],
         aes: [],
         regions: [],
         units: [],
@@ -52,7 +53,10 @@ new Vue({
             skillset: null,
             expectedStartDate: null,
             positionNote: null,
-            opportunityId: null
+            opportunityId: null,
+            duration: null,
+            expectedStartDate: null,
+            skillset: null
         },
         editData: {
             accountExecutiveUserId: null,
@@ -618,6 +622,7 @@ new Vue({
         requests.getOpportunityList(this);
         requests.fetchPositions(this);
         requests.fetchClients(this);
+        requests.getGradeList(this);
         this.getFilterStatus();
     },
     updated: function () {

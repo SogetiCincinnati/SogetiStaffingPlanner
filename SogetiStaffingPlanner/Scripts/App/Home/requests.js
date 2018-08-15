@@ -574,20 +574,20 @@ let requests = {
                 console.log(e);
                 console.log(e, "Error adding data! Please try again.");
             }
+        });        
+    },
+    getGradeList: function (that) {
+        $.ajax({ // Get Grade List 
+            async: false,
+            cache: false,
+            type: "GET",
+            url: "Position/GetGradeList",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                that.grades = data;
+            }.bind(that)
         });
-
-
-
-
-
-
-
-
-
-
-
-
-        
     },
     addMessage: function (message, that) {
         setTimeout(function () {

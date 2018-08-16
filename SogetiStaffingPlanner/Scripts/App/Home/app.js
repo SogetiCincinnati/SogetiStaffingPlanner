@@ -437,7 +437,7 @@ new Vue({
                 case "PositionName":
                     return "Position Name";
                 case "NumberOfPositions":
-                    return "Number Of Postions";
+                    return "Number Of Positions";
                 case "Priority":
                     return "Priority";
                 case "SoldStatusName":
@@ -445,7 +445,7 @@ new Vue({
                 case "PositionStatusId":
                     return "Position Status";
                 case "ClientName":
-                    return "Client";
+                    return "Client Name";
                 case "AE":
                     return "AE";
                 case "ACT":

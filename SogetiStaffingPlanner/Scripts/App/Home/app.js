@@ -147,18 +147,6 @@ new Vue({
         'formData.numberOfPositions': function (newVal, oldVal) {
             validate.checkNumberOfPositions(newVal, oldVal, this);
         },
-        'formData.proposedCandidate': function (newVal, oldVal) {
-            validate.checkProposedCandidate(newVal, oldVal, this);
-        },
-        'formData.acceptedCandidate': function (newVal, oldVal) {
-            validate.checkAcceptedCandidate(newVal, oldVal, this);
-        },
-        'formData.rejectedCandidate': function (newVal, oldVal) {
-            validate.checkRejectedCandidate(newVal, oldVal, this);
-        },
-        'formData.hiredCandidate': function (newVal, oldVal) {
-            validate.checkHiredCandidate(newVal, oldVal, this);
-        },
         'formData.positionStatusId': function (newVal, oldVal) {
             validate.checkPositionStatusId(newVal, oldVal, this);
         },
@@ -511,7 +499,10 @@ new Vue({
                 opportunityName: this.formData.opportunityName,
                 clientContact: this.formData.clientContact,
                 opportunityNote: this.formData.opportunityNote,
-                regionId: this.formData.regionId
+                regionId: this.formData.regionId,
+                soldStatusId: this.formData.soldStatusId,
+                opportunityOwnerUserId: this.formData.opportunityOwnerUserId,
+                opportunityNotes: this.formData.opportunityNotes
             }
             requests.quickAddOpportunity(quickOpportunity, this);
         },

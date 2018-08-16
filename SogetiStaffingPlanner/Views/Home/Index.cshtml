@@ -587,27 +587,27 @@
             <template v-if="displayState === true" class="addButton">
                 <div class="displayBox">
                     <button class="btn btn-small btn-warning" v-on:click="displayState = false"><i class="fa fa-window-close"></i></button>
-
+                    <h1>Task Details</h1>
+                    <hr />
                     <div class="col-sm-3">
-                        <span class="detailLabel">Opportunity Name:</span><h1 class="detailLabel">{{displayView.OpportunityName}}</h1>
-                        <span ckass="detailLabel">Position Name:</span><p class="detailLabel">{{displayView.PositionName}}</p>
-                        <p><span class="detailLabel">Unit: </span>{{displayView.UnitName}} - <span class="detailLabel">Client:</span>{{displayView.ClientName}}</p>
+                        <p><b>Opportunity Name</b>: {{displayView.OpportunityName}}</p>
+                        <p><b>Position Name</b>: {{displayView.PositionName}}</p>
+                        <p><b>Unit</b>: {{displayView.UnitName}} - Client: {{displayView.ClientName}}</p>
                     </div>
                     <div class="col-sm-3">
-                        <p>Number of Positions : {{displayView.NumberOfPositions}}</p>
-                        <p>Status : {{displayStatusName(displayView.PositionStatusId)}}</p>
-                        <p> Client Contact : {{displayView.ClientContact}}</p>
+                        <p><b>Number of Positions</b>: {{displayView.NumberOfPositions}}</p>
+                        <p><b>Status</b>: {{displayStatusName(displayView.PositionStatusId)}}</p>
+                        <p><b>Client Contact</b>: {{displayView.ClientContact}}</p>
                     </div>
                     <div class="col-sm-3">
-                        <p>Priority : {{displayView.Priority}}</p>
-                        <p>Sold : {{displayView.SoldStatusName}}</p>
-                        <p>AE : {{displayUser(displayView.AE)}}</p>
+                        <p><b>Priority</b>: {{displayView.Priority}}</p>
+                        <p><b>Sold</b>: {{displayView.SoldStatusName}}</p>
+                        <p><b>AE</b>: {{displayUser(displayView.AE)}}</p>
                     </div>
                     <div class="col-sm-3">
-                        <p>ACT : {{displayUser(displayView.ACT)}}</p>
-                        <p><b>Skillset</b> : {{displayView.Skillset}}</p>
-                        <p>Expected Start Date : {{displayDate(displayView.ExpectedStartDate)}}</p>
-                        <p>Last modified on <i>{{displayDate(displayView.LastModified)}}</i></p>
+                        <p><b>ACT</b>: {{displayUser(displayView.ACT)}}</p>
+                        <p><b>Skillset</b>: {{displayView.Skillset}}</p>
+                        <p><b>Expected Start Date</b>: {{displayDate(displayView.ExpectedStartDate)}}</p>
                     </div>
                     <div class="col-sm-12">
                         <table class="table table-bordered">
@@ -636,6 +636,7 @@
                                 <td>{{displayView.Rate}}</td>
                             </tr>
                         </table>
+                        <p><i>Last modified on {{displayDate(displayView.LastModified)}}</i></p>
                     </div>
 
 
@@ -652,12 +653,14 @@
             <button class="btn btn-small btn-warning" v-on:click="state.displayOppState = false"><i class="fa fa-window-close"></i></button>
 
             <div class="col-sm-12">
-                <span class="detailLabel">Opportunity Name:</span><p>{{oppDetails.opportunityName}}</p>
-                <span class="detailLabel">AE:</span><p>{{displayUser(oppDetails.accountExecutiveUserId)}}</p>
-                <span class="detailLabel">Unit: </span><p>{{getUnitName(oppDetails.unitId)}}</p>
-               <span class="detailLabel">Client Contact: </span><p>{{oppDetails.clientContact}}</p>
-                <span class="detailLabel">Region Id: </span><p>{{getRegionName(oppDetails.regionId)}}</p>
-                <span class="detailLabel">Opportunity Note: </span><p>{{oppDetails.opportunityNote}}</p>
+                <span class="detailLabel"><b>Opportunity Name</b>:</span><p>{{oppDetails.opportunityName}}</p>
+                <span class="detailLabel"><b>AE</b>:</span><p>{{displayUser(oppDetails.accountExecutiveUserId)}}</p>
+                <span class="detailLabel"><b>Unit</b>: </span><p>{{getUnitName(oppDetails.unitId)}}</p>
+                <span class="detailLabel"><b>Client Contact</b>: </span><p>{{oppDetails.clientContact}}</p>
+                <span class="detailLabel"><b>Region Id</b>: </span><p>{{getRegionName(oppDetails.regionId)}}</p>
+                <span class="detailLabel"><b>Opportunity Note</b>: </span><p>{{oppDetails.opportunityNotes}}</p>
+                <span class="detailLabel"><b>Opportunity Owner</b>: </span><p>{{oppDetails.opportunityOwnerUserId}}</p>
+                <span class="detailLabel"><b>Sold Status</b>: </span><p>{{oppDetails.soldStatusId}}</p>
             </div>
             
 

@@ -567,13 +567,19 @@ new Vue({
         onOpportunityDetails() {
             for (let i = 0; i < this.opportunities.length; i++) {
                 if (this.formData.opportunityId === this.opportunities[i].opportunityId) {
-                   
+                    console.log(this.opportunities[i]);
                     this.oppDetails.accountExecutiveUserId = this.opportunities[i].accountExecutiveUserId;
                     this.oppDetails.unitId = this.opportunities[i].unitId;
                     this.oppDetails.opportunityName = this.opportunities[i].opportunityName;
                     this.oppDetails.clientContact = this.opportunities[i].clientContact;
                     this.oppDetails.regionId = this.opportunities[i].regionId;
-                    this.oppDetails.opportunityNote = this.opportunities[i].opportunityNote;
+                    this.oppDetails.opportunityNotes = this.opportunities[i].opportunityNotes;
+                    if (this.opportunities[i].soldStatusId == 1) {
+                        this.oppDetails.soldStatusId = "Yes";
+                    } else {
+                        this.oppDetails.soldStatusId = "No";
+                    }
+                    this.oppDetails.opportunityOwnerUserId = this.getUserName(this.opportunities[i].opportunityOwnerUserId);
                 }
             }
             this.state.displayOppState = true;

@@ -111,29 +111,35 @@ ul.navItems {
 }
 
 .displayBox {
-    background-color: #E0E0E0;
+    background-color: #f8f8f8;
     color: black;
     position: fixed;
     width: 90%;
     margin-top: 10px;
-    margin-left: -50px;
+    margin-left: -65px;
     padding: 20px;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
 }
 .oppDisplay {
     width: 50%;
-    margin-left: 500px;
+    margin-left: 300px;
     margin-top: -100px;
-    background-color: rgb(184, 184, 184);
+    background-color: #f8f8f8;
 }
 .displayBox p {
-    font-size: 10px;
+    font-size: 14px;
+    padding: 5px;
 }
 .displayBox h1 {
-    font-size: 14px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 .displayBox h3 {
     font-size: 12px;
+    padding: 5px;
 }
 .displayBox button {
     display: block;
@@ -142,8 +148,11 @@ ul.navItems {
     margin-top: -10px;
     margin-bottom: 10px;
 }
+.displayBox table {
+    margin-top: 20px;
+}
 .displayBox td {
-   
+   font-size: 12px;
 }
 .detailLabel {
     display: inline;

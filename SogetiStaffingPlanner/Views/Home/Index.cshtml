@@ -113,8 +113,6 @@
                                             <input class="form-control" type="text" v-model="formData.clientSubbusiness" maxlength="200" />
                                             <span class="error">{{ errors.clientSubbusiness }}</span>
                                         </div>
-
-
                                     </div>
                                     <div class="form-group"></div>
                                     <div class="col-sm-12">
@@ -141,6 +139,7 @@
                                                     </option>
                                                 </select>
                                                 <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd"><i class="fa fa-plus"></i></button>
+                                                <button v-if="formData.clientId" class="client_quick_add btn btn-sm btn-info" v-on:click="onClientQuickEdit"><i class="fa fa-pencil"></i></button>
                                             </div>
                      
                                         </div>
@@ -159,13 +158,24 @@
                                     </div>
                                    
 
-                                        <div v-if="state.updateState">
-                                            <div class="col-sm-6">
-                                                <p><b>Client Name:</b> {{editObjs.clientEdit.ClientName}}</p>
-                                                <p><b>Client Subbusiness:</b> {{editObjs.clientEdit.ClientSubbusiness}}</p>
-                                            </div>
-
+                                    <div v-if="state.updateState">
+                                        <div class="clientEditContainer">
+                                        <div class="col-sm-6">
+                                            <p><b>Client Name:</b> {{editObjs.clientEdit.ClientName}}</p>
+                                            <p><b>Client Subbusiness:</b> {{editObjs.clientEdit.ClientSubbusiness}}</p>
                                         </div>
+                                        <div class="col-sm-6 opportunity_quick_add_container">
+                                            <select class="form-control" v-model="formData.clientId">
+                                                <option v-for="client in clients" :value="client.ClientId" class="form-control">
+                                                    {{ client.ClientName }}: {{ client.ClientSubbusiness }}
+                                                </option>
+                                            </select>
+                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd"><i class="fa fa-plus"></i></button>
+                                            <button class=" client_quick_add btn btn-sm btn-info" v-on:click="onClientQuickEdit"><i class="fa fa-pencil"></i></button>
+                                        </div>
+                                       </div>
+
+                                    </div>
                                     
                                 </div>
 
@@ -176,14 +186,11 @@
                                         <select class="form-control" v-model="formData.opportunityId">
                                             <option v-for="opportunity in opportunities" :value="opportunity.opportunityId">{{ opportunity.opportunityName }}</option>
                                         </select>
-                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd"><i class="fa fa-plus"></i></button>
+                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onOpportunityQuickAdd"><i class="fa fa-plus"></i></button>                                       
+                                        <button v-if="formData.opportunityId" class=" client_quick_add btn btn-sm btn-info" v-on:click="onOpportunityQuickEdit"><i class="fa fa-pencil"></i></button>
+                                        <button v-if="formData.opportunityId" class=" client_quick_add btn btn-sm btn-warning" v-on:click="onOpportunityDetails"><i class="fa fa-search"></i></button> 
                                     </div>
-                                  
-                                    <div v-if="formData.opportunityId" class="quickOppEdit">
-                                        <button class=" btn btn-sm btn-info" v-on:click="onOpportunityQuickEdit">Quick Edit</button>
-                                        <button class=" btn btn-sm btn-success" v-on:click="onOpportunityDetails">Details</button>
-                                    </div>
-                                    <div class="form-group"></div>
+
 
                                 </div>
                                 <br />
@@ -196,22 +203,24 @@
 
                             <span id="oppError" class="error">{{ errors.opportunityDropdown }}</span>
 
-
+                            
                             <template v-if="state.opportunityQuickAdd">
                                 <div id="oppQuickAdd">
                                     <h4>
                                         Opportunity
                                     </h4>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 opportunity_quick_add_container">
                                         <label class="col-sm-4">Client: </label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-8 opportunity_quick_add_container">
                                             <select class="form-control" v-model="formData.clientId">
                                                 <option v-for="client in clients" :value="client.ClientId" class="form-control">
                                                     {{ client.ClientName }}: {{ client.ClientSubbusiness }}
                                                 </option>
                                             </select>
+                                            <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd"><i class="fa fa-plus"></i></button>
+                                    
                                         </div>
-                                        <button class="client_quick_add btn btn-sm btn-success" v-on:click="onClientQuickAdd">Quick Add</button>
+                                    
                                     </div>
                                     <div class="col-sm-6"></div>
                                     <div class="form-group"></div>

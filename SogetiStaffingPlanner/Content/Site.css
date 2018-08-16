@@ -409,6 +409,9 @@ footer {
 .quickOppEdit {
     display: inline;
 }
+.clientEditContainer {
+    margin-top: -15px;
+}
 #oppQuickAdd {
     position: fixed;
     z-index: 500;

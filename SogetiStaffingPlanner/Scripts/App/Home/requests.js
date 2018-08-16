@@ -105,6 +105,26 @@ let requests = {
             }
         });
     },
+    quickEditClient: function (data, that) {
+        $.ajax({
+            type: "POST",
+            url: "Client/EditClient",
+            dataType: "json",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                that.editObjs.clientEdit = {
+                    ClientName: data.clientName,
+                    ClientSubbusiness: data.clientSubbusiness
+                }
+                that.formData.clientName = null;
+                that.formData.clientSubbusiness = null;
+            }.bind(that),
+            error: function (e) {
+                console.log(e, "Error adding data! Please try again.");
+            }
+        });
+    },
     quickAddOpportunity: function (quickOpportunity, that, id) {
         $.ajax({
             type: "POST",

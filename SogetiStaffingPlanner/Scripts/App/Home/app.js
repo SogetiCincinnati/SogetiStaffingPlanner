@@ -127,6 +127,7 @@ new Vue({
             lastOppId: null,
             updateState: false,
             clientQuickAdd: false,
+            clientQuickEdit: false,
             opportunityQuickAdd: false,
             opportunityQuickEdit: false,
             displayOppState: false
@@ -458,11 +459,30 @@ new Vue({
             this.state.clientQuickAdd = true;
             
         },
+        onClientQuickEdit: function () {
+            console.log(this.formData.clientId);
+            let client;
+            for (let i = 0; i < this.clients.length; i++) {
+                if (this.clients[i].ClientId == this.formData.clientId) {
+                    client = this.clients[i];
+                    console.log('MATCH');
+                    console.log(client);
+                    this.formData.clientName = client.ClientName;
+                    this.formData.clientSubbusiness = client.ClientSubbusiness;
+                };
+            }
+            this.state.clientQuickAdd = true;
+            this.state.clientQuickEdit = true;
+            this.formData.clientName = this.editObjs.clientEdit.ClientName;
+            this.formData.clientSubbusiness = this.editObjs.clientEdit.ClientSubbusiness;
+        },
         onClientCancel: function () {
             this.state.clientQuickAdd = false;
             this.quickClientErr = 0;
             this.errors.clientName = null;
             this.errors.clientSubbusiness = null;
+            this.formData.clientName = null;
+            this.formData.clientSubbusiness = null;
             
         },
         onClientSubmit: function () {
@@ -473,7 +493,15 @@ new Vue({
                 clientName: this.formData.clientName,
                 clientSubbusiness: this.formData.clientSubbusiness
             };
-            requests.quickAddClient(quickClient, this, this.formData.clientId);        
+            this.formData.clientName = null;
+            this.formData.clientSubbusiness = null;
+            if (this.state.clientQuickAdd === true) {
+                requests.quickAddClient(quickClient, this, this.formData.clientId);  
+            }
+            if (this.state.clientQuickEdit === true) {
+                requests.quickEditClient(quickClient, this);
+            }
+                  
         },
         onOpportunityQuickAdd: function () {
             this.state.opportunityQuickAdd = true;

@@ -133,14 +133,14 @@ let requests = {
             accountExecutiveUserId: that.editObjs.oppQuickEdit.accountExecutiveUserId,
             unitId: that.editObjs.oppQuickEdit.unitId,
             regionId: that.editObjs.oppQuickEdit.regionId,
-            soldStatusId: that.editObjs.oppQuickEdit.soldStatusId,
+            soldStatusId: that.editData.soldStatusId,
             opportunityName: that.editData.opportunityName,
-            opportunityOwnerUserId: that.editObjs.oppQuickEdit.opportunityOwnerUserId,
-            opportunityNotes: that.editObjs.oppQuickEdit.opportunityNotes,
+            opportunityOwnerUserId: that.editData.opportunityOwnerUserId,
+            opportunityNotes: that.editData.opportunityNotes,
             clientContact: that.editData.clientContact,
             active: that.editObjs.oppQuickEdit.active
         }
-        console.log(editObj);
+        console.log('HERE,', editObj);
         $.ajax({
             type: "POST",
             url: "Opportunity/EditPost",

@@ -68,7 +68,8 @@ new Vue({
             unitId: null,
             clientContact: null,
             opportunityNote: null,
-            opportunityName: null
+            opportunityName: null,
+            opportunityOwnerUserId: null
         },
         oppDetails: {
             accountExecutiveUserId: null,
@@ -470,6 +471,7 @@ new Vue({
             this.state.opportunityQuickAdd = true;
         },
         onOpportunityQuickEdit: function () {
+            console.log('FIRED!!');
             this.state.opportunityQuickEdit = true;
             for (let i = 0; i < this.opportunities.length; i++) {
                 if (this.formData.opportunityId === this.opportunities[i].opportunityId) {
@@ -479,7 +481,9 @@ new Vue({
                     this.editData.opportunityName = this.opportunities[i].opportunityName;
                     this.editData.clientContact = this.opportunities[i].clientContact;
                     this.editData.regionId = this.opportunities[i].regionId;
-                    this.editData.opportunityNote = this.opportunities[i].opportunityNote;
+                    this.editData.opportunityNotes = this.opportunities[i].opportunityNotes;
+                    this.editData.opportunityOwnerUserId = this.opportunities[i].opportunityOwnerUserId;
+                    this.editData.soldStatusId = this.opportunities[i].soldStatusId;
                 }
             }
             console.log('QUICK OBJ', this.editObjs.oppQuickEdit);
@@ -504,6 +508,7 @@ new Vue({
                 opportunityOwnerUserId: this.formData.opportunityOwnerUserId,
                 opportunityNotes: this.formData.opportunityNotes
             }
+            console.log('quick adding');
             requests.quickAddOpportunity(quickOpportunity, this);
         },
         onOpportunityCancel: function () {
@@ -589,6 +594,14 @@ new Vue({
             for (ae in this.aes) {
                 if (this.aes[ae].UserId == AEId) {
                     return (this.aes[ae].FullName);
+                }
+            }
+        },
+        getUserName: function (id) { // pass ID and get name back
+            for (let i = 0; i < this.users.length; i++) {
+                
+                if (this.users[i].UserId == id) {
+                    return this.users[i].UserFullName;
                 }
             }
         },

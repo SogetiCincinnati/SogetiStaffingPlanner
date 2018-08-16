@@ -24,14 +24,6 @@
             that.errors.positionStatusId = null;
         }
     },
-    checkPositionNote: function (newVal, oldVal, that) {
-        if (newVal.length < 1) {
-            that.errors.positionNote = 'Position note required';
-            that.errorCount++;
-        } else {
-            that.errors.positionNote = null;
-        }
-    },
     checkRate: function (newVal, oldVal, that) {
         if (newVal.length < 1) {
             that.errors.rate = 'Rate is required';

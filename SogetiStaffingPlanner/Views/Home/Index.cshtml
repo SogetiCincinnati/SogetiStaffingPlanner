@@ -676,6 +676,9 @@
                 <div id="mainContainer " class="scrollBar">
                     <table class='clientView'>
                         <tr>
+                            <th v-bind:class="highlightCol('OpportunityName') ? 'sortrow' : ''">
+ ID <br />
+                            </th>
                             <th v-on:click="sortTable('OpportunityName')" v-bind:class="highlightCol('OpportunityName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.oppDir, 'fa-caret-up' : sorting.oppDir, 'fa-sort' : sorting.oppSort}">
@@ -704,12 +707,12 @@
                             <th v-on:click="sortTable('SoldStatusName')" v-bind:class="highlightCol('SoldStatusName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.soldDir, 'fa-caret-up' : sorting.soldDir, 'fa-sort' : sorting.soldSort}">
-                                </i> Sold
+                                </i> Sold <br /> Status
                             </th>
                             <th v-on:click="sortTable('PositionStatusId')" v-bind:class="highlightCol('PositionStatusId') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.statusDir, 'fa-caret-up' : sorting.statusDir, 'fa-sort' : sorting.statusSort}">
-                                </i> Status
+                                </i> Position <br />Status
                             </th>
                             <th v-on:click="sortTable('ClientName')" v-bind:class="highlightCol('ClientName') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
@@ -724,13 +727,14 @@
                             <th v-on:click="sortTable('ACT')" v-bind:class="highlightCol('ACT') ? 'sortrow' : ''">
                                 <i v-on:click="sortTable" class="fa"
                                    v-bind:class="{'fa-caret-down' : !sorting.ACTDir, 'fa-caret-up' : sorting.ACTDir, 'fa-sort' : sorting.ACTSort}">
-                                </i> ACT Lead
+                                </i> Opportunity <br /> Owner
                             </th>
                             <th>Details</th>
                             <th>Edit</th>
                         </tr>
                         <!-- VUE WILL GENERATE EACH ROW BASED ON DATA RECIEVED -->
                         <tr v-for="post in posts">
+                            <td v-bind:class="highlightCol('PositionId') ? 'sortdata' : ''"> {{ post.PositionId }}</td>
                             <td v-bind:class="highlightCol('OpportunityName') ? 'sortdata' : ''"> {{ post.OpportunityName }}</td>
                             <td v-bind:class="highlightCol('UnitName') ? 'sortdata' : ''"> {{ post.UnitName }} </td>
                             <td v-bind:class="highlightCol('NumberOfPositions') ? 'sortdata' : ''"> {{ post.NumberOfPositions }} </td>

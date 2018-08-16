@@ -46,7 +46,7 @@ ul.navItems {
     background-color: #E0E0E0;
     width: 98%;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: -5px;
     margin-top: -60px;
     color: black;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
@@ -298,6 +298,7 @@ td {
 .main{
     background-color: white;
     position: relative;
+    padding: 20px;
 }
 .submain {
     margin-top: 40px;
@@ -414,6 +415,7 @@ footer {
     width: 90%;
     padding: 20px;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    margin-left: 35px;
 }
 .quickOppEdit {
     display: inline;

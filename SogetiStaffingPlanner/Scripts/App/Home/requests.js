@@ -10,6 +10,7 @@ let requests = {
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (data) {
+                console.log('MAIN DATA', data);
                 let result = [];
                 let filterPosResult = [];
                 for (post in data) {

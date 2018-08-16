@@ -433,7 +433,7 @@ new Vue({
                 case "OpportunityName":
                     return "Opportunity Name";
                 case "UnitName":
-                    return "UnitName";
+                    return "Unit";
                 case "PositionName":
                     return "Position Name";
                 case "NumberOfPositions":
@@ -447,7 +447,7 @@ new Vue({
                 case "ClientName":
                     return "Client";
                 case "AE":
-                    return "Account Executive";
+                    return "AE";
                 case "ACT":
                     return "Opportunity Owner";
                 default:

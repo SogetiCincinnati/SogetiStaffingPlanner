@@ -113,12 +113,14 @@ ul.navItems {
 .displayBox {
     background-color: #f8f8f8;
     color: black;
-    position: fixed;
-    width: 90%;
-    margin-top: 10px;
-    margin-left: -65px;
+    
+    
     padding: 20px;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
+    width: 75%;
+    position: fixed;
+    left: 50%;
+    margin-left: -37.5%;
 }
 .oppDisplay {
     width: 50%;

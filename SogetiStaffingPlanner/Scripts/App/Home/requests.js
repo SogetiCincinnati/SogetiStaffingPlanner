@@ -538,6 +538,13 @@ let requests = {
             data: JSON.stringify(oppObj),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
+                console.log(that.formData, 'SUBMITTED DATA!!!');
+                if (that.formData.expectedStartDate) {
+                    let parts = that.formData.expectedStartDate.split('-')
+                    let date = new Date(parts);
+                    date = date.toISOString();
+                    that.formData.expectedStartDate = date;
+                }
                 let positionObj = {
                     positionId: that.editObjs.positionEdit.PositionId,
                     opportunityId: foundOpp.opportunityId,
@@ -552,7 +559,12 @@ let requests = {
                     rejectedCandidate: that.formData.rejectedCandidate,
                     positionNote: that.formData.positionNote,
                     active: that.editObjs.positionEdit.Active,
-                    positionStatusId: that.formData.positionStatusId
+                    positionStatusId: that.formData.positionStatusId,
+                    duration: that.formData.duration,
+                    minConsultantGradeId: that.formData.minConsultantGradeId,
+                    maxConsultantGradeId: that.formData.maxConsultantGradeId,
+                    skillset: that.formData.skillset,
+                    expectedStartDate: that.formData.expectedStartDate
                 };
                 $.ajax({
                     type: "POST",

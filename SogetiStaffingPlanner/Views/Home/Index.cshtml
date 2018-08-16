@@ -520,7 +520,7 @@
                                     <label class="col-sm-4">Unit Practice: </label>
                                     <div class="col-sm-8">
                                         <select class="form-control" v-model="formData.unitPracticeId">
-                                            <option selected> ACT</option>
+                                            <option :value="4" selected> ACT</option>
                                         </select>
                                         <template v-if="errors.unitPracticeId">
                                             <span class="error">{{ errors.unitPracticeId }}</span>

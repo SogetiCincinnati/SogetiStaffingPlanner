@@ -341,11 +341,19 @@ new Vue({
             this.formData.rejectedCandidate = post.RejectedCandidate;
             this.formData.proposedCandidate = post.ProposedCandidate;
             for (let i = 0; i < this.positions.length; i++) {
+                
                 if (this.positions[i].PositionId == post.PositionId) {
+                    console.log(this.positions[i]);
                     this.formData.numberOfPositions = this.positions[i].NumberOfPositions;
                     this.formData.positionStatusId = this.positions[i].PositionStatusId;
                     this.formData.positionNote = this.positions[i].PositionNote;
                     this.formData.rate = this.positions[i].Rate;
+                    this.formData.duration = this.positions[i].Duration;
+                    this.formData.expectedStartDate = this.displayDate(this.positions[i].ExpectedStartDate);
+                    this.formData.minConsultantGradeId = this.positions[i].MinConsultantGradeId;
+                    this.formData.maxConsultantGradeId = this.positions[i].MaxConsultantGradeId;
+                    this.formData.skillset = this.positions[i].Skillset;
+                    this.formData.unitPracticeId = 4;
                     this.editObjs.positionEdit = this.positions[i];
                     }
             }
@@ -605,6 +613,13 @@ new Vue({
                 }
             }
         },
+        displayDate: function (date) {
+            let returnDate = date;
+            returnDate = parseInt(returnDate.slice(6));
+            returnDate = new Date(returnDate);
+            returnDate = returnDate.toISOString().slice(0, 10);
+            return returnDate;
+        }
     },
     created: function () {
         requests.getMainData(this);

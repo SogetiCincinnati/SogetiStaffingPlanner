@@ -99,7 +99,8 @@ let requests = {
                 }
                 that.state.lastClientId = findRecentClient(that.clients);
                 that.formData.clientId = that.state.lastClientId;
-                
+                that.errors.clientName = null;
+                that.errors.clientSubbusiness = null;
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
@@ -128,6 +129,8 @@ let requests = {
                 that.errors.clientSubbusiness = null;
                 that.formData.clientName = null;
                 that.formData.clientSubbusiness = null;
+                that.errors.clientName = null;
+                that.errors.clientSubbusiness = null;
                
             
             }.bind(that),

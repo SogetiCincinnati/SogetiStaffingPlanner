@@ -510,6 +510,8 @@ new Vue({
                 this.errors.clientName = null;
                 this.errors.clientSubbusiness = null;
             }
+            this.state.clientQuickAdd = false;
+            this.state.clientQuickEdit = false;
             this.formData.clientName = null;
             this.formData.clientSubbusiness = null;
                   

@@ -50,7 +50,7 @@ ul.navItems {
     color: black;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
     width: 75%;
-    margin-top: -80px;
+    margin-top: -87px;
     left: 50%;
     margin-left: -37.5%;
 }
@@ -116,8 +116,7 @@ ul.navItems {
 .displayBox {
     background-color: #f8f8f8;
     color: black;
-    
-    
+    margin-top: -60px;
     padding: 20px;
     box-shadow: 0 0 1px rgba(34, 25, 25, 0.4);
     width: 75%;

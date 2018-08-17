@@ -270,6 +270,8 @@ new Vue({
         },
         cancel: function () {
             this.errors = {};
+            this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
             this.addState = false;
             this.state.updateState = false;
             this.state.clientQuickAdd = false;
@@ -307,6 +309,8 @@ new Vue({
         onEdit: function (post) {
     
             this.errors.clientDropdown = null;
+             this.errors.clientName = null;
+            this.errors.clientSubbusiness = null;
             this.errors.opportunityDropdown = null;
             window.scrollTo(0, 200);
             console.log('EDIT', post);
@@ -473,8 +477,7 @@ new Vue({
             }
             this.state.clientQuickAdd = true;
             this.state.clientQuickEdit = true;
-            this.formData.clientName = this.editObjs.clientEdit.ClientName;
-            this.formData.clientSubbusiness = this.editObjs.clientEdit.ClientSubbusiness;
+           
         },
         onClientCancel: function () {
             this.state.clientQuickAdd = false;
@@ -491,16 +494,24 @@ new Vue({
             }
             let quickClient = {
                 clientName: this.formData.clientName,
-                clientSubbusiness: this.formData.clientSubbusiness
+                clientSubbusiness: this.formData.clientSubbusiness,
+                clientId: this.formData.clientId
             };
+            
+            if (this.state.clientQuickEdit === false) {
+                console.log('ADD FIRED!')
+                requests.quickAddClient(quickClient, this, this.formData.clientId);  
+                this.errors.clientName = null;
+                this.errors.clientSubbusiness = null;
+            }
+            else if (this.state.clientQuickEdit === true) {
+                console.log('EDIT FIRED!');
+                requests.quickEditClient(quickClient, this);
+                this.errors.clientName = null;
+                this.errors.clientSubbusiness = null;
+            }
             this.formData.clientName = null;
             this.formData.clientSubbusiness = null;
-            if (this.state.clientQuickAdd === true) {
-                requests.quickAddClient(quickClient, this, this.formData.clientId);  
-            }
-            if (this.state.clientQuickEdit === true) {
-                requests.quickEditClient(quickClient, this);
-            }
                   
         },
         onOpportunityQuickAdd: function () {

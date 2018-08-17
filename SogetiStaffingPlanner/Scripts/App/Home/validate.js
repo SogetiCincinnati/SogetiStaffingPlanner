@@ -35,9 +35,12 @@
     checkClientId: function (newVal, oldVal, that) {
         if (!newVal) {
             that.errors.clientDropdown = '*Client is required';
+            
             that.errorCount++;
         } else {
             that.errors.clientDropdown = null;
+            that.errors.clientName = null;
+            that.errors.clientSubbusiness = null;
         }
     },
     checkOpportunityId: function (newVal, oldVal, that) {

@@ -85,7 +85,7 @@ let requests = {
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
                 requests.fetchClients(that);
-                requests.addMessage(that.formData.clientName, that);
+                
                 that.state.clientQuickAdd = false;
                 that.formData.clientName = quickClient.clientName;
                 that.formData.clientSubbusiness = quickClient.clientSubbusiness;
@@ -107,6 +107,7 @@ let requests = {
         });
     },
     quickEditClient: function (data, that) {
+        console.log(data);
         $.ajax({
             type: "POST",
             url: "Client/EditClient",
@@ -114,12 +115,21 @@ let requests = {
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             success: function (res) {
+                console.log(res);
+                that.state.clientQuickAdd = false;
+                that.state.clientQuickEdit = false;
                 that.editObjs.clientEdit = {
                     ClientName: data.clientName,
-                    ClientSubbusiness: data.clientSubbusiness
+                    ClientSubbusiness: data.clientSubbusiness,
+                    ClientId: data.clientId
                 }
+                requests.fetchClients(that);
+                that.errors.clientName = null;
+                that.errors.clientSubbusiness = null;
                 that.formData.clientName = null;
                 that.formData.clientSubbusiness = null;
+               
+            
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
@@ -312,7 +322,7 @@ let requests = {
                 that.addState = false;
                 that.state.updateState = false;
                 requests.fetchClients(that);
-                requests.updateMessage(that.formData.clientName, that);
+                
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
@@ -329,7 +339,7 @@ let requests = {
             success: function (res) {
                 //Receives message from backend for you to do what you want with it
                 that.addState = false;
-                requests.addMessage(that.formData.clientName, that);
+                
             }.bind(that),
             error: function (e) {
                 console.log(e, "Error adding data! Please try again.");
